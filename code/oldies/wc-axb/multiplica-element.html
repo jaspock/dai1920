@@ -1,0 +1,67 @@
+<link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
+<link rel="import" href="multiplica-solo.html">
+
+<dom-module id="multiplica-element">
+
+  <template>
+    <style>
+      #resultado {
+        color: dodgerblue;
+      }
+      #resultado2 {
+        color: olive;
+      }
+      :host {  /* properties of the container node */
+        color: steelblue;
+        font-size: 120%;
+      }
+    </style>
+    <!-- Multiplicación hecha en este mismo elemento: -->
+    <p><slot name="sujeto"></slot> {{a}} × {{b}} <slot name="verbo"></slot> 
+       <span id="resultado">{{c}},</span>
+
+    <!--Multiplicación hecha en otro elemento: -->
+    <multiplica-solo a="{{a}}" b="{{b}}" c="{{c2}}"></multiplica-solo>
+    <slot name="ie"></slot>, 
+    <span id="resultado2">{{c2}}</span>.</p>
+  </template>
+
+  <script>
+    class MultiplicaElement extends Polymer.Element {
+      static get is() { return "multiplica-element"; }
+      constructor() {
+        super();
+      }
+      connectedCallback() { 
+        super.connectedCallback(); 
+
+        /* En el constructor no se pueden leer las propiedades todavía, por lo que 
+           la siguiente línea no puede ponerse allí: */
+        this.c= this.a*this.b;  // this.c=a*b no funciona; piensa por qué
+
+        /* Any node specified in the element's template with an id is stored by 
+           Polymer on the this.$ hash by id (only for statically created local DOM 
+           nodes). For locating dynamically-created nodes in your element's local DOM, 
+           the $$ method provides a shorthand for Polymer.dom(this.root).querySelector():
+           this.$$(selector) */
+        console.log(this.$.resultado.textContent);
+      }
+      static get properties() {
+        return {
+          a: {
+            type: Number,
+            value: 1
+          },
+          b: {
+            type: Number,
+            value: 1
+          }
+        };
+      }
+    }
+ 
+    customElements.define(MultiplicaElement.is, MultiplicaElement);
+  </script>
+
+</dom-module>
+

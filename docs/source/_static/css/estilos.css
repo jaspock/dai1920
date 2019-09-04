@@ -1,0 +1,36 @@
+
+/* contador para el número de problema */
+body {
+    counter-reset: problema
+}
+
+/* estilo para añadir el número de problema */
+.problema-contador::after {
+    counter-increment: problema; 
+    content: " " counter(problema);
+}
+
+/* contenido principal más ancho */
+.wy-nav-content {
+    max-width: 1200px !important;
+}
+
+/* encabezado de problemas */
+.problema .admonition-title {
+    background-color: rgb(72,135,199);
+}
+
+/* fondo de problemas */
+.problema.admonition {
+    background-color: rgb(239,239,239);
+}
+
+/* encabezado de hazlotú */
+.hazlotu .admonition-title {
+    background-color: rgb(101,142,169);
+}
+
+/* fondo de hazlotú */
+.hazlotu.admonition {
+    background-color: rgb(229,237,243);
+}

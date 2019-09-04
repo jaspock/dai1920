@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Formulario validado con JavaScript</title>
+
+  <script type='text/javascript'>
+    var re = /^(?:\+(\d{1,2}))?\s*\d{9}$/;
+
+    function comprueba() {  
+      var r = re.exec(document.querySelector("#teléfono").value);
+      if (!r)  
+        document.querySelector("#respuesta").innerHTML= document.querySelector("#teléfono").value + " no es un teléfono válido";  
+      else
+        document.querySelector("#respuesta").innerHTML= "El teléfono es "+ r[0]+ " y el prefijo es "+ r[1];  
+      }
+
+      window.onload= function() {
+        document.querySelector("#enviar").addEventListener("click", comprueba, false);
+      }
+  </script>
+</head>
+<body>
+  <div>
+    <label>Teléfono:</label>
+    <input type="text" id="teléfono"/>
+    <input type="button" id="enviar" value="Comprueba"/>
+  </div>
+  <div id="respuesta"></div>
+</body>
+</html>
+

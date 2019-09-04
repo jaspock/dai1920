@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Formulario validado con jQuery</title>
+
+  <!-- From Google Hosted Libraries: -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script type='text/javascript'>
+    var re = /^(?:\+(\d{1,2}))?\s*\d{9}$/;
+   
+    // window.jQuery = window.$ = jQuery
+    function comprueba() {  
+      var r = re.exec($("#teléfono").val());
+      if (!r)  
+        $("#respuesta").html($("#teléfono").val() + " no es un teléfono válido");  
+      else
+        $("#respuesta").html("El teléfono es "+ r[0]+ " y el prefijo es "+ r[1]);  
+    }
+
+    // $(function() {...}) = $(document).ready(function() {...}) ~= window.onload = function () {...}
+    $(function() {
+      $("#enviar").click(function (event) {comprueba();});
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <label>Teléfono:</label>
+    <input type="text" id="teléfono"/>
+    <input type="button" id="enviar" value="Comprueba"/>
+  </div>
+  <div id="respuesta"></div>
+</body>
+</html>
+

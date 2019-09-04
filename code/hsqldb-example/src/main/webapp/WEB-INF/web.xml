@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+    <description></description>
+    <display-name>Register</display-name>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewRecords</display-name>
+    <servlet-name>ViewRecords</servlet-name>
+    <servlet-class>ViewRecords</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewRecords</servlet-name>
+    <url-pattern>/ViewRecords</url-pattern>
+  </servlet-mapping>
+</web-app>
+

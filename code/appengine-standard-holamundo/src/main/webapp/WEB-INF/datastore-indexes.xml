@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Este fichero no es necesario en este caso, ya que los índices para consultas 
+     simples se crean automáticamente, pero se incluye a modo de ejemplo por si
+     en algún momento se hace necesario definir índices explícitamente. -->
+
+<datastore-indexes autoGenerate="true">
+
+    <datastore-index kind="Palabra" ancestor="true">
+        <property name="lema" direction="asc" />
+    </datastore-index>
+
+</datastore-indexes>
+

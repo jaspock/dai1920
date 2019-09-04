@@ -1,0 +1,36 @@
+<link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+<dom-module id="multiplica-solo">
+
+  <script>
+    class MultiplicaSolo extends Polymer.Element {
+      static get is() { return "multiplica-solo"; }
+      connectedCallback() { 
+        super.connectedCallback(); 
+        this.c= this.a*this.b;
+      }
+      /* For changes to propagate upward, you must use automatic data binding 
+         delimiters ({{ }}) and the target property must be set to notify: true. */
+      static get properties() {
+        return {
+          a: {
+            type: Number,
+            value: 1
+          },
+          b: {
+            type: Number,
+            value: 1
+          },
+          c: {
+            type: Number,
+            notify: true
+          }
+        };
+      }
+    }
+ 
+    customElements.define(MultiplicaSolo.is, MultiplicaSolo);
+  </script>
+
+</dom-module>
+
