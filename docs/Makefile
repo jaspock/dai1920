@@ -37,7 +37,7 @@ slides:
 	fi;
 
 pages:
-	rm -rf /tmp/gh-pages
+	rm -rf /tmp/gh-pages 
 	cp -r $(BUILDDIR)/html /tmp/gh-pages
 	touch /tmp/gh-pages/.nojekyll
 	git checkout gh-pages
