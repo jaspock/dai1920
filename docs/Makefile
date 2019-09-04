@@ -42,8 +42,9 @@ pages:
 	touch /tmp/gh-pages/.nojekyll
 	git checkout gh-pages
 	cd .. && rm -rf * && cp -r /tmp/gh-pages/* . && git add . && \
-	git commit -m "Website en gh-pages actualizado" && git push origin gh-pages && git checkout master
-	git branch
+		git commit -m "Website en gh-pages actualizado" && git push origin gh-pages && \
+		git checkout master && git branch
+	echo "move to the root of the repository before working on files!"
 
 clean:
 	rm -rf build $(SLIDESDIR)
