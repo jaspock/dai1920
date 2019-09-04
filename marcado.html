@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="es" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="es" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1 Lenguajes de marcado &mdash; documentación de Desarrollo de Aplicaciones en Internet - </title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/estilos.css" type="text/css" />
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Lenguajes de estilo" href="estilo.html" />
+    <link rel="prev" title="Materiales de Desarrollo de Aplicaciones en Internet" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Desarrollo de Aplicaciones en Internet
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contenidos:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><span class="sectnum">1</span> Lenguajes de marcado</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sintaxis-y-elementos-del-lenguaje-html"><span class="sectnum">1.1</span> Sintaxis y elementos del lenguaje HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#representacion-en-memoria-de-un-documento-html"><span class="sectnum">1.2</span> Representación en memoria de un documento HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#herramientas-para-desarrolladores"><span class="sectnum">1.3</span> Herramientas para desarrolladores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#codificacion-de-caracteres"><span class="sectnum">1.4</span> Codificación de caracteres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alojamiento-en-un-servidor"><span class="sectnum">1.5</span> Alojamiento en un servidor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validacion-de-documentos-html"><span class="sectnum">1.6</span> Validación de documentos HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ejercicios-de-repaso"><span class="sectnum">1.7</span> Ejercicios de repaso</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="estilo.html">Lenguajes de estilo</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Desarrollo de Aplicaciones en Internet</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><span class="sectnum">1</span> Lenguajes de marcado</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/marcado.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="lenguajes-de-marcado">
+<h1><span class="sectnum">1</span> Lenguajes de marcado<a class="headerlink" href="#lenguajes-de-marcado" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>HTML (<em>HyperText Markup Language</em>) es el lenguaje en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>HTML es un <em>estándar vivo</em>, mantenido por el grupo de trabajo <a class="reference external" href="https://whatwg.org/">WHATWG</a> (Web Hypertext Application Technology Working Group). Échale un vistazo por encima a la <a class="reference external" href="https://html.spec.whatwg.org/multipage/">especificación</a>. Otra entidad, el <a class="reference external" href="https://www.w3.org/">W3C</a> (World Wide Web Consortium), <em>empaqueta</em> la especificación estándar de vez en cuando y le asigna un número de versión (por ejemplo, 5.0 en 2014, 5.1 en 2016 o 5.2 en 2017). El W3C sí es el principal responsable de otros estándares de la web como CSS, que estudiaremos más adelante.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Las habilidades que deberías adquirir con este tema incluyen las siguientes:</p>
+<ul class="simple">
+<li><p>Entender la diferencia entre un lenguaje de marcado con propósito semántico como HTML y un lenguaje de estilo.</p></li>
+<li><p>Conocer la semántica de los elementos de HTML discutidos en clase.</p></li>
+<li><p>Gestionar correctamente diferentes codificaciones de caracteres.</p></li>
+<li><p>Saber crear documentos HTML válidos.</p></li>
+<li><p>Usar correctamente las herramientas de desarrolladores integradas en navegadores; en particular, las Chrome DevTools.</p></li>
+<li><p>Entender el papel jugado por un servidor web y cómo publicar en él contenido estático.</p></li>
+</ul>
+</div>
+<div class="section" id="sintaxis-y-elementos-del-lenguaje-html">
+<h2><span class="sectnum">1.1</span> Sintaxis y elementos del lenguaje HTML<a class="headerlink" href="#sintaxis-y-elementos-del-lenguaje-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>HTML es el lenguaje informático básico que se usa para escribir el contenido de las páginas web (por otro lado, CSS se usa para especificar los aspectos estéticos que afectan a la presentación de las páginas y JavaScript para programar los aspectos dinámicos). En esta actividad vas a conocer los elementos fundamentales de HTML. Te basarás para ello en el código de la página web mínima que aparece a continuación, que iremos ampliando con otros elementos del lenguaje.</p>
+<div class="admonition attention">
+<p class="admonition-title">Atención</p>
+<p>La forma normal de trabajar con HTML es usar tu editor de texto favorito para editar el fichero y abrir el documento resultante (con extensión <code class="docutils literal notranslate"><span class="pre">.html</span></code>) en un navegador. No obstante, cuando se dan los primeros pasos en el aprendizaje del lenguaje puede ser más cómodo usar entornos en línea como <a class="reference external" href="http://jsbin.com/">JSBin</a>, que evitan tener que guardar y recargar constantemente. Hay otras herramientas similares como <a class="reference external" href="https://jsfiddle.net/">JSFiddle</a> o <a class="reference external" href="http://codepen.io/">CodePen</a>, pero son menos recomendables desde el punto de vista educativo, ya que ocultan ciertas partes del documento HTML (por ejemplo, la cabecera) para no <em>molestar</em> al usuario con elementos obvios.</p>
+</div>
+<p>Una de los documentos web más sencillos que se pueden escribir es el siguiente. Comienza con la declaración de tipo de documento (<code class="docutils literal notranslate"><span class="pre">doctype</span></code>). Le sigue el <em>elemento</em> (o <em>etiqueta</em>) raíz <code class="docutils literal notranslate"><span class="pre">html</span></code> con un <em>atributo</em> opcional <code class="docutils literal notranslate"><span class="pre">lang</span></code> que indica el idioma del texto. El elemento <code class="docutils literal notranslate"><span class="pre">head</span></code> incluye metadatos sobre el documento: en este caso, la codificación de caracteres utilizada (hablaremos sobre ello más adelante) y el título del documento que aparecerá en la pestaña del navegador. El elemento <code class="docutils literal notranslate"><span class="pre">body</span></code> contiene el texto principal del documento, que en este caso es un único párrafo (elemento <code class="docutils literal notranslate"><span class="pre">p</span></code>) con un saludo.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Un documento HTML válido y corto.</span><a class="headerlink" href="#id1" title="Enlace permanente a este código fuente">¶</a></div>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Título del documento<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>¡Hola, mundo!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades <em>estéticas</em> de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades <em>semánticas</em> (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilos como CSS, que estudiaremos más adelante.</p>
+<p>HTML tiene aproximadamente un centenar de elementos diferentes, cada uno de ellos con un propósito semántico bien definido. En este curso vamos a estudiar un subconjunto de ellos, cuyo cometido puedes consultar en <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN web docs</a> y que se muestran en este documento más <a class="reference external" href="_static/data/franz.html">completo</a>.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>La especificación estándar de HTML es un documento demasiado técnico para los propósitos de este curso y para la mayoría de los desarrolladores. La web <a class="reference external" href="https://developer.mozilla.org/es/">MDN</a> muestra esta información de forma más sencilla. Estudia en ella todos los elementos de HTML que aparecen en este tema y asegúrate de que entiendes su propósito. Elementos adicionales, como los relacionados con los formularios, se estudiarán en otro tema. Reserva cita para tutoría si crees que no lo tienes todo claro.</p>
+</div>
+<p>El código del documento HTML más completo enlazado anteriormente es el siguiente:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Blog del profesor Franz de Copenhague<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Blogs de la Universidad de la Atlántida<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Reflexiones sobre <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#física&quot;</span><span class="p">&gt;</span>física cuántica<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Reflexiones sobre <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#ia&quot;</span><span class="p">&gt;</span>inteligencia artificial<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Reflexiones sobre ciencia del profesor Franz de Copenhague<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;física&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entradas sobre física cuántica ⚛<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+          <span class="c">&lt;!-- Teclear caracteres Unicode en Linux: Ctrl+Mayús+u 269b espacio --&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Esta sección incluye mis artículos recientes sobre física cuántica.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Consecuencias del entrelazamiento cuántico (noviembre de 2016)<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>El entrelazamiento cuántico se define como [...]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+            <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Encabezado 1<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Encabezado 2<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>a<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>b<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>c<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>d<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Pie 1<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Pie 2<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">tfoot</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;ia&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entradas sobre inteligencia artificial ♟<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Esta sección incluye mis artículos recientes sobre inteligencia artificial.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Hacia una inteligencia artificial de propósito general (septiembre de 2017)<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Introducción<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Los recientes avances [...] En una charla reciente, Andrew Ng señalaba que:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">blockquote</span> <span class="na">cite</span><span class="o">=</span><span class="s">&quot;http://time.com/4631730/andrew-ng-artificial-intelligence-2017/&quot;</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+              <span class="ni">&amp;ldquo;</span>We&#39;re making this analogy that artificial inteligence is the new electricity. Electricity
+              transformed industries: agriculture, transportation, communication, manufacturing. I think we are
+              now in that phase where artificial inteligence technology has advanced to the point where we see
+              a clear path for it to transform multiple industries.”
+            <span class="p">&lt;/</span><span class="nt">blockquote</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Modelo matemático<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>De todo lo anterior se deduce que [...]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            $$
+              [\boldsymbol{\nu}_t,\boldsymbol{\xi}_t] = \mathcal{N}\left(x_t,r^{1}_{t-1},\ldots,r^{R}_{t-1}\right)
+            $$
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>No obstante, [...]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;&lt;</span><span class="nt">code</span><span class="p">&gt;</span>
+              interface PrimaryCore {
+                boolean verifyDataLine();
+                void sendData(in sequence<span class="ni">&amp;lt;</span>byte&gt; data);
+                void initSelfDestruct();
+              }
+            <span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>La memoria en las redes neuronales (octubre de 2016)<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tradicionalmente, las redes neuronales [...]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">figure</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://images.nature.com/full/nature-assets/nature/journal/v538/n7626/images/nature20101-f1.jpg&quot;</span>
+                <span class="na">alt</span><span class="o">=</span><span class="s">&quot;Esquema de una red neuronal derivable, donde se pueden observar los distintos cabezales de</span>
+<span class="s">                     lectura/escritura accediendo a los contenidos de la memoria.&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">figcaption</span><span class="p">&gt;</span>Esquema de una red neuronal derivable<span class="p">&lt;/</span><span class="nt">figcaption</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">figure</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">aside</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Al hilo de las reflexiones anteriores [...]<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>© 2017, Universidad de la Atlántida<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica con qué código HTML es necesario sustituir la cadena &#64;1 para que el siguiente bloque HTML sea válido y corresponga a una tabla con dos filas (la primera de encabezado) y una columna.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">em</span><span class="p">&gt;</span>Nombre del río<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span>@1<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Ebro<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica con qué código es necesario sustituir la cadena &#64;1 para que el siguiente bloque HTML se muestre como se ve más abajo.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="p">&gt;</span>1<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>@1<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<table style="border: 1px solid gray">
+  <tr><td><strong>1</strong></td><td>2</td></tr>
+</table></div>
+<dl class="simple">
+<dt>espacios en blanco. Un <em>screen reader</em> podría no mostrar el contenido de <em>nav</em>. Un navegador aplica unos estilos por defecto a cada elemento.</dt><dd><p>hablar por ahora de <em>img</em> solo y dejar el resto para más adelante; no explicar aún el atributo <em>alt</em> de <em>img</em> para que luego se obtenga un error como mínimo al validar el documento.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="representacion-en-memoria-de-un-documento-html">
+<h2><span class="sectnum">1.2</span> Representación en memoria de un documento HTML<a class="headerlink" href="#representacion-en-memoria-de-un-documento-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Imaginemos que tenemos que escribir un programa que cargue en memoria un documento HTML para luego realizar algún procesamiento sobre sus elementos (por ejemplo, mostrarlo en la ventana de un navegador o extraer los datos de una tabla). La estructura de datos que se utiliza para ello es un árbol en el que cada nodo es un objeto que representa una parte del documento. El DOM (<em>Document Object Model</em>) es un conjunto estándar de métodos (es decir, una interfaz) independiente del lenguaje para interactuar con este árbol.</p>
+<p>—– espacios en blanco,</p>
+<div class="figure align-default" id="id2">
+<a class="reference external image-reference" href="https://commons.wikimedia.org/wiki/File:DOM-model.svg"><img alt="ejemplo de árbol DOM" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/DOM-model.svg" /></a>
+<p class="caption"><span class="caption-text">Árbol DOM por Birger Eriksson</span><a class="headerlink" href="#id2" title="Enlace permanente a esta imagen">¶</a></p>
+</div>
+</div>
+<div class="section" id="herramientas-para-desarrolladores">
+<h2><span class="sectnum">1.3</span> Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Abre la página web que usaste en una actividad anterior desde los navegadores Google Chrome o Chromium. Utiliza el panel <em>Elements</em> de las [Chrome DevTools](<a class="reference external" href="https://developers.google.com/chrome-developer-tools/docs/elements">https://developers.google.com/chrome-developer-tools/docs/elements</a>) para inspeccionar los distintos elementos de tu página; para ello, sitúa el puntero del ratón encima de alguna posición de tu página web y selecciona <em>Inspeccionar elemento</em> en el menú contextual (otra opción es abrir las DevTools desde el menú <em>Herramientas</em> / <em>Herramientas para desarrolladores</em> del navegador o mediante el atajo de teclado Ctrl+Shift+I).</p>
+<p>Familiarízate con el entorno, ya que te será extremadamente útil. Estudia ahora también un documento de HTML más complejo como [este](<a class="reference external" href="http://html5up.net/uploads/demos/prologue/">http://html5up.net/uploads/demos/prologue/</a>).</p>
+<p>&lt;note&gt;
+Tiempo:</p>
+<p>El profesor comenzará mostrando cómo ver el código fuente («Ver código fuente la página» en menú contextual o Ctrl+U) de una página y discutirá cómo está opción tiene una utilidad limitada para desarrolladores, especialmente si el código es muy extenso. Además, esta opción muestra siempre el código inicial descargado y no el que el navegador tiene en memoria, que puede ser diferente por manipulaciones del DOM. A continuación, los estudiantes abrirán las Chrome DevTools para inspeccionar elementos de la página y se les mostrará el uso de la lupa (ahora con icono de flecha).</p>
+<p>Además, el profesor hará a los alumnos estudiar detenidamente la secuencia de elementos anidados que aparecen al pie de la herramienta (que define una ruta desde la raíz del DOM, aunque posiblemente que no define unívocamente un elemento concreto) para que vayan haciéndose idea de la anidación de elementos existentes en un documento HTML; se les ha de pedir, de paso, que observen cómo en la secuencia de elementos aparecen algunos con información adicional separada por puntos (class, todavía no estudiado) o almohadillas (id, que fue estudiado en la actividad anterior). Se buscará un elemento bastante profundo y se preguntará cuál es la forma más corta de referirnos a ese elemento; los alumnos deberían llegar a la idea de que el último elemento con id es un nodo de inicio <em>seguro</em> hacia el elemento que se pretende identificar. Aunque el uso a fondo de los conceptos de DOM y XPATH se realizará más adelante (temas sobre CSS o JavaScript, por ejemplo), es recomendable que observen también qué es lo que se copia al portapapeles cuando seleccionan un elemento en las DevTools del documento web más complejo y desde el menú contextual eligen <em>Copy / Copy Selector</em> (hacerlo con un elemento con id y otro sin id para estudiar las diferencias). Comentarles, también, <em>Edit as HTML</em> (para esta opción también pueden hacer doble click en el nombre del elemento) y <em>Copy as HTML</em> (para copiar en un editor la web modificada).</p>
+<p>El profesor comentará la existencia de extensiones similares para otros navegadores, como Firebug para Mozilla Firefox.
+&lt;/note&gt;</p>
+</div>
+<div class="section" id="codificacion-de-caracteres">
+<h2><span class="sectnum">1.4</span> Codificación de caracteres<a class="headerlink" href="#codificacion-de-caracteres" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codificación de caracteres de longitud variable UTF-8, que permite representar todos los caracteres del juego de caracteres Unicode, es importante que seas capaz de saber qué codificación de caracteres se usa en tus documentos web, en los de terceros, o en tu servidor web. No tener esto en cuenta puede hacer que tu web se visualice incorrectamente en algunos navegadores. En esta actividad hablaremos de codificación de caracteres siguiendo <a class="reference external" href="_static/slides/070-codificacion-slides.html">estas diapositivas</a>. Para comprobarlo, usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones <em>UTF-8</em> e <em>ISO-8859-1</em> (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva <em>meta</em> y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan los caracteres en las distintas codificaciones con editores hexadecimales como [HexEd.it](<a class="reference external" href="https://hexed.it/">https://hexed.it/</a>).</p>
+<p>&lt;note&gt;
+Tiempo:</p>
+<p>En esta actividad se introducirá la importancia de Unicode (comentar los problemas que había en el pasado para representar caracteres de varios idiomas usando solo un byte por carácter) y los posibles problemas con las codificaciones de caracteres (por ejemplo, para representar caracteres de múltiples codificaciones en un mismo documento de texto).</p>
+<p>Además, de realizar lo demandado por la actividad, los alumnos usarán un editor de texto para comprobar cuál es la longitud de un fichero de texto que contiene la secuencia <em>añ</em> con ambas codificaciones y se les pedirá que razonen cómo interpretaría esta secuencia un editor que esté prepararado para el otro formato. Se le mostrará a los estudiantes la [lista de caracteres](<a class="reference external" href="http://www.unicode.org/charts/">http://www.unicode.org/charts/</a>) de Unicode para que vean su riqueza.</p>
+<p>Suele ser necesario hacer mucho énfasis en que colocar la codificación correcta en <em>charset</em> no garantiza que el documento use dicha codificación. También en que un documento grabado desde un editor de texto no tiene negritas ni colores ni nada por el estilo, a diferencia de uno grabado desde un procesador de texto.
+&lt;/note&gt;</p>
+</div>
+<div class="section" id="alojamiento-en-un-servidor">
+<h2><span class="sectnum">1.5</span> Alojamiento en un servidor<a class="headerlink" href="#alojamiento-en-un-servidor" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Una página web normalmente se aloja en un servidor web. En esta actividad vamos a instalar el servidor Jetty y <em>alojar</em> en él nuestra página. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor.</p>
+<p>Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat y Jetty. Aunque este último está escrito en Java y pensado especialmente para devolver contenido dinámico generado por programas escritos en Java o en JSP (y para eso lo usaremos más adelante), también puede usarse como proveedor de contenidos estáticos. Descarga el [repositorio Git](<a class="reference external" href="https://github.com/jaspock/dai">https://github.com/jaspock/dai</a>) de la asignatura, accede a la carpeta <em>simple-html-file</em> y haz</p>
+<p>~~~
+mvn jetty:run
+~~~</p>
+<p>para lanzar (y descargarlo antes, si procede) el servidor Jetty sobre la carpeta actual. Accede luego a los ficheros guardados en la carpeta local <em>src/main/webapp</em> (este directorio sigue la estructura común de los proyectos en Maven) a través del servidor usando para ello el URL [<a class="reference external" href="http://localhost:8080](http://localhost:8080">http://localhost:8080](http://localhost:8080</a>).</p>
+<p>Puedes lanzar también otro servidor HTTP sobre el mismo contenido. Por ejemplo, para usar el que Python incluye por defecto, colócate en el directorio raíz del contenido que quieres servir y haz:</p>
+<p>~~~
+python -m SimpleHTTPServer
+~~~</p>
+<p>&lt;note&gt;
+Tiempo:
+&lt;/note&gt;</p>
+</div>
+<div class="section" id="validacion-de-documentos-html">
+<h2><span class="sectnum">1.6</span> Validación de documentos HTML<a class="headerlink" href="#validacion-de-documentos-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con las directrices de HTML, tanto a nivel sintáctico (por ejemplo, las marcas de apertura y clausura respetan el anidamiento entre elementos) como semántico (no hay dos atributos <em>id</em> con el mismo valor). De esta manera, se allana el camino hacia la compatibilidad entre navegadores y la usabilidad de la página web; la validación, sin embargo, no asegura que el documento se vaya a ver como el desarrollador tiene en la cabeza ni que se muestre de igual manera en todos los navegadores. Usa el [validador del W3C](<a class="reference external" href="http://validator.w3.org/">http://validator.w3.org/</a>) para validar la página web que has confeccionado en actividades anteriores; corrige todos los errores que te indique el validador hasta conseguir validarla. A continuación, crea una copia de tu documento, introduce diversos errores en ella y comprueba que el validador del W3C informa de ellos correctamente.</p>
+<p>Indicar, de paso, que lo que en HTML5 se representa como</p>
+<blockquote>
+<div><p>&lt;meta charset=utf-8&gt;</p>
+</div></blockquote>
+<p>en XHTML o HTML4 se representaba como</p>
+<blockquote>
+<div><p>&lt;meta http-equiv=»content-type» content=»text/html; charset=iso-8859-1» &gt;</p>
+</div></blockquote>
+<p>Esta es una de las múltiples diferencias entre ambas versiones del estándar.</p>
+</div>
+<div class="section" id="ejercicios-de-repaso">
+<h2><span class="sectnum">1.7</span> Ejercicios de repaso<a class="headerlink" href="#ejercicios-de-repaso" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Crea el esqueleto de una única página web que contenga la información que habitualmente se muestra en la ficha de una asignatura. Asegúrate de que el documento HTML es válido según el [validador del W3C](<a class="reference external" href="http://validator.w3.org/">http://validator.w3.org/</a>).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="estilo.html" class="btn btn-neutral float-right" title="Lenguajes de estilo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Materiales de Desarrollo de Aplicaciones en Internet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Juan Antonio Pérez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
