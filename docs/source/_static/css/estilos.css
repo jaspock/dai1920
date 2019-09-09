@@ -34,3 +34,8 @@ body {
 .hazlotu.admonition {
     background-color: rgb(229,237,243);
 }
+
+/* tamaño de texto de tablas */
+table.tablita td p {
+    font-size: 92% !important;
+}

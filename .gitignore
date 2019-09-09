@@ -1,4 +1,5 @@
-docs/build/*
-slides/build/*
+docs/build/
+slides/build/
 *.class
-docs/source/_static/slides/*
+docs/source/_static/slides/
+.vscode/

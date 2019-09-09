@@ -1,8 +1,11 @@
-.. section-numbering::
 .. role:: problema-contador
 
 Lenguajes de marcado
 ====================
+
+.. Important::
+
+  Esta página contiene un borrador de los materiales y todavía no está finalizada. Cuando lo esté, se dejará de mostrar este aviso.
 
 HTML (*HyperText Markup Language*) es el lenguaje en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.
 
@@ -62,7 +65,9 @@ Una de los documentos web más sencillos que se pueden escribir es el siguiente.
   </html>
 
 
-Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilos como CSS, que estudiaremos más adelante.
+Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilos como CSS, que estudiaremos más adelante. Esta separación de presentación y contenido hace que el documento HTML sea independiente de la representación visual, táctil o auditiva que hagamos de él: en diferentes contextos podrían usarse diferentes hojas de estilo; o un *screen reader* podría usar el contenido del bloque `nav` para permitir a una persona ciega elegir directamente qué sección del documento desea escuchar o consultar en un `terminal braille`_; o un programa que procesa automáticamente un documento HTML no tendría que lidiar con aspectos secundarios meramente cosméticos.
+
+  .. _`terminal braille`: https://en.wikipedia.org/wiki/Refreshable_braille_display
 
 HTML tiene aproximadamente un centenar de elementos diferentes, cada uno de ellos con un propósito semántico bien definido. En este curso vamos a estudiar un subconjunto de ellos, cuyo cometido puedes consultar en `MDN web docs`_ y que se muestran en este documento más completo_.
 
@@ -73,7 +78,7 @@ HTML tiene aproximadamente un centenar de elementos diferentes, cada uno de ello
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  La especificación estándar de HTML es un documento demasiado técnico para los propósitos de este curso y para la mayoría de los desarrolladores. La web `MDN`_ muestra esta información de forma más sencilla. Estudia en ella todos los elementos de HTML que aparecen en este tema y asegúrate de que entiendes su propósito. Elementos adicionales, como los relacionados con los formularios, se estudiarán en otro tema. Reserva cita para tutoría si crees que no lo tienes todo claro.
+  La especificación estándar de HTML es un documento demasiado técnico para los propósitos de este curso y para la mayoría de los desarrolladores. La web `MDN`_ muestra esta información de forma más sencilla. En principio, acostúmbrate a usar esta web como referencia, frente a otras que pueden aparecer más arriba en los resultados de los buscadores. Usa la versión en inglés, ya que otros idiomas no siempre están actualizados. Estudia en MDN todos los elementos de HTML que aparecen en este tema y asegúrate de que entiendes su propósito. Elementos adicionales, como los relacionados con los formularios, se estudiarán en otro tema. Reserva cita para tutoría si crees que no lo tienes todo claro.
 
   .. _MDN: https://developer.mozilla.org/es/
 
@@ -104,7 +109,7 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Indica con qué código es necesario sustituir la cadena @1 para que el siguiente bloque HTML se muestre como se ve más abajo.
+  Indica con qué código es necesario sustituir la cadena @1 para que el siguiente bloque HTML se represente como se ve más abajo.
 
   .. code-block:: html
 
@@ -115,22 +120,17 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
   .. raw:: html
 
     <table style="border: 1px solid gray">
-      <tr><td><strong>1</strong></td><td>2</td></tr>
+      <tr><td>1</td><td>2</td></tr>
     </table>
-
-
-espacios en blanco. Un *screen reader* podría no mostrar el contenido de *nav*. Un navegador aplica unos estilos por defecto a cada elemento.
- hablar por ahora de *img* solo y dejar el resto para más adelante; no explicar aún el atributo *alt* de *img* para que luego se obtenga un error como mínimo al validar el documento.
 
 
 
 Representación en memoria de un documento HTML
 ----------------------------------------------
 
-Imaginemos que tenemos que escribir un programa que cargue en memoria un documento HTML para luego realizar algún procesamiento sobre sus elementos (por ejemplo, mostrarlo en la ventana de un navegador o extraer los datos de una tabla). La estructura de datos que se utiliza para ello es un árbol en el que cada nodo es un objeto que representa una parte del documento. El DOM (*Document Object Model*) es un conjunto estándar de métodos (es decir, una interfaz) independiente del lenguaje para interactuar con este árbol.
+Imaginemos que tenemos que escribir un programa que cargue en memoria un documento HTML para luego realizar algún procesamiento sobre sus elementos (por ejemplo, mostrarlo en la ventana de un navegador, extraer los datos de una tabla desde un programa en Java u obtener sus palabras para indexarlas en la base de datos de un buscador). La estructura de datos que se utiliza para ello es un árbol en el que cada nodo es un objeto que representa una parte del documento. El DOM (*Document Object Model*) es un conjunto estándar de métodos (una interfaz) independientes del lenguaje para interactuar con este árbol que suele, por tanto, llamarse *árbol DOM*. En un tema posterior estudiaremos algunos de los métodos del DOM, pero por ahora centrémonos en la forma del árbol.
 
------ espacios en blanco, 
-
+La siguiente figura muestra parte de un árbol DOM:
 
 .. figure:: https://upload.wikimedia.org/wikipedia/commons/5/5a/DOM-model.svg
   :target: https://commons.wikimedia.org/wiki/File:DOM-model.svg
@@ -139,84 +139,109 @@ Imaginemos que tenemos que escribir un programa que cargue en memoria un documen
   Árbol DOM por Birger Eriksson
 
 
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Dibuja el árbol DOM de los documentos HTML que hemos estudiado anteriormente y utiliza la herramienta `Live DOM Viewer`_ para comprobar si tu solución es correcta. Observa en especial el tratamiento que se hace de los espacios en blanco entre dos elementos: estos blancos tienen su propio nodo asociado lo que puede ser necesario tener en cuenta al movernos por el árbol. HTML es un lenguaje en el que, en general, las secuencias de más de un espacio en blanco, tabulador o salto de línea se tratan como si fueran un único espacio en blanco.
+
+  .. _`Live DOM Viewer`: https://software.hixie.ch/utilities/js/live-dom-viewer/
+
+
+.. Hint::
+
+  Podría ser que en alguna ocasión necesites que entre dos elementos (por ejemplo, entre dos palabras) de tu página haya un espacio más grande lo habitual. Podrías en ese caso tener la tentación de usar la entidad ``&nbsp;`` (también ``&NonBreakingSpace;``), repetida varias veces, para obtener aproximadamente este espacio extra. Comprueba una vez cómo funciona (observa la diferencia entre ``a &nbsp;&nbsp; b`` y ``a b``) y luego no vuelvas a usarla nunca más (salvo para su verdadero propósito; sigue leyendo). Posteriormente veremos que, dentro del espíritu de separar presentación y contenido, son las hojas de estilo las que se han de encargar de definir de forma precisa la separación entre los elementos de una página. ¿Para qué existe entonces una entidad como ``&nbsp;``? Su propósito es indicar al navegador que nunca introduzca un salto de línea en el punto en el que aparece la entidad (cosa que el navegador puede decidir hacer con cualquier otro espacio en blanco) y la interprete estrictamente como un espacio en blanco. Escribe una latitud como ``40°&nbsp;41′&nbsp;21.4”&nbsp;N`` en un documento HTML, cambia el ancho de la ventana del navegador e intenta que se separen sus componentes en dos líneas consecutivas.
+
+
 Herramientas para desarrolladores
 ---------------------------------
 
-Abre la página web que usaste en una actividad anterior desde los navegadores Google Chrome o Chromium. Utiliza el panel *Elements* de las [Chrome DevTools](https://developers.google.com/chrome-developer-tools/docs/elements) para inspeccionar los distintos elementos de tu página; para ello, sitúa el puntero del ratón encima de alguna posición de tu página web y selecciona *Inspeccionar elemento* en el menú contextual (otra opción es abrir las DevTools desde el menú *Herramientas* / *Herramientas para desarrolladores* del navegador o mediante el atajo de teclado Ctrl+Shift+I).
+Los navegadores suelen incorporar de serie un conjunto de herramientas para facilitar el trabajo de los desarrolladores. En particular, a estas alturas del curso ya puedes usar el panel :guilabel:`Elements` de las *Chrome DevTools* para inspeccionar los distintos elementos de tu página; para ello, en el navegador Google Chrome (o Chromium) sitúa el puntero del ratón encima de alguna posición de tu página web y selecciona :guilabel:`Inspeccionar` en el menú contextual; otra opción para acceder a estas herramientas es abrirlas desde el menú :menuselection:`Más herramientas --> Herramientas para desarrolladores` del navegador o mediante el atajo de teclado :kbd:`Ctrl+Shift+I` o :kbd:`F12`. Existen extensiones similares para otros navegadores, como *Firebug* para *Mozilla Firefox*.
 
-Familiarízate con el entorno, ya que te será extremadamente útil. Estudia ahora también un documento de HTML más complejo como [este](http://html5up.net/uploads/demos/prologue/).
 
-<note>
-Tiempo:
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
 
-El profesor comenzará mostrando cómo ver el código fuente ("Ver código fuente la página" en menú contextual o Ctrl+U) de una página y discutirá cómo está opción tiene una utilidad limitada para desarrolladores, especialmente si el código es muy extenso. Además, esta opción muestra siempre el código inicial descargado y no el que el navegador tiene en memoria, que puede ser diferente por manipulaciones del DOM. A continuación, los estudiantes abrirán las Chrome DevTools para inspeccionar elementos de la página y se les mostrará el uso de la lupa (ahora con icono de flecha).
+  Familiarízate, siguiendo esta `página de su documentación`_, con la pestaña :guilabel:`Elements` del entorno de las Chrome DevTools, ya que te será extremadamente útil. Práctica después las distintas posibilidades con un documento de HTML más complejo como este_.
 
-eeeeeelllllllll profesor hará a los alumnos estudiar detenidamente la secuencia de elementos anidados que aparecen al pie de la herramienta (que define una ruta desde la raíz del DOM, aunque posiblemente que no define unívocamente un elemento concreto) para que vayan haciéndose idea de la anidación de elementos existentes en un documento HTML; se les ha de pedir, de paso, que observen cómo en la secuencia de elementos aparecen algunos con información adicional separada por puntos (class, todavía no estudiado) o almohadillas (id, que fue estudiado en la actividad anterior). Se buscará un elemento bastante profundo y se preguntará cuál es la forma más corta de referirnos a ese elemento; los alumnos deberían llegar a la idea de que el último elemento con id es un nodo de inicio *seguro* hacia el elemento que se pretende identificar. Aunque el uso a fondo de los conceptos de DOM y XPATH se realizará más adelante (temas sobre CSS o JavaScript, por ejemplo), es recomendable que observen también qué es lo que se copia al portapapeles cuando seleccionan un elemento en las DevTools del documento web más complejo y desde el menú contextual eligen *Copy / Copy Selector* (hacerlo con un elemento con id y otro sin id para estudiar las diferencias). Comentarles, también, *Edit as HTML* (para esta opción también pueden hacer doble click en el nombre del elemento) y *Copy as HTML* (para copiar en un editor la web modificada).
+  .. _`página de su documentación`: https://developers.google.com/web/tools/chrome-devtools/dom/
+  .. _este: https://htmldog.com/guides/html/intermediate/sectioning/
 
-El profesor comentará la existencia de extensiones similares para otros navegadores, como Firebug para Mozilla Firefox.
-</note>
+
+.. Attention:: 
+
+  El panel :guilabel:`Elements` de las *Chrome DevTools* muestra una información potencialmente distinta de la opción :guilabel:`Ver código fuente la página` que aparece en el menú contextual de una página (atajo de teclado :kbd:`Ctrl+U`), ya que esta última opción muestra siempre el código inicial descargado por el navegador y no el HTML dinámico que el navegador tiene en memoria en un determinado momento, que puede ser diferente al inicial por manipulaciones del árbol DOM, como veremos en posteriores temas.
+
 
 Codificación de caracteres
 --------------------------
 
-Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codificación de caracteres de longitud variable UTF-8, que permite representar todos los caracteres del juego de caracteres Unicode, es importante que seas capaz de saber qué codificación de caracteres se usa en tus documentos web, en los de terceros, o en tu servidor web. No tener esto en cuenta puede hacer que tu web se visualice incorrectamente en algunos navegadores. En esta actividad hablaremos de codificación de caracteres siguiendo `estas diapositivas`_. Para comprobarlo, usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones *UTF-8* e *ISO-8859-1* (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva *meta* y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan los caracteres en las distintas codificaciones con editores hexadecimales como [HexEd.it](https://hexed.it/).
+Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codificación de caracteres de longitud variable UTF-8, que permite representar todos los caracteres del juego de caracteres Unicode, es importante que seas capaz de saber qué codificación de caracteres se usa en tus documentos web, en los de terceros, o en tu servidor web. No tener esto en cuenta puede hacer que tu web se visualice incorrectamente en algunos navegadores. En esta actividad hablaremos de codificación de caracteres siguiendo `estas diapositivas`_. 
 
 .. _`estas diapositivas`: _static/slides/070-codificacion-slides.html
 
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
 
-<note>
-Tiempo:
+  Usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones *UTF-8* e *ISO-8859-1* (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva ``meta`` y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan los caracteres en las distintas codificaciones con editores hexadecimales como `HexEd.it`_.
 
-En esta actividad se introducirá la importancia de Unicode (comentar los problemas que había en el pasado para representar caracteres de varios idiomas usando solo un byte por carácter) y los posibles problemas con las codificaciones de caracteres (por ejemplo, para representar caracteres de múltiples codificaciones en un mismo documento de texto).
+  .. _`HexEd.it`: https://hexed.it/
 
-Además, de realizar lo demandado por la actividad, los alumnos usarán un editor de texto para comprobar cuál es la longitud de un fichero de texto que contiene la secuencia *añ* con ambas codificaciones y se les pedirá que razonen cómo interpretaría esta secuencia un editor que esté prepararado para el otro formato. Se le mostrará a los estudiantes la [lista de caracteres](http://www.unicode.org/charts/) de Unicode para que vean su riqueza.
+.. admonition:: :problema-contador:`Problema`
+  :class: problema
 
-Suele ser necesario hacer mucho énfasis en que colocar la codificación correcta en *charset* no garantiza que el documento use dicha codificación. También en que un documento grabado desde un editor de texto no tiene negritas ni colores ni nada por el estilo, a diferencia de uno grabado desde un procesador de texto.
-</note>
+  Indica cuántos bytes ocupa un fichero de texto codificado en UTF-8 con el siguiente contenido:
+
+
+Colocar la codificación correcta en ``charset`` no garantiza que el documento use dicha codificación. 
 
 Alojamiento en un servidor
 --------------------------
 
-Una página web normalmente se aloja en un servidor web. En esta actividad vamos a instalar el servidor Jetty y *alojar* en él nuestra página. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor.
+Una página web normalmente se aloja en un servidor web. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor. Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat y Jetty. Mientras un programador desarrolla una aplicación web es habitual que lance un servidor en su máquina para ir probando sus cambios; en ese caso, el URL de acceso al servidor suele tener la forma ``http://localhost:8080`` donde ``localhost`` es el nombre de la propia máquina como *host* y ``8080`` es un puerto libre que es necesario indicar en el URL, ya que de no hacerlo el protocolo HTTP usa por defecto el puerto 80 (y HTTPS el 443), que estará normalmente reservado para comunicarse mediante HTTP con otros ordenadores. 
 
-Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat y Jetty. Aunque este último está escrito en Java y pensado especialmente para devolver contenido dinámico generado por programas escritos en Java o en JSP (y para eso lo usaremos más adelante), también puede usarse como proveedor de contenidos estáticos. Descarga el [repositorio Git](https://github.com/jaspock/dai) de la asignatura, accede a la carpeta *simple-html-file* y haz
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
 
-~~~
-mvn jetty:run
-~~~
+  Una de las formas más sencillas de lanzar un servidor local es usar el que Python incluye por defecto. Colócate en el directorio raíz del contenido que quieres servir y haz:
 
-para lanzar (y descargarlo antes, si procede) el servidor Jetty sobre la carpeta actual. Accede luego a los ficheros guardados en la carpeta local *src/main/webapp* (este directorio sigue la estructura común de los proyectos en Maven) a través del servidor usando para ello el URL [http://localhost:8080](http://localhost:8080).
+  .. code-block::
 
-Puedes lanzar también otro servidor HTTP sobre el mismo contenido. Por ejemplo, para usar el que Python incluye por defecto, colócate en el directorio raíz del contenido que quieres servir y haz:
-
-~~~
-python -m SimpleHTTPServer
-~~~
-
-
-<note>
-Tiempo:
-</note>
+    python -m SimpleHTTPServer
 
 
 Validación de documentos HTML
 -----------------------------
 
-Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con las directrices de HTML, tanto a nivel sintáctico (por ejemplo, las marcas de apertura y clausura respetan el anidamiento entre elementos) como semántico (no hay dos atributos *id* con el mismo valor). De esta manera, se allana el camino hacia la compatibilidad entre navegadores y la usabilidad de la página web; la validación, sin embargo, no asegura que el documento se vaya a ver como el desarrollador tiene en la cabeza ni que se muestre de igual manera en todos los navegadores. Usa el [validador del W3C](http://validator.w3.org/) para validar la página web que has confeccionado en actividades anteriores; corrige todos los errores que te indique el validador hasta conseguir validarla. A continuación, crea una copia de tu documento, introduce diversos errores en ella y comprueba que el validador del W3C informa de ellos correctamente.
+Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con las directrices de HTML, tanto a nivel sintáctico (por ejemplo, las marcas de apertura y clausura respetan el anidamiento entre elementos) como semántico (no hay dos atributos *id* con el mismo valor o no se usan en un elemento atributos que correspondan a otros elementos). De esta manera, se allana el camino hacia la compatibilidad entre navegadores y la usabilidad de la página web; la validación, sin embargo, no asegura que el documento se vaya a ver como el desarrollador tiene en la cabeza ni que se muestre de igual manera en todos los navegadores. 
 
-Indicar, de paso, que lo que en HTML5 se representa como
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Usa el `validador del W3C`_ para validar alguna de las páginas web usadas en actividades anteriores; corrige todos los errores que te indique el validador hasta conseguir validarla. Algunas de las cosas que puedes probar son:
+
+  - dejar una etiqueta sin cerrar
+  - mover el elemento ``meta`` de la cabecera al cuerpo (``body``) del documento
+  - mover un párrafo (``p``) a la cabecera (``head``) del documento
+  - eliminar el título (``title``) de la cabecera del documento
+  - poner una imagen (``img``) sin el atributo ``alt``
+  - colocar un elemento de lista (``li``) fuera de la marca de lista (``ul``)
+
+  .. _`validador del W3C`: http://validator.w3.org/
+
+
+.. Note::
+
+  El lenguaje HTML evoluciona como cualquier otro lenguaje informático. Así, lo que hoy en día se representa como
+
+  .. code-block:: html
 
     <meta charset=utf-8>
 
-en XHTML o HTML4 se representaba como
+  en XHTML o HTML4 se representaba como
+
+  .. code-block:: html
 
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" >
 
-Esta es una de las múltiples diferencias entre ambas versiones del estándar.
-
-Ejercicios de repaso
---------------------
-
-Crea el esqueleto de una única página web que contenga la información que habitualmente se muestra en la ficha de una asignatura. Asegúrate de que el documento HTML es válido según el [validador del W3C](http://validator.w3.org/).
-
+  Ten en cuenta estas diferencias cuando encuentres código de ejemplo en HTML en alguna web. Los navegadores suelen procesar correctamente la mayor parte del estándar existente cuando son publicados, pero no...
 
