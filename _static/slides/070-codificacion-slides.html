@@ -53,9 +53,10 @@
 <section id="us-ascii" class="slide level2">
 <h2>US-ASCII</h2>
 <ul>
-<li>El estándar US-ASCII (también conocido como ASCII, American Standard Code for Information Interchange) representa cada carácter mediante 7 bits</li>
+<li>El estándar US-ASCII (también conocido como ASCII, American Standard Code for Information Interchange) representa cada carácter con 7 bits</li>
 <li>Su origen se remota a la década de 1960</li>
 <li>Se decidió usar 7 bits porque eran suficientes para representar los 128 caracteres deseados y también para reducir el coste de la transmisión</li>
+<li>En la práctica se usan 8 bits para que coincida con un byte</li>
 </ul>
 </section>
 <section id="us-ascii-1" class="slide level2">
@@ -70,14 +71,19 @@
 <li>Una serie de estándares de codificación de caracteres de 8 bits (256 caracteres diferentes)</li>
 <li>15 codificaciones de caracteres para diferentes lenguajes</li>
 <li>Los 128 primeros caracteres (0-127) son compatibles con US-ASCII</li>
+</ul>
+</section>
+<section id="isoiec-8859-1" class="slide level2">
+<h2>ISO/IEC 8859</h2>
+<ul>
 <li>Si no permitimos el cambio de la codificación de caracteres en mitad de un documento, no es posible mezclar textos en español y ruso, por ejemplo</li>
-<li>Como los ficheros de texto no indican la codificación que usan, es necesario indicarla explícitamente a un editor de textos, por ejemplo</li>
+<li>En el caso de ficheros de texto, como estos no contienen la codificación que usan, es necesario indicarla explícitamente al programa con el que vayamos a visualizarlos o editarlos</li>
 </ul>
 </section>
 <section id="isoiec-8859-1-latin-1" class="slide level2">
 <h2>ISO/IEC 8859-1 (Latin 1)</h2>
 <ul>
-<li>Inglés, alemán, irlandés, islandés, portugués, francés, catalán, noruego…</li>
+<li>Inglés, islandés, español, francés, catalán…</li>
 </ul>
 <div style="width:500px; margin: 0 auto;">
 <p><img data-src="https://www.charset.org/img/charsets/iso-8859-1.gif" /></p>
@@ -119,6 +125,11 @@
 <li>Estándar del Unicode Consortium que intenta reemplazar a todos los anteriores y permite entornos plurilingües</li>
 <li>Cada carácter se identifica mediante un número o punto de código</li>
 <li>Los puntos de código no cambian, pero hay diferentes codificaciones: UTF-8, UTF-16, UTF-32, etc.</li>
+</ul>
+</section>
+<section id="unicode-1" class="slide level2">
+<h2>Unicode</h2>
+<ul>
 <li>El estándar Unicode permite 1.114.112 puntos de código</li>
 <li>Actualmente están asignados unos 140.000, incluyendo emojis (‘🥘’, U+1F958), caracteres de alfabetos antiguos, etc.</li>
 </ul>
@@ -134,17 +145,21 @@
 <section id="cómo-usar-unicode" class="slide level2">
 <h2>Cómo usar Unicode</h2>
 <ul>
-<li>Usar un editor de texto que lo soporte (suele ser la opción por defecto hoy en día)</li>
+<li>Usar un editor de texto que lo soporte (Unicode suele ser la codificación por defecto hoy en día)</li>
 <li>Usar un lenguaje de programación que lo soporte (muchos lo hacen de forma nativa)</li>
 <li>Usar un tipo de letra adecuado (ningún tipo de letra soporta todos los caracteres de Unicode)</li>
 </ul>
 </section>
 <section id="programar-con-caracteres-de-unicode" class="slide level2">
 <h2>Programar con caracteres de Unicode</h2>
-<pre><code>   var Omega = &#39;Ω&#39;;
-   var Omega = &#39;\u03A9&#39;;  // compatible con cualquier entorno</code></pre>
-<pre><code>  public static void main(final String[] args) {
-    String ဆဆဆ = &quot;မောင်မောင်&quot;;  // caracteres de lenguas de la República de la Unión de Myanmar
+<ul>
+<li>Ejemplos en Java:</li>
+</ul>
+<pre><code>  var Omega = &#39;Ω&#39;;
+  var Omega = &#39;\u03A9&#39;;  // compatible con cualquier entorno
+
+  public static void m (void) {
+    int ဆဆဆ = 100;  // caracteres en birmano
     System.out.println(&quot;ကောင်းသောနေ.ပါ &quot; + ဆဆဆ);
   }</code></pre>
 </section>
@@ -159,34 +174,47 @@
   &amp;#xC3;
   &amp;Atilde;</code></pre>
 </section>
-<section id="ejemplos-de-representaciones-de-caracteres" class="slide level2">
-<h2>Ejemplos de representaciones de caracteres</h2>
+<section id="ejemplos" class="slide level2">
+<h2>Ejemplos</h2>
 <ul>
-<li>El carácter ‘a’ (LATIN SMALL LETTER A, U+0061) en US-ASCII es 01100001 (61 en hexadecimal), la misma que en los ISO/IEC 8859 y que en UTF-8; en UTF-16 es 11111110 11111111 00000000 01100001 (FEFF0061)</li>
-<li>El carácter ‘Ã’ se representa en ISO/IEC 8859-15 como C3</li>
-<li>El carácter ‘¡’ se representa en ISO/IEC 8859-15 como A1</li>
-<li>El carácter ‘á’ (LATIN SMALL LETTER A WITH ACUTE, U+00E1) se representa en ISO/IEC 8859-15 como E1 y en UTF-8 como C3A1</li>
+<li>El carácter ‘a’ (LATIN SMALL LETTER A, U+0061) en US-ASCII es 01100001 (61 en hexadecimal, x61), igual que en ISO/IEC 8859 y que en UTF-8; en UTF-16 es 11111110 11111111 00000000 01100001 (xFEFF0061)</li>
+<li>El carácter ‘á’ (LATIN SMALL LETTER A WITH ACUTE, U+00E1) se representa en ISO/IEC 8859-15 como xE1 y en UTF-8 como xC3A1</li>
 </ul>
 </section>
-<section id="ejemplos-de-representaciones-de-caracteres-2" class="slide level2">
-<h2>Ejemplos de representaciones de caracteres /2</h2>
+<section id="ejemplos-1" class="slide level2">
+<h2>Ejemplos</h2>
 <ul>
-<li>¿Cómo se ve un fichero de texto en UTF-8 que contiene <em>guaraná</em> en un editor de texto configurado para ISO/IEC 8859-15? ¿Y al revés?</li>
+<li>El carácter ‘Ã’ se representa en ISO/IEC 8859-15 como xC3</li>
+<li>El carácter ‘¡’ se representa en ISO/IEC 8859-15 como xA1</li>
+</ul>
+</section>
+<section id="problema" class="slide level2">
+<h2>Problema</h2>
+<ul>
+<li>Teniendo en cuenta los datos de las diapositivas anteriores, ¿cómo se ve un fichero de texto escrito en UTF-8 que contiene <em>guaraná</em> en un editor de texto configurado para ISO/IEC 8859-15?</li>
+<li>¿Cómo se ve un fichero de texto escrito en ISO/IEC 8859-1 que contiene <em>guaraná</em> en un editor de texto configurado para UTF-8?</li>
 </ul>
 </section>
 <section id="utf-8-en-páginas-web" class="slide level2">
 <h2>UTF-8 en páginas web</h2>
 <ul>
-<li>Configurar el servidor para que informe al cliente de que la codificación es UTF-8</li>
-<li>Añadir a la petición y a la respuesta la cabecera HTTP:</li>
+<li>Configurar el servidor para que informe al cliente de que la codificación es UTF-8: añadir a la petición y a la respuesta la cabecera HTTP:</li>
 </ul>
 <pre><code>  Content-Type: text/html; charset=utf-8</code></pre>
 <ul>
-<li>Indicar la codificación en el <em>head</em> del documento HTML:</li>
+<li>Indicar la codificación en el <em>head</em> de HTML:</li>
 </ul>
 <pre><code>  &lt;meta charset=&quot;utf-8&quot;&gt;</code></pre>
 <p>o antiguamente:</p>
 <pre><code>  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code></pre>
+</section>
+<section id="precacuciones" class="slide level2">
+<h2>Precacuciones</h2>
+<ul>
+<li>En JavaScript, que usa UTF-16, “🤦🏻‍♂️”.length == 7 (<em>man facepalming: light skin tone</em>); el número de bytes en memoria es 14</li>
+<li>La cadena contiene 5 valores de Unicode (<a href="https://hsivonen.fi/string-length/">explicación</a>): persona palmeándose la cara, color de piel, ligadura de códigos, hombre, no monocromo</li>
+<li>En otros lenguajes la longitud puede ser diferente, pero pocos lenguajes dan 1 como longitud</li>
+</ul>
 </section>
     </div>
   </div>
@@ -200,6 +228,8 @@
       Reveal.initialize({
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: {37:'prev',38:'prev',39:'next',40:'next'},
         // Transition style
         transition: 'linear', // none/fade/slide/convex/concave/zoom
 

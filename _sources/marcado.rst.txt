@@ -3,9 +3,6 @@
 Lenguajes de marcado
 ====================
 
-.. Important::
-
-  Esta página contiene un borrador de los materiales y todavía no está finalizada. Cuando lo esté, se dejará de mostrar este aviso.
 
 HTML (*HyperText Markup Language*) es el lenguaje en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.
 
@@ -31,6 +28,14 @@ HTML (*HyperText Markup Language*) es el lenguaje en el que están escritas las 
   - Entender el papel jugado por un servidor web y cómo publicar en él contenido estático.
 
 
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Prepárate para este tema, leyendo en primer lugar el `capítulo sobre HTML`_ del libro "Client-Side Web Development".
+
+  .. _`capítulo sobre HTML`: https://info340.github.io/html-fundamentals.html
+
+
 Sintaxis y elementos del lenguaje HTML
 --------------------------------------
 
@@ -39,7 +44,7 @@ HTML es el lenguaje informático básico que se usa para escribir el contenido d
 
 .. Attention::
 
-  La forma normal de trabajar con HTML es usar tu editor de texto favorito para editar el fichero y abrir el documento resultante (con extensión ``.html``) en un navegador. No obstante, cuando se dan los primeros pasos en el aprendizaje del lenguaje puede ser más cómodo usar entornos en línea como JSBin_, que evitan tener que guardar y recargar constantemente. Hay otras herramientas similares como JSFiddle_ o CodePen_, pero son menos recomendables desde el punto de vista educativo, ya que ocultan ciertas partes del documento HTML (por ejemplo, la cabecera) para no *molestar* al usuario con elementos obvios.
+  La forma normal de trabajar con HTML es usar tu editor de texto favorito para editar el fichero y abrir el documento resultante (con extensión ``.html``) en un navegador. No obstante, cuando se dan los primeros pasos en el aprendizaje del lenguaje puede ser más cómodo usar entornos en línea como JSBin_, que evitan tener que guardar y recargar constantemente. Hay otras herramientas similares como JSFiddle_ o CodePen_, pero son menos recomendables desde el punto de vista educativo, ya que ocultan ciertas partes del documento HTML (por ejemplo, la cabecera) para no *distraer* al usuario con elementos obvios.
 
   .. _JSBin: http://jsbin.com/
   .. _JSFiddle: https://jsfiddle.net/
@@ -65,7 +70,7 @@ Una de los documentos web más sencillos que se pueden escribir es el siguiente.
   </html>
 
 
-Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilos como CSS, que estudiaremos más adelante. Esta separación de presentación y contenido hace que el documento HTML sea independiente de la representación visual, táctil o auditiva que hagamos de él: en diferentes contextos podrían usarse diferentes hojas de estilo; o un *screen reader* podría usar el contenido del bloque `nav` para permitir a una persona ciega elegir directamente qué sección del documento desea escuchar o consultar en un `terminal braille`_; o un programa que procesa automáticamente un documento HTML no tendría que lidiar con aspectos secundarios meramente cosméticos.
+Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilo como CSS, que estudiaremos más adelante. Esta separación de presentación y contenido hace que el documento HTML sea independiente de la representación visual, táctil o auditiva que hagamos de él: en diferentes contextos podrían usarse diferentes hojas de estilo para el mismo documento; o un *screen reader* podría usar el contenido del bloque `nav` para permitir a una persona ciega elegir directamente qué sección del documento desea escuchar o consultar en un `terminal braille`_; o un programa que procesa automáticamente un documento HTML (por poner un ejemplo, un buscador) no tendría que lidiar con aspectos secundarios meramente cosméticos.
 
   .. _`terminal braille`: https://en.wikipedia.org/wiki/Refreshable_braille_display
 
@@ -78,13 +83,12 @@ HTML tiene aproximadamente un centenar de elementos diferentes, cada uno de ello
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  La especificación estándar de HTML es un documento demasiado técnico para los propósitos de este curso y para la mayoría de los desarrolladores. La web `MDN`_ muestra esta información de forma más sencilla. En principio, acostúmbrate a usar esta web como referencia, frente a otras que pueden aparecer más arriba en los resultados de los buscadores. Usa la versión en inglés, ya que otros idiomas no siempre están actualizados. Estudia en MDN todos los elementos de HTML que aparecen en este tema y asegúrate de que entiendes su propósito. Elementos adicionales, como los relacionados con los formularios, se estudiarán en otro tema. Reserva cita para tutoría si crees que no lo tienes todo claro.
+  La especificación estándar de HTML es un documento demasiado técnico para los propósitos de este curso y para la mayoría de los desarrolladores. La web `MDN`_ muestra esta información de forma más sencilla. En principio, acostúmbrate a usar esta web como referencia, frente a otras que pueden aparecer más arriba en los resultados de los buscadores. Usa la versión en inglés, ya que otros idiomas no siempre están actualizados. Estudia en `MDN web docs`_ todos los elementos de HTML que aparecen en este tema y asegúrate de que entiendes su propósito. Elementos adicionales, como los relacionados con los formularios, se estudiarán en otro tema. Reserva cita para tutoría si crees que no lo tienes todo claro.
 
-  .. _MDN: https://developer.mozilla.org/es/
+  .. _MDN: https://developer.mozilla.org/en-US/
 
 
 El código del documento HTML más completo enlazado anteriormente es el siguiente:
-
 
 .. literalinclude:: _static/data/franz.html
   :language: html
@@ -96,9 +100,10 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Indica con qué código HTML es necesario sustituir la cadena @1 para que el siguiente bloque HTML sea válido y corresponga a una tabla con dos filas (la primera de encabezado) y una columna.
+  Indica con qué código HTML es necesario sustituir la cadena @1 para que el siguiente bloque HTML sea válido y corresponda a una tabla con dos filas (la primera de encabezado) y una columna.
 
   .. code-block:: html
+    :linenos:
 
     <table>
       <thead><tr><td><em>Nombre del río</em>@1<td>Ebro</td></tr>
@@ -106,23 +111,34 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
 
   .. @1=</td></tr></thead><tr>
 
+
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Indica con qué código es necesario sustituir la cadena @1 para que el siguiente bloque HTML se represente como se ve más abajo.
-
-  .. code-block:: html
-
-    <table>
-      <tr><td>1</td>@1</tr>
-    </table>
+  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente de esta manera sin usar ninguna hoja de estilo adicional:
 
   .. raw:: html
 
-    <table style="border: 1px solid gray">
-      <tr><td>1</td><td>2</td></tr>
-    </table>
+    <section><h4>Colores
+    </h4>
+    <ul>
+    <li>azul
+    </li>
+    </ul>
+    </section>
+    
+  .. code-block:: html
+    :linenos:
 
+    <li>azul
+    <ul>
+    </section>
+    </li>
+    <section><h4>Colores
+    </h4>
+    </ul>
+
+  .. 5,6,2,1,4,7,3
 
 
 Representación en memoria de un documento HTML
@@ -152,6 +168,27 @@ La siguiente figura muestra parte de un árbol DOM:
   Podría ser que en alguna ocasión necesites que entre dos elementos (por ejemplo, entre dos palabras) de tu página haya un espacio más grande lo habitual. Podrías en ese caso tener la tentación de usar la entidad ``&nbsp;`` (también ``&NonBreakingSpace;``), repetida varias veces, para obtener aproximadamente este espacio extra. Comprueba una vez cómo funciona (observa la diferencia entre ``a &nbsp;&nbsp; b`` y ``a b``) y luego no vuelvas a usarla nunca más (salvo para su verdadero propósito; sigue leyendo). Posteriormente veremos que, dentro del espíritu de separar presentación y contenido, son las hojas de estilo las que se han de encargar de definir de forma precisa la separación entre los elementos de una página. ¿Para qué existe entonces una entidad como ``&nbsp;``? Su propósito es indicar al navegador que nunca introduzca un salto de línea en el punto en el que aparece la entidad (cosa que el navegador puede decidir hacer con cualquier otro espacio en blanco) y la interprete estrictamente como un espacio en blanco. Escribe una latitud como ``40°&nbsp;41′&nbsp;21.4”&nbsp;N`` en un documento HTML, cambia el ancho de la ventana del navegador e intenta que se separen sus componentes en dos líneas consecutivas.
 
 
+.. admonition:: :problema-contador:`Problema`
+  :class: problema
+
+  Dibuja el árbol DOM correspondiente al siguiente documento HTML.
+
+  .. code-block:: html
+    :linenos:
+
+    <!doctype html>
+    <html lang="es"><head>
+          <title>La historia interminable</title></head>
+      <body><section><h2>La ciudad de los espectros</h2><p>Fújur se esforzó
+      desesperadamente por encontrar otra vez el lugar en que Atreyu debía de haber
+      caído al agua, pero hasta para un dragón blanco de la suerte es imposible
+      descubrir en la espuma hirviente de un mar revuelto el puntito diminuto de un
+      cuerpo que flota... o el de un ahogado en su fondo.</p><p>Sin embargo, Fújur
+      no quiso renunciar.</p></section>
+    </body>
+    </html>
+
+
 Herramientas para desarrolladores
 ---------------------------------
 
@@ -179,25 +216,32 @@ Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codifi
 
 .. _`estas diapositivas`: _static/slides/070-codificacion-slides.html
 
-.. admonition:: Hazlo tú ahora
-  :class: hazlotu
-
-  Usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones *UTF-8* e *ISO-8859-1* (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva ``meta`` y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan los caracteres en las distintas codificaciones con editores hexadecimales como `HexEd.it`_.
-
-  .. _`HexEd.it`: https://hexed.it/
 
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Indica cuántos bytes ocupa un fichero de texto codificado en UTF-8 con el siguiente contenido:
+  Considera los siguientes datos: 
+
+  - El carácter ``a`` (*Latin small letter a*, U+0061) en US-ASCII se repesenta como ``61`` en hexadecimal (``01100001`` en binario), igual que en ISO/IEC 8859 y que en UTF-8; en UTF-16 es ``FEFF0061`` (o en binario ``11111110 11111111 00000000 01100001``).
+  - El carácter ``á`` (*Latin small letter a with acute*, U+00E1) se representa en ISO/IEC 8859-15 como ``E1`` y en UTF-8 como ``C3A1``.
+  - El carácter ``Ã`` se representa en ISO/IEC 8859-15 como ``C3``.
+  - El carácter ``¡`` se representa en ISO/IEC 8859-15 como ``A1``.
+
+  Teniendo en cuenta los datos de las diapositivas anteriores, ¿cómo se ve un fichero de texto escrito en UTF-8 que contiene la cadena ``aáa`` en un editor de texto configurado para ISO/IEC 8859-15? ¿Cómo se ve un fichero de texto escrito en ISO/IEC 8859-15 que contiene la cadena ``aáa`` en un editor de texto configurado para UTF-8?
 
 
-Colocar la codificación correcta en ``charset`` no garantiza que el documento use dicha codificación. 
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Observa que indicar una determinada codificación en el atributo ``charset`` del elemento ``meta`` no garantiza que los caracteres del documento usen realmente dicha codificación. Usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones *UTF-8* e *ISO-8859-15* (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva ``meta`` y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan a nivel de bytes los caracteres en las distintas codificaciones con editores hexadecimales como `HexEd.it`_.
+
+  .. _`HexEd.it`: https://hexed.it/
+
 
 Alojamiento en un servidor
 --------------------------
 
-Una página web normalmente se aloja en un servidor web. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor. Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat y Jetty. Mientras un programador desarrolla una aplicación web es habitual que lance un servidor en su máquina para ir probando sus cambios; en ese caso, el URL de acceso al servidor suele tener la forma ``http://localhost:8080`` donde ``localhost`` es el nombre de la propia máquina como *host* y ``8080`` es un puerto libre que es necesario indicar en el URL, ya que de no hacerlo el protocolo HTTP usa por defecto el puerto 80 (y HTTPS el 443), que estará normalmente reservado para comunicarse mediante HTTP con otros ordenadores. 
+Una página web normalmente se aloja en un servidor web. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor. Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat o Jetty. Mientras un programador desarrolla una aplicación web es habitual que lance un servidor en su máquina para ir probando sus cambios; en ese caso, el URL de acceso al servidor suele tener la forma ``http://localhost:8080`` donde ``localhost`` es el nombre de la propia máquina como *host* (IP 127.0.0.1) y ``8080`` es un puerto libre que es necesario indicar en el URL, ya que de no hacerlo el protocolo HTTP usa por defecto el puerto 80 (y HTTPS el 443), que estará normalmente reservado para comunicarse mediante HTTP con otros ordenadores. 
 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
@@ -231,17 +275,16 @@ Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con
 
 .. Note::
 
-  El lenguaje HTML evoluciona como cualquier otro lenguaje informático. Así, lo que hoy en día se representa como
+  El lenguaje HTML evoluciona como cualquier otro lenguaje informático. Así, lo que hoy en día se representa como:
 
   .. code-block:: html
 
     <meta charset=utf-8>
 
-  en XHTML o HTML4 se representaba como
+  en XHTML o HTML4 se representaba como:
 
   .. code-block:: html
 
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" >
 
-  Ten en cuenta estas diferencias cuando encuentres código de ejemplo en HTML en alguna web. Los navegadores suelen procesar correctamente la mayor parte del estándar existente cuando son publicados, pero no...
-
+  Ten en cuenta estas diferencias cuando encuentres código de ejemplo en HTML en alguna web. Los navegadores suelen procesar correctamente la mayor parte de la última versión del estándar existente cuando son publicados, pero no debes perder de vista que un gran número de usuarios tendrásn probablemente versiones antiguas del navegador. Aunque no las veremos en este curso, existen maneras de desarrollar aplicaciones web teniendo en cuenta estas versiones antiguas sin renunciar necesariamente a la versatilidad de las recientes.
