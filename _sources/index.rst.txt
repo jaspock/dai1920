@@ -18,12 +18,15 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 16 Sep 
+      - Léete el `capítulo de introducción a CSS`_ del libro "Client-Side Web Development" antes de las clases del 24 de septiembre.  
     * - 09 sep
-      - Antes de las clases del 17 de septiembre es necesario haber leído el `capítulo sobre HTML`_ del libro "Client-Side Web Development".
+      - Antes de las clases del 17 de septiembre e necesario haber leído el `capítulo sobre HTML`_ del libro "Client-Side Web Development".
     * - 08 sep
       - Ya está publicado el enunciado de la práctica 1. Las clases de prácticas comienzan el 17 de septiembre.
 
 .. _`capítulo sobre HTML`: https://info340.github.io/html-fundamentals.html
+.. _`capítulo de introducción a CSS`: https://info340.github.io/css.html
 
 Guía docente
 ------------
