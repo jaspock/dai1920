@@ -115,7 +115,7 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente de esta manera sin usar ninguna hoja de estilo adicional:
+  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente como sigue sin usar ninguna hoja de estilo adicional:
 
   .. raw:: html
 
@@ -137,6 +137,8 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
     <section><h4>Colores
     </h4>
     </ul>
+
+  Una posible respuesta (incorrecta) tendría el formato ``1,2,3,4,5,6,7``.
 
   .. 5,6,2,1,4,7,3
 
