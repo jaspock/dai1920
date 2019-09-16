@@ -15,9 +15,10 @@ Desarrollo de Aplicaciones en Internet
 
 ## US-ASCII
 
-- El estándar US-ASCII (también conocido como ASCII, American Standard Code for Information Interchange) representa cada carácter mediante 7 bits
+- El estándar US-ASCII (también conocido como ASCII, American Standard Code for Information Interchange) representa cada carácter con 7 bits
 - Su origen se remota a la década de 1960
 - Se decidió usar 7 bits porque eran suficientes para representar los 128 caracteres deseados y también para reducir el coste de la transmisión
+- En la práctica se usan 8 bits para que coincida con un byte
 
 ## US-ASCII
 
@@ -30,12 +31,15 @@ Desarrollo de Aplicaciones en Internet
 - Una serie de estándares de codificación de caracteres de 8 bits (256 caracteres diferentes)
 - 15 codificaciones de caracteres para diferentes lenguajes
 - Los 128 primeros caracteres (0-127) son compatibles con US-ASCII
+
+## ISO/IEC 8859
+
 - Si no permitimos el cambio de la codificación de caracteres en mitad de un documento, no es posible mezclar textos en español y ruso, por ejemplo
-- Como los ficheros de texto no indican la codificación que usan, es necesario indicarla explícitamente a un editor de textos, por ejemplo
+- En el caso de ficheros de texto, como estos no contienen la codificación que usan, es necesario indicarla explícitamente al programa con el que vayamos a visualizarlos o editarlos
 
 ## ISO/IEC 8859-1 (Latin 1)
 
-- Inglés, alemán, irlandés, islandés, portugués, francés, catalán, noruego...
+- Inglés, islandés, español, francés, catalán...
 
 <div style="width:500px; margin: 0 auto;">
 ![](https://www.charset.org/img/charsets/iso-8859-1.gif)
@@ -70,6 +74,9 @@ Desarrollo de Aplicaciones en Internet
 - Estándar del Unicode Consortium que intenta reemplazar a todos los anteriores y permite entornos plurilingües
 - Cada carácter se identifica mediante un número o punto de código
 - Los puntos de código no cambian, pero hay diferentes codificaciones: UTF-8, UTF-16, UTF-32, etc.
+
+## Unicode
+
 - El estándar Unicode permite 1.114.112 puntos de código
 - Actualmente están asignados unos 140.000, incluyendo emojis ('🥘', U+1F958), caracteres de alfabetos antiguos, etc.
 
@@ -81,20 +88,20 @@ Desarrollo de Aplicaciones en Internet
 
 ## Cómo usar Unicode
 
-- Usar un editor de texto que lo soporte (suele ser la opción por defecto hoy en día)
+- Usar un editor de texto que lo soporte (Unicode suele ser la codificación por defecto hoy en día)
 - Usar un lenguaje de programación que lo soporte (muchos lo hacen de forma nativa)
 - Usar un tipo de letra adecuado (ningún tipo de letra soporta todos los caracteres de Unicode)
 
 ## Programar con caracteres de Unicode
 
-~~~
-   var Omega = 'Ω';
-   var Omega = '\u03A9';  // compatible con cualquier entorno
-~~~
+- Ejemplos en Java:
 
 ~~~
-  public static void main(final String[] args) {
-    String ဆဆဆ = "မောင်မောင်";  // caracteres de lenguas de la República de la Unión de Myanmar
+  var Omega = 'Ω';
+  var Omega = '\u03A9';  // compatible con cualquier entorno
+
+  public static void m (void) {
+    int ဆဆဆ = 100;  // caracteres en birmano
     System.out.println("ကောင်းသောနေ.ပါ " + ဆဆဆ);
   }
 ~~~
@@ -111,28 +118,30 @@ Desarrollo de Aplicaciones en Internet
   &Atilde;
 ~~~
 
-## Ejemplos de representaciones de caracteres
+## Ejemplos
 
-- El carácter 'a' (LATIN SMALL LETTER A, U+0061) en US-ASCII es 01100001 (61 en hexadecimal), la misma que en los ISO/IEC 8859 y que en UTF-8; en UTF-16 es
-11111110 11111111 00000000 01100001 (FEFF0061)
-- El carácter 'Ã' se representa en ISO/IEC 8859-15 como C3
-- El carácter '¡' se representa en ISO/IEC 8859-15 como A1
-- El carácter 'á' (LATIN SMALL LETTER A WITH ACUTE, U+00E1) se representa en ISO/IEC 8859-15 como E1 y en UTF-8 como C3A1
+- El carácter 'a' (LATIN SMALL LETTER A, U+0061) en US-ASCII es 01100001 (61 en hexadecimal, x61), igual que en ISO/IEC 8859 y que en UTF-8; en UTF-16 es
+11111110 11111111 00000000 01100001 (xFEFF0061)
+- El carácter 'á' (LATIN SMALL LETTER A WITH ACUTE, U+00E1) se representa en ISO/IEC 8859-15 como xE1 y en UTF-8 como xC3A1
 
-## Ejemplos de representaciones de caracteres /2
+## Ejemplos
 
-- ¿Cómo se ve un fichero de texto en UTF-8 que contiene *guaraná* en un editor de texto configurado para ISO/IEC 8859-15? ¿Y al revés?
+- El carácter 'Ã' se representa en ISO/IEC 8859-15 como xC3
+- El carácter '¡' se representa en ISO/IEC 8859-15 como xA1
+
+## Problema
+
+- Teniendo en cuenta los datos de las diapositivas anteriores, ¿cómo se ve un fichero de texto escrito en UTF-8 que contiene *guaraná* en un editor de texto configurado para ISO/IEC 8859-15? 
+- ¿Cómo se ve un fichero de texto escrito en ISO/IEC 8859-1 que contiene *guaraná* en un editor de texto configurado para UTF-8?
 
 ## UTF-8 en páginas web
 
-- Configurar el servidor para que informe al cliente de que la codificación es UTF-8
-- Añadir a la petición y a la respuesta la cabecera HTTP:
-
+- Configurar el servidor para que informe al cliente de que la codificación es UTF-8: añadir a la petición y a la respuesta la cabecera HTTP:
 ~~~
   Content-Type: text/html; charset=utf-8
 ~~~
 
-- Indicar la codificación en el *head* del documento HTML:
+- Indicar la codificación en el *head* de HTML:
 
 ~~~
   <meta charset="utf-8">
@@ -143,3 +152,9 @@ o antiguamente:
 ~~~
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 ~~~
+
+## Precacuciones
+
+- En JavaScript, que usa UTF-16, "🤦🏻‍♂️".length == 7 (*man facepalming: light skin tone*); el número de bytes en memoria es 14
+- La cadena contiene 5 valores de Unicode ([explicación](https://hsivonen.fi/string-length/)): persona palmeándose la cara, color de piel, ligadura de códigos, hombre, no monocromo
+- En otros lenguajes la longitud puede ser diferente, pero pocos lenguajes dan 1 como longitud
