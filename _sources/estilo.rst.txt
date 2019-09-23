@@ -1,14 +1,995 @@
+.. role:: problema-contador
 
 Lenguajes de estilo
 ===================
 
-Las habilidades que deberías adquirir con este tema incluyen las siguientes:
+El lenguaje HTML dota de contenido a una página web. El lenguaje JavaScript de interactividad. Y el lenguaje CSS (*cascading style sheets*), que vamos a estudiar en este tema, es el encargado de representar los aspectos relacionados con la presentación. Sin alterar el HTML de una página, solo modificando su hoja de estilo en CSS, pueden conseguirse `vistas completamente diferentes de un mismo documento`_. El World Wide Web Consortium (W3C) ha ido definiendo varios niveles para CSS (que se corresponden, más o menos, con la idea de versiones) de forma que cada nivel extiende las funcionalidades del nivel anterior. Hasta CSS 2.1 (revisión 1 del nivel 2), la recomendación venía recogida en un único documento, pero a partir del nivel 3 se divide en varias `decenas de módulos`_, cada uno de los cuales puede encontrarse en un estatus diferente (desde borrador a recomendación formal); además, el W3C ya trabaja en algunos módulos del nivel 4.
 
-- Entender la diferencia entre un lenguaje de marcas como HTML y un lenguaje de estilo como CSS.
-- Conocer el propósito de los atributos de CSS discutidos en clase.
-- Entender las regla de herencia y especificidad de CSS.
-- Aplicar el modelo de caja de CSS.
-- Saber posicionar los elementos HTML usando posicionamiento estático, relativo, fijo o absoluto.
-- Saber crear hojas de estilo CSS válidas.
-- Usar las herramientas para desarrolladores integradas en los navegadores, como Chrome DevTools, para inspeccionar el estilo de una parte de un documento HTML.
+.. _`vistas completamente diferentes de un mismo documento`: http://csszengarden.com/
+.. _`decenas de módulos`: https://www.w3.org/Style/CSS/
 
+
+.. Important::
+
+    Las habilidades que deberías adquirir con este tema incluyen las siguientes:
+
+    - Entender la diferencia entre un lenguaje de marcas como HTML y un lenguaje de estilo como CSS.
+    - Conocer el propósito de los atributos de CSS estudiados en este tema.
+    - Entender las regla de herencia y especificidad de CSS.
+    - Aplicar el modelo de caja de CSS.
+    - Saber posicionar los elementos HTML usando posicionamiento estático, relativo, fijo o absoluto.
+    - Saber crear hojas de estilo CSS válidas.
+    - Usar las herramientas para desarrolladores integradas en los navegadores, como Chrome DevTools, para inspeccionar el estilo de una parte de un documento HTML.
+
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Prepárate para este tema, leyendo en primer lugar el `capítulo sobre fundamentos de CSS`_ del libro "Client-Side Web Development", donde se explican los conceptos básicos de las reglas, las propiedades y los selectores de CSS.
+
+  .. _`capítulo sobre fundamentos de CSS`: https://info340.github.io/css.html
+
+
+Conexión entre los estilos y el documento HTML
+----------------------------------------------
+
+En el documento de introducción a CSS que has leído, se mencionan dos formas de vincular los estilos a un documento HTML. La forma más habitual (y normalmente la más correcta) de hacerlo es mediante el elemento ``<link>`` empleado en la cabecera (``<head>``) del documento:
+
+.. code-block:: html
+  :linenos:
+
+  <head>
+    ...
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
+    ...
+  </head>
+
+Observa cómo se puede vincular más de una hoja de estilo a la vez a un documento. Si un elemento recibe estilos incompatibles de más de una regla, se aplican los criterios de *especificidad* que comentaremos más adelante. 
+
+La segunda manera de vincular estilos con un documento HTML es usando el elemento ``<style>`` en la cabecera del documento HTML e incluyendo las reglas CSS en su interior, pero esta forma no es muy recomendable ya que introduce una dependencia excesiva entre contenido y presentación, e impide la aplicación de los mismos estilos a otros documentos.
+
+Existe una tercera vía que es todavía menos recomendable. La contamos aquí para que conozcas su existencia ya que es posible que te la encuentres en código de terceros. Consiste en usar el atributo ``style`` sobre un elemento del documento HTML:
+
+.. code-block:: html
+  :linenos:
+
+  <body>
+    ...
+    <p style="color:red; font-style:italic;">
+      ...
+    </p>
+    ...
+  </body>
+
+Esta tercera forma se aleja definitivamente de la idea de separar presentación y contenido, anulando todas sus ventajas.
+
+Respecto a la *especificidad*, para los mismos selectores el último en declararse tiene precedencia; además, existe un orden principal establecido por el estilo del documento, el definido por el usuario y el por defecto del navegador, en este orden. En el caso de conflictos, es decir, cuando más de un selector puede aplicarse a un elemento del documento HTML y las propiedades asociadas a cada selector son incompatibles, se aplican las siguientes reglas de cálculo de la especificidad de un selector para determinar el selector *ganador*: 
+
+- un estilo aplicado en línea con el atributo ``style`` suma 1000 a la especificidad
+- cada identificador (*id*) que aparezca en el selector suma 100
+- cada selector de clase, de atributo o de pseudo-clase (``:hover``) suma 10
+- cada elemento o pseudo-elemento (``::before``) suma 1
+
+Estos son algunos ejemplos de cálculo de especificidad para diferentes selectores:
+
+.. list-table::
+    :widths: 50 20
+    :header-rows: 1
+    
+    * - Selector
+      - Especificidad
+    * - ``p``
+      - 1
+    * - ``div p``
+      - 2
+    * - ``.menu``
+      - 10
+    * - ``div ul.menu``
+      - 12
+    * - ``#activo``
+      - 100
+    * - ``body #contenido .principal p``
+      - 112
+
+En la tabla anterior aparecen algunos *selectores compuestos* que estudiarás más adelante.
+
+.. Note::
+
+  El criterio de especificidad puede sobrescribirse usando ``!important`` en la declaración de estilo. Aunque no lo veremos en este curso por ser poco recomendable la mayoría de las veces (normalmente podremos conseguir que el valor de un estilo se aplique sobre otros aumentando la especificidad del selector), puede ser útil cuando no podemos modificar ni el código HTML ni el CSS de una página (por ejemplo, porque son generados automáticamente por una herramienta), sino únicamente aportar una nueva hoja de estilo (en ese contexto, si queremos que alguna propiedad se aplique a un elemento que ya tiene la misma propiedad aplicada con otro valor por la hoja de estilo generada automáticamente y no existe un selector más específico que el ya usado en la hoja de estilo generada, modificaremos la propiedad en nuestra hoja de estilo con ``!important``).
+
+
+Selectores y propiedades del lenguaje CSS
+-----------------------------------------
+
+Los selectores de CSS permiten identificar uno o más elementos de un documento HTML. Aunque en este tema vamos a usar los selectores como parte de las reglas de CSS, esta notación tiene otros usos que veremos más adelante (como identificar los nodos del árbol DOM sobre los que realizar ciertas operaciones en JavaScript). Como veremos ahora, la sintaxis de los selectores puede ser más elaborada para definir criterios de selección más avanzados. Veremos también cómo especificar medidas (por ejemplo, el tamaño de la letra o el ancho de una caja), colores o tipos de letra en CSS.
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Estudia el `capítulo sobre las opciones de CSS`_ (excepto la subsección "Background and Images") del libro "Client-side web development". Practica con los diferentes tipos de selectores así como con los diferentes valores de las propiedades hasta tener claro su uso.
+
+  .. _`capítulo sobre las opciones de CSS`: https://info340.github.io/css-options.html
+
+
+.. Attention::
+
+  El hecho de introducir propiedades cosméticas a nivel de clase o identificador no debe distraer al desarrollador web de seguir usando los elementos de HTML para indicar la semántica del contenido (como se estudió en el tema de lenguajes de marcado), evitando así el abuso de elementos como ``div`` o ``span``: por ejemplo, si queremos aplicar un estilo específico a una cita, definiremos en la hoja de estilo el valor de las propiedades oportunas para el elemento ``<q>``, que será el que usemos en el documento HTML en lugar de un elemento del tipo ``<span class="cita">``.
+
+
+.. Note::
+
+  No todas las propiedades se propagan *en cascada* a los elementos interiores. Las propiedades ``color``, ``font-size`` y muchas otras se heredan, pero hay muchas propiedades de CSS no heredadas como ``border``, ``margin``, ``padding``, ``width``, etc.
+
+
+.. Note::
+
+  De la misma manera que un documento HTML puede (y debe) ser validado para asegurar su corrección, existen también validadores de documentos CSS, como el `validador del W3C`_. La validación no asegura que el documento se vaya a ver como el desarrollador tiene en la cabeza ni que se muestre de igual manera en todos los navegadores, pero permite detectar errores sintácticos que, por otra parte, posiblemente sean también detectados por el editor de texto que utilices.
+
+  .. _`validador del W3C`: http://jigsaw.w3.org/css-validator/
+
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Practica tu conocimiento de CSS con este entretenido `juego sobre selectores`_.
+
+  .. _`juego sobre selectores`: https://flukeout.github.io/
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Considera el siguiente fragmento de un documento HTML:
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <section>
+        <header><h1>The Boy Who Lived</h1></header>
+        <p>Mr. and Mrs. Dursley, of number four, Privet Drive, 
+          were proud to say that they were perfectly normal, 
+          thank you very much.</p>
+        <p class="last">They were the last people you'd expect to 
+          be involved in anything strange or mysterious, because they
+          just didn't hold with such nonsense.</p>
+      </section>
+    </body>
+
+  Considera también los siguientes estilos de CSS:
+
+  .. code-block:: css
+    :linenos:
+
+    p {
+      color: red;
+    }
+    p.last {
+      color: gray;
+    }
+    section > p {
+      color: blueviolet;
+    }
+    header h1 p {
+      color: green;
+    }
+    section {
+      color: lightskyblue;
+    }
+    p {
+      color: black;
+    }
+
+  ¿De qué color se muestra el párrafo que comienza por "They were the last people..."? ¿Y el párrafo anterior a ese? Indica como respuesta los dos colores separados por una coma.
+
+  .. solución: gray, blueviolet; https://jsfiddle.net/vhbc4t5s/
+
+
+Elementos en línea y de bloque
+------------------------------
+
+El motor de renderizado (*layout engine* o *rendering engine*) es un complejo componente de los navegadores que aplica los diferentes estilos definidos mediante CSS al contenido del documento HTML para mostrarlo en el dispositivo del usuario.  Cuando los motores de renderizado de los navegadores tienen que mostrar un elemento de un documento de HTML, determinan la ubicación, medidas y propiedades de una *caja* que incluirá el contenido del elemento. La forma en la que se calculan estos parámetros de la caja depende del tipo de elemento. 
+
+La mayoría de los elementos de HTML que pueden aparecer en el cuerpo (``<body>``) del documento caen en una de estas dos categorías:
+
+- elementos *de bloque* (*block elements*): su caja comienza en una nueva línea respecto a la caja anterior y, salvo que se restrinja explícitamente (mediante propiedades como ``width``), se extiende completamente a derecha e izquierda hasta ocupar todo el ancho disponible para el elemento padre (elemento contenedor); la caja de cualquier elemento posterior también aparece en una nueva línea; la altura de la caja depende del contenido, aunque puede fijarse explícitamente con propiedades como ``height``; elementos como ``<p>``, ``<div>`` o ``<section>`` son ejemplos de elementos de bloque.
+- elementos *en línea* (*inline elements*): estos elementos no se muestran en una nueva línea ni provocan la aparición de una nueva línea al final de ellos; el ancho de su caja depende de su contenido (propiedades como ``width`` y ``height`` son ignoradas); ejemplos de elementos en línea son ``<strong>``, ``<span>`` o ``<a>``.
+
+Observa el resultado mostrado por el navegador para el siguiente bloque de código (puedes obviar los estilos por ahora) en el que hay tanto elementos en línea (``span``) como de bloque (``div``):
+
+.. code-block:: html
+  :linenos:
+
+  <div>
+    <span>inline naranja</span><span>inline azul</span>
+    <span>inline lila</span>
+    <div>bloque naranja</div>
+    <div>bloque azul</div>
+  </div>
+
+.. raw:: html
+
+  <div id="basico">
+    <script>
+      var root = document.querySelector('#basico').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px; 
+        }
+        </style>
+        <div class="cuadrados">
+          <span class="orange">inline naranja</span><span class="blue">inline azul</span>
+          <span class="lavender">inline lavanda</span>
+          <div class="orange">bloque naranja</div>
+          <div class="blue">bloque azul</div>
+        </div>`;
+    </script>
+  </div>
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Mira bien el código HTML y asegúrate de que sabes por qué la caja con el texto *inline lavanda* está separada de la caja con *inline azul*, pero esta no lo está de la caja que contiene *inline naranja*. Observa también cómo el texto *bloque naranja* se ajusta automáticamente dentro de la caja sin salirse por su margen derecho y prueba a sustituirlo por textos de mayor longitud.
+
+Un elemento en línea puede aparecer dentro de un elemento en línea o de un elemento de tipo bloque. Un elemento de tipo bloque puede estar anidado dentro de otro elemento de tipo bloque; sin embargo, un elemento de tipo bloque no puede aparecer dentro de un elemento en línea.
+
+
+Modelo de caja en CSS
+---------------------
+
+Entender el modelo de caja de CSS es fundamental a la hora de dar estilo a una página web. Esto implica, entre otras cosas, entender bien la forma de definir los márgenes, el borde y el relleno (*padding*) de cada caja.
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Estudia la `sección "The Box Model"`_ (ojo: solo esta sección) del capítulo "CSS Layouts" del libro "Client-side web development". Practica con las diferentes propiedades con un documento con diferentes cajas hasta tener claro el propósito de cada una de ellas.
+
+  .. _`sección "The Box Model"`: https://info340.github.io/css-layouts.html#box-model
+
+
+.. Note::
+
+  Cuando estés depurando tus estilos, ten en cuenta que los navegadores suelen *colapsar* los márgenes de elementos adyacentes. Así, si una caja tiene un margen inferior de 10 píxeles y la caja que aparece bajo esta tiene un margen superior de 15 píxeles, se deja únicamente una separación de 15 píxeles entre ambas.
+
+Dado que los márgenes y rellenos por defecto que aplica el navegador a cada elemento de tipo bloque pueden variar de un navegador a otro, es una práctica muy habitual *resetear* estos valores de manera que todas las medidas sean predecibles:
+
+.. code-block:: css
+  :linenos:
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+De paso, hemos hecho que las medidas de todas las cajas se determinen usando el criterio ``border-box``, lo que también constituye una buena práctica.
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Dibuja de la forma más precisa que puedas cómo representaría un navegador el siguiente bloque de código. No es necesario que los colores o el tipo de letra coincidan. Todos los tamaños han de mantener de forma aproximada la misma proporcionalidad que tendrían en la ventana del navegador: decide cuál es el tamaño en papel de, por ejemplo, 10 píxeles, y mantén la escala en todos los elementos.
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <div id="peligrosas">
+        colacuerno
+        <div id="basilisco">basilisco</div>
+      </div>
+      <div id="hipogrifo">hipogrifo</div>
+    <body>
+
+  Considera que se están aplicando los siguientes estilos:
+
+  .. code-block:: css
+    :linenos:
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 10px;
+    }
+    #peligrosas {         
+      width: 200px;
+      border: 1px solid darkgray;
+      padding-left: 50px;
+      padding-bottom: 50px;
+    }
+    #basilisco {
+      width: 50px; 
+    }
+    #hipogrifo {
+      width: 100px;
+      border: 1px dotted darkgray;
+      text-align: right;
+      padding-bottom: 50px;
+    }
+
+  .. solución: https://jsfiddle.net/xep58sr7/
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Considera el siguiente fragmento de un documento HTML:
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <h1>Lista</h1>
+      <section>
+        <article>artículo1</article>
+        <article>artículo2</article>
+      </section>
+    </body>
+
+  Teníamos una hoja de estilo que asignaba estilos a cada elemento para que el documento se visualizara como sigue (el fondo gris representa la ventana del navegador):
+  
+  .. raw:: html
+
+    <div id="problema-borrado">
+      <script>
+        var root = document.querySelector('#problema-borrado').createShadowRoot();
+        root.innerHTML = `
+          <style>
+          .cuadrados {
+            background: gainsboro; 
+            padding: 10px; 
+            margin-bottom: 20px;
+          }
+          h1, section, article {
+            display: inline;
+          }
+          h1::after {
+            content: ": ";
+          }
+          h1 {
+            font-family: sans-serif;
+            font-style: italic;
+          }
+          article {
+            font-family: serif;
+          }
+          </style>
+          <div class="cuadrados">
+            <h1>Lista</h1>
+            <section>
+              <article>artículo1</article>
+              <article>artículo2</article>
+            </section>
+          </div>`;
+      </script>
+    </div>
+  
+  Lamentablemente, las propiedades del fichero CSS se nos han borrado y solo nos han quedado las siguientes reglas vacías que únicamente tienen selector pero ninguna propiedad:
+
+  .. code-block:: css
+    :linenos:
+
+    h1, section, article {  }
+    h1::after {  }
+    h1 {  }
+    article {  }
+
+  Indica en qué regla de las anteriores hay que colocar cada una de las siguientes propiedades CSS para que el documento HTML se vuelva a visualizar como antes:
+
+  1. ``font-family:serif``
+  2. ``display:inline``
+  3. ``font-family:sans-serif``
+  4. ``content:": "``
+  5. ``font-style:italic``
+
+  Para abreviar, usa una notación como la de la siguiente posible respuesta (incorrecta): ``h1, section, article {1}`` / ``h1::after {1;2}`` / ``h1 {3;4}`` / ``article {5}``.
+
+  .. solución: h1, section, article {2} / h1::after {4} / h1 {3,5} / article {1}; https://jsfiddle.net/b6qnrpy3/
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Dado el siguiente fragmento de un documento HTML, indica un selector que tenga menos de 10 caracteres y que permita seleccionar el párrafo que contiene la cadena ``dos``:
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <header>
+        <h1>a</h1>
+      </header>
+      <main id="principal" class="info-descripción act">
+        <h2>b</h2>
+        <p>uno</p>
+        <p id="info-detalle" class="act">dos</p>
+      </main>
+      <section>
+        <h2>c</h2>
+        <p>tres</p>
+        <p lang="ca" class="act">quatre</p>
+      </section>
+    </body>
+
+  .. solución: man .act; https://jsfiddle.net/2mt1p7he/
+
+.. admonition:: :problema-contador:`Problema`
+
+  Indica la palabra con la que rellenar el hueco de la siguiente frase para que sea correcta: el selector ``#a[href="https://example.org"]`` es un selector compuesto que incluye un selector de ``_____`` y un selector de identificador.
+
+  .. solución: atributos
+
+
+.. Note::
+
+  Independientemente del tipo (en línea o bloque) que un elemento tenga por defecto en HTML, el tipo puede cambiarse mediante la propiedad ``display`` usando los valores ``block`` e ``inline``. Además, podemos dar a un elemento el tipo ``inline-block`` que hace que se comporte como un elemento en línea, pero para el que se tienen en cuenta el ancho, el alto o los márgenes de manera que los elementos circundantes respetan el espacio de la caja, lo que no ocurre con los elementos en línea. La propiedad ``display`` también puede tomar el valor ``none``; en ese caso, el contenido del elemento no se visualiza en la ventana del navegador ni se reserva sitio alguno para él.
+
+
+Posicionamiento
+---------------
+
+Las opciones anteriores son bastante limitadas y es habitual que necesitemos más libertad a la hora de distribuir el contenido de los elementos en una página web. Una de las formas básicas de conseguirlo es a través del atributo ``position``, que puede tener los valores ``static``, ``relative``, ``absolute``, ``fixed`` y ``sticky``.
+
+Posicionamiento estático
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+El posicionamiento ``static`` corresponde al comportamiento por defecto que ya hemos visto: cada elemento de tipo bloque se muestra en la línea siguiente al elemento anterior. Si un elemento no tiene asociado explícitamente ningún valor en su propiedad ``position`` esta tomará el valor ``static``.
+
+Considera el siguiente fragmento de HTML:
+
+.. code-block:: html
+  :linenos:
+
+  <div class="cuadrados">
+    <div class="orange">naranja</div>
+    <div class="blue">azul</div>
+    <div class="lavender">lavanda</div>
+  </div>
+
+Y considera el siguiente código CSS:
+
+.. code-block:: css
+  :linenos:
+
+  .cuadrados {
+    background: gainsboro; 
+    padding: 10px; 
+  }
+  .orange {         
+    background: orange;
+    height: 100px;
+    width: 100px;
+  }
+  .blue {
+    background: lightskyblue;
+    height: 100px;
+    width: 100px; 
+    position: static; 
+  }
+  .lavender {
+    background: lavender;
+    height: 100px;
+    width: 100px; 
+  }
+
+Puedes observar cómo el uso de ``static`` en la propiedad ``position`` de uno de los cuadrados no introduce ningún cambio respecto a la forma que ya conocíamos de representar los elementos de tipo bloque:
+
+.. raw:: html
+  
+  <div id="estatico">
+    <script>
+      var root = document.querySelector('#estatico').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+          position: static; 
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px; 
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+  
+Posicionamiento relativo
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+El posicionamiento ``relative`` nos permite cambiar la posición por defecto de un elemento, moviéndolo de la posición que le habría correspondido por defecto con ayuda de las propiedades ``top``, ``bottom``, ``left`` y ``right``. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es aquí la distancia del borde izquierdo de la ubicación donde se habría colocado la caja del elemento por defecto al borde izquierdo de la ubicación en la que finalmente se colocará.
+
+Vamos a mover el cuadrado azul a la derecha del lavanda; para ello indicamos que vamos a sumar 100 píxeles a la posición de su parte superior y la misma cantidad a su posición izquierda:
+
+.. code-block:: css
+  :linenos:
+
+  .blue {
+    background: lightskyblue;
+    height: 100px;
+    width: 100px; 
+    position: relative;
+    top: 100px;
+    left: 100px;
+  }
+
+.. raw:: html
+  
+  <div id="relativo">
+    <script>
+      var root = document.querySelector('#relativo').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+          position: relative;
+          top: 100px;
+          left: 100px; 
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px; 
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+
+Observa cómo el espacio por defecto que ocupaba el cuadrado azul no ha sido ocupado por ningún otro elemento. Es como si el motor de visualización del navegador ignorara el posicionamiento relativo en una primera pasada y lo tuviera en cuenta en una segunda pasada tras haber colocado todos los elementos de la página.
+
+Podemos incluso *invadir* el espacio de otros cuadrados, usar valores negativos o salirnos del espacio del elemento contenedor:
+
+.. code-block:: css
+  :linenos:
+
+    .blue {
+      background: lightskyblue;
+      height: 100px;
+      width: 100px; 
+      position: relative;
+      top: 50px;
+      left: -25px;
+    }
+
+.. raw:: html
+  
+  <div id="relativo3">
+    <script>
+      var root = document.querySelector('#relativo3').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+          position: relative;
+          top: 50px;
+          left: -25px;
+        }
+        .lavender {
+          background: lavender;
+          position: relative;
+          height: 100px;
+          width: 100px; 
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+
+Como ves, la caja lavanda se ha superpuesto a la azul. Para que se quede "debajo", es necesario usar la propiedad ``z-index`` que permite especificar *capas* en la página web, de manera que la capa 0 es la capa de visualización por defecto y valores negativos o positivos corresponden a capas más alejadas o cercanas al *visualizador*, respectivamente:
+
+.. code-block:: css
+  :linenos:
+
+  .blue {
+    background: lightskyblue;
+    height: 100px;
+    width: 100px; 
+    position: relative;
+    top: 50px;
+    left: -25px;
+    z-index: 2;
+  }
+  .lavender {
+    background: lavender;
+    height: 100px;
+    width: 100px; 
+    position: relative;
+    z-index: 1;
+  }
+
+.. raw:: html
+  
+  <div id="relativo4">
+    <script>
+      var root = document.querySelector('#relativo4').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+          position: relative;
+          top: 50px;
+          left: -25px;
+          z-index: 2;
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          z-index: 1;
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+
+La propiedad ``z-index`` solo funciona si el elemento *está posicionado*. Diremos que un elemento *está posicionado* si el valor de su posición es cualquiera excepto ``static``. Por ello es por lo que hemos tenido que añadir un posicionamiento relativo a la caja lavanda (pero no hemos cambiado ninguna propiedad como ``top``, ``bottom``, ``left`` o ``right`` para no cambiar su posición).
+
+Finalmente, observa cómo con el uso adecuado del posicionamiento relativo podemos cambiar el orden en el que se muestra la información en el navegador respecto al orden inicialmente definido en el documento HTML:
+
+.. code-block:: css
+  :linenos:
+
+  .orange {         
+    background: orange;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    top: 200px;
+  }
+  .blue {
+    background: lightskyblue;
+    height: 100px;
+    width: 100px;
+  }
+  .lavender {
+    background: lavender;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    top: -200px;
+  }
+
+.. raw:: html
+  
+  <div id="relativo6">
+    <script>
+      var root = document.querySelector('#relativo6').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          top: 200px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px;
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          top: -200px;
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+
+Posicionamiento absoluto
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Si el posicionamiento ``relative`` que acabamos de ver permite colocar un elemento de forma relativa a su posición por defecto, el posicionamiento ``absolute`` permite colocarlo de forma relativa al elemento padre (más abajo matizaremos esto). En este caso, no *deja hueco*, porque nunca llega a tener una posición original propia. Además, de nuevo podemos usar las propiedades ``top``, ``bottom``, ``left`` y ``right`` para moverlo. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es la distancia del borde izquierdo de la caja contenedora al borde izquierdo de la caja que resultará para el nuevo elemento.
+
+.. code-block:: css
+  :linenos:
+
+  .cuadrados {
+    background: gainsboro; 
+    padding: 10px; 
+    position: relative;
+  }
+  .blue {
+    background: lightskyblue;
+    height: 100px;
+    width: 100px; 
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+
+.. raw:: html
+  
+  <div id="relativo5">
+    <script>
+      var root = document.querySelector('#relativo5').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          position: relative;
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px; 
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px;
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+        </div>`;
+    </script>
+  </div>
+
+Observa cómo además de añadir las propiedades ``position``, ``left`` y ``right`` al elemento azul, hemos añadido ``position: relative`` al padre (esto es, al elemento contenedor). Esto es así porque las reglas son un poco más complejas que las mencionadas anteriormente: en realidad, el posicionamiento absoluto usa como referencia el primer ancestro que *esté posicionado*, es decir, como ya hemos dicho antes, aquel que tenga un posicionamiento no estático. Si tras ascender por el árbol buscando un ancestro posicionado, el navegador no encontrara ninguno, el elemento con posicionamiento absoluto se posicionaría con respecto al elemento ``<body>``.
+
+.. Note::
+
+  Es muy recomendable que al usar el posicionamiento absoluto siempre indiques el valor para uno de las desplazamientos ``left``/``right`` y para uno de los desplazamientos ``top``/``bottom``, ya que el comportamiento por defecto puede no coincidir con el esperado. Por ejemplo, si se omiten todos los desplazamientos, estos toman el valor por defecto ``auto``, que implica que el elemento permanece en su posición estática, aunque sin ocupar espacio propio por ser un elemento absoluto. Por otro lado, si se indican valores tanto para ``left`` como para ``right`` (lo que no es recomendable) el valor de la propiedad ``left`` prevalece. En el caso de ``top`` y ``bottom``, es el valor de ``top`` el que gana. En realidad, ``left`` prevalece si el sentido de escritura es de izquierda a derecha y no de derecha a izquierda como pasa en lenguas como el árabe, pero no entraremos en esos detalles en esta asignatura.
+
+  .. Valores por defecto de los offsets: https://stackoverflow.com/a/19969046
+
+Posicionamiento fijo
+~~~~~~~~~~~~~~~~~~~~
+
+Al igual que con el posicionamiento absoluto, en el posicionamiento ``fixed`` no se aplica el flujo normal para el elemento correspondiente y este no deja ningún hueco. Las diferencias con el posicionamiento fijo son:
+
+- Los desplazamientos son relativos a la ventana del documento.
+- La caja se mantiene en esa posición de la ventana aunque el usuario se desplace arriba o abajo (*scroll*) por el documento.
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Juega con el posicionamiento fijo y con los otros tipos de posicionamiento estudiados en este tema, usando inicialmente para ello el ejemplo de los cuadrados de colores. Usar un entorno de trabajo como JSFiddle (puedes partir de `este código`_ y modificarlo) te simplificará la tarea ya que puedes ir realizando cambios en las propiedades CSS y viendo inmediatamente su efecto en la visualización del documento pulsando :guilabel:`Run` o con el atajo de teclado :kbd:`Ctrl+Enter`. Para poder estudiar bien el posicionamiento fijo tendrás que añadir más contenido al documento hasta conseguir que aparezca la barra de desplazamiento. Cuando un desarrollador web necesita rellenar con texto un documento HTML para observar el resultado en un navegador pero no le interesa el contenido del texto en sí, es habitual que recurra a `generadores de texto de relleno`_ basados en frases escritas en latín.
+
+  .. _`este código`: https://jsfiddle.net/d0pqgzr7/
+  .. _`generadores de texto de relleno`: https://getlorem.com/
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Considera el siguiente fragmento de un documento HTML:
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <div class="cuadrados">
+        <div class="orange">naranja</div>
+        <div class="blue">azul</div>
+        <div class="lavender">lavanda</div>
+        <div class="palegreen">verde</div>
+      </div>
+    </body>
+    
+  Considera también los siguientes estilos de CSS:
+
+  .. code-block:: css
+    :linenos:
+
+    .cuadrados {
+      background: gainsboro; 
+      padding: 10px; 
+      margin-bottom: 20px;
+    }
+    .orange {         
+      background: orange;
+      height: 100px;
+      width: 100px;
+    }
+    .blue {
+      background: lightskyblue;
+      height: 100px;
+      width: 100px;
+      position: relative;
+      top: -100px;
+      left: 100px;
+    }
+    .lavender {
+      background: lavender;
+      height: 100px;
+      width: 100px;
+      position: relative;
+      top: -100px;
+    }
+    .palegreen {
+      background: palegreen;
+      height: 100px;
+      width: 100px;
+      position: relative;
+      /* @1 */
+    }
+
+  Indica el código CSS por el que es necesario sustituir el comentario que contiene ``@1`` para que el fragmento HTML se muestre como sigue:
+
+  .. raw:: html
+
+    <div id="problema-puzle">
+    <script>
+      var root = document.querySelector('#problema-puzle').createShadowRoot();
+      root.innerHTML = `
+        <style>
+        .cuadrados {
+          background: gainsboro; 
+          padding: 10px; 
+          margin-bottom: 20px;
+        }
+        .orange {         
+          background: orange;
+          height: 100px;
+          width: 100px;
+        }
+        .blue {
+          background: lightskyblue;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          top: -100px;
+          left: 100px;
+        }
+        .lavender {
+          background: lavender;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          top: -100px;
+        }
+        .palegreen {
+          background: palegreen;
+          height: 100px;
+          width: 100px;
+          position: relative;
+          top: -200px;
+          left: 100px;
+        }
+        </style>
+        <div class="cuadrados">
+          <div class="orange">naranja</div>
+          <div class="blue">azul</div>
+          <div class="lavender">lavanda</div>
+          <div class="palegreen">verde</div>
+        </div>`;
+    </script>
+    </div>
+    
+  Considera que no hay otros estilos definidos que puedan entrar en conflicto con los que escribas.
+
+
+Herramientas para desarrolladores
+---------------------------------
+
+Las herramientas para desarrolladores que incorporan los navegadores permiten no solo inspeccionar información referente a HTML, sino también verificar o modificar aspectos relativos a los estilos de CSS.
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Familiarízate, siguiendo esta `página de su documentación`_, con la sección :guilabel:`Styles` de la pestaña :guilabel:`Elements` del entorno de las Chrome DevTools. Después, estudia opciones más avanzadas siguiendo esta `otra página`_. Práctica las distintas posibilidades de los estilos en DevTools con un documento de HTML como este_.
+
+  .. _`página de su documentación`: https://developers.google.com/web/tools/chrome-devtools/css
+  .. _`otra página`: https://developers.google.com/web/tools/chrome-devtools/css/reference
+  .. _este: https://htmldog.com/guides/html/intermediate/sectioning/
+
+
+
+Chuletas de resumen
+-------------------
+
+Ahora que ya sabes HTML y CSS te puede vebir bien tener a mano esta `chuleta de CSS`_ de Adam Marsdem y esta `otra de HTML y CSS`_ de acchou.
+
+.. _`chuleta de CSS`: https://adam-marsden.co.uk/css-cheat-sheet
+.. _`otra de HTML y CSS`: https://acchou.github.io/html-css-cheat-sheet/html-css-cheat-sheet.html
