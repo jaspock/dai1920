@@ -18,6 +18,10 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 23 Sep 
+      - Léete el `capítulo de introducción a JavaScript`_ del libro "Client-Side Web Development" antes de las clases del 1 de octubre. 
+    * - 22 Sep 
+      - Por error se había colado en la página de prácticas la afirmación de que las prácticas se podían hacer en parejas, pero este curso las prácticas de la asignatura son individuales. Si ya habías comenzado a realizar la práctica 1 en pareja y la tienes relativamente avanzada, habla con el profesor.
     * - 16 Sep 
       - Léete el `capítulo de introducción a CSS`_ del libro "Client-Side Web Development" antes de las clases del 24 de septiembre.  
     * - 09 sep
@@ -27,6 +31,8 @@ Novedades
 
 .. _`capítulo sobre HTML`: https://info340.github.io/html-fundamentals.html
 .. _`capítulo de introducción a CSS`: https://info340.github.io/css.html
+.. _`capítulo de introducción a JavaScript`: https://info340.github.io/javascript.html
+
 
 Guía docente
 ------------

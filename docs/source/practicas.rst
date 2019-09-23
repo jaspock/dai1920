@@ -32,7 +32,7 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
 Instrucciones de entrega de las prácticas
 -----------------------------------------
 
-Realiza tu entrega en un único fichero comprimido a través del `servidor web del Departamento`_ antes de las 23.59 del día de la fecha límite. Recuerda que no se admitirán entregas fuera de plazo. Las prácticas pueden realizarse por parejas.
+Realiza tu entrega en un único fichero comprimido a través del `servidor web del Departamento`_ antes de las 23.59 del día de la fecha límite. Recuerda que no se admitirán entregas fuera de plazo.
 
 .. _`servidor web del Departamento`: https://pracdlsi.dlsi.ua.es/index.cgi?id=val
 
@@ -170,6 +170,8 @@ Recomendaciones finales
 
 Asegúrate de que tus ficheros se validan correctamente con los validadores HTML5 y CSS del W3C (usando la pestaña :guilabel:`Validate by File Upload` en ambos casos). Además, usa Chrome DevTools para comprobar que el estilo aplicado en cada punto del documento es correcto. Finalmente, asegúrate de que cumple con todas las especificaciones de este enunciado (por ejemplo, los nombres o valores de atributos, elementos o ficheros).
 
-Recuerda poner un los nombres completos y DNIs en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p1-dai.zip`` a través del `servidor web del Departamento`_. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con los ficheros con las hojas de estilo que hayas usado y una carpeta ``img`` con las imágenes.
+Recuerda poner tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p1-dai.zip`` a través del `servidor web del Departamento`_. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con los ficheros con las hojas de estilo que hayas usado y una carpeta ``img`` con las imágenes.
+
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[5 horas]</span>`` donde has de sustiruir el 5 por el número de horas aproximadas que te haya llevado hacer esta prática.
 
 .. _`servidor web del Departamento`: https://pracdlsi.dlsi.ua.es/index.cgi?id=val

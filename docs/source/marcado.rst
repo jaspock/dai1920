@@ -4,7 +4,7 @@ Lenguajes de marcado
 ====================
 
 
-HTML (*HyperText Markup Language*) es el lenguaje en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.
+HTML (*HyperText Markup Language*) es el lenguaje *declarativo* en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.
 
 
 .. Note::
@@ -70,7 +70,7 @@ Una de los documentos web más sencillos que se pueden escribir es el siguiente.
   </html>
 
 
-Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilo como CSS, que estudiaremos más adelante. Esta separación de presentación y contenido hace que el documento HTML sea independiente de la representación visual, táctil o auditiva que hagamos de él: en diferentes contextos podrían usarse diferentes hojas de estilo para el mismo documento; o un *screen reader* podría usar el contenido del bloque `nav` para permitir a una persona ciega elegir directamente qué sección del documento desea escuchar o consultar en un `terminal braille`_; o un programa que procesa automáticamente un documento HTML (por poner un ejemplo, un buscador) no tendría que lidiar con aspectos secundarios meramente cosméticos.
+Una de las ideas que tienes que tener más claras es que los diferentes elementos de HTML no representan propiedades *estéticas* de su contenido (como, por ejemplo, si un texto se muestra en negrita o si se ha de mostrar separado del texto precedente por un espacio vertical), sino únicamente propiedades *semánticas* (este texto enfatiza una determinada idea o este otro texto constituye un párrafo). Los aspectos estéticos se definen mediante lenguajes de estilo como CSS, que estudiaremos más adelante. Esta separación de presentación y contenido hace que el documento HTML sea independiente de la representación visual, táctil o auditiva que hagamos de él: en diferentes contextos podrían usarse diferentes hojas de estilo para el mismo documento; o un *screen reader* podría usar el contenido del bloque `nav` para permitir a una persona ciega elegir directamente qué sección del documento desea escuchar o consultar en un `terminal braille`_; o un programa que procesa automáticamente un documento HTML (por poner un ejemplo, un buscador) no tendría que lidiar con aspectos secundarios meramente cosméticos. Además, gracias a la *externalización* de los estilos en un fichero aparte, es posible reutilizar los mismos estilos en múltiples documentos de HTML sin tener que duplicar su definición.
 
   .. _`terminal braille`: https://en.wikipedia.org/wiki/Refreshable_braille_display
 
@@ -173,7 +173,7 @@ La siguiente figura muestra parte de un árbol DOM:
 .. admonition:: :problema-contador:`Problema`
   :class: problema
 
-  Dibuja el árbol DOM correspondiente al siguiente documento HTML.
+  Dibuja el árbol DOM correspondiente al siguiente documento HTML. Representa todos los nodos, incluyendo aquellos que representan secuencias de blancos.
 
   .. code-block:: html
     :linenos:
@@ -289,4 +289,4 @@ Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con
 
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" >
 
-  Ten en cuenta estas diferencias cuando encuentres código de ejemplo en HTML en alguna web. Los navegadores suelen procesar correctamente la mayor parte de la última versión del estándar existente cuando son publicados, pero no debes perder de vista que un gran número de usuarios tendrásn probablemente versiones antiguas del navegador. Aunque no las veremos en este curso, existen maneras de desarrollar aplicaciones web teniendo en cuenta estas versiones antiguas sin renunciar necesariamente a la versatilidad de las recientes.
+  Ten en cuenta estas diferencias cuando encuentres código de ejemplo en HTML en alguna web. Los navegadores suelen procesar correctamente la mayor parte de la última versión del estándar existente cuando son publicados, pero no debes perder de vista que un gran número de usuarios tendrás probablemente versiones antiguas del navegador. Aunque no las veremos en este curso, existen maneras de desarrollar aplicaciones web teniendo en cuenta estas versiones antiguas sin renunciar necesariamente a la versatilidad de las recientes.
