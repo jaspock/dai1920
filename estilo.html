@@ -387,7 +387,7 @@
 </td></tr></table></div>
 <div id="basico">
   <script>
-    var root = document.querySelector('#basico').createShadowRoot();
+    var root = document.querySelector('#basico').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -536,7 +536,7 @@
 <p>Teníamos una hoja de estilo que asignaba estilos a cada elemento para que el documento se visualizara como sigue (el fondo gris representa la ventana del navegador):</p>
 <div id="problema-borrado">
   <script>
-    var root = document.querySelector('#problema-borrado').createShadowRoot();
+    var root = document.querySelector('#problema-borrado').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -693,7 +693,7 @@
 <p>Puedes observar cómo el uso de <code class="docutils literal notranslate"><span class="pre">static</span></code> en la propiedad <code class="docutils literal notranslate"><span class="pre">position</span></code> de uno de los cuadrados no introduce ningún cambio respecto a la forma que ya conocíamos de representar los elementos de tipo bloque:</p>
 <div id="estatico">
   <script>
-    var root = document.querySelector('#estatico').createShadowRoot();
+    var root = document.querySelector('#estatico').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -748,7 +748,7 @@
 </td></tr></table></div>
 <div id="relativo">
   <script>
-    var root = document.querySelector('#relativo').createShadowRoot();
+    var root = document.querySelector('#relativo').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -802,7 +802,7 @@
 </td></tr></table></div>
 <div id="relativo3">
   <script>
-    var root = document.querySelector('#relativo3').createShadowRoot();
+    var root = document.querySelector('#relativo3').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -872,7 +872,7 @@
 </td></tr></table></div>
 <div id="relativo4">
   <script>
-    var root = document.querySelector('#relativo4').createShadowRoot();
+    var root = document.querySelector('#relativo4').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -951,7 +951,7 @@
 </td></tr></table></div>
 <div id="relativo6">
   <script>
-    var root = document.querySelector('#relativo6').createShadowRoot();
+    var root = document.querySelector('#relativo6').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -1018,7 +1018,7 @@
 </td></tr></table></div>
 <div id="relativo5">
   <script>
-    var root = document.querySelector('#relativo5').createShadowRoot();
+    var root = document.querySelector('#relativo5').attachShadow({mode:'open'});
     root.innerHTML = `
       <style>
       .cuadrados {
@@ -1158,7 +1158,7 @@
 <p>Indica el código CSS por el que es necesario sustituir el comentario que contiene <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> para que el fragmento HTML se muestre como sigue:</p>
 <div id="problema-puzle">
 <script>
-  var root = document.querySelector('#problema-puzle').createShadowRoot();
+  var root = document.querySelector('#problema-puzle').attachShadow({mode:'open'});
   root.innerHTML = `
     <style>
     .cuadrados {

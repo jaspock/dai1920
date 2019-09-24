@@ -211,7 +211,7 @@ Observa el resultado mostrado por el navegador para el siguiente bloque de códi
 
   <div id="basico">
     <script>
-      var root = document.querySelector('#basico').createShadowRoot();
+      var root = document.querySelector('#basico').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -351,7 +351,7 @@ De paso, hemos hecho que las medidas de todas las cajas se determinen usando el 
 
     <div id="problema-borrado">
       <script>
-        var root = document.querySelector('#problema-borrado').createShadowRoot();
+        var root = document.querySelector('#problema-borrado').attachShadow({mode:'open'});
         root.innerHTML = `
           <style>
           .cuadrados {
@@ -496,7 +496,7 @@ Puedes observar cómo el uso de ``static`` en la propiedad ``position`` de uno d
   
   <div id="estatico">
     <script>
-      var root = document.querySelector('#estatico').createShadowRoot();
+      var root = document.querySelector('#estatico').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -552,7 +552,7 @@ Vamos a mover el cuadrado azul a la derecha del lavanda; para ello indicamos que
   
   <div id="relativo">
     <script>
-      var root = document.querySelector('#relativo').createShadowRoot();
+      var root = document.querySelector('#relativo').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -607,7 +607,7 @@ Podemos incluso *invadir* el espacio de otros cuadrados, usar valores negativos 
   
   <div id="relativo3">
     <script>
-      var root = document.querySelector('#relativo3').createShadowRoot();
+      var root = document.querySelector('#relativo3').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -669,7 +669,7 @@ Como ves, la caja lavanda se ha superpuesto a la azul. Para que se quede "debajo
   
   <div id="relativo4">
     <script>
-      var root = document.querySelector('#relativo4').createShadowRoot();
+      var root = document.querySelector('#relativo4').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -738,7 +738,7 @@ Finalmente, observa cómo con el uso adecuado del posicionamiento relativo podem
   
   <div id="relativo6">
     <script>
-      var root = document.querySelector('#relativo6').createShadowRoot();
+      var root = document.querySelector('#relativo6').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -800,7 +800,7 @@ Si el posicionamiento ``relative`` que acabamos de ver permite colocar un elemen
   
   <div id="relativo5">
     <script>
-      var root = document.querySelector('#relativo5').createShadowRoot();
+      var root = document.querySelector('#relativo5').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {
@@ -921,7 +921,7 @@ Al igual que con el posicionamiento absoluto, en el posicionamiento ``fixed`` no
 
     <div id="problema-puzle">
     <script>
-      var root = document.querySelector('#problema-puzle').createShadowRoot();
+      var root = document.querySelector('#problema-puzle').attachShadow({mode:'open'});
       root.innerHTML = `
         <style>
         .cuadrados {

@@ -56,6 +56,10 @@ Puedes encontrar algo de información adicional en las diapositivas usadas en la
 
 .. _`presentación del curso`: _static/slides/000-presentacion-curso.html
 
+El `código fuente`_ de estas páginas, escrito en reStructuredText, está disponible en Github.
+
+.. _`código fuente`: https://github.com/jaspock/dai1920
+
 Recomendaciones
 ---------------
 
