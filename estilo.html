@@ -286,7 +286,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>No todas las propiedades se propagan <em>en cascada</em> a los elementos interiores. Las propiedades <code class="docutils literal notranslate"><span class="pre">color</span></code>, <code class="docutils literal notranslate"><span class="pre">font-size</span></code> y muchas otras se heredan, pero hay muchas propiedades de CSS no heredadas como <code class="docutils literal notranslate"><span class="pre">border</span></code>, <code class="docutils literal notranslate"><span class="pre">margin</span></code>, <code class="docutils literal notranslate"><span class="pre">padding</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, etc.</p>
+<p>No todas las propiedades se propagan <em>en cascada</em> a los elementos interiores. Las propiedades <code class="docutils literal notranslate"><span class="pre">color</span></code>, <code class="docutils literal notranslate"><span class="pre">font-size</span></code> y muchas otras se heredan, pero hay muchas propiedades de CSS no heredadas como <code class="docutils literal notranslate"><span class="pre">border</span></code>, <code class="docutils literal notranslate"><span class="pre">margin</span></code>, <code class="docutils literal notranslate"><span class="pre">padding</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code>, etc.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -365,12 +365,23 @@
 </div>
 <div class="section" id="elementos-en-linea-y-de-bloque">
 <h2>2.3. Elementos en línea y de bloque<a class="headerlink" href="#elementos-en-linea-y-de-bloque" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>El motor de renderizado (<em>layout engine</em> o <em>rendering engine</em>) es un complejo componente de los navegadores que aplica los diferentes estilos definidos mediante CSS al contenido del documento HTML para mostrarlo en el dispositivo del usuario.  Cuando los motores de renderizado de los navegadores tienen que mostrar un elemento de un documento de HTML, determinan la ubicación, medidas y propiedades de una <em>caja</em> que incluirá el contenido del elemento. La forma en la que se calculan estos parámetros de la caja depende del tipo de elemento.</p>
-<p>La mayoría de los elementos de HTML que pueden aparecer en el cuerpo (<code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>) del documento caen en una de estas dos categorías:</p>
+<p>El motor de renderizado (<em>layout engine</em> o <em>rendering engine</em>) es un complejo componente de los navegadores que aplica los diferentes estilos definidos mediante CSS al contenido del documento HTML para mostrarlo en el dispositivo del usuario.  Cuando los motores de renderizado de los navegadores tienen que mostrar un elemento de un documento de HTML, determinan la ubicación, medidas y propiedades de una <em>caja rectangular de píxeles</em> que incluirá el contenido del elemento. La forma en la que se calculan estos parámetros de la caja depende del tipo de elemento.</p>
+<p>La mayoría de los elementos de HTML que pueden aparecer en el cuerpo (<code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>) del documento caen en una de estas dos categorías: de bloque o en línea.</p>
+<p>En el caso de los elementos <em>de bloque</em> (<em>block elements</em>),</p>
 <ul class="simple">
-<li><p>elementos <em>de bloque</em> (<em>block elements</em>): su caja comienza en una nueva línea respecto a la caja anterior y, salvo que se restrinja explícitamente (mediante propiedades como <code class="docutils literal notranslate"><span class="pre">width</span></code>), se extiende completamente a derecha e izquierda hasta ocupar todo el ancho disponible para el elemento padre (elemento contenedor); la caja de cualquier elemento posterior también aparece en una nueva línea; la altura de la caja depende del contenido, aunque puede fijarse explícitamente con propiedades como <code class="docutils literal notranslate"><span class="pre">height</span></code>; elementos como <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> o <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> son ejemplos de elementos de bloque.</p></li>
-<li><p>elementos <em>en línea</em> (<em>inline elements</em>): estos elementos no se muestran en una nueva línea ni provocan la aparición de una nueva línea al final de ellos; el ancho de su caja depende de su contenido (propiedades como <code class="docutils literal notranslate"><span class="pre">width</span></code> y <code class="docutils literal notranslate"><span class="pre">height</span></code> son ignoradas); ejemplos de elementos en línea son <code class="docutils literal notranslate"><span class="pre">&lt;strong&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> o <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code>.</p></li>
+<li><p>su caja comienza en una nueva línea <em>debajo</em> de la caja anterior y, salvo que se restrinja explícitamente (mediante propiedades como <code class="docutils literal notranslate"><span class="pre">width</span></code>), se extiende completamente a derecha e izquierda hasta ocupar todo el ancho disponible para el elemento padre (elemento contenedor);</p></li>
+<li><p>la caja de cualquier elemento posterior también aparece en una nueva línea;</p></li>
+<li><p>la altura de la caja depende del contenido (si se estrecha la ventana del navegador, la caja se alarga convenientemente para que el contenido quepa en ella), aunque puede fijarse explícitamente con propiedades como <code class="docutils literal notranslate"><span class="pre">height</span></code>;</p></li>
+<li><p>elementos como <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> o <code class="docutils literal notranslate"><span class="pre">&lt;section&gt;</span></code> son ejemplos de elementos de bloque.</p></li>
 </ul>
+<p>En el caso de los elementos <em>en línea</em> (<em>inline elements</em>),</p>
+<ul class="simple">
+<li><p>estos elementos no se muestran en una nueva línea ni provocan la aparición de una nueva línea al final de ellos;</p></li>
+<li><p>las cajas en línea no afectan al espaciado vertical;</p></li>
+<li><p>el ancho de su caja depende de su contenido (propiedades como <code class="docutils literal notranslate"><span class="pre">width</span></code> y <code class="docutils literal notranslate"><span class="pre">height</span></code> son ignoradas), no del ancho del elemento padre;</p></li>
+<li><p>ejemplos de elementos en línea son <code class="docutils literal notranslate"><span class="pre">&lt;strong&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> o <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code>.</p></li>
+</ul>
+<p>Los comportamientos de las listas anteriores responden al flujo normal que se aplica por defecto a las cajas y constituye lo que se conoce como posicionamiento <em>estático</em>. Más adelante, veremos que hay otros tipos de posicionamiento.</p>
 <p>Observa el resultado mostrado por el navegador para el siguiente bloque de código (puedes obviar los estilos por ahora) en el que hay tanto elementos en línea (<code class="docutils literal notranslate"><span class="pre">span</span></code>) como de bloque (<code class="docutils literal notranslate"><span class="pre">div</span></code>):</p>
 <div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -423,6 +434,27 @@
 <p>Mira bien el código HTML y asegúrate de que sabes por qué la caja con el texto <em>inline lavanda</em> está separada de la caja con <em>inline azul</em>, pero esta no lo está de la caja que contiene <em>inline naranja</em>. Observa también cómo el texto <em>bloque naranja</em> se ajusta automáticamente dentro de la caja sin salirse por su margen derecho y prueba a sustituirlo por textos de mayor longitud.</p>
 </div>
 <p>Un elemento en línea puede aparecer dentro de un elemento en línea o de un elemento de tipo bloque. Un elemento de tipo bloque puede estar anidado dentro de otro elemento de tipo bloque; sin embargo, un elemento de tipo bloque no puede aparecer dentro de un elemento en línea.</p>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Considera el siguiente fragmento de CSS:</p>
+<div class="highlight-css notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">a</span> <span class="p">{</span><span class="k">font-weight</span><span class="p">:</span> <span class="kc">normal</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">a</span> <span class="p">.</span><span class="nc">b</span> <span class="p">{</span><span class="k">color</span><span class="p">:</span> <span class="kc">blue</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">a</span> <span class="p">.</span><span class="nc">b</span> <span class="p">#</span><span class="nn">c</span> <span class="p">{</span><span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;}</span>
+<span class="p">.</span><span class="nc">destaca</span> <span class="p">{</span><span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Indica con qué sustituir las dos arrobas (<code class="docutils literal notranslate"><span class="pre">&#64;1</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code>) para que dado el siguiente fragmento de HTML el texto <em>Privet Drive</em> se muestre en negrita y color azul. Usa la notación <code class="docutils literal notranslate"><span class="pre">&#64;1=...,&#64;2=...</span></code> para tu respuesta.</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;a&quot;</span><span class="p">&gt;</span>El señor y la señora Dursley, que vivían en el
+número 4 de @1 Privet Drive @2, estaban orgullosos de decir
+que eran muy normales, afortunadamente.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="modelo-de-caja-en-css">
 <h2>2.4. Modelo de caja en CSS<a class="headerlink" href="#modelo-de-caja-en-css" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -625,6 +657,44 @@
 <p class="admonition-title"><span class="problema-contador">Problema</span></p>
 <p>Indica la palabra con la que rellenar el hueco de la siguiente frase para que sea correcta: el selector <code class="docutils literal notranslate"><span class="pre">#a[href=&quot;https://example.org&quot;]</span></code> es un selector compuesto que incluye un selector de <code class="docutils literal notranslate"><span class="pre">_____</span></code> y un selector de identificador.</p>
 </div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Dados los siguientes estilos de CSS:</p>
+<div class="highlight-css notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nt">li</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="p">;</span>
+  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">25</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">25</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">50</span><span class="kt">px</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#000000</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Dibuja de la forma más aproximada posible cómo representaría el navegador el siguiente fragmento de HTML. Comienza pintando un recuadro que represente la ventana del navegador.</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Recuerdo cada varita que he vendido, Harry Potter.
+Cada una de las varitas.
+Y resulta que la cola de fénix de donde salió la pluma
+que está en tu varita dio otra pluma,<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>solo<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>una<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>más.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>..solución: <a class="reference external" href="https://jsbin.com/howativusi">https://jsbin.com/howativusi</a></p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
 <p>Independientemente del tipo (en línea o bloque) que un elemento tenga por defecto en HTML, el tipo puede cambiarse mediante la propiedad <code class="docutils literal notranslate"><span class="pre">display</span></code> usando los valores <code class="docutils literal notranslate"><span class="pre">block</span></code> e <code class="docutils literal notranslate"><span class="pre">inline</span></code>. Además, podemos dar a un elemento el tipo <code class="docutils literal notranslate"><span class="pre">inline-block</span></code> que hace que se comporte como un elemento en línea, pero para el que se tienen en cuenta el ancho, el alto o los márgenes de manera que los elementos circundantes respetan el espacio de la caja, lo que no ocurre con los elementos en línea. La propiedad <code class="docutils literal notranslate"><span class="pre">display</span></code> también puede tomar el valor <code class="docutils literal notranslate"><span class="pre">none</span></code>; en ese caso, el contenido del elemento no se visualiza en la ventana del navegador ni se reserva sitio alguno para él.</p>
@@ -635,7 +705,11 @@
 <p>Las opciones anteriores son bastante limitadas y es habitual que necesitemos más libertad a la hora de distribuir el contenido de los elementos en una página web. Una de las formas básicas de conseguirlo es a través del atributo <code class="docutils literal notranslate"><span class="pre">position</span></code>, que puede tener los valores <code class="docutils literal notranslate"><span class="pre">static</span></code>, <code class="docutils literal notranslate"><span class="pre">relative</span></code>, <code class="docutils literal notranslate"><span class="pre">absolute</span></code>, <code class="docutils literal notranslate"><span class="pre">fixed</span></code> y <code class="docutils literal notranslate"><span class="pre">sticky</span></code>.</p>
 <div class="section" id="posicionamiento-estatico">
 <h3>2.5.1. Posicionamiento estático<a class="headerlink" href="#posicionamiento-estatico" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>El posicionamiento <code class="docutils literal notranslate"><span class="pre">static</span></code> corresponde al comportamiento por defecto que ya hemos visto: cada elemento de tipo bloque se muestra en la línea siguiente al elemento anterior. Si un elemento no tiene asociado explícitamente ningún valor en su propiedad <code class="docutils literal notranslate"><span class="pre">position</span></code> esta tomará el valor <code class="docutils literal notranslate"><span class="pre">static</span></code>.</p>
+<p>El posicionamiento <code class="docutils literal notranslate"><span class="pre">static</span></code> corresponde al comportamiento por defecto que ya hemos visto: por ejemplo, cada elemento de tipo bloque se muestra en la línea siguiente al elemento anterior. Si un elemento no tiene asociado ningún valor en su propiedad <code class="docutils literal notranslate"><span class="pre">position</span></code> esta tomará el valor <code class="docutils literal notranslate"><span class="pre">static</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Normalmente no usaremos explícitamente este valor de <code class="docutils literal notranslate"><span class="pre">position</span></code> por ser el valor por defecto, pero excepcionalmente nos podría interesar sobrescribir un valor diferente que un elemento dado tome de alguna hoja de estilo que no podemos cambiar (por ejemplo, porque se genera automáticamente o porque se define en una librería); esta propiedad no se hereda, en cualquier caso, por lo que se tratará de algo excepcional como hemos comentado.</p>
+</div>
 <p>Considera el siguiente fragmento de HTML:</p>
 <div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -727,7 +801,8 @@
 </div></div>
 <div class="section" id="posicionamiento-relativo">
 <h3>2.5.2. Posicionamiento relativo<a class="headerlink" href="#posicionamiento-relativo" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>El posicionamiento <code class="docutils literal notranslate"><span class="pre">relative</span></code> nos permite cambiar la posición por defecto de un elemento, moviéndolo de la posición que le habría correspondido por defecto con ayuda de las propiedades <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> y <code class="docutils literal notranslate"><span class="pre">right</span></code>. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de <code class="docutils literal notranslate"><span class="pre">left</span></code> es aquí la distancia del borde izquierdo de la ubicación donde se habría colocado la caja del elemento por defecto al borde izquierdo de la ubicación en la que finalmente se colocará.</p>
+<p>El posicionamiento <code class="docutils literal notranslate"><span class="pre">relative</span></code> nos permite cambiar la posición por defecto de un elemento, moviéndolo de la posición que le habría correspondido por defecto con ayuda de las propiedades <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> y <code class="docutils literal notranslate"><span class="pre">right</span></code>. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de <code class="docutils literal notranslate"><span class="pre">left</span></code> es aquí la distancia del borde izquierdo de la ubicación donde se habría colocado la caja del elemento por defecto al borde izquierdo de la ubicación en la que finalmente se colocará. Si no se da valor a ninguna de estas cuatro proiedades, el elemento se mostrará exactamente en su lugar por defecto; como veremos más adelante, definir <code class="docutils literal notranslate"><span class="pre">position</span></code> como <code class="docutils literal notranslate"><span class="pre">relative</span></code>, aun sin cambiar ninguna de las propiedades <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> o <code class="docutils literal notranslate"><span class="pre">right</span></code>, puede ser muy útil para que un elemento se considere como <em>posicionado</em> cuando usemos el posicionamiento de tipo absoluto.</p>
+<p>Este posicionamiento es muy utilizado para realizar pequeños ajustes en la posición por defecto en la que se muestra un determinado elemento.</p>
 <p>Vamos a mover el cuadrado azul a la derecha del lavanda; para ello indicamos que vamos a sumar 100 píxeles a la posición de su parte superior y la misma cantidad a su posición izquierda:</p>
 <div class="highlight-css notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -988,7 +1063,7 @@
 </div></div>
 <div class="section" id="posicionamiento-absoluto">
 <h3>2.5.3. Posicionamiento absoluto<a class="headerlink" href="#posicionamiento-absoluto" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Si el posicionamiento <code class="docutils literal notranslate"><span class="pre">relative</span></code> que acabamos de ver permite colocar un elemento de forma relativa a su posición por defecto, el posicionamiento <code class="docutils literal notranslate"><span class="pre">absolute</span></code> permite colocarlo de forma relativa al elemento padre (más abajo matizaremos esto). En este caso, no <em>deja hueco</em>, porque nunca llega a tener una posición original propia. Además, de nuevo podemos usar las propiedades <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> y <code class="docutils literal notranslate"><span class="pre">right</span></code> para moverlo. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de <code class="docutils literal notranslate"><span class="pre">left</span></code> es la distancia del borde izquierdo de la caja contenedora al borde izquierdo de la caja que resultará para el nuevo elemento.</p>
+<p>Si el posicionamiento <code class="docutils literal notranslate"><span class="pre">relative</span></code> que acabamos de ver permite colocar un elemento de forma relativa a su posición por defecto, el posicionamiento <code class="docutils literal notranslate"><span class="pre">absolute</span></code> permite colocarlo de forma relativa al elemento padre (más abajo matizaremos esto). En este caso, no <em>deja hueco</em>, porque nunca llega a tener una posición original propia. Además, de nuevo podemos usar las propiedades <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">bottom</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span></code> y <code class="docutils literal notranslate"><span class="pre">right</span></code> para moverlo. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de <code class="docutils literal notranslate"><span class="pre">left</span></code> es la distancia del borde izquierdo de la caja contenedora al borde izquierdo de la caja que resultará para el nuevo elemento. Un elemento con posicionamiento relativo no influye en otros elementos ni otros elementos influyen en él.</p>
 <div class="highlight-css notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1211,7 +1286,7 @@
 <p>Las herramientas para desarrolladores que incorporan los navegadores permiten no solo inspeccionar información referente a HTML, sino también verificar o modificar aspectos relativos a los estilos de CSS.</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
-<p>Familiarízate, siguiendo esta <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/css">página de su documentación</a>, con la sección <span class="guilabel">Styles</span> de la pestaña <span class="guilabel">Elements</span> del entorno de las Chrome DevTools. Después, estudia opciones más avanzadas siguiendo esta <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/css/reference">otra página</a>. Práctica las distintas posibilidades de los estilos en DevTools con un documento de HTML como <a class="reference external" href="https://htmldog.com/guides/html/intermediate/sectioning/">este</a>.</p>
+<p>Familiarízate, siguiendo esta <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/css">página de su documentación</a>, con la sección <span class="guilabel">Styles</span> de la pestaña <span class="guilabel">Elements</span> del entorno de las Chrome DevTools. Después, estudia opciones más avanzadas siguiendo esta <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/css/reference">otra página</a>. Practica las distintas posibilidades de los estilos en DevTools con un documento de HTML como <a class="reference external" href="https://htmldog.com/guides/html/intermediate/sectioning/">este</a>.</p>
 </div>
 </div>
 <div class="section" id="chuletas-de-resumen">

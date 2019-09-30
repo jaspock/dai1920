@@ -119,7 +119,7 @@ Los selectores de CSS permiten identificar uno o más elementos de un documento 
 
 .. Note::
 
-  No todas las propiedades se propagan *en cascada* a los elementos interiores. Las propiedades ``color``, ``font-size`` y muchas otras se heredan, pero hay muchas propiedades de CSS no heredadas como ``border``, ``margin``, ``padding``, ``width``, etc.
+  No todas las propiedades se propagan *en cascada* a los elementos interiores. Las propiedades ``color``, ``font-size`` y muchas otras se heredan, pero hay muchas propiedades de CSS no heredadas como ``border``, ``margin``, ``padding``, ``width``, ``position``, etc.
 
 
 .. Note::
@@ -188,12 +188,25 @@ Los selectores de CSS permiten identificar uno o más elementos de un documento 
 Elementos en línea y de bloque
 ------------------------------
 
-El motor de renderizado (*layout engine* o *rendering engine*) es un complejo componente de los navegadores que aplica los diferentes estilos definidos mediante CSS al contenido del documento HTML para mostrarlo en el dispositivo del usuario.  Cuando los motores de renderizado de los navegadores tienen que mostrar un elemento de un documento de HTML, determinan la ubicación, medidas y propiedades de una *caja* que incluirá el contenido del elemento. La forma en la que se calculan estos parámetros de la caja depende del tipo de elemento. 
+El motor de renderizado (*layout engine* o *rendering engine*) es un complejo componente de los navegadores que aplica los diferentes estilos definidos mediante CSS al contenido del documento HTML para mostrarlo en el dispositivo del usuario.  Cuando los motores de renderizado de los navegadores tienen que mostrar un elemento de un documento de HTML, determinan la ubicación, medidas y propiedades de una *caja rectangular de píxeles* que incluirá el contenido del elemento. La forma en la que se calculan estos parámetros de la caja depende del tipo de elemento. 
 
-La mayoría de los elementos de HTML que pueden aparecer en el cuerpo (``<body>``) del documento caen en una de estas dos categorías:
+La mayoría de los elementos de HTML que pueden aparecer en el cuerpo (``<body>``) del documento caen en una de estas dos categorías: de bloque o en línea.
 
-- elementos *de bloque* (*block elements*): su caja comienza en una nueva línea respecto a la caja anterior y, salvo que se restrinja explícitamente (mediante propiedades como ``width``), se extiende completamente a derecha e izquierda hasta ocupar todo el ancho disponible para el elemento padre (elemento contenedor); la caja de cualquier elemento posterior también aparece en una nueva línea; la altura de la caja depende del contenido, aunque puede fijarse explícitamente con propiedades como ``height``; elementos como ``<p>``, ``<div>`` o ``<section>`` son ejemplos de elementos de bloque.
-- elementos *en línea* (*inline elements*): estos elementos no se muestran en una nueva línea ni provocan la aparición de una nueva línea al final de ellos; el ancho de su caja depende de su contenido (propiedades como ``width`` y ``height`` son ignoradas); ejemplos de elementos en línea son ``<strong>``, ``<span>`` o ``<a>``.
+En el caso de los elementos *de bloque* (*block elements*),
+
+- su caja comienza en una nueva línea *debajo* de la caja anterior y, salvo que se restrinja explícitamente (mediante propiedades como ``width``), se extiende completamente a derecha e izquierda hasta ocupar todo el ancho disponible para el elemento padre (elemento contenedor); 
+- la caja de cualquier elemento posterior también aparece en una nueva línea; 
+- la altura de la caja depende del contenido (si se estrecha la ventana del navegador, la caja se alarga convenientemente para que el contenido quepa en ella), aunque puede fijarse explícitamente con propiedades como ``height``; 
+- elementos como ``<p>``, ``<div>`` o ``<section>`` son ejemplos de elementos de bloque.
+
+En el caso de los elementos *en línea* (*inline elements*),
+  
+- estos elementos no se muestran en una nueva línea ni provocan la aparición de una nueva línea al final de ellos;
+- las cajas en línea no afectan al espaciado vertical;
+- el ancho de su caja depende de su contenido (propiedades como ``width`` y ``height`` son ignoradas), no del ancho del elemento padre; 
+- ejemplos de elementos en línea son ``<strong>``, ``<span>`` o ``<a>``.
+
+Los comportamientos de las listas anteriores responden al flujo normal que se aplica por defecto a las cajas y constituye lo que se conoce como posicionamiento *estático*. Más adelante, veremos que hay otros tipos de posicionamiento.
 
 Observa el resultado mostrado por el navegador para el siguiente bloque de código (puedes obviar los estilos por ahora) en el que hay tanto elementos en línea (``span``) como de bloque (``div``):
 
@@ -250,6 +263,31 @@ Observa el resultado mostrado por el navegador para el siguiente bloque de códi
   Mira bien el código HTML y asegúrate de que sabes por qué la caja con el texto *inline lavanda* está separada de la caja con *inline azul*, pero esta no lo está de la caja que contiene *inline naranja*. Observa también cómo el texto *bloque naranja* se ajusta automáticamente dentro de la caja sin salirse por su margen derecho y prueba a sustituirlo por textos de mayor longitud.
 
 Un elemento en línea puede aparecer dentro de un elemento en línea o de un elemento de tipo bloque. Un elemento de tipo bloque puede estar anidado dentro de otro elemento de tipo bloque; sin embargo, un elemento de tipo bloque no puede aparecer dentro de un elemento en línea.
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Considera el siguiente fragmento de CSS:
+
+  .. code-block:: css
+    :linenos:
+
+    .a {font-weight: normal;}
+    .a .b {color: blue;}
+    .a .b #c {color: red;}
+    .destaca {font-weight: bold;}
+
+  Indica con qué sustituir las dos arrobas (``@1``, ``@2``) para que dado el siguiente fragmento de HTML el texto *Privet Drive* se muestre en negrita y color azul. Usa la notación ``@1=...,@2=...`` para tu respuesta.
+
+  .. code-block:: html
+    :linenos:
+
+    <p class="a">El señor y la señora Dursley, que vivían en el 
+    número 4 de @1 Privet Drive @2, estaban orgullosos de decir 
+    que eran muy normales, afortunadamente.</p>
+
+.. solución: @1=<span class="b destaca" id="c"> / @1=<span class="destaca"><span class="b" id="c">, @2=</span>
+
 
 
 Modelo de caja en CSS
@@ -431,11 +469,44 @@ De paso, hemos hecho que las medidas de todas las cajas se determinen usando el 
 
   .. solución: man .act; https://jsfiddle.net/2mt1p7he/
 
+
 .. admonition:: :problema-contador:`Problema`
 
   Indica la palabra con la que rellenar el hueco de la siguiente frase para que sea correcta: el selector ``#a[href="https://example.org"]`` es un selector compuesto que incluye un selector de ``_____`` y un selector de identificador.
 
   .. solución: atributos
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Dados los siguientes estilos de CSS:
+  
+  .. code-block:: css
+    :linenos:
+
+    li {
+      display: inline;
+      margin: 0px 25px 0px 25px;
+      padding: 10px 50px 10px 0px;
+      border: 2px solid #000000;
+    }
+
+  Dibuja de la forma más aproximada posible cómo representaría el navegador el siguiente fragmento de HTML. Comienza pintando un recuadro que represente la ventana del navegador.
+
+  .. code-block:: html
+    :linenos:
+
+    <p>Recuerdo cada varita que he vendido, Harry Potter. 
+    Cada una de las varitas. 
+    Y resulta que la cola de fénix de donde salió la pluma 
+    que está en tu varita dio otra pluma,</p>
+    <ul>
+      <li>solo</li>
+      <li>una</li>
+      <li>más.</li>
+    </ul>
+
+  ..solución: https://jsbin.com/howativusi
 
 
 .. Note::
@@ -451,7 +522,11 @@ Las opciones anteriores son bastante limitadas y es habitual que necesitemos má
 Posicionamiento estático
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-El posicionamiento ``static`` corresponde al comportamiento por defecto que ya hemos visto: cada elemento de tipo bloque se muestra en la línea siguiente al elemento anterior. Si un elemento no tiene asociado explícitamente ningún valor en su propiedad ``position`` esta tomará el valor ``static``.
+El posicionamiento ``static`` corresponde al comportamiento por defecto que ya hemos visto: por ejemplo, cada elemento de tipo bloque se muestra en la línea siguiente al elemento anterior. Si un elemento no tiene asociado ningún valor en su propiedad ``position`` esta tomará el valor ``static``. 
+
+.. Note::
+
+  Normalmente no usaremos explícitamente este valor de ``position`` por ser el valor por defecto, pero excepcionalmente nos podría interesar sobrescribir un valor diferente que un elemento dado tome de alguna hoja de estilo que no podemos cambiar (por ejemplo, porque se genera automáticamente o porque se define en una librería); esta propiedad no se hereda, en cualquier caso, por lo que se tratará de algo excepcional como hemos comentado.
 
 Considera el siguiente fragmento de HTML:
 
@@ -532,7 +607,9 @@ Puedes observar cómo el uso de ``static`` en la propiedad ``position`` de uno d
 Posicionamiento relativo
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-El posicionamiento ``relative`` nos permite cambiar la posición por defecto de un elemento, moviéndolo de la posición que le habría correspondido por defecto con ayuda de las propiedades ``top``, ``bottom``, ``left`` y ``right``. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es aquí la distancia del borde izquierdo de la ubicación donde se habría colocado la caja del elemento por defecto al borde izquierdo de la ubicación en la que finalmente se colocará.
+El posicionamiento ``relative`` nos permite cambiar la posición por defecto de un elemento, moviéndolo de la posición que le habría correspondido por defecto con ayuda de las propiedades ``top``, ``bottom``, ``left`` y ``right``. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es aquí la distancia del borde izquierdo de la ubicación donde se habría colocado la caja del elemento por defecto al borde izquierdo de la ubicación en la que finalmente se colocará. Si no se da valor a ninguna de estas cuatro proiedades, el elemento se mostrará exactamente en su lugar por defecto; como veremos más adelante, definir ``position`` como ``relative``, aun sin cambiar ninguna de las propiedades ``top``, ``bottom``, ``left`` o ``right``, puede ser muy útil para que un elemento se considere como *posicionado* cuando usemos el posicionamiento de tipo absoluto.
+
+Este posicionamiento es muy utilizado para realizar pequeños ajustes en la posición por defecto en la que se muestra un determinado elemento.
 
 Vamos a mover el cuadrado azul a la derecha del lavanda; para ello indicamos que vamos a sumar 100 píxeles a la posición de su parte superior y la misma cantidad a su posición izquierda:
 
@@ -777,7 +854,7 @@ Finalmente, observa cómo con el uso adecuado del posicionamiento relativo podem
 Posicionamiento absoluto
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Si el posicionamiento ``relative`` que acabamos de ver permite colocar un elemento de forma relativa a su posición por defecto, el posicionamiento ``absolute`` permite colocarlo de forma relativa al elemento padre (más abajo matizaremos esto). En este caso, no *deja hueco*, porque nunca llega a tener una posición original propia. Además, de nuevo podemos usar las propiedades ``top``, ``bottom``, ``left`` y ``right`` para moverlo. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es la distancia del borde izquierdo de la caja contenedora al borde izquierdo de la caja que resultará para el nuevo elemento.
+Si el posicionamiento ``relative`` que acabamos de ver permite colocar un elemento de forma relativa a su posición por defecto, el posicionamiento ``absolute`` permite colocarlo de forma relativa al elemento padre (más abajo matizaremos esto). En este caso, no *deja hueco*, porque nunca llega a tener una posición original propia. Además, de nuevo podemos usar las propiedades ``top``, ``bottom``, ``left`` y ``right`` para moverlo. Por poner un ejemplo, extensible a las otras tres propiedades, el valor de ``left`` es la distancia del borde izquierdo de la caja contenedora al borde izquierdo de la caja que resultará para el nuevo elemento. Un elemento con posicionamiento relativo no influye en otros elementos ni otros elementos influyen en él.
 
 .. code-block:: css
   :linenos:
@@ -978,7 +1055,7 @@ Las herramientas para desarrolladores que incorporan los navegadores permiten no
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  Familiarízate, siguiendo esta `página de su documentación`_, con la sección :guilabel:`Styles` de la pestaña :guilabel:`Elements` del entorno de las Chrome DevTools. Después, estudia opciones más avanzadas siguiendo esta `otra página`_. Práctica las distintas posibilidades de los estilos en DevTools con un documento de HTML como este_.
+  Familiarízate, siguiendo esta `página de su documentación`_, con la sección :guilabel:`Styles` de la pestaña :guilabel:`Elements` del entorno de las Chrome DevTools. Después, estudia opciones más avanzadas siguiendo esta `otra página`_. Practica las distintas posibilidades de los estilos en DevTools con un documento de HTML como este_.
 
   .. _`página de su documentación`: https://developers.google.com/web/tools/chrome-devtools/css
   .. _`otra página`: https://developers.google.com/web/tools/chrome-devtools/css/reference

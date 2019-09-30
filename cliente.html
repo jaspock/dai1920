@@ -86,7 +86,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="marcado.html">1. Lenguajes de marcado</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estilo.html">2. Lenguajes de estilo</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Programar el lado del cliente</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Programar el lado del cliente</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#una-aplicacion-web-sencilla">3.1. Una aplicación web sencilla</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#el-lenguaje-de-programacion-javascript">3.2. El lenguaje de programación JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#las-apis-del-navegador-para-programar-el-lado-del-cliente">3.3. Las APIs del navegador para programar el lado del cliente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#herramientas-para-desarrolladores">3.4. Herramientas para desarrolladores</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="protocolos.html">4. Protocolos de comunicación</a></li>
 <li class="toctree-l1"><a class="reference internal" href="servicios.html">5. Acceso a servicios web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="componentes.html">6. Componentes web</a></li>
@@ -160,6 +166,579 @@
             
   <div class="section" id="programar-el-lado-del-cliente">
 <h1>3. Programar el lado del cliente<a class="headerlink" href="#programar-el-lado-del-cliente" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>JavaScript es un lenguaje orientado a objetos, funcional, dinámico e interpretado, usado principalmente como el lenguaje de programación de las páginas web en el lado del navegador. Actualmente, sin embargo, se usa también en la parte del servidor en entornos como Node.js o MongoDB. El nombre del estándar que regula JavaScript es ECMAScript. Los navegadores recientes entienden las últimas versiones de ECMAScript; cada año se publica una nueva versión (por ejemplo, ECMAScript 2019, también conocido como ES10).</p>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Las habilidades que deberías adquirir con este tema incluyen las siguientes:</p>
+<ul class="simple">
+<li><p>Comprender los elementos básicos de JavaScript como lenguaje de programación orientado a objetos.</p></li>
+<li><p>Saber programar en JavaScript la parte del cliente de una aplicación web usando la API de los navegadores para la gestión del DOM, eventos, estilos, etc.</p></li>
+<li><p>Usar las herramientas para desarrolladores integradas en los navegadores, como Chrome DevTools, para depurar un programa escrito en JavaScript.</p></li>
+</ul>
+</div>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Prepárate para este tema, leyendo en primer lugar el <a class="reference external" href="https://info340.github.io/javascript.html">capítulo de introducción a JavaScript</a> del libro «Client-Side Web Development», donde se explican los conceptos básicos del lenguaje.</p>
+</div>
+<div class="section" id="una-aplicacion-web-sencilla">
+<h2>3.1. Una aplicación web sencilla<a class="headerlink" href="#una-aplicacion-web-sencilla" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El siguiente código muestra <em>en acción</em>, a modo de introducción, los elementos básicos del lenguaje JavaScript (variables, condicionales, bucles, funciones, etc.), así como la utilización de las APIs del navegador relacionadas con la gestión del DOM, de los eventos o de los estilos, para, con todo ello, presentar una <a class="reference external" href="_static/data/ejemplo-apis-js.html">aplicación web muy sencilla</a> que permite añadir dinámicamente contenido a una página web e interactuar con el contenido añadido. Lee los comentarios para entender el propósito de cada línea, pero ten en cuenta que en actividades posteriores ampliaremos todos estos elementos.</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
+<span class="c">&lt;!-- Ejemplos de uso de la API DOM y de la API de eventos del navegador --&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Ejemplos de uso de la API DOM y de la API de eventos del navegador<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- Es recomendable que tanto estilos como scripts vayan en ficheros aparte, pero</span>
+<span class="c">    en este caso los dejamos aquí por ser una prueba de concepto --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="p">@</span><span class="k">import</span> <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;https://fonts.googleapis.com/css?family=Lato&amp;display=swap&#39;</span><span class="o">)</span><span class="p">;</span>
+      <span class="o">*</span> <span class="p">{</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">body</span> <span class="p">{</span>
+        <span class="k">font-size</span><span class="p">:</span> <span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">font-family</span><span class="p">:</span> <span class="s1">&#39;Lato&#39;</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">h3</span><span class="p">.</span><span class="nc">destacado</span> <span class="p">{</span>
+        <span class="k">color</span><span class="p">:</span> <span class="kc">lightseagreen</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">h3</span> <span class="p">{</span>
+        <span class="k">color</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
+        <span class="k">font-size</span><span class="p">:</span> <span class="mf">1.3</span><span class="kt">em</span><span class="p">;</span>
+        <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="p">;</span>
+        <span class="k">margin-right</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">form</span> <span class="p">{</span>
+        <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">section</span> <span class="p">{</span>
+        <span class="k">border-top</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
+	      <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">padding-top</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- Formularios: --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f1&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Crea sección con título:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span> 
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;título&quot;</span><span class="p">&gt;</span> 
+      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Crea sección<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f2&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Destaca secciones cuya primera palabra sea:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span> 
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;palabra&quot;</span><span class="p">&gt;</span> 
+      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Marca sección<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f3&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Desmarca todas las secciones<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+    <span class="c">&lt;!-- El elemento main está vacío inicialmente, pero irá conteniendo las secciones que </span>
+<span class="c">      se crearán dinámicamente. --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+      <span class="c1">// Manejador del evento de marcar/desmarcar de una sección individual:</span>
+      <span class="kd">function</span> <span class="nx">marcaDesmarcaUnaSección</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// event.currentTarget es el elemento al que se asoció este manejador;</span>
+        <span class="c1">// event.target es el elemento sobre el que se produjo la acción;</span>
+        <span class="c1">// parentNode devuelve el nodo padre de un elemento dado;</span>
+        <span class="c1">// toggle añade el valor &#39;destacado&#39; a class si el elemento no lo tiene y lo</span>
+        <span class="c1">// borra si lo tiene:</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">).</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">&#39;destacado&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Manejador del evento de creación de una nueva sección a partir del título</span>
+      <span class="c1">// indicado en el formulario; no se declara el parámetro del evento porque </span>
+      <span class="c1">// no se va a usar, pero creaSección se invocará por el navegador con el</span>
+      <span class="c1">// argumento del evento igualmente:</span>
+      <span class="kd">function</span> <span class="nx">creaSección</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Obtiene el título del formulario; querySelector devuelve el primer nodo</span>
+        <span class="c1">// que cumple con el criterio del selector desde el objeto desde el que </span>
+        <span class="c1">// se invoca la función (en este caso, el elemento raíz, document):</span>
+        <span class="kd">let</span> <span class="nx">título</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#título&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="c1">// Borra el campo del formulario:</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#título&#39;</span><span class="p">).</span><span class="nx">value</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="c1">// Crea el elemento padre para la nueva sección:</span>
+        <span class="kd">let</span> <span class="nx">sección</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">);</span>
+        <span class="c1">// Una forma de añadir HTML dinámicamente es mediante el atributo innerHTML;</span>
+        <span class="c1">// es más cómoda, pero es más fácil cometer errores en el HTML.</span>
+        <span class="c1">// Además, innerHTML debe ser usado con prudencia y nunca con cadenas no</span>
+        <span class="c1">// generadas por nuestra aplicación; la siguiente instrucción desobedece</span>
+        <span class="c1">// esta regla y hace que la aplicación pueda recibir potencialmente</span>
+        <span class="c1">// un ataque tipo XSS (por *cross-site scripting*); para comprobarlo, prueba</span>
+        <span class="c1">// a introducir como título: &lt;img src=&quot;x&quot; onerror=&quot;alert(&#39;¡Ataque XSS!&#39;)&quot;&gt;</span>
+        <span class="c1">// Para evitar estos ataques, se recomienda usar textContent cuando </span>
+        <span class="c1">// hay contenido no propio o sustituir ciertos caracteres en las cadenas</span>
+        <span class="c1">// antes de usar innerHTML:</span>
+        <span class="nx">sección</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span> <span class="s1">&#39;&lt;h3&gt;&#39;</span><span class="o">+</span><span class="nx">título</span><span class="o">+</span><span class="s1">&#39;&lt;/h3&gt;&#39;</span><span class="p">;</span>
+        <span class="c1">// Otra forma de añadir HTML dinámicamente es mediante la APIS de creación</span>
+        <span class="c1">// e inserción de nodos:</span>
+        <span class="kd">let</span> <span class="nx">botón</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">);</span>
+        <span class="nx">botón</span><span class="p">.</span><span class="nx">textContent</span><span class="o">=</span> <span class="s1">&#39;Marca/desmarca&#39;</span><span class="p">;</span>
+        <span class="nx">sección</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">botón</span><span class="p">);</span>
+        <span class="c1">// Todos los botones individuales creados para cada sección tienen el</span>
+        <span class="c1">// mismo manejador de eveneto; el parámetro del manejador nos permitirá</span>
+        <span class="c1">// determinar sobre qué botón concreto se ha hecho clic:</span>
+        <span class="nx">botón</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">marcaDesmarcaUnaSección</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+        <span class="c1">// Insertamos la sección dentro de &lt;main&gt;:</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">sección</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Itera sobre todos los elementos h3 (por eso usamos querySelectorAll y no </span>
+      <span class="c1">// querySelector)</span>
+      <span class="kd">function</span> <span class="nx">destacaSecciónSegúnPalabra</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">secciones</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">);</span>
+        <span class="c1">// Obtiene la palabra a buscar del formulario:</span>
+        <span class="kd">let</span> <span class="nx">palabra</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#palabra&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+        <span class="c1">// Borra el campo del formulario:</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#palabra&#39;</span><span class="p">).</span><span class="nx">value</span><span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="c1">// Itera sobre todos los elementos h3:</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">secciones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// Primera palabra del texto contenido en el h3:</span>
+          <span class="kd">let</span> <span class="nx">primera</span><span class="o">=</span> <span class="nx">secciones</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">textContent</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+          <span class="c1">// En JavaScript, el operador == puede realizar conversiones de tipo antes</span>
+          <span class="c1">// de la comparación; con el operador === no hay conversiones implícitas:</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">primera</span><span class="o">===</span><span class="nx">palabra</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Añade &#39;destacado&#39; como class si la palabra coincide:</span>
+            <span class="nx">secciones</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;destacado&#39;</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Desmarca todos los h3 del documento quitando la clase &#39;destacado&#39;</span>
+      <span class="c1">// de sus encabezados:</span>
+      <span class="kd">function</span> <span class="nx">desmarcaTodasSecciones</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">secciones</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">secciones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">secciones</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;destacado&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Función de inicialización:</span>
+      <span class="kd">function</span> <span class="nx">init</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Asignación de manejadores de eventos; el segundo parámetro es el nombre de </span>
+        <span class="c1">// una función, pero no se llama (aún) a dicha función; el tercer parámetro se</span>
+        <span class="c1">// estudiará más adelante:</span>
+        <span class="kd">let</span> <span class="nx">e</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#f1 button&#39;</span><span class="p">);</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">creaSección</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+        <span class="nx">e</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#f2 button&#39;</span><span class="p">);</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">destacaSecciónSegúnPalabra</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+        <span class="nx">e</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#f3 button&#39;</span><span class="p">);</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="nx">desmarcaTodasSecciones</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+        <span class="c1">// Se evita para todos los formularios que al aceptar su contenido (pulsando el</span>
+        <span class="c1">// botón o enter) se envíe una petición al servidor y se recargue la página:</span>
+        <span class="kd">let</span> <span class="nx">fs</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">fs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">fs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">addEventListener</span><span class="p">(</span>
+            <span class="s1">&#39;submit&#39;</span><span class="p">,</span>
+            <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+            <span class="p">},</span> 
+            <span class="kc">false</span>
+          <span class="p">);</span>
+        <span class="p">}</span>
+  
+        <span class="c1">// Usando construcciones recientes del lenguaje para iterar sobre un array </span>
+        <span class="c1">// de elementos y para indicar mediante funciones flecha (o lambda) la función</span>
+        <span class="c1">// a ejecutar sobre cada elemento, el código anterior sería: </span>
+        <span class="c1">//</span>
+        <span class="c1">// Array.from(document.querySelectorAll(&#39;form&#39;)).forEach(</span>
+        <span class="c1">//  (formulario) =&gt; {</span>
+        <span class="c1">//    formulario.addEventListener(</span>
+        <span class="c1">//      &#39;submit&#39;,</span>
+        <span class="c1">//      (event) =&gt; {event.preventDefault();}, </span>
+        <span class="c1">//      false</span>
+        <span class="c1">//    )</span>
+        <span class="c1">//  }</span>
+        <span class="c1">// );</span>
+
+      <span class="p">}</span>
+
+      <span class="c1">// Define init como la función que será invocada cuando se dispare el</span>
+      <span class="c1">// evento DOMContentLoaded, que señala que el árbol DOM ya está construido</span>
+      <span class="c1">// (y sus nodos disponibles en memoria), aunque quizás aún no se hayan</span>
+      <span class="c1">// descargado todas las imágenes, aplicados todos los estilos, etc.;</span>
+      <span class="c1">// si en lugar de init pusiéramos init() el efecto sería diferente (y</span>
+      <span class="c1">// probablemente no deseado):</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="nx">init</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="el-lenguaje-de-programacion-javascript">
+<h2>3.2. El lenguaje de programación JavaScript<a class="headerlink" href="#el-lenguaje-de-programacion-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En esta actividad ampliaremos el estudio de los elementos fundamentales del lenguaje JavaScript. Las características adicionales a las que un programador puede acceder cuando escribe programas en JavaScript para ser ejecutados por un navegador se estudiarán en la siguiente actividad.</p>
+<p>Los conceptos que tienes que comprender del lenguaje se encuentran recogidos en <a class="reference external" href="_static/slides/150-js-slides.html">estas diapositivas</a>.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Lee el <a class="reference external" href="https://info340.github.io/functional-programming.html">capítulo sobre programación funcional en JavaScript</a> del libro «Client-Side Web Development», donde se explican las características del lenguaje relacionadas con el paradigma funcional, entre las que trabajaremos especialmente con el concepto de clausura. Puedes practicar con la consola de JavaScript de las Chrome Devtools o con una <a class="reference external" href="https://jsconsole.com/">consola en línea</a>.</p>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>¿Qué imprime el siguiente programa de JavaScript por la consola?</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">outer</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">z</span><span class="p">;</span>
+  <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">b</span><span class="o">+=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">inner</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">X</span> <span class="o">=</span> <span class="nx">outer</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Y</span> <span class="o">=</span> <span class="nx">outer</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="nx">X</span><span class="p">();</span>
+<span class="nx">Y</span><span class="p">();</span>
+<span class="nx">X</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica <em>una expresión</em> con la que sustituir el comentario que contiene <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> en el siguiente código en JavaScript para que la siguiente función permita contar el número de veces que el carácter indicado como parámetro aparece dentro de la cadena sobre la que se invoca el método (por ejemplo, <code class="docutils literal notranslate"><span class="pre">&quot;foo&quot;.count('o')</span></code> ha de devolver 2).</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">count</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">count</span><span class="o">+=</span> <span class="cm">/*@1*/</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">count</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica <em>una única instrucción</em> en JavaScript que use la siguiente declaración para imprimir un 100 por la consola.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">logger</span><span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica con qué es necesario sustituir los comentarios con las tres arrobas (<code class="docutils literal notranslate"><span class="pre">&#64;1</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;3</span></code>) para que la siguiente función de JavaScript devuelva un valor booleano que indique si el array pasado como parámetro está ordenado de forma ascendente. Usa la notación <code class="docutils literal notranslate"><span class="pre">&#64;1=...,&#64;2=...,&#64;3=...</span></code> para tu respuesta.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">isSorted</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="cm">/*@1*/</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="cm">/*@2*/</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="cm">/*@3*/</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">c</span> <span class="o">&gt;</span> <span class="nx">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica con qué es necesario sustituir el comentario que contiene <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> para que el siguiente código en JavaScript muestre por la consola el valor 42. Atención: el carácter de punto y coma no puede aparecer en tu respuesta para evitar que añadas instrucciones adicionales.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">answer</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">);</span>
+<span class="p">})</span><span class="cm">/*@1*/</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>¿Qué salida muestra por consola el siguiente programa en JavaScript?</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">done</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">increment</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">callBack</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">f</span><span class="o">=</span> <span class="nx">callBack</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">num</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">callBack</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">increment</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="las-apis-del-navegador-para-programar-el-lado-del-cliente">
+<h2>3.3. Las APIs del navegador para programar el lado del cliente<a class="headerlink" href="#las-apis-del-navegador-para-programar-el-lado-del-cliente" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los navegadores incluyen una serie de librerías estandarizadas para programar la parte de la aplicación web que se ejecuta en el navegador (lo que se conoce como el <em>front-end</em> de la aplicación, en oposición al <em>back-end</em>, que denotaría la parte del servidor). En esta actividad profundizaremos en las APIs para el manejo del árbol DOM, la gestión de eventos y el control de estilos. Otras APIs, como la que permite realizar peticiones asíncronas desde el cliente a un servidor, se explorarán más adelante.</p>
+<p>Los conceptos que tienes que estudiar de estas APIs se encuentran recogidos en <a class="reference external" href="_static/slides/150-apidom-slides.html">estas otras diapositivas</a>.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Lee el <a class="reference external" href="https://info340.github.io/dom.html">capítulo sobre el Document Object Model</a> del libro «Client-Side Web Development», donde se explican las principales funciones de las APIs ya mencionadas. Puedes practicar con la consola de JavaScript de las Chrome Devtools o con entornos como <a class="reference external" href="https://jsfiddle.net/">JSFiddle</a>.</p>
+</div>
+</div>
+<div class="section" id="herramientas-para-desarrolladores">
+<h2>3.4. Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las herramientas para desarrolladores que incorporan los navegadores permiten depurar el código en JavaScript de la parte del cliente de una aplicación web.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Familiarízate con las opciones de depuración de JavaScript de las pestañas <span class="guilabel">Console</span> y <span class="guilabel">Sources</span> del entorno de las Chrome DevTools siguiendo estas páginas de su documentación: <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/console">Console Overview</a> , <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript">Get Started</a>, <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints">Pause your Code with Breakpoints</a> y <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript/reference">JS Debugging Reference</a>. Practica las distintas posibilidades en DevTools con una aplicación web como la de la primera actividad de este tema.</p>
+</div>
+</div>
 </div>
 
 
