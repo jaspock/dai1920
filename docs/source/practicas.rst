@@ -19,8 +19,8 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
       - `Una página web con HTML5`_
       - 7 octubre 2019
     * - Práctica #2
-      - Una aplicación web local
-      - 29 octubre 2019 aprox.
+      - `Una aplicación web local`_
+      - 29 octubre 2019
     * - Práctica #3
       - Una aplicación con acceso a servicios web de terceros y con componentes web
       - 25 noviembre 2019 aprox.
@@ -172,6 +172,247 @@ Asegúrate de que tus ficheros se validan correctamente con los validadores HTML
 
 Recuerda poner tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p1-dai.zip`` a través del `servidor web del Departamento`_. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con los ficheros con las hojas de estilo que hayas usado y una carpeta ``img`` con las imágenes.
 
-Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[5 horas]</span>`` donde has de sustiruir el 5 por el número de horas aproximadas que te haya llevado hacer esta prática.
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[5 horas]</span>`` donde has de sustiuir el 5 por el número de horas aproximadas que te haya llevado hacer esta prática.
 
 .. _`servidor web del Departamento`: https://pracdlsi.dlsi.ua.es/index.cgi?id=val
+
+
+
+Una aplicación web local
+------------------------
+
+En esta práctica extenderás la práctica anterior con la incorporación de elementos dinámicos mediante JavaScript. En particular, será posible añadir y eliminar cuestionarios, así como añadir y eliminar sus preguntas; todo ello en el navegador, sin interaccionar con ningún servidor o base de datos. Para ello, la sección ``main`` del documento tendrá al principio un formulario que permitirá añadir nuevos cuestionarios indicando su título y su imagen asociada; además, al principio de cada cuestionario (tras el título e inmediatamente antes de la primera pregunta, si la hubiera) se mostrará otro formulario que permitirá añadir una nueva pregunta y su respuesta (verdadero o falso) al final del cuestionario correspondiente. Se permitirá, además, borrar individualmente las preguntas de los cuestionarios.
+
+Asegúrate de que sigues los siguientes pasos en el orden en que aparecen en estas instrucciones para que la realización de la práctica sea más sencilla. Repasa, además, todo lo estudiado en clase sobre JavaScript antes de comenzar la implementación. No puedes utilizar ninguna librería externa (por ejemplo, la clásica *jQuery*) en tu solución. Al igual que en la práctica anterior, tu documento ha de ser válido en cada momento.
+
+Eliminación de la doble vista
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Elimina las dos vistas del documento de la práctica anterior y deja únicamente la vista *normal*. Para ello, borra todo el código JavaScript relacionado con el cambio de estilo, así como los dos enlaces que había en el pie de página para alternar entre los dos estilos. Fusiona todo el CSS que afectaba a la vista *normal* en un único documento CSS de nombre ``normal.css``.
+
+Adición del formulario para insertar un nuevo cuestionario
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Añade el siguiente código al principio del bloque ``main`` de tu documento:
+
+.. code-block:: html
+
+  <div class="formulario" id="nuevoCuestionario">
+    <ul>
+      <li>
+        <label>Tema del cuestionario:</label>
+        <input type="text" name="tema" autofocus>
+      </li>
+      <li>
+        <label>URL de la imagen:</label>
+        <input type="url" name="imagen">
+      </li>
+      <li>
+        <input type="button" name="crea" value="Crear nuevo cuestionario">
+      </li>
+    </ul>
+  </div>
+
+Este código define los elementos necesarios para el formulario de creación de un nuevo cuestionario. Cada campo a insertar se representa en el formulario con una etiqueta (elemento ``<label>``) y una entrada (elemento ``<input>``); ambos se incluyen como elementos dentro de una lista. El botón que se añade como último elemento de la lista ejecutará al ser pulsado el código JavaScript de creación del cuestionario. Es importante que respetes escrupulosamente el fragmento de código anterior, incluyendo los nombres de las clases e identificadores.
+
+Date cuenta de que, en este caso, no usamos un elemento de tipo ``<form>``, sino un ``<div>`` para contener el formulario, con lo que no es necesario desactivar el envío de datos y la recarga automática de la página que ocurre con los formularios de tipo ``<form>``.
+
+Estilo del formulario
+~~~~~~~~~~~~~~~~~~~~~
+
+Respeta las siguientes directrices a la de hora de dar estilo al formulario. Como más adelante usarás estos mismos estilos para el resto de formularios, basa tus selectores de CSS en la clase ``.formulario`` y no en el atributo ``id`` del formulario del apartado anterior:
+
+- el elemento ``<ul>`` que contiene los distintos campos no usa ningún estilo de lista para sus elementos (de lo contrario, aparecería un topo o bala antes de cada elemento de la lista) y no tiene relleno (el *padding* es cero); además, su margen superior es de 30px, el inferior de 20px y el derecho e izquierdo son de 0px;
+- cada elemento de la lista (elemento ``<li>``) tiene un relleno (por los cuatro lados) de 12px y un borde inferior sólido de grosor 1px y color ``#eee``;
+- además, el primer elemento de la lista tendrá un borde superior sólido de grosor 1px y color #777; el último elemento de la lista tendrá un borde inferior de idénticas características; identifica cuál de las `pseudoclases de CSS`_ te puede ser útil para esto;
+- el contenido de los elementos ``<label>`` se ha de mostrar con el valor ``inline-block`` para la propiedad ``display`` (que trata el contenido del elemento como una combinación de ``inline`` y ``block``) lo que nos permitirá darle un ancho fijo de 15em y conseguir que las cajas de introducción de texto queden bien alineadas unas respecto a otras;
+- aquellos elementos de tipo ``<input>`` del formulario que tengan su atributo ``type`` con valor ``text`` o ``url`` (el botón, por tanto, queda excluido) tendrá un borde sólido de 1px de grosor y color ``#aaa``; añádeles, además, estos atributos para conseguir una mayor definición de la caja:
+
+.. code-block:: css
+
+  box-shadow: 0px 0px 3px #ccc, 0 5px 8px #eee inset;
+  border-radius:2px;
+
+.. _`pseudoclases de CSS`: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors
+
+Documento HTML
+~~~~~~~~~~~~~~
+
+Las únicas diferencias en el documento HTML respecto a la práctica anterior es la supresión de todo lo relacionado con el uso de las dos hojas de estilo, la incorporación del formulario de creación de cuestionarios y, evidentemente, la inserción de un elemento ``<script>`` para cargar desde un fichero externo (atributo ``src`` de ``<script>``) el código JavaScript que escribas. Ten en cuenta que tu documento HTML no puede contener ningún código en CSS ni en JavaScript.
+
+Adición de iconos para borrar cada pregunta
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En primer lugar, vamos a añadir a las (cinco) cajas existentes para bloques de pregunta un icono que permita eliminar el bloque completo (número, enunciado y respuesta) de la página. Crea para ello una función ``addCruz`` que reciba como parámetro un objeto de tipo nodo que apunte a un elemento de clase ``.bloque``. La función creará un nodo que contega un elemento como el siguiente
+
+.. code-block:: html
+
+  <div class="borra">☒</div>
+
+y lo insertará como primer hijo del nodo ``.bloque`` pasado como parámetro. El contenido corresponde al carácter Unicode `2612`_.
+
+.. _`2612`: http://unicode-table.com/en/2612/
+
+El estilo de los elementos de clase ``.borra`` usará posicionamiento absoluto para situarse a 2px del extremo derecho y 1px del extremo superior de la caja del elemento ``.bloque`` que lo contiene. *Nota:* para que este posicionamiento funcione tendrás que *posicionar* el elemento ``.bloque``. Además, el cursor del ratón al pasar por encima de la cruz de borrado adoptará el estilo ``pointer``.
+
+Por último, añade un manejador de evento al nuevo nodo de manera que se invoque a una función ``borraPregunta`` (definida más adelante) cuando se haga clic en el elemento.
+
+Recuerda que puedes evaluar la corrección de tu función desde la consola de JavaScript del navegador.
+
+Funciones auxiliares a crear
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Durante la implementación de la práctica te serán de utilidad algunas funciones que puedes definir y evaluar ahora:
+
+- ``insertAsLastChild(padre,nuevoHijo)``: inserta el nodo ``nuevoHijo`` como último hijo del nodo ``padre``.
+- ``insertAsFirstChild(padre,nuevoHijo)``: inserta el nodo ``nuevoHijo`` como primer hijo del nodo ``padre``.
+- ``insertBeforeChild(padre,hijo,nuevoHijo)``: inserta el nodo ``nuevoHijo`` como hijo del nodo ``padre`` inmediatamente antes del nodo ``hijo``.
+- ``removeElement(nodo)``: elimina del DOM el nodo pasado como parámetro.
+
+Además, te será de suma utilidad disponer de una función que funcione de forma similar a ``querySelector`` pero buscando el primer ancestro (en lugar de descendiente) que concuerde con el selector:
+
+- ``queryAncestorSelector(node,selector)``: devuelve el ancestro más cercano a ``node`` que case con el selector indicado como segundo parámetro o ``null`` si no existe ninguno; ``node`` ha de ser un nodo inferior en el árbol a ``document.body``.
+
+La siguiente es una posible implementación de la función que puedes copiar en tu práctica después de asegurarte de que la entiendes perfectamente:
+
+.. code-block:: javascript
+
+  function queryAncestorSelector (node,selector) {
+    var parent= node.parentNode;
+    var all = document.querySelectorAll(selector);
+    var found= false;
+    while (parent !== document && !found) {
+      for (var i = 0; i < all.length && !found; i++) {
+        found= (all[i] === parent)?true:false;
+      }
+      parent= (!found)?parent.parentNode:parent;
+    }
+    return (found)?parent:null;
+  }
+
+.. Note::
+
+  Versiones recientes de los navegadores permiten usar la función closest_ que tiene un comportamiento similar a ``queryAncestorSelector``, pero no es necesario que la uses en tu práctica.
+
+  .. _closest: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+
+Esta función la usaras cuando desde un nodo determinado del DOM quieras acceder a un ancestro para el que conoces un selector, pero no conoces la *distancia* exacta a la que se encuentra o no te interesa hacer que tu código dependa en exceso de dicha distancia porque en el futuro podría haber más nodos intermedios en el árbol y no quieres tener que modificar el código de JavaScript si esto ocurre. Por ejemplo, considera este fragmento de HTML:
+
+.. code-block::  html
+
+  <a>
+    <b>
+      ...
+      <c>
+        <d>
+        </d>
+      </c>
+      ...
+      <e>
+      </e>
+      ...
+      <f>
+      </f>
+    </b>
+  </a>
+
+Si ``x`` representa el nodo correspondiente al elemento ``d`` y quieres acceder a información del nodo ``a``, podría hacerse algo como:
+
+.. code-block::  javascript
+
+  x.parentNode.parentNode.parentNode
+
+o, con ayuda de la nueva funcion, simplemente
+
+.. code-block::  javascript
+
+  queryAncestorSelector(x,"a");
+
+Otro ejemplo: para acceder al elemento ``f`` desde ``x``, se puede hacer:
+
+.. code-block::  javascript
+
+  queryAncestorSelector(x,"b").querySelector("f");
+
+Borrado de preguntas
+~~~~~~~~~~~~~~~~~~~~
+
+Escribe ahora el código para ``borraPregunta``, el manejador del evento discutido en más arriba. Esta función usará el objeto de tipo evento recibido como parámetro para acceder al elemento sobre el que se ha hecho clic. A partir de este elemento, usando ``queryAncestorSelector``, accederá al ancestro con selector ``.bloque`` y lo eliminará del documento, es decir, eliminará el nodo correspondiente del DOM. Además, cuando el cuestionario se quede sin ninguna pregunta, este se eliminará por completo del DOM, así como su entrada en el índice al principio de la página.
+
+Incorporación automática de los botones de borrado
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Crea una función ``init``, que sea invocada por el manejador del evento ``load`` y que recorra todos los elementos de clase ``.bloque`` e invoque la función ``addCruz`` (definida anteriormente) sobre cada uno de ellos. En estos momentos, al abrir tu documento, cada pregunta debería tener su icono de borrado y debería ser posible dejar el documento sin cuestionarios tras borrar todos los bloques de preguntas.
+
+Adición de formularios de inserción de preguntas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A diferencia del formulario de creación de cuestionarios, el formulario de adición de una nueva pregunta se crea dinámicamente para cada cuestionario. Crea ahora una función ``addFormPregunta`` que se encargue de ello. Esta función recibe como parámetro el nodo correspondiente al elemento ``section`` de un determinado cuestionario, crea dinámicamente un formulario como el siguiente y lo inserta a continuación del título del cuestionario (antes de la primera pregunta, si la hubiera):
+
+.. code-block:: html
+
+  <div class="formulario">
+    <ul>
+      <li>
+        <label>Enunciado de la pregunta:</label>
+        <input type="text" name="paris_pregunta">
+      </li>
+      <li>
+        <label>Respuesta:</label>
+        <input type="radio" name="paris_respuesta" value="verdadero" checked>Verdadero
+        <input type="radio" name="paris_respuesta" value="falso">Falso
+      </li>
+      <li>
+        <input type="button" value="Añadir nueva pregunta">
+      </li>
+    </ul>
+  </div>
+
+Un comentario sobre los atributos ``name`` del formulario: dado que estos no pueden tener los mismos valores para los distintos formularios del documento (de otro modo, todos los botones de radio serían considerados como un único conjunto por el navegador y activar uno de ellos en un cuestionario desactivaría el resto de botones en los otros cuestionarios), en esta práctica has de añadir como prefijo el nombre del atributo ``id`` del elemento ``section`` correspondiente seguido de un carácter subrayado.
+
+La función finalizará especificando la función ``addPregunta`` (analizada a continuación) como función manejadora del evento de clic sobre el botón.
+
+Inserción de nuevas preguntas en un cuestionario
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Al igual que la función ``borraPregunta``, la función ``addPregunta`` utilizará también el objeto de tipo evento recibido como parámetro para acceder (con ayuda de funciones como ``querySelectorAncestor`` o ``querySelector``) a los datos introducidos en el formulario correspondiente.
+
+En primer lugar, la función comprobará que ninguno de los campos del formulario haya quedado sin rellenar; si alguno de los campos estuviera vacío, se mostrará un `diálogo de alerta`_ con un texto descriptivo de la causa del error que puedes escoger libremente. En otro caso, se procederá a crear un nuevo elemento ``<div>`` de clase ``.bloque`` para la nueva pregunta, al que se añadirá el icono de borrado mediante una llamada a la función ``addCruz``.
+
+.. _`diálogo de alerta`: https://developer.mozilla.org/en-US/docs/Web/API/Window.alert
+
+Finalmente, la función dejará en blanco el contenido de los campos del formulario, excepto el correspondiente a los botones de radio, que se quedará en el valor *verdadero*.
+
+Incorporación automática de los formularios de inserción de preguntas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Añade código a la función ``init`` que recorra todos los elementos de tipo ``section`` del documento inicial e inserte en ellos los formularios de adición de preguntas con la función definida anteriormente.
+
+Creación de nuevos cuestionarios
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Añade también a la función ``init`` código que asocie la función ``addCuestionario`` explicada a continuación como manejadora del evento de clic sobre el botón del formulario de creación de nuevo formulario.
+
+La función ``addCuestionario`` utilizará el objeto de tipo evento recibido como parámetro para acceder (con ayuda de funciones como ``querySelectorAncestor`` o ``querySelector``) a los datos introducidos en el formulario de creación de cuestionarios. La función comprobará que ninguno de los campos del formulario haya quedado sin rellenar; si alguno de los campos estuviera vacío, se mostrará un diálogo de alerta con un texto descriptivo de la causa del error que puedes escoger libremente. No has de comprobar, en cualquier caso, que la URL indicada sea válida ni corresponda a una imagen existente en internet. Si todos los campos del formulario se han rellenado, se procederá a crear un elemento de tipo ``<section>`` que acogerá un nuevo formulario y que se añadirá a continuación del último formulario de la página. El título del cuestionario será "Cuestionario sobre " seguido del valor del primer campo del formulario; la URL de la imagen a usar será la indicada en el segundo campo. Recuerda también que has de añadir una nueva entrada al índice de cuestionarios de la cabecera del documento.
+
+Dado que cada sección ha de tener un atributo de tipo ``id`` (por ejemplo, para enlazarlo desde el índice), en tu implementación usa como valor del identificador el carácter "c" seguido del valor de una variable global que se inicializará a 1 y se incrementará tras la creación de cada cuestionario. Date cuenta de que los cuestionarios presentes inicialmente en la página web ya tienen sus propios valores de ``id``, por lo que el primer cuestionario que se cree tendrá ``c1`` por ``id``, el segundo ``c2``, etc. El contador global nunca se decrementará, aunque se borre un cuestionario. Observa, también, que la única manera de borrar un cuestionario es mediante el borrado de la última de sus preguntas, por lo que no es posible en esta práctica borrar un cuestionario para el que no se ha introducido ninguna pregunta aún.
+
+Tras la creación e inserción del nuevo elemento ``<section>``, se procederá a incorporarle el formulario de creación de preguntas mediante la oportuna llamada a ``addFormPregunta``.
+
+Además, la función ``addCuestionario`` dejará en blanco el contenido de los campos del formulario.
+
+Captura de pantalla
+~~~~~~~~~~~~~~~~~~~
+
+Observa en `esta imagen`_ como quedaría la página web una vez añadidos dos cuestionarios con sendas preguntas.
+
+.. _`esta imagen`: _static/img/dai-p2-captura.png
+
+Entrega de la práctica
+~~~~~~~~~~~~~~~~~~~~~~
+
+Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior del DOM se validan correctamente con los validadores HTML5 y CSS del W3C. Además, usa Chrome DevTools para comprobar que el estilo aplicado en cada punto del documento es correcto y para depurar tu código en JavaScript. Finalmente, asegúrate de que tu implementación cumple con todas las especificaciones de este enunciado.
+
+Recuerda mantener tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p2-dai.zip`` a través del servidor web del Departamento. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con el fichero ``normal.css``, una carpeta ``img`` con las imágenes de Londres y París, y una carpeta ``js`` con el código en JavaScript.
+
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta prática.

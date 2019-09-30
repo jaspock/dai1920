@@ -18,6 +18,10 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 01 Oct
+      - Léete el `capítulo de introducción a la programación funcional con JavaScript`_ del libro "Client-Side Web Development" antes de las clases del 1 de octubre.
+    * - 30 Sep
+      - Ya está publicado el enunciado de la práctica 2.
     * - 23 Sep 
       - Léete el `capítulo de introducción a JavaScript`_ del libro "Client-Side Web Development" antes de las clases del 1 de octubre. 
     * - 22 Sep 
@@ -32,7 +36,7 @@ Novedades
 .. _`capítulo sobre HTML`: https://info340.github.io/html-fundamentals.html
 .. _`capítulo de introducción a CSS`: https://info340.github.io/css.html
 .. _`capítulo de introducción a JavaScript`: https://info340.github.io/javascript.html
-
+.. _`capítulo de introducción a la programación funcional con JavaScript`: https://info340.github.io/functional-programming.html
 
 Guía docente
 ------------
