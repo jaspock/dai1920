@@ -679,7 +679,7 @@ y(7); // 27
 
 ## Clausuras
 
-- Otro ejemplo (muy frecuente) de uso de *let*:
+- Otro ejemplo (muy habitual) de uso de *let*:
 
 ~~~
 var list = document.getElementById("list");
@@ -688,7 +688,7 @@ for (let i = 1; i <= 5; i++) {
   let item = document.createElement("li");
   item.appendChild(document.createTextNode("Item " + i));
 
-  item..addEventListener("click", function (ev) {
+  item.addEventListener("click", function (ev) {
     console.log("Item " + i + " is clicked.");
   }, false);
   list.appendChild(item);
