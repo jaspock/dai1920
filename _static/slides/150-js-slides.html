@@ -8,8 +8,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reset.css">
   <link rel="stylesheet" href="reveal.js/css/reveal.css">
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
   <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
@@ -27,7 +33,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section>
+<section id="title-slide">
   <h1 class="title">El lenguaje JavaScript</h1>
   <p class="author">Desarrollo de Aplicaciones en Internet</p>
 </section>
@@ -73,7 +79,7 @@
 <li><em>String</em></li>
 <li><em>Boolean</em></li>
 <li><em>Symbol</em> (desde ES6)</li>
-<li><em>Object</em> (<em>Function</em>, <em>Array</em>, <em>Date</em>, <em>RegExp</em>...)</li>
+<li><em>Object</em> (<em>Function</em>, <em>Array</em>, <em>Date</em>, <em>RegExp</em>…)</li>
 <li><em>null</em>, <em>undefined</em></li>
 </ul></li>
 </ul>
@@ -119,7 +125,7 @@ isFinite(-Infinity);   // false</code></pre>
 <li><em>null</em> (indica falta deliberada de valor)</li>
 <li><em>undefined</em> (valor de una variable declarada pero sin valor asignado)</li>
 <li>Los posibles valores de un booleano son <em>true</em> y <em>false</em>.</li>
-<li>Cuando un valor se convierte a <em>Boolean</em> (implícita o explícitamente), <em>false</em>, 0, la cadena vacía (&quot;&quot;), <em>NaN</em>, <em>null</em> y <em>undefined</em> son falsos.</li>
+<li>Cuando un valor se convierte a <em>Boolean</em> (implícita o explícitamente), <em>false</em>, 0, la cadena vacía (""), <em>NaN</em>, <em>null</em> y <em>undefined</em> son falsos.</li>
 </ul>
 </section>
 <section id="variables" class="slide level2">
@@ -660,7 +666,6 @@ for (let i = 1; i &lt;= 5; i++) {
     </div>
   </div>
 
-  <script src="reveal.js/lib/js/head.min.js"></script>
   <script src="reveal.js/js/reveal.js"></script>
 
   <script>
@@ -668,6 +673,8 @@ for (let i = 1; i &lt;= 5; i++) {
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: {37:'prev',38:'prev',39:'next',40:'next'},
         // Transition style
@@ -677,7 +684,7 @@ for (let i = 1; i &lt;= 5; i++) {
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
         ]
       });
     </script>

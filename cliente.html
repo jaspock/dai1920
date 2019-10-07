@@ -88,7 +88,10 @@
 <li class="toctree-l1"><a class="reference internal" href="estilo.html">2. Lenguajes de estilo</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Programar el lado del cliente</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#una-aplicacion-web-sencilla">3.1. Una aplicación web sencilla</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#el-lenguaje-de-programacion-javascript">3.2. El lenguaje de programación JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#el-lenguaje-de-programacion-javascript">3.2. El lenguaje de programación JavaScript</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ambitos-y-clausuras">3.2.1. Ámbitos y clausuras</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#las-apis-del-navegador-para-programar-el-lado-del-cliente">3.3. Las APIs del navegador para programar el lado del cliente</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#herramientas-para-desarrolladores">3.4. Herramientas para desarrolladores</a></li>
 </ul>
@@ -376,71 +379,71 @@
 191
 192
 193
-194</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
+194</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
 <span class="c">&lt;!-- Ejemplos de uso de la API DOM y de la API de eventos del navegador --&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Ejemplos de uso de la API DOM y de la API de eventos del navegador<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;es&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Ejemplos de uso de la API DOM y de la API de eventos del navegador<span class="nt">&lt;/title&gt;</span>
 
     <span class="c">&lt;!-- Es recomendable que tanto estilos como scripts vayan en ficheros aparte, pero</span>
 <span class="c">    en este caso los dejamos aquí por ser una prueba de concepto --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-      <span class="p">@</span><span class="k">import</span> <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;https://fonts.googleapis.com/css?family=Lato&amp;display=swap&#39;</span><span class="o">)</span><span class="p">;</span>
+    <span class="nt">&lt;style&gt;</span>
+      <span class="k">@import</span> <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;https://fonts.googleapis.com/css?family=Lato&amp;display=swap&#39;</span><span class="o">)</span><span class="p">;</span>
       <span class="o">*</span> <span class="p">{</span>
-        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+        <span class="k">margin</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+        <span class="k">padding</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+        <span class="n">box</span><span class="o">-</span><span class="n">sizing</span><span class="o">:</span> <span class="k">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="nt">body</span> <span class="p">{</span>
-        <span class="k">font-size</span><span class="p">:</span> <span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">font-family</span><span class="p">:</span> <span class="s1">&#39;Lato&#39;</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
-        <span class="k">margin</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">font-size</span><span class="o">:</span> <span class="m">18px</span><span class="p">;</span>
+        <span class="k">font-family</span><span class="o">:</span> <span class="s1">&#39;Lato&#39;</span><span class="o">,</span> <span class="k">sans-serif</span><span class="p">;</span>
+        <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
       <span class="p">}</span>
-      <span class="nt">h3</span><span class="p">.</span><span class="nc">destacado</span> <span class="p">{</span>
-        <span class="k">color</span><span class="p">:</span> <span class="kc">lightseagreen</span><span class="p">;</span>
+      <span class="nt">h3</span><span class="nc">.destacado</span> <span class="p">{</span>
+        <span class="k">color</span><span class="o">:</span> <span class="nb">lightseagreen</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="nt">h3</span> <span class="p">{</span>
-        <span class="k">color</span><span class="p">:</span> <span class="kc">black</span><span class="p">;</span>
-        <span class="k">font-size</span><span class="p">:</span> <span class="mf">1.3</span><span class="kt">em</span><span class="p">;</span>
-        <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="p">;</span>
-        <span class="k">margin-right</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+        <span class="k">font-size</span><span class="o">:</span> <span class="m">1.3em</span><span class="p">;</span>
+        <span class="k">display</span><span class="o">:</span> <span class="k">inline</span><span class="p">;</span>
+        <span class="k">margin-right</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="nt">form</span> <span class="p">{</span>
-        <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="nt">section</span> <span class="p">{</span>
-        <span class="k">border-top</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
-	      <span class="k">margin-top</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">padding-top</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">border-top</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+	      <span class="k">margin-top</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="k">padding-top</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+        <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
       <span class="p">}</span>
-    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="nt">&lt;/style&gt;</span>
 
-  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
   
-  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
 
     <span class="c">&lt;!-- Formularios: --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f1&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Crea sección con título:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span> 
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;título&quot;</span><span class="p">&gt;</span> 
-      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Crea sección<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f2&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Destaca secciones cuya primera palabra sea:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span> 
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;palabra&quot;</span><span class="p">&gt;</span> 
-      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Marca sección<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;f3&quot;</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Desmarca todas las secciones<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;f1&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Crea sección con título:<span class="nt">&lt;/label&gt;</span> 
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;título&quot;</span><span class="nt">&gt;</span> 
+      <span class="nt">&lt;button&gt;</span>Crea sección<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;f2&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Destaca secciones cuya primera palabra sea:<span class="nt">&lt;/label&gt;</span> 
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;palabra&quot;</span><span class="nt">&gt;</span> 
+      <span class="nt">&lt;button&gt;</span>Marca sección<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;f3&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button&gt;</span>Desmarca todas las secciones<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
 
     <span class="c">&lt;!-- El elemento main está vacío inicialmente, pero irá conteniendo las secciones que </span>
 <span class="c">      se crearán dinámicamente. --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="nt">&lt;main&gt;&lt;/main&gt;</span>
 
-    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
       <span class="c1">// Manejador del evento de marcar/desmarcar de una sección individual:</span>
       <span class="kd">function</span> <span class="nx">marcaDesmarcaUnaSección</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// event.currentTarget es el elemento al que se asoció este manejador;</span>
@@ -565,11 +568,11 @@
       <span class="c1">// si en lugar de init pusiéramos init() el efecto sería diferente (y</span>
       <span class="c1">// probablemente no deseado):</span>
       <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="nx">init</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
-    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
 
-  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
 
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -580,6 +583,75 @@
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>Lee el <a class="reference external" href="https://info340.github.io/functional-programming.html">capítulo sobre programación funcional en JavaScript</a> del libro «Client-Side Web Development», donde se explican las características del lenguaje relacionadas con el paradigma funcional, entre las que trabajaremos especialmente con el concepto de clausura. Puedes practicar con la consola de JavaScript de las Chrome Devtools o con una <a class="reference external" href="https://jsconsole.com/">consola en línea</a>.</p>
+</div>
+<div class="section" id="ambitos-y-clausuras">
+<h3>3.2.1. Ámbitos y clausuras<a class="headerlink" href="#ambitos-y-clausuras" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Las clausuras y su relación con las variables declaradas con <code class="docutils literal notranslate"><span class="pre">var</span></code> o <code class="docutils literal notranslate"><span class="pre">let</span></code> es uno de los aspectos que más cuesta entender a los programadores que acaban de empezar con JavaScript. Existen cuatro tipos de ámbitos para las variables en JavaScript:</p>
+<ul class="simple">
+<li><p>ámbito de función: corresponde a las variables locales declaradas con <code class="docutils literal notranslate"><span class="pre">var</span></code>; estas variables se almacenan en la pila y pueden usarse incluso antes de haber sido definidas; esto es así por un mecanismo conocido como <em>izado</em> (<em>hoisting</em>) que aupa las declaraciones de variables locales (pero no sus inicializaciones) al comienzo de la función; declarar dos o más veces una variable con <code class="docutils literal notranslate"><span class="pre">var</span></code> dentro de la misma función equivale a declararla una sola vez al comienzo de esta; si intentamos leer el valor de una variable antes de su declaración en el código y antes de haberle asignado ningún valor obtenemos el valor <em>undefined</em>;</p></li>
+<li><p>ámbito de bloque: corresponde a las variables locales declaradas con <code class="docutils literal notranslate"><span class="pre">let</span></code>; estas variables se almacenan en la pila también, pero no hay ningún proceso de izado y la variable se circunscribe al ámbito en el que ha sido declarada; dos variables declaradas en ámbitos diferentes de una misma función tienen espacios separados en la pila; no se pueden declarar dos variables de este tipo con el mismo nombre dentro del mismo contexto; si se declara una variable con <code class="docutils literal notranslate"><span class="pre">let</span></code> dentro de un bucle, se reserva sitio en la pila para una variable distinta en cada iteración;  el uso de <code class="docutils literal notranslate"><span class="pre">let</span></code> está permitido en el lenguaje desde la versión 6 de ECMAScript, publicada en 2015, por lo que es normal que encuentres muchos ejemplos de código que no lo usan;</p></li>
+<li><p>ámbito global: corresponde a las variables globales declaradas fuera de cualquier función; estas variables se almacenan en el <em>heap</em> y sus declaraciones también son <em>izadas</em> al principio del ámbito global;</p></li>
+<li><p>ámbito léxico: corresponde al hecho de que una función definida dentro de otra función puede acceder a las variables locales de esta última; si una función interna <em>sobrevive</em> a la función contenedora, las variables referenciadas no se borran de la memoria (a la asociación entre la función y las variables externas se le conoce como <em>clausura</em>);</p></li>
+</ul>
+<p>Las declaraciones de funciones locales y globales también sufren el mecanismo de izado en sus ámbitos respectivos.</p>
+<p>Estudia el siguiente código y ejécutalo (pulsando en <span class="guilabel">run</span>) después de dedicar un rato a pensar qué valores imprime por la consola.</p>
+<script src="https://embed.runkit.com" data-element-id="clausura1"></script>
+<div id="clausura1">
+  function f () {
+    var i=0;
+    var x= {};
+    {
+      var i=0;
+      x.f1= function() {
+        console.log(i);
+      };
+    }
+    i++;
+    {
+      var i=1;
+      x.f2= () => {console.log(i);};
+    }
+    i++;
+    return x;
+  }
+
+  var x= f();
+  x.f1();
+  x.f2();
+</div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>La variable <code class="docutils literal notranslate"><span class="pre">i</span></code> se declara con <code class="docutils literal notranslate"><span class="pre">var</span></code> y, por tanto, su ámbito es el de la función <code class="docutils literal notranslate"><span class="pre">f</span></code>. No importa que usemos <code class="docutils literal notranslate"><span class="pre">var</span></code> varias veces a continuación dentro de la función, incluso aunque estas declaraciones adicionales estén dentro de un nuevo ámbito. En la pila de ejecución solo se reserva sitio para una variable cuando se ejecuta la función y esta única posición es la que no se destruye al salir de la función debido a las clausuras que se crean por las dos funciones anónimas asignadas a <code class="docutils literal notranslate"><span class="pre">x.f1</span></code> y <code class="docutils literal notranslate"><span class="pre">x.f2</span></code>. La variable <code class="docutils literal notranslate"><span class="pre">i</span></code> vale 2 al salir de la función y este valor es el que se usa al llamar a las dos funciones.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Observa de paso que para introducir nuevos ámbitos no es necesario usar una instrucción condicional o un bucle, sino que en JavaScript, como en la mayoría de lenguajes, basta con encerrar un bloque de código entre llaves para conseguirlo.</p>
+</div>
+<p>Sin embargo, si usamos <code class="docutils literal notranslate"><span class="pre">let</span></code> en lugar de <code class="docutils literal notranslate"><span class="pre">var</span></code> en las declaraciones de <code class="docutils literal notranslate"><span class="pre">i</span></code>, el ámbito de cada variable será el del bloque y tendremos tres variables distintas en la pila de ejecución justo antes de salir de la función. La primera de ellas será destruida en ese momento, pero las otras dos se <em>salvarán</em> de dicha destrucción para mantener las clausuras:</p>
+<script src="https://embed.runkit.com" data-element-id="clausura2"></script>
+<div id="clausura2">
+  function f () {
+    let i=0;
+    let x= {};
+    {
+      let i=0;
+      x.f1= function() {
+        console.log(i);
+      };
+    }
+    i++;
+    {
+      let i=1;
+      x.f2= () => {console.log(i);};
+    }
+    i++;
+    return x;
+  }
+
+  let x= f();
+  x.f1();
+  x.f2();
+</div><div class="line-block">
+<div class="line"><br /></div>
 </div>
 <div class="admonition-problema-contador-problema admonition">
 <p class="admonition-title"><span class="problema-contador">Problema</span></p>
@@ -598,7 +670,7 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">outer</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">outer</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">z</span><span class="p">;</span>
   <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
@@ -625,7 +697,7 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">count</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">count</span><span class="o">=</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">count</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
   <span class="k">while</span> <span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">count</span><span class="o">+=</span> <span class="cm">/*@1*/</span><span class="p">;</span>
@@ -644,7 +716,7 @@
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">logger</span><span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">logger</span><span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
@@ -665,7 +737,7 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">isSorted</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">isSorted</span><span class="p">(</span><span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
   <span class="k">for</span> <span class="p">(</span><span class="cm">/*@1*/</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="cm">/*@2*/</span><span class="p">;</span>
@@ -683,7 +755,7 @@
 <div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">answer</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">);</span>
 <span class="p">})</span><span class="cm">/*@1*/</span><span class="p">;</span>
@@ -705,7 +777,7 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">done</span><span class="p">(){</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">done</span><span class="p">(){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -720,6 +792,7 @@
 <span class="nx">increment</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nx">done</span><span class="p">);</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 </div>
 </div>
 <div class="section" id="las-apis-del-navegador-para-programar-el-lado-del-cliente">

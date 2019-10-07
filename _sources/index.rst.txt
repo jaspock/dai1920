@@ -18,6 +18,8 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 07 Oct
+      - Léete el `capítulo sobre el Document Object Model`_ del libro "Client-Side Web Development" antes de las clases del 15 de octubre.
     * - 01 Oct
       - Léete el `capítulo de introducción a la programación funcional con JavaScript`_ del libro "Client-Side Web Development" antes de las clases del 1 de octubre.
     * - 30 Sep
@@ -37,6 +39,7 @@ Novedades
 .. _`capítulo de introducción a CSS`: https://info340.github.io/css.html
 .. _`capítulo de introducción a JavaScript`: https://info340.github.io/javascript.html
 .. _`capítulo de introducción a la programación funcional con JavaScript`: https://info340.github.io/functional-programming.html
+.. _`capítulo sobre el Document Object Model`: https://info340.github.io/dom.html
 
 Guía docente
 ------------
@@ -50,6 +53,7 @@ Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en
 - La asistencia a prácticas es obligatoria, aunque se puede tener un máximo de 5 faltas no justificadas. Si tienes alguna ocupación que te impide asistir a todas o gran parte de las prácticas, envía un justificante escaneado al profesor a través del sistema de tutoría de UACloud. Para justificar una falta puntual, enseña al profesor el justificante durante la próxima sesión de prácticas a la que acudas.
 - La visita al profesor durante sus horas de tutoría no puede ser obligatoria por cuestiones normativas, pero es muy recomendable, ya que es la oportunidad de recibir supervisión sobre tus conocimientos de la materia o la calidad del código que has desarrollado. Reserva turno a través de UACloud. Si el horario no es compatible con tu agenda, escribe al profesor e intentará encontrar un hueco fuera de dicho horario. Si no resultara posible consensuar una hora de visita, también puedes contactar previa cita por chat, videollamada o teléfono.
 - Las prácticas se realizan individualmente. Lee lo que se comenta más abajo sobre plagios.
+- Cada una de las cuatro prácticas contribuye un 25% a la nota final de las prácticas.
 - Los exámenes de teoría y prácticas se realizan uno a continuación del otro en la fecha oficial del calendario de exámenes. Salvo excepciones autorizadas expresamente por el profesor, el único material que puedes llevar a cada examen es un documento identificativo, un boligrafo y una hoja de tamaño ISO/DIN A5 (148 x 210 mm) en la que puedes escribir o imprimir toda la información que consideres útil. La hoja se entregará al profesor al acabar el examen y no puede compartirse con otros estudiantes. Puedes llevar una hoja diferente para el examen teórico y para el práctico, pero no puede superar las medidas indicadas.
 - El examen de prácticas se realizará en los ordenadores de los laboratorios de la Escuela Politécnica Superior; durante su realización no habrá acceso a internet.
 - Para acceder a Google Cloud Platform en las últimas semanas del curso necesitarás tu `cuenta de correo electrónico de GCloud`_ con dominio ``@gcloud.ua.es`` de la que dispones como alumno de la Universitat d'Alacant.
