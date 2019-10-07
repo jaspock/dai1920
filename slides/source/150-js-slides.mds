@@ -12,6 +12,9 @@ Fuente: [A re-introduction to JavaScript](https://developer.mozilla.org/en-US/do
 
 - Diseñado en 1995 por Netscape Communications para su navegador (heredero de Mosaic, el primer navegador gráfico).
 - Se *inspira* levemente en algunos aspectos de Java, que estaba entonces en auge, pero tiene elementos de lenguajes funcionales como Scheme.
+
+## Historia 
+
 - Bajo el nombre EcmaScript (ES) es un estándar de Ecma International desde pocos meses después de su creación.
 - La versión 3 apareció en 1999, la 5 en 2009, la 6 en 2015, la 7 en 2016, la 8 en 2017, etc. (ahora se revisa anualmente).
 
@@ -20,7 +23,7 @@ Fuente: [A re-introduction to JavaScript](https://developer.mozilla.org/en-US/do
 - JavaScript no tiene concepto de entrada/salida.
 - Es un lenguaje de script pensado para ser ejecutado en un entorno que es el que aporta mecanismos para la comunicación con el exterior: navegador, formularios en PDFs, Node.js, MondoDB, etc.
 - En 1995, Netscape Enterprise Server ya permitía programar en JavaScript en el lado del servidor.
-- Lenguaje interpretado, aunque muchos motores incorporan la compilación *just-in-time*.
+- Lenguaje interpretado (no compilado), aunque muchos motores incorporan la compilación *just-in-time*.
 
 ## Introducción
 
@@ -41,7 +44,7 @@ Fuente: [A re-introduction to JavaScript](https://developer.mozilla.org/en-US/do
 
 ## Números
 
-- Los números son reales de doble precisión. Como en otros lenguajes, la representación en coma flotante de 0.1, por ejemplo, no es exacta.
+- Los números son reales de doble precisión. Como en otros lenguajes, la representación en coma flotante de ciertos valores [no es exacta](https://0.30000000000000004.com/).
 - Se pueden usar los operadores aritméticos habituales.
 - No existen enteros como tales.
 - Existe un objeto predefinido *Math*.
@@ -59,10 +62,10 @@ var circumference = Math.PI * (r + r);
 ## Conversiones
 
 ~~~
-parseInt("123", 10);   // 123
-parseFloat("3.14");    // 3.14
-+ "42";                // 42
-parseInt("hello", 10); // NaN
+parseInt("123", 10);   // 123 (de cadena a entero en base 10)
+parseFloat("3.14");    // 3.14 (de cadena a real)
++ "42";                // 42 (equivale a 0+"42"; cadena+entero o entero+cadena dan una cadena)
+parseInt("hello", 10); // NaN (not a number)
 NaN + 5;               // NaN
 isNaN(NaN);            // true
 1 / 0;                 // Infinity
@@ -77,7 +80,7 @@ isFinite(-Infinity);   // false
 ~~~
 "hello".length;    // 5
 'hello'.length;    // 5
-"hello".charAt(0); // carácter "h"
+"hello".charAt(0); // carácter "h" (representado como cadena)
 "hello, world".replace("hello", "goodbye"); // "goodbye, world"
 ~~~
 
@@ -90,15 +93,22 @@ isFinite(-Infinity);   // false
 
 ## Variables
 
-- Se declaran con la palabra reservada *var*.
-- A diferencia de Java o C, los bloques (por ejemplo, un *if*) no definen ámbitos; solo existe el ámbito de funciones.
-- Declarar una variable en un bloque equivale a declararla al principio de la función.
-- Declarar en un bloque una variable homónima a la de un bloque exterior no crea una nueva variable.
+- Se declaran con la palabra reservada *var* o *let*.
 
 ~~~
-var a;    // undefined
+var a;    // undefined en este momento
 var name = "simon";
+nanne = "garfunkel";   // no da error salvo que usemos 'use strict';
 ~~~
+
+
+## Variables
+
+- El ámbito de las variables declaradas con *var* es el de la función.
+- Declarar una variable con *var* en un bloque equivale a declararla al principio de la función.
+- Declarar con *var* en un bloque una variable homónima a la de un bloque exterior no crea una nueva variable.
+- Las variables declaradas con *let* pertenecen al ámbito del bloque correspondiente.
+
 
 ## Variables
 
@@ -117,7 +127,9 @@ function f() {
 ~~~
 
 
-## Instrucción *let* en ES6
+## Instrucción *let* 
+
+- Desde EcmaScript 6 (2015)
 
 ~~~
 function letTest() {
@@ -131,7 +143,7 @@ function letTest() {
 }
 ~~~
 
-## Instrucción *let* en ES6
+## Instrucción *var*
 
 ~~~
 function varTest() {
@@ -151,19 +163,19 @@ x += 5
 x = x + 5
 "hello" + " world"   // "hello world"
 "3" + 4 + 5          // "345"
-3 + 4 + "5"          // "75"
-17 + ""              // "17" (conversión)
+3 + 4 + "5"          // "75" (se operan 3 y 4 primero)
+17 + ""              // "17" (conversión; entero+cadena -> cadena)
 123 == "123"         // true (conversión implícita)
 1 == true            // true (conversión implícita)
-123 === "123"        // false (no hay conversión)
-1 === true           // false (no hay conversión)
+123 === "123"        // false (no hay conversión con ===)
+1 === true           // false (no hay conversión con ===)
 1 != true            // false
 1 !== true           // true
 ~~~
 
 ## Operadores
 
-- La evaluación en cortocircuito es útil para comprobar si un objeto es *null* antes de acceder a sus miembros o para dar valores por defecto.
+- La evaluación en cortocircuito (presente en otros muchos lenguajes) es útil para comprobar si un objeto es *null* antes de acceder a sus miembros o para dar valores por defecto.
 
 ~~~
 var name = o && o.getName();
@@ -186,7 +198,7 @@ if (name == "puppies") {
 } else {
   name = "!" + name;
 }
-name == "kittens!!"
+name == "kittens!!"  // true
 ~~~
 
 ## Estructuras de control
@@ -269,8 +281,9 @@ var You = new Person("You", 24);
 obj.name = "Simon";
 var name = obj.name;    // esta forma suele ser más eficiente
 
-obj["name"] = "Simon";
-var name = obj["name"]; // esta forma permite obtener nombres de propiedades en tiempo de ejecución
+prop= "name";  // el valor de prop se puede leer de un fichero o un formulario
+obj[prop] = "Simon";
+var name = obj[prop]; // esta permite obtener nombres de propiedades durante la ejecución
 ~~~
 
 ## Arrays
@@ -282,7 +295,7 @@ var name = obj["name"]; // esta forma permite obtener nombres de propiedades en 
 var a = new Array();
 a[0] = "dog";
 a[1] = "cat";
-a[2] = "hen";
+a[2] = 42;
 a.length; // 3
 ~~~
 
@@ -308,7 +321,7 @@ a.length;        // 101
 - Métodos disponibles para arrays: *toString*, *concat*, *join*, *pop*, *push*, *reverse*, *shift*, *slice*, *sort*, etc.
 
 ~~~
-["dog", "cat", "hen"].forEach(function(currentValue, index, array) {
+["dog", "cat"].forEach(function(currentValue, index, array) {
   // Hacer algo con currentValue o array[index]
 });
 ~~~
@@ -370,9 +383,9 @@ var g=avg;
 g(2, 3, 4, 5);
 ~~~
 
-## Funciones anónimas
+## Immediately-invoked functions
 
-- Un *truco* para esconder variables locales de forma similar al ámbito de bloque en C (sin usar let):
+- Un *truco* para esconder variables locales dentro de su bloque antes de que existiera *let*:
 
 ~~~
 var a = 1;
@@ -427,9 +440,11 @@ function Person(first, last) {
 - Una manera aún mejor es usar los prototipos de JavaScript.
 - Cuando se crea una función en JavaScript, el intérprete le añade una propiedad *prototype*.
 - Esta propiedad apunta a un *objeto prototipo* que será luego también compartido por todos los objetos creados usando la función constructora.
-- A este objeto prototipo se puede acceder también desde tales objetos por medio de la propiedad *__proto__*.
+- A este objeto prototipo se puede acceder también desde tales objetos con la propiedad *\_\_proto\_\_*.
 
 ## Objetos personalizados
+
+- *Person.prototype* es un objeto compartido por todas las instancias de *Person*.
 
 ~~~
 function Person(first, last) {
@@ -446,8 +461,7 @@ Person.prototype.fullNameReversed = function() {
 
 ## Objetos personalizados
 
-- *Person.prototype* es un objeto compartido por todas las instancias de *Person*.
-- Cuando se intenta acceder a una propiedad de un objeto *Person* a la que no se ha dado valor explícitamente, el intérprete la busca en *Person.prototype*.
+- Al intentar acceder a una propiedad de un objeto *Person* sin asignación explícita, el intérprete la busca en *Person.prototype*.
 
 ~~~
 function Person(first, last) {
@@ -473,7 +487,7 @@ s.firstNameCaps(); // TypeError on line 1: s.firstNameCaps is not a function
 
 Person.prototype.firstNameCaps = function firstNameCaps() {
   return this.first.toUpperCase()
-};
+}; // cualquier Person existente responde ahora a esta función
 s.firstNameCaps(); // "SIMON"
 ~~~
 
@@ -519,7 +533,7 @@ class SimpleDate {
 
 ## Clases en ES6
 
-- No se puede poner una propiedad como privada, aunque existen formas de conseguir algo equivalente.
+- No se puede poner una propiedad como privada (existen formas de conseguir algo equivalente que no veremos).
 
 ~~~
 let today = new SimpleDate(2017, 1, 14);
@@ -580,8 +594,8 @@ function betterExampleNeeded() {
 
 ## Clausuras
 
-- Son necesarias cuando una función anidada que accede a algunas variables de la función padre sobrevive a esta.
-- Una clausura se implementa como un registro que almacena una función y un entorno.
+- Son necesarias cuando una función anidada que accede a algunas variables de la función madre sobrevive a esta.
+- Una clausura se implementa como un registro que almacena una función y un entorno de la pila.
 
 ~~~
 function makeAdder(a) {
@@ -665,7 +679,7 @@ y(7); // 27
 
 ## Clausuras
 
-- Otro ejemplo con *let*:
+- Otro ejemplo (muy frecuente) de uso de *let*:
 
 ~~~
 var list = document.getElementById("list");
@@ -674,9 +688,9 @@ for (let i = 1; i <= 5; i++) {
   let item = document.createElement("li");
   item.appendChild(document.createTextNode("Item " + i));
 
-  item.onclick = function (ev) {
+  item..addEventListener("click", function (ev) {
     console.log("Item " + i + " is clicked.");
-  };
+  }, false);
   list.appendChild(item);
 }
 ~~~

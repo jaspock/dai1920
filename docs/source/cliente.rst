@@ -1,10 +1,10 @@
 .. role:: problema-contador
+.. role:: entorno
 
 Programar el lado del cliente
 =============================
 
 JavaScript es un lenguaje orientado a objetos, funcional, dinámico e interpretado, usado principalmente como el lenguaje de programación de las páginas web en el lado del navegador. Actualmente, sin embargo, se usa también en la parte del servidor en entornos como Node.js o MongoDB. El nombre del estándar que regula JavaScript es ECMAScript. Los navegadores recientes entienden las últimas versiones de ECMAScript; cada año se publica una nueva versión (por ejemplo, ECMAScript 2019, también conocido como ES10).
-
 
 .. Important::
 
@@ -51,6 +51,89 @@ Los conceptos que tienes que comprender del lenguaje se encuentran recogidos en 
 
   .. _`capítulo sobre programación funcional en JavaScript`: https://info340.github.io/functional-programming.html
   .. _`consola en línea`: https://jsconsole.com/
+
+
+Ámbitos y clausuras
+~~~~~~~~~~~~~~~~~~~
+
+Las clausuras y su relación con las variables declaradas con ``var`` o ``let`` es uno de los aspectos que más cuesta entender a los programadores que acaban de empezar con JavaScript. Existen cuatro tipos de ámbitos para las variables en JavaScript:
+
+- ámbito de función: corresponde a las variables locales declaradas con ``var``; estas variables se almacenan en la pila y pueden usarse incluso antes de haber sido definidas; esto es así por un mecanismo conocido como *izado* (*hoisting*) que aupa las declaraciones de variables locales (pero no sus inicializaciones) al comienzo de la función; declarar dos o más veces una variable con ``var`` dentro de la misma función equivale a declararla una sola vez al comienzo de esta; si intentamos leer el valor de una variable antes de su declaración en el código y antes de haberle asignado ningún valor obtenemos el valor *undefined*;
+- ámbito de bloque: corresponde a las variables locales declaradas con ``let``; estas variables se almacenan en la pila también, pero no hay ningún proceso de izado y la variable se circunscribe al ámbito en el que ha sido declarada; dos variables declaradas en ámbitos diferentes de una misma función tienen espacios separados en la pila; no se pueden declarar dos variables de este tipo con el mismo nombre dentro del mismo contexto; si se declara una variable con ``let`` dentro de un bucle, se reserva sitio en la pila para una variable distinta en cada iteración;  el uso de ``let`` está permitido en el lenguaje desde la versión 6 de ECMAScript, publicada en 2015, por lo que es normal que encuentres muchos ejemplos de código que no lo usan;
+- ámbito global: corresponde a las variables globales declaradas fuera de cualquier función; estas variables se almacenan en el *heap* y sus declaraciones también son *izadas* al principio del ámbito global;
+- ámbito léxico: corresponde al hecho de que una función definida dentro de otra función puede acceder a las variables locales de esta última; si una función interna *sobrevive* a la función contenedora, las variables referenciadas no se borran de la memoria (a la asociación entre la función y las variables externas se le conoce como *clausura*);
+
+Las declaraciones de funciones locales y globales también sufren el mecanismo de izado en sus ámbitos respectivos.
+
+Estudia el siguiente código y ejécutalo (pulsando en :guilabel:`run`) después de dedicar un rato a pensar qué valores imprime por la consola.
+
+.. raw:: html
+
+  <script src="https://embed.runkit.com" data-element-id="clausura1"></script>
+  <div id="clausura1">
+    function f () {
+      var i=0;
+      var x= {};
+      {
+        var i=0;
+        x.f1= function() {
+          console.log(i);
+        };
+      }
+      i++;
+      {
+        var i=1;
+        x.f2= () => {console.log(i);};
+      }
+      i++;
+      return x;
+    }
+
+    var x= f();
+    x.f1();
+    x.f2();
+  </div>
+
+|
+
+.. la barra intrdduce una línea en blanco en restructured text
+
+La variable ``i`` se declara con ``var`` y, por tanto, su ámbito es el de la función ``f``. No importa que usemos ``var`` varias veces a continuación dentro de la función, incluso aunque estas declaraciones adicionales estén dentro de un nuevo ámbito. En la pila de ejecución solo se reserva sitio para una variable cuando se ejecuta la función y esta única posición es la que no se destruye al salir de la función debido a las clausuras que se crean por las dos funciones anónimas asignadas a ``x.f1`` y ``x.f2``. La variable ``i`` vale 2 al salir de la función y este valor es el que se usa al llamar a las dos funciones.
+
+.. Note::
+
+  Observa de paso que para introducir nuevos ámbitos no es necesario usar una instrucción condicional o un bucle, sino que en JavaScript, como en la mayoría de lenguajes, basta con encerrar un bloque de código entre llaves para conseguirlo.
+
+Sin embargo, si usamos ``let`` en lugar de ``var`` en las declaraciones de ``i``, el ámbito de cada variable será el del bloque y tendremos tres variables distintas en la pila de ejecución justo antes de salir de la función. La primera de ellas será destruida en ese momento, pero las otras dos se *salvarán* de dicha destrucción para mantener las clausuras:
+
+.. raw:: html
+
+  <script src="https://embed.runkit.com" data-element-id="clausura2"></script>
+  <div id="clausura2">
+    function f () {
+      let i=0;
+      let x= {};
+      {
+        let i=0;
+        x.f1= function() {
+          console.log(i);
+        };
+      }
+      i++;
+      {
+        let i=1;
+        x.f2= () => {console.log(i);};
+      }
+      i++;
+      return x;
+    }
+
+    let x= f();
+    x.f1();
+    x.f2();
+  </div>
+
+|
 
 
 .. admonition:: :problema-contador:`Problema`
