@@ -48,6 +48,11 @@
 <ul>
 <li>Diseñado en 1995 por Netscape Communications para su navegador (heredero de Mosaic, el primer navegador gráfico).</li>
 <li>Se <em>inspira</em> levemente en algunos aspectos de Java, que estaba entonces en auge, pero tiene elementos de lenguajes funcionales como Scheme.</li>
+</ul>
+</section>
+<section id="historia-1" class="slide level2">
+<h2>Historia</h2>
+<ul>
 <li>Bajo el nombre EcmaScript (ES) es un estándar de Ecma International desde pocos meses después de su creación.</li>
 <li>La versión 3 apareció en 1999, la 5 en 2009, la 6 en 2015, la 7 en 2016, la 8 en 2017, etc. (ahora se revisa anualmente).</li>
 </ul>
@@ -58,7 +63,7 @@
 <li>JavaScript no tiene concepto de entrada/salida.</li>
 <li>Es un lenguaje de script pensado para ser ejecutado en un entorno que es el que aporta mecanismos para la comunicación con el exterior: navegador, formularios en PDFs, Node.js, MondoDB, etc.</li>
 <li>En 1995, Netscape Enterprise Server ya permitía programar en JavaScript en el lado del servidor.</li>
-<li>Lenguaje interpretado, aunque muchos motores incorporan la compilación <em>just-in-time</em>.</li>
+<li>Lenguaje interpretado (no compilado), aunque muchos motores incorporan la compilación <em>just-in-time</em>.</li>
 </ul>
 </section>
 <section id="introducción" class="slide level2">
@@ -87,7 +92,7 @@
 <section id="números" class="slide level2">
 <h2>Números</h2>
 <ul>
-<li>Los números son reales de doble precisión. Como en otros lenguajes, la representación en coma flotante de 0.1, por ejemplo, no es exacta.</li>
+<li>Los números son reales de doble precisión. Como en otros lenguajes, la representación en coma flotante de ciertos valores <a href="https://0.30000000000000004.com/">no es exacta</a>.</li>
 <li>Se pueden usar los operadores aritméticos habituales.</li>
 <li>No existen enteros como tales.</li>
 <li>Existe un objeto predefinido <em>Math</em>.</li>
@@ -99,10 +104,10 @@ var circumference = Math.PI * (r + r);</code></pre>
 </section>
 <section id="conversiones" class="slide level2">
 <h2>Conversiones</h2>
-<pre><code>parseInt(&quot;123&quot;, 10);   // 123
-parseFloat(&quot;3.14&quot;);    // 3.14
-+ &quot;42&quot;;                // 42
-parseInt(&quot;hello&quot;, 10); // NaN
+<pre><code>parseInt(&quot;123&quot;, 10);   // 123 (de cadena a entero en base 10)
+parseFloat(&quot;3.14&quot;);    // 3.14 (de cadena a real)
++ &quot;42&quot;;                // 42 (equivale a 0+&quot;42&quot;; cadena+entero o entero+cadena dan una cadena)
+parseInt(&quot;hello&quot;, 10); // NaN (not a number)
 NaN + 5;               // NaN
 isNaN(NaN);            // true
 1 / 0;                 // Infinity
@@ -116,7 +121,7 @@ isFinite(-Infinity);   // false</code></pre>
 </ul>
 <pre><code>&quot;hello&quot;.length;    // 5
 &#39;hello&#39;.length;    // 5
-&quot;hello&quot;.charAt(0); // carácter &quot;h&quot;
+&quot;hello&quot;.charAt(0); // carácter &quot;h&quot; (representado como cadena)
 &quot;hello, world&quot;.replace(&quot;hello&quot;, &quot;goodbye&quot;); // &quot;goodbye, world&quot;</code></pre>
 </section>
 <section id="otros-tipos" class="slide level2">
@@ -131,15 +136,22 @@ isFinite(-Infinity);   // false</code></pre>
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
 <ul>
-<li>Se declaran con la palabra reservada <em>var</em>.</li>
-<li>A diferencia de Java o C, los bloques (por ejemplo, un <em>if</em>) no definen ámbitos; solo existe el ámbito de funciones.</li>
-<li>Declarar una variable en un bloque equivale a declararla al principio de la función.</li>
-<li>Declarar en un bloque una variable homónima a la de un bloque exterior no crea una nueva variable.</li>
+<li>Se declaran con la palabra reservada <em>var</em> o <em>let</em>.</li>
 </ul>
-<pre><code>var a;    // undefined
-var name = &quot;simon&quot;;</code></pre>
+<pre><code>var a;    // undefined en este momento
+var name = &quot;simon&quot;;
+nanne = &quot;garfunkel&quot;;   // no da error salvo que usemos &#39;use strict&#39;;</code></pre>
 </section>
 <section id="variables-1" class="slide level2">
+<h2>Variables</h2>
+<ul>
+<li>El ámbito de las variables declaradas con <em>var</em> es el de la función.</li>
+<li>Declarar una variable con <em>var</em> en un bloque equivale a declararla al principio de la función.</li>
+<li>Declarar con <em>var</em> en un bloque una variable homónima a la de un bloque exterior no crea una nueva variable.</li>
+<li>Las variables declaradas con <em>let</em> pertenecen al ámbito del bloque correspondiente.</li>
+</ul>
+</section>
+<section id="variables-2" class="slide level2">
 <h2>Variables</h2>
 <ul>
 <li>Nota: ni <em>console.log</em> ni <em>document.write</em> son parte del estándar del lenguaje.</li>
@@ -154,8 +166,11 @@ var name = &quot;simon&quot;;</code></pre>
   var b;
 }</code></pre>
 </section>
-<section id="instrucción-let-en-es6" class="slide level2">
-<h2>Instrucción <em>let</em> en ES6</h2>
+<section id="instrucción-let" class="slide level2">
+<h2>Instrucción <em>let</em></h2>
+<ul>
+<li>Desde EcmaScript 6 (2015)</li>
+</ul>
 <pre><code>function letTest() {
   let x = 1;
   if (true) {
@@ -166,8 +181,8 @@ var name = &quot;simon&quot;;</code></pre>
   console.log(x);    // 1
 }</code></pre>
 </section>
-<section id="instrucción-let-en-es6-1" class="slide level2">
-<h2>Instrucción <em>let</em> en ES6</h2>
+<section id="instrucción-var" class="slide level2">
+<h2>Instrucción <em>var</em></h2>
 <pre><code>function varTest() {
   var x = 31;
   if (true) {
@@ -183,19 +198,19 @@ var name = &quot;simon&quot;;</code></pre>
 x = x + 5
 &quot;hello&quot; + &quot; world&quot;   // &quot;hello world&quot;
 &quot;3&quot; + 4 + 5          // &quot;345&quot;
-3 + 4 + &quot;5&quot;          // &quot;75&quot;
-17 + &quot;&quot;              // &quot;17&quot; (conversión)
+3 + 4 + &quot;5&quot;          // &quot;75&quot; (se operan 3 y 4 primero)
+17 + &quot;&quot;              // &quot;17&quot; (conversión; entero+cadena -&gt; cadena)
 123 == &quot;123&quot;         // true (conversión implícita)
 1 == true            // true (conversión implícita)
-123 === &quot;123&quot;        // false (no hay conversión)
-1 === true           // false (no hay conversión)
+123 === &quot;123&quot;        // false (no hay conversión con ===)
+1 === true           // false (no hay conversión con ===)
 1 != true            // false
 1 !== true           // true</code></pre>
 </section>
 <section id="operadores-1" class="slide level2">
 <h2>Operadores</h2>
 <ul>
-<li>La evaluación en cortocircuito es útil para comprobar si un objeto es <em>null</em> antes de acceder a sus miembros o para dar valores por defecto.</li>
+<li>La evaluación en cortocircuito (presente en otros muchos lenguajes) es útil para comprobar si un objeto es <em>null</em> antes de acceder a sus miembros o para dar valores por defecto.</li>
 </ul>
 <pre><code>var name = o &amp;&amp; o.getName();
 var name = otherName || &quot;default&quot;;</code></pre>
@@ -211,7 +226,7 @@ if (name == &quot;puppies&quot;) {
 } else {
   name = &quot;!&quot; + name;
 }
-name == &quot;kittens!!&quot;</code></pre>
+name == &quot;kittens!!&quot;  // true</code></pre>
 </section>
 <section id="estructuras-de-control-1" class="slide level2">
 <h2>Estructuras de control</h2>
@@ -284,8 +299,9 @@ var You = new Person(&quot;You&quot;, 24);</code></pre>
 <pre><code>obj.name = &quot;Simon&quot;;
 var name = obj.name;    // esta forma suele ser más eficiente
 
-obj[&quot;name&quot;] = &quot;Simon&quot;;
-var name = obj[&quot;name&quot;]; // esta forma permite obtener nombres de propiedades en tiempo de ejecución</code></pre>
+prop= &quot;name&quot;;  // el valor de prop se puede leer de un fichero o un formulario
+obj[prop] = &quot;Simon&quot;;
+var name = obj[prop]; // esta permite obtener nombres de propiedades durante la ejecución</code></pre>
 </section>
 <section id="arrays" class="slide level2">
 <h2>Arrays</h2>
@@ -296,7 +312,7 @@ var name = obj[&quot;name&quot;]; // esta forma permite obtener nombres de propi
 <pre><code>var a = new Array();
 a[0] = &quot;dog&quot;;
 a[1] = &quot;cat&quot;;
-a[2] = &quot;hen&quot;;
+a[2] = 42;
 a.length; // 3</code></pre>
 </section>
 <section id="arrays-1" class="slide level2">
@@ -317,7 +333,7 @@ a.length;        // 101</code></pre>
 <li>Podemos iterar con un bucle <em>for</em> o usando <em>forEach</em>.</li>
 <li>Métodos disponibles para arrays: <em>toString</em>, <em>concat</em>, <em>join</em>, <em>pop</em>, <em>push</em>, <em>reverse</em>, <em>shift</em>, <em>slice</em>, <em>sort</em>, etc.</li>
 </ul>
-<pre><code>[&quot;dog&quot;, &quot;cat&quot;, &quot;hen&quot;].forEach(function(currentValue, index, array) {
+<pre><code>[&quot;dog&quot;, &quot;cat&quot;].forEach(function(currentValue, index, array) {
   // Hacer algo con currentValue o array[index]
 });</code></pre>
 </section>
@@ -370,10 +386,10 @@ var g=avg;
 
 g(2, 3, 4, 5);</code></pre>
 </section>
-<section id="funciones-anónimas-1" class="slide level2">
-<h2>Funciones anónimas</h2>
+<section id="immediately-invoked-functions" class="slide level2">
+<h2>Immediately-invoked functions</h2>
 <ul>
-<li>Un <em>truco</em> para esconder variables locales de forma similar al ámbito de bloque en C (sin usar let):</li>
+<li>Un <em>truco</em> para esconder variables locales dentro de su bloque antes de que existiera <em>let</em>:</li>
 </ul>
 <pre><code>var a = 1;
 var b = 2;
@@ -424,11 +440,14 @@ function Person(first, last) {
 <li>Una manera aún mejor es usar los prototipos de JavaScript.</li>
 <li>Cuando se crea una función en JavaScript, el intérprete le añade una propiedad <em>prototype</em>.</li>
 <li>Esta propiedad apunta a un <em>objeto prototipo</em> que será luego también compartido por todos los objetos creados usando la función constructora.</li>
-<li>A este objeto prototipo se puede acceder también desde tales objetos por medio de la propiedad <em><strong>proto</strong></em>.</li>
+<li>A este objeto prototipo se puede acceder también desde tales objetos con la propiedad <em>__proto__</em>.</li>
 </ul>
 </section>
 <section id="objetos-personalizados-3" class="slide level2">
 <h2>Objetos personalizados</h2>
+<ul>
+<li><em>Person.prototype</em> es un objeto compartido por todas las instancias de <em>Person</em>.</li>
+</ul>
 <pre><code>function Person(first, last) {
   this.first = first;
   this.last = last;
@@ -443,8 +462,7 @@ Person.prototype.fullNameReversed = function() {
 <section id="objetos-personalizados-4" class="slide level2">
 <h2>Objetos personalizados</h2>
 <ul>
-<li><em>Person.prototype</em> es un objeto compartido por todas las instancias de <em>Person</em>.</li>
-<li>Cuando se intenta acceder a una propiedad de un objeto <em>Person</em> a la que no se ha dado valor explícitamente, el intérprete la busca en <em>Person.prototype</em>.</li>
+<li>Al intentar acceder a una propiedad de un objeto <em>Person</em> sin asignación explícita, el intérprete la busca en <em>Person.prototype</em>.</li>
 </ul>
 <pre><code>function Person(first, last) {
   this.first = first;
@@ -468,7 +486,7 @@ s.firstNameCaps(); // TypeError on line 1: s.firstNameCaps is not a function
 
 Person.prototype.firstNameCaps = function firstNameCaps() {
   return this.first.toUpperCase()
-};
+}; // cualquier Person existente responde ahora a esta función
 s.firstNameCaps(); // &quot;SIMON&quot;</code></pre>
 </section>
 <section id="objetos-personalizados-6" class="slide level2">
@@ -511,7 +529,7 @@ s.reversed(); // nomiS</code></pre>
 <section id="clases-en-es6-1" class="slide level2">
 <h2>Clases en ES6</h2>
 <ul>
-<li>No se puede poner una propiedad como privada, aunque existen formas de conseguir algo equivalente.</li>
+<li>No se puede poner una propiedad como privada (existen formas de conseguir algo equivalente que no veremos).</li>
 </ul>
 <pre><code>let today = new SimpleDate(2017, 1, 14);
 today.addDays(1);
@@ -568,8 +586,8 @@ class Manager extends Employee {
 <section id="clausuras" class="slide level2">
 <h2>Clausuras</h2>
 <ul>
-<li>Son necesarias cuando una función anidada que accede a algunas variables de la función padre sobrevive a esta.</li>
-<li>Una clausura se implementa como un registro que almacena una función y un entorno.</li>
+<li>Son necesarias cuando una función anidada que accede a algunas variables de la función madre sobrevive a esta.</li>
+<li>Una clausura se implementa como un registro que almacena una función y un entorno de la pila.</li>
 </ul>
 <pre><code>function makeAdder(a) {
   return function(b) {
@@ -649,7 +667,7 @@ y(7); // 27</code></pre>
 <section id="clausuras-4" class="slide level2">
 <h2>Clausuras</h2>
 <ul>
-<li>Otro ejemplo con <em>let</em>:</li>
+<li>Otro ejemplo (muy habitual) de uso de <em>let</em>:</li>
 </ul>
 <pre><code>var list = document.getElementById(&quot;list&quot;);
 
@@ -657,9 +675,9 @@ for (let i = 1; i &lt;= 5; i++) {
   let item = document.createElement(&quot;li&quot;);
   item.appendChild(document.createTextNode(&quot;Item &quot; + i));
 
-  item.onclick = function (ev) {
+  item.addEventListener(&quot;click&quot;, function (ev) {
     console.log(&quot;Item &quot; + i + &quot; is clicked.&quot;);
-  };
+  }, false);
   list.appendChild(item);
 }</code></pre>
 </section>
