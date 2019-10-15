@@ -20,7 +20,7 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
       - 7 octubre 2019
     * - Práctica #2
       - `Una aplicación web local`_
-      - 29 octubre 2019
+      - 4 noviembre 2019 (extendido)
     * - Práctica #3
       - Una aplicación con acceso a servicios web de terceros y con componentes web
       - 25 noviembre 2019 aprox.

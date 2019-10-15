@@ -8,14 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="reveal.js/css/reset.css">
   <link rel="stylesheet" href="reveal.js/css/reveal.css">
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
+  <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
@@ -33,7 +27,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide">
+<section>
   <h1 class="title">Hypertext Transfer Protocol (HTTP)</h1>
   <p class="author">Desarrollo de Aplicaciones en Internet</p>
 </section>
@@ -64,7 +58,7 @@
 <section id="urls" class="slide level2">
 <h2>URLs</h2>
 <ul>
-<li>Uniform Resource Locators (URLs). <img data-src="https://cdn.tutsplus.com/net/authors/jeremymcpeak/http1-url-structure.png" alt="URL de ejemplo" /></li>
+<li>Uniform Resource Locators (URLs). <img src="https://cdn.tutsplus.com/net/authors/jeremymcpeak/http1-url-structure.png" alt="URL de ejemplo" /></li>
 </ul>
 </section>
 <section id="verbos" class="slide level2">
@@ -217,6 +211,7 @@ Connection: close
     </div>
   </div>
 
+  <script src="reveal.js/lib/js/head.min.js"></script>
   <script src="reveal.js/js/reveal.js"></script>
 
   <script>
@@ -224,8 +219,6 @@ Connection: close
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Push each slide change to the browser history
-        history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: {37:'prev',38:'prev',39:'next',40:'next'},
         // Transition style
@@ -235,7 +228,7 @@ Connection: close
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
         ]
       });
     </script>

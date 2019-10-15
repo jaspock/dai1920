@@ -94,6 +94,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#las-apis-del-navegador-para-programar-el-lado-del-cliente">3.3. Las APIs del navegador para programar el lado del cliente</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#herramientas-para-desarrolladores">3.4. Herramientas para desarrolladores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profundizar-en-javascript">3.5. Profundizar en JavaScript</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="protocolos.html">4. Protocolos de comunicación</a></li>
@@ -803,6 +804,110 @@
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>Lee el <a class="reference external" href="https://info340.github.io/dom.html">capítulo sobre el Document Object Model</a> del libro «Client-Side Web Development», donde se explican las principales funciones de las APIs ya mencionadas. Puedes practicar con la consola de JavaScript de las Chrome Devtools o con entornos como <a class="reference external" href="https://jsfiddle.net/">JSFiddle</a>.</p>
 </div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Indica cuál es la salida por consola tras ejecutar el siguiente programa en JavaScript asumiendo que la función <code class="docutils literal notranslate"><span class="pre">emit</span></code> imprime por consola el valor pasado como parámetro tras realizar una serie de cálculos durante 1 segundo y que el tiempo de ejecución de cualquier otro elemento del código es despreciable.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="o">+</span><span class="p">(</span><span class="nx">x</span><span class="o">||</span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">g</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;g1&quot;</span><span class="p">);</span>
+  <span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span><span class="mi">5000</span><span class="p">);</span>
+  <span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;g2&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">f</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span><span class="mi">6000</span><span class="p">);</span>
+<span class="nx">g</span><span class="p">();</span>
+<span class="nx">f</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Considera el siguiente fragmento de un documento de HTML:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;section&gt;</span>
+    <span class="nt">&lt;header&gt;&lt;h1&gt;</span>The Boy Who Lived<span class="nt">&lt;/h1&gt;&lt;/header&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;first&quot;</span><span class="nt">&gt;</span>Mr. and Mrs. Dursley, of number four,
+      Privet Drive, were proud to say that they were perfectly
+      normal, thank you very much.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;last&quot;</span><span class="nt">&gt;</span>They were the last people you&#39;d expect to
+      be involved in anything strange or mysterious, because they
+      just didn&#39;t hold with such nonsense.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Considera que al documento anterior se le están aplicando los siguientes estilos:</p>
+<div class="highlight-css notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="nt">p</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">silver</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#ch1</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">tomato</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">p</span><span class="nc">.last</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">blueviolet</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">header</span> <span class="nt">h1</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">forestgreen</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">p</span><span class="nc">.first</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">lightskyblue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Indica en qué colores se mostrarán, por este orden, el primer y segundo párrafo tras ejecutar el siguiente código de JavaScript:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;p.last&#39;</span><span class="p">).</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span><span class="o">=</span> <span class="s1">&#39;ch1&#39;</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">e</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+<span class="nx">e</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+<span class="nx">e</span><span class="p">.</span><span class="nx">previousSibling</span><span class="p">.</span><span class="nx">previousSibling</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="herramientas-para-desarrolladores">
 <h2>3.4. Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
@@ -811,6 +916,10 @@
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>Familiarízate con las opciones de depuración de JavaScript de las pestañas <span class="guilabel">Console</span> y <span class="guilabel">Sources</span> del entorno de las Chrome DevTools siguiendo estas páginas de su documentación: <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/console">Console Overview</a> , <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript">Get Started</a>, <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints">Pause your Code with Breakpoints</a> y <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/javascript/reference">JS Debugging Reference</a>. Practica las distintas posibilidades en DevTools con una aplicación web como la de la primera actividad de este tema.</p>
 </div>
+</div>
+<div class="section" id="profundizar-en-javascript">
+<h2>3.5. Profundizar en JavaScript<a class="headerlink" href="#profundizar-en-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>JavaScript tiene obviamente muchos más elementos que los que hemos explorado en este tema. Si quieres ampliar por tu cuenta tu conocimiento del lenguaje, puedes seguir con referencias como <a class="reference external" href="https://javascript.info/">The Modern JavaScript Tutorial</a> o <a class="reference external" href="https://eloquentjavascript.net/">Eloquent JavaScript</a>.</p>
 </div>
 </div>
 

@@ -39,3 +39,8 @@ body {
 table.tablita td p {
     font-size: 92% !important;
 }
+
+/* sobrescribe el no-wrap de las tablas */
+table.tablita td, table.tablita th {
+    white-space: normal;
+}

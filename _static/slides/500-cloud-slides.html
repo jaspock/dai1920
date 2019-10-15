@@ -8,14 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="reveal.js/css/reset.css">
   <link rel="stylesheet" href="reveal.js/css/reveal.css">
-  <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
+  <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
@@ -33,7 +27,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide">
+<section>
   <h1 class="title">La computación en la nube</h1>
   <p class="author">Desarrollo de Aplicaciones en Internet</p>
 </section>
@@ -77,7 +71,9 @@
 </section>
 <section id="capacidad-frente-a-demanda" class="slide level2">
 <h2>Capacidad frente a demanda</h2>
-<p><img data-src="img/capacity-vs-demand.png" /></p>
+<figure>
+<img src="img/capacity-vs-demand.png" />
+</figure>
 </section>
 <section id="x-as-a-service" class="slide level2">
 <h2>X-as-a-Service</h2>
@@ -108,7 +104,7 @@
 <li><a href="https://cloudstack.apache.org/">CloudStack</a> (IaaS)</li>
 <li><a href="https://www.cloudfoundry.org/">Cloud Foundry</a> (PaaS)</li>
 <li><a href="https://www.openshift.com/">OpenShift</a> (PaaS)</li>
-<li>…</li>
+<li>...</li>
 </ul>
 </section>
 <section id="proveedores-de-computación-en-la-nube" class="slide level2">
@@ -119,7 +115,7 @@
 <li>Google Compute Engine</li>
 <li>IBM SoftLayer</li>
 <li>Rackspace</li>
-<li>…</li>
+<li>...</li>
 </ul>
 </section>
 <section id="tecnologías-relacionadas" class="slide level2">
@@ -143,6 +139,7 @@
     </div>
   </div>
 
+  <script src="reveal.js/lib/js/head.min.js"></script>
   <script src="reveal.js/js/reveal.js"></script>
 
   <script>
@@ -150,8 +147,6 @@
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Push each slide change to the browser history
-        history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: {37:'prev',38:'prev',39:'next',40:'next'},
         // Transition style
@@ -161,7 +156,7 @@
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+              { src: 'reveal.js/plugin/notes/notes.js', async: true }
         ]
       });
     </script>
