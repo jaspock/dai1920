@@ -280,6 +280,87 @@ Los conceptos que tienes que estudiar de estas APIs se encuentran recogidos en `
   .. _`JSFiddle`: https://jsfiddle.net/
 
 
+.. admonition:: :problema-contador:`Problema`
+
+  Indica cuál es la salida por consola tras ejecutar el siguiente programa en JavaScript asumiendo que la función ``emit`` imprime por consola el valor pasado como parámetro tras realizar una serie de cálculos durante 1 segundo y que el tiempo de ejecución de cualquier otro elemento del código es despreciable.
+
+  .. code-block:: javascript
+    :linenos:
+
+    function f(x) {
+      emit("f"+(x||0));
+    }
+
+    function g() {
+      emit("g1");
+      f(3);
+      setTimeout(f,5000);
+      emit("g2");
+    }
+
+    f(1);
+    setTimeout(f,6000);
+    g();
+    f(2);
+
+  .. solución: f1,g1,f3,g2,f2,f0,f0; https://jsfiddle.net/obqj50zx/
+  .. function emit(s) { function pause(milliseconds) { let dt = new Date(); while ((new Date())-dt<=milliseconds) { /* Do nothing */} }
+  ..   pause(1000); let dt= new Date(); let seconds= dt.getSeconds(); console.log(seconds+"': "+s); }
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Considera el siguiente fragmento de un documento de HTML:
+
+  .. code-block:: html
+    :linenos:
+
+    <body>
+      <section>
+        <header><h1>The Boy Who Lived</h1></header>
+        <p class="first">Mr. and Mrs. Dursley, of number four, 
+          Privet Drive, were proud to say that they were perfectly 
+          normal, thank you very much.</p>
+        <p class="last">They were the last people you'd expect to
+          be involved in anything strange or mysterious, because they
+          just didn't hold with such nonsense.</p>
+      </section>
+    </body>
+
+  Considera que al documento anterior se le están aplicando los siguientes estilos:
+
+  .. code-block:: css
+    :linenos:
+
+    p {
+      color: silver;
+    }
+    #ch1 {
+      color: tomato;
+    }
+    p.last {
+      color: blueviolet;
+    }
+    header h1 {
+      color: forestgreen;
+    }
+    p.first {
+      color: lightskyblue;
+    }
+
+  Indica en qué colores se mostrarán, por este orden, el primer y segundo párrafo tras ejecutar el siguiente código de JavaScript:
+
+  .. code-block:: javascript
+    :linenos:
+
+    document.querySelector('p.last').parentNode.children[0].id= 'ch1';
+    let e= document.querySelectorAll('p')[1]; 
+    e.classList.toggle('first');
+    e.previousSibling.previousSibling.classList.toggle('first');
+
+  .. solución: silver, lightskyblue; https://jsfiddle.net/ztk4bw67/
+
+
 Herramientas para desarrolladores
 ---------------------------------
 
@@ -295,3 +376,11 @@ Las herramientas para desarrolladores que incorporan los navegadores permiten de
   .. _`Pause your Code with Breakpoints`: https://developers.google.com/web/tools/chrome-devtools/javascript/breakpoints
   .. _`JS Debugging Reference`: https://developers.google.com/web/tools/chrome-devtools/javascript/reference
 
+
+Profundizar en JavaScript
+-------------------------
+
+JavaScript tiene obviamente muchos más elementos que los que hemos explorado en este tema. Si quieres ampliar por tu cuenta tu conocimiento del lenguaje, puedes seguir con referencias como `The Modern JavaScript Tutorial`_ o `Eloquent JavaScript`_.
+
+.. _`The Modern JavaScript Tutorial`: https://javascript.info/
+.. _`Eloquent JavaScript`: https://eloquentjavascript.net/

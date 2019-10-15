@@ -64,7 +64,7 @@ var circumference = Math.PI * (r + r);
 ~~~
 parseInt("123", 10);   // 123 (de cadena a entero en base 10)
 parseFloat("3.14");    // 3.14 (de cadena a real)
-+ "42";                // 42 (equivale a 0+"42"; cadena+entero o entero+cadena dan una cadena)
++ "42";                // 42 (diferente a 0+"42")
 parseInt("hello", 10); // NaN (not a number)
 NaN + 5;               // NaN
 isNaN(NaN);            // true
@@ -162,7 +162,7 @@ function varTest() {
 x += 5
 x = x + 5
 "hello" + " world"   // "hello world"
-"3" + 4 + 5          // "345"
+"3" + 4 + 5          // "345" (cadena+entero o entero+cadena -> cadena)
 3 + 4 + "5"          // "75" (se operan 3 y 4 primero)
 17 + ""              // "17" (conversión; entero+cadena -> cadena)
 123 == "123"         // true (conversión implícita)
