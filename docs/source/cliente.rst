@@ -1,5 +1,4 @@
 .. role:: problema-contador
-.. role:: entorno
 
 Programar el lado del cliente
 =============================
@@ -96,7 +95,7 @@ Estudia el siguiente código y ejécutalo (pulsando en :guilabel:`run`) después
 
 |
 
-.. la barra intrdduce una línea en blanco en restructured text
+.. la barra introduce una línea en blanco en restructured text
 
 La variable ``i`` se declara con ``var`` y, por tanto, su ámbito es el de la función ``f``. No importa que usemos ``var`` varias veces a continuación dentro de la función, incluso aunque estas declaraciones adicionales estén dentro de un nuevo ámbito. En la pila de ejecución solo se reserva sitio para una variable cuando se ejecuta la función y esta única posición es la que no se destruye al salir de la función debido a las clausuras que se crean por las dos funciones anónimas asignadas a ``x.f1`` y ``x.f2``. La variable ``i`` vale 2 al salir de la función y este valor es el que se usa al llamar a las dos funciones.
 

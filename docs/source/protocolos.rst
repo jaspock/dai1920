@@ -1,3 +1,0 @@
-
-Protocolos de comunicación
-==========================
