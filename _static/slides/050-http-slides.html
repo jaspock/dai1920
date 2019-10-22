@@ -49,7 +49,7 @@
 <ul>
 <li>Internet y la web no son lo mismo.</li>
 <li>Hypertext Transfer Protocol (HTTP) es un protocolo de comunicación para la capa de aplicación.</li>
-<li>La comunicación se produce habitualmente sobre TCP/IP, pero podría utilizarse cualquier otro transporte.</li>
+<li>La comunicación se produce habitualmente sobre TCP/IP, pero podría utilizarse cualquier otro transporte. De hecho, HTTP/3 usa QUIC en lugar de TCP.</li>
 <li>El puerto por defecto es el 80, pero pueden usarse otros.</li>
 <li>Es un protocolo sin estado (<em>stateless</em>).</li>
 </ul>
@@ -58,7 +58,7 @@
 <h2>HTTP</h2>
 <ul>
 <li>La comunicación se produce mediante un mecanismo de petición/respuesta entre un cliente y un servidor.</li>
-<li>La última versión es HTTP/2 de 2015 (RFC 7540), pero muchos clientes o servidores aún usan el estándar HTTP/1.1 de 1997.</li>
+<li>La última versión es HTTP/3 de 2019, pero muchos clientes o servidores aún usan los estándares HTTP/2 de 2015 o HTTP/1.1 de 1997.</li>
 </ul>
 </section>
 <section id="urls" class="slide level2">
@@ -80,7 +80,7 @@
 <li>Los verbos más usuales (existen otros como HEAD, TRACE, OPTIONS, etc.) son:
 <ul>
 <li>GET: obtener un determinado recurso; el URL contiene toda la información necesaria para identificarlo.</li>
-<li>POST: crear un nuevo recurso; las peticiones POST usualmente llevan datos adicionales (<em>payload</em>) que definen el recurso a crear.</li>
+<li>POST: crear un nuevo recurso; estas peticiones usualmente llevan datos adicionales (<em>payload</em> o <em>body</em>) que definen el recurso a crear.</li>
 <li>PUT: actualizar un recurso ya existente; la petición puede llevar datos adicionales si es necesario.</li>
 <li>DELETE: borrar un recurso determinado.</li>
 </ul></li>
@@ -100,11 +100,19 @@
 <ul>
 <li>1xx: mensajes informativos; por ejemplo, informar al cliente de que puede seguir enviando los datos de una petición.</li>
 <li>2xx: la solicitud fue procesada correctamente (200 OK, 206 Partial Content).</li>
-<li>3xx: el cliente ha de hacer alguna tarea adicional; por ejemplo, buscar el recurso en un URL diferente (301 Move Permanently, 303 See Other) o en su propia caché (304 Not Modified).</li>
 </ul></li>
 </ul>
 </section>
 <section id="códigos-de-estado-1" class="slide level2">
+<h2>Códigos de estado</h2>
+<ul>
+<li><p>Más rangos según el tipo de respuesta:</p>
+<ul>
+<li>3xx: el cliente ha de hacer alguna tarea adicional; por ejemplo, buscar el recurso en un URL diferente (301 Move Permanently, 303 See Other) o en su propia caché (304 Not Modified).</li>
+</ul></li>
+</ul>
+</section>
+<section id="códigos-de-estado-2" class="slide level2">
 <h2>Códigos de estado</h2>
 <ul>
 <li><p>Más rangos según el tipo de respuesta:</p>
@@ -138,7 +146,7 @@ Connection: close
 <ul>
 <li>Una línea en blanco separa las cabeceras del cuerpo del mensaje.</li>
 <li>El cuerpo del mensaje puede contener datos incompletos enviados en varias tandas si se usa la cabecera <code>Transfer-Encoding: chunked</code>.</li>
-<li>Las cabeceras contienen metadatos. El estándar define las cabeceras posibles.</li>
+<li>Las cabeceras contienen metadatos. El estándar define las cabeceras posibles como, por ejemplo, <code>Content-Type: application/json; charset=utf-8</code>.</li>
 </ul>
 </section>
 <section id="identificación" class="slide level2">
@@ -156,24 +164,43 @@ Connection: close
 <section id="más-características-de-http" class="slide level2">
 <h2>Más características de HTTP</h2>
 <ul>
-<li>Conexiones persistentes. Hasta HTTP/1.1 aunque la conexión se mantenía abierta, esta se seguía produciendo mediante el patrón petición/respuesta, es decir, el servidor no puede enviar datos al cliente sin una petición explícita. HTTP/2 sí lo permite (<em>server push</em>), lo que acelera la descarga de los elementos de una página web, que empieza a producirse antes de que el navegador sepa que los necesita.</li>
-<li>HTTP/1 y HTTP/1.1 usan un formato de texto; en HTTP/2 es binario.</li>
+<li>Conexiones persistentes. En HTTP/1.0 era necesario crear una nueva conexión para cada petición, lo que introduce un retardo inicial elevado (debido al <em>handshaking</em>).</li>
+<li>En HTTP/1.1 aunque la conexión se mantiene viva y la latencia inicial se reduce, cada petición tiene que empezar cuando acabe la anterior.</li>
+<li>En HTTP/1.1 la conexión se seguía produciendo mediante el patrón petición/respuesta, es decir, el servidor no puede enviar datos al cliente sin una petición explícita.</li>
+</ul>
+</section>
+<section id="más-características" class="slide level2">
+<h2>Más características</h2>
+<ul>
+<li>HTTP/2 y HTTP/3 sí permiten que el servidor envíe datos sin peticiones explícitas (<em>server push</em>), lo que acelera la descarga de los elementos de una página web, que empieza a producirse antes de que el navegador sepa que los necesita.</li>
+<li>HTTP/1 y HTTP/1.1 usan un formato de texto; desde HTTP/2 es binario.</li>
 </ul>
 </section>
 <section id="más-características-de-http-1" class="slide level2">
 <h2>Más características de HTTP</h2>
 <ul>
-<li>Conexiones paralelas. HTTP/1.1 permitía un cierto número de conexiones simultáneas pero el mecanismo implementado no estaba exento de problemas (por ejemplo, una respuesta larga o lenta puede bloquear las siguientes). HTTP/2 utiliza un mecanismo de multiplexación que permite varias peticiones y respuestas simultáneas (y mezcladas) sobre una misma conexión, lo que evita la necesidad de conexiones paralelas y la sobrecarga del sistema TCP.</li>
+<li>Conexiones paralelas. HTTP/2 introduce <em>streams</em>, un mecanismo de multiplexación que permite varias peticiones y respuestas simultáneas (y mezcladas) sobre una misma conexión, lo que evita la necesidad de conexiones paralelas y la sobrecarga del sistema TCP, pero si hay error en un paquete correspondiente a una petición, los paquetes posteriores de otras peticiones quedan temporalmente bloqueados porque TCP no sabe que son de peticiones diferentes.</li>
 </ul>
 </section>
 <section id="más-características-de-http-2" class="slide level2">
 <h2>Más características de HTTP</h2>
 <ul>
-<li>Autenticación. El cliente ha de enviar una contraseña. Normalmente se utiliza en conjunción con SSL.</li>
-<li>HTTPS (puerto 443). Comunicaciones seguras mediante el protocolo criptográfico Transport Layer Security (TLS) y su predecesor, Secure Sockets Layer (SSL); se usa el término SSL para referirse indistintamente a ambos. Son una capa intermedia entre HTTP y TCP, por lo que el paso de HTTP a HTTPS no supone esfuerzo para el desarrollador web, excepto porque es necesario que el servidor aporte un <em>certificado</em> aprobado por una autoridad certificadora.</li>
+<li>HTTP/3 usa QUIC, un nuevo protocolo de transporte, que evita los problemas anteriores e introduce los <em>streams</em> como ciudadanos de primera clase.</li>
 </ul>
 </section>
 <section id="más-características-de-http-3" class="slide level2">
+<h2>Más características de HTTP</h2>
+<ul>
+<li>Autenticación. El cliente ha de enviar una contraseña. Normalmente se utiliza en conjunción con SSL.</li>
+</ul>
+</section>
+<section id="más-características-de-http-4" class="slide level2">
+<h2>Más características de HTTP</h2>
+<ul>
+<li>HTTPS (puerto 443). Comunicaciones seguras mediante el protocolo criptográfico Transport Layer Security (TLS) y su predecesor, Secure Sockets Layer (SSL); se usa el término SSL para referirse indistintamente a ambos. Son una capa intermedia entre HTTP y TCP, por lo que el paso de HTTP a HTTPS no supone esfuerzo para el desarrollador web, excepto porque es necesario que el servidor aporte un <em>certificado</em> aprobado por una autoridad certificadora.</li>
+</ul>
+</section>
+<section id="más-características-de-http-5" class="slide level2">
 <h2>Más características de HTTP</h2>
 <ul>
 <li>Caché. Puede estar en el navegador o en un proxy intermedio. El servidor puede usar cabeceras para indicar cuándo expira un cierto contenido y debe procederse a una <em>revalidación</em> con el servidor.</li>
@@ -183,15 +210,20 @@ Connection: close
 <h2>Software para clientes</h2>
 <ul>
 <li>El cliente puede ser un navegador (incluso un navegador <em>sin cabeza</em>) o cualquier otro tipo de programa.</li>
-<li>Un navegador está compuesto de:
-<ul>
-<li>interfaz de usuario</li>
-<li>motor de <em>renderizado</em> (<em>layout/rendering/web engine</em>): Webkit para Safari; Blink para Chrome, Chromium u Opera; Gecko para Firefox; EdgeHTML para Microsoft Edge</li>
-<li>motor de JavaScript, habitualmente con compilación al vuelo (<em>just-in-time</em>): JavaScriptCore para Safari; V8 para Chrome, Chromium u Opera; SpiderMonkey para Firefox; Chakra para Microsoft Edge</li>
-</ul></li>
 </ul>
 </section>
 <section id="software-para-clientes-1" class="slide level2">
+<h2>Software para clientes</h2>
+<ul>
+<li>Un navegador está compuesto de:
+<ul>
+<li>interfaz de usuario</li>
+<li>motor de <em>renderizado</em> (<em>layout/rendering/web engine</em>): Webkit para Safari; Blink para Chrome, Chromium, Edge u Opera; Gecko para Firefox</li>
+<li>motor de JavaScript, habitualmente con compilación al vuelo (<em>just-in-time</em>): JavaScriptCore para Safari; V8 para Chrome, Chromium, Edge u Opera; SpiderMonkey para Firefox</li>
+</ul></li>
+</ul>
+</section>
+<section id="software-para-clientes-2" class="slide level2">
 <h2>Software para clientes</h2>
 <ul>
 <li><p>Más componentes de un navegador:</p>
@@ -206,11 +238,14 @@ Connection: close
 <h2>Software para servidores</h2>
 <ul>
 <li>Apache HTTP Server</li>
+<li>Node.js</li>
 <li>Internet Information Services</li>
 <li>Nginx</li>
 <li>Lighttpd</li>
 <li>Apache Tomcat</li>
 <li>Jetty</li>
+<li>WebSphere</li>
+<li>WebLogic</li>
 <li>etc.</li>
 </ul>
 </section>

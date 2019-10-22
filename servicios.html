@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>5. Acceso a servicios web &mdash; documentación de Desarrollo de Aplicaciones en Internet - </title>
+  <title>4. Servicios web &mdash; documentación de Desarrollo de Aplicaciones en Internet - </title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="_static/css/estilos.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="6. Componentes web" href="componentes.html" />
-    <link rel="prev" title="4. Protocolos de comunicación" href="protocolos.html" /> 
+    <link rel="next" title="5. Componentes web" href="componentes.html" />
+    <link rel="prev" title="3. Programar el lado del cliente" href="cliente.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,13 +87,21 @@
 <li class="toctree-l1"><a class="reference internal" href="marcado.html">1. Lenguajes de marcado</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estilo.html">2. Lenguajes de estilo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cliente.html">3. Programar el lado del cliente</a></li>
-<li class="toctree-l1"><a class="reference internal" href="protocolos.html">4. Protocolos de comunicación</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Acceso a servicios web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="componentes.html">6. Componentes web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="servidor.html">7. Programar el lado del servidor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nube.html">8. Computación en la nube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="otros.html">9. Otros elementos del desarrollo web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practicas.html">10. Enunciados de las prácticas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Servicios web</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#el-protocolo-http">4.1. El protocolo HTTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#herramientas-para-desarrolladores">4.2. Herramientas para desarrolladores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#promesas-de-javascript">4.3. Promesas de JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#el-objeto-xmlhttprequest">4.4. El objeto XMLHttpRequest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#la-api-fetch">4.5. La API Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#la-politica-del-mismo-origen">4.6. La política del mismo origen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#la-arquitectura-rest">4.7. La arquitectura REST</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="componentes.html">5. Componentes web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servidor.html">6. Programar el lado del servidor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nube.html">7. Computación en la nube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="otros.html">8. Otros elementos del desarrollo web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practicas.html">9. Enunciados de las prácticas</a></li>
 </ul>
 
             
@@ -139,7 +147,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>5. Acceso a servicios web</li>
+      <li>4. Servicios web</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -158,8 +166,455 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="acceso-a-servicios-web">
-<h1>5. Acceso a servicios web<a class="headerlink" href="#acceso-a-servicios-web" title="Enlazar permanentemente con este título">¶</a></h1>
+  <div class="section" id="servicios-web">
+<h1>4. Servicios web<a class="headerlink" href="#servicios-web" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Los <em>servicios web</em> proporcionan una forma estándar de interoperabilidad entre diferentes aplicaciones, posiblemente heterogéneas. En este tema, veremos cómo crear y cómo acceder a estos servicios, así como su relación con el estándar HTTP. Además, abordaremos el estudio de la arquitectura de servicios conocida como REST (por el inglés, <em>representation state transfer</em>), en la que los agentes proporcionan una interfaz con una semántica uniforme (que, básicamente, se corresponde con las operaciones para crear, recuperar, actualizar y borrar recursos), en lugar de interfaces arbitrarias o específicas de una aplicación concreta. En un primer momento, nos centraremos en el acceso a servicios web ofrecidos por terceros; posteriormente, veremos cómo definir nuestros propios servicios web.</p>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Las habilidades que deberías adquirir con este tema incluyen las siguientes:</p>
+<ul class="simple">
+<li><p>Saber usar Ajax, especialmente a través de la API Fetch, como una tecnología para crear aplicaciones de una única página.</p></li>
+<li><p>Saber crear y encadenar promesas en un programa de JavaScript.</p></li>
+<li><p>Entender la <em>política del mismo origen</em> y cómo superarla con la técnica CORS.</p></li>
+<li><p>Entender los fundamentos de la arquitectura REST.</p></li>
+<li><p>Comprender los fundamentos del protocolo HTTP y la configuración cliente-servidor.</p></li>
+<li><p>Diferenciar los distintos componentes de un navegador.</p></li>
+<li><p>Saber implementar aplicaciones <em>mashups</em> que accedan e integren servicios web de terceros.</p></li>
+</ul>
+</div>
+<div class="section" id="el-protocolo-http">
+<h2>4.1. El protocolo HTTP<a class="headerlink" href="#el-protocolo-http" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>HTTP (por <em>hypertext transfer protocol</em>) es el protocolo de comunicación (a nivel de capa de aplicación) diseñado para permitir el envío de información en la <em>world wide web</em> entre distintos ordenadores. Sus primeras versiones fueron desarrolladas en la década de los noventa a partir de los trabajos de Tim Berners Lee y su equipo (los creadores de la web). Las diferentes versiones del estándar son coordinadas por el <a class="reference external" href="https://httpwg.org/">HTTP Working Group</a> de la Internet Engineering Task Force. HTTP/1.1 se publicó en 1997, HTTP/2 en 2015 y HTTP/3 en 2018, aunque tanto navegadores como servidores siguen soportando las versiones antiguas y son capaces de adaptarse para usar el mismo protocolo: por ejemplo, un navegador reciente que soporte HTTP/3 usará HTTP/2 o incluso HTTP/1.1 al comunicarse con un servidor que no haya sido actualizado en mucho tiempo. HTTP/3, a diferencia de anteriores versiones, ya no se apoya en el protocolo de transporte TCP (<em>transmission control protocol</em>), sino que usa QUIC (que no son siglas, sino un término que pretende evocar a la palabra inglesa <em>quick</em>). QUIC mejora la capacidad de multiplexación de TCP y suele mejorar la latencia y velocidad de las conexiones.</p>
+<p>Los conceptos que tienes que comprender del protocolo HTTP se encuentran recogidos en <a class="reference external" href="_static/slides/050-http-slides.html">estas diapositivas</a>.</p>
+</div>
+<div class="section" id="herramientas-para-desarrolladores">
+<h2>4.2. Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Las herramientas para desarrolladores que incorporan los navegadores permiten estudiar los detalles de todas las conexiones establecidas por el navegador al ejecutar una aplicación web.</p>
+<p>Las peticiones lanzadas desde la barra de direcciones del navegador son siempre de tipo GET. Para estudiar los otros tipos de peticiones de HTTP, necesitamos crear un formulario para peticiones de tipo POST, o, si queremos poder usar cualquier verbo, escribir código en JavaScript (usando la API Fetch que estudiáremos después) u otro lenguaje de programación. También hay herramientas como <a class="reference external" href="https://www.getpostman.com/">Postman</a>, una aplicación que permite crear cómodamente colecciones de peticiones a APIs (<em>application programming interfaces</em>).</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Familiarízate con las opciones de inspección de la actividad en red de la pestaña <span class="guilabel">Network</span> del entorno de las Chrome DevTools siguiendo la página de su documentación <a class="reference external" href="https://developers.google.com/web/tools/chrome-devtools/network">Inspect Network Activity</a> . Practica las distintas posibilidades en DevTools con peticiones GET por ahora, pero recuerda volver a esta actividad cuando estudies cómo realizar desde JavaScript peticiones con otros verbos.</p>
+</div>
+</div>
+<div class="section" id="promesas-de-javascript">
+<h2>4.3. Promesas de JavaScript<a class="headerlink" href="#promesas-de-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Los objetos de tipo <code class="docutils literal notranslate"><span class="pre">Promise</span></code> (una clase definida en la API de JavaScript de los navegadores modernos) se usan para representar la finalización con éxito de una tarea (normalmente asíncrona, es decir, que no bloquea el bucle de eventos, sino que define una función de <em>callback</em> que será ejecutada más adelante) o su fracaso. En términos informales, diremos que una promesa se cumple (en caso de éxito), se incumple (en caso de fracaso) o que está pendiente (cuando aún no se ha resuelto); en inglés se usan los términos <em>fullfilled</em>, <em>rejected</em> o <em>pending</em>, respectivamente. Los objetos promesa nos serán muy útiles en tareas como la comunicación con un servidor, que veremos más adelante en este tema.</p>
+<p>Veamos un primer ejemplo. El siguiente código crea un objeto de tipo promesa <code class="docutils literal notranslate"><span class="pre">p</span></code> invocando al constructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code>. Este constuctor recibe dos funciones de <em>callback</em> que son aportadas por el sistema (es decir, no son definidas por el programador); estas dos funciones (<code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> en el código de abajo) serán invocadas en los lugares de nuestro código en los que determinemos que la tarea se ha desarrollado con éxito (en el caso del primer parámetro) o ha fracasado (función pasada como segundo parámetro). En este caso, vamos a suponer que nuestra promesa ejecuta una tarea asíncrona muy sencilla: esperar un segundo y generar un número aleatorio entre 0 y 1; la tarea se considera un éxito si el número es menor de 0,5. En lenguaje de la calle, sería como decir «te prometo que voy a generar (asíncronamente) un número aleatorio y que será menor que 0,5»; como cualquier promesa, en cualquier caso, esta puede cumpirse o no.</p>
+<script src="https://embed.runkit.com" data-element-id="promesas567"></script>
+<div id="promesas567">
+  let p= new Promise(function(resolve,reject) {
+    console.log('Entrando en el constructor de la promesa');
+    setTimeout( function() {
+      const r= Math.random();
+      if (r<0.5) {
+        resolve('la cosa fue bien');
+      }
+      else {
+        reject('algo salió mal');
+      }
+    }, 1000);
+  });
+
+  p.then(function(mensaje) {
+      console.log(`Promesa cumplida: ${mensaje}`);
+    }, function(mensaje) {
+      console.log(`Promesa incumplida: ${mensaje}`);
+    }
+  );
+</div><p>Las funciones <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> reciben un único argumento que usaremos para dar información adicional relacionada con el éxito o fracaso de la tarea asíncrona; en este caso, es una simple cadena con un mensaje, pero puede ser un objeto que incluya un conjunto de atributos. Nada más invocar al contructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code> se establece el estado de la promesa a <em>pendiente</em> y se ejecuta el código de la función pasada como parámetro al constructor. Este código normalmente definirá una operación asíncrona (como realizar una petición a un servidor) y terminará llamando a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> o <code class="docutils literal notranslate"><span class="pre">reject</span></code>; estas funciones (recordemos que son creadas por el sistema y no pertenecen a nuestro código) cambian el estado de la promesa a <em>cumplida</em> o <em>incumplida</em> y llaman a las funciones que el programador haya definido para manejar ambas situaciones.</p>
+<p>El vínculo entre las funciones del sistema <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> y nuestro código se establece llamando al método <code class="docutils literal notranslate"><span class="pre">then</span></code> sobre el objeto de tipo promesa. Al método <code class="docutils literal notranslate"><span class="pre">then</span></code> se le pasan dos funciones: la primera se vincula a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y la segunda a <code class="docutils literal notranslate"><span class="pre">reject</span></code>. Estas funciones pueden tener un parámetro que será el mismo que el usado como argumento en las llamadas a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> del constructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code>.</p>
+<p>Realmente, las llamadas a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> también se realizan de forma asíncrona, de manera que para entonces el intérprete ya habrá ejecutado el método <code class="docutils literal notranslate"><span class="pre">then</span></code> correspondiente.</p>
+<p>Finalmente, observa en el código anterior cómo hemos usado <em>cadenas con plantillas</em> (<em>template strings</em>) para imprimir los mensajes por consola. Las cadenas con plantillas de JavaScript usan comillas invertidas en lugar de rectas, pueden contener variables embebidas como en el ejemplo, y pueden también ocupar más de una línea.</p>
+<div class="figure align-default" id="id1">
+<a class="reference external image-reference" href="https://www.c-sharpcorner.com/blogs/overview-of-promises-in-javascript"><img alt="diagrama de los elementos implicados en una promesa" src="https://csharpcorner-mindcrackerinc.netdna-ssl.com/UploadFile/BlogImages/01262017214716PM/Screen%20Shot%202017-01-26%20at%208.28.19%20pm.png" /></a>
+<p class="caption"><span class="caption-text">Diagrama de los elementos de una promesa por Sumant Mishra</span><a class="headerlink" href="#id1" title="Enlace permanente a esta imagen">¶</a></p>
+</div>
+<p>El código anterior es equivalente al siguiente en el que en lugar de pasar dos funciones a <code class="docutils literal notranslate"><span class="pre">then</span></code> se define la función asociada al incumplimiento de la promesa en un método <code class="docutils literal notranslate"><span class="pre">catch</span></code>:</p>
+<script src="https://embed.runkit.com" data-element-id="promesas830"></script>
+<div id="promesas830">
+  let p= new Promise(function(resolve,reject) {
+    setTimeout( function() {
+      const r= Math.random();
+      if (r<0.5) {
+        resolve('la cosa fue bien');
+      }
+      else {
+        reject('algo salió mal');
+      }
+    }, 1000);
+  });
+
+  p.then(function(mensaje) {
+      console.log(`Promesa cumplida: ${mensaje}`);
+    })
+    .catch(function(mensaje) {
+      console.log(`Promesa incumplida: ${mensaje}`);
+    });
+</div><p>Además, si encapsulamos el código de creación de la promesa en una función, usamos funciones flecha y gestionamos el error mediante una excepción (clase <code class="docutils literal notranslate"><span class="pre">Error</span></code>), el código anterior se convierte en:</p>
+<script src="https://embed.runkit.com" data-element-id="promesas731"></script>
+<div id="promesas731">
+  function aleatorio() {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<0.5) {
+          resolve('la cosa fue bien');
+        }
+        else {
+          reject(Error('algo salió mal'));
+        }
+      }, 1000);
+  });
+
+  aleatorio()
+    .then( (mensaje) => {console.log(`Promesa cumplida: ${mensaje}`);})
+    .catch( (mensaje) => {console.log(`Promesa incumplida: ${error.message}`);});
+</div><p>Las promesas pueden concatenarse simplemente haciendo que la función asociada al cumplimiento de la promesa (la indicada en la llamada al método <code class="docutils literal notranslate"><span class="pre">then</span></code>) devuelva a su vez una promesa:</p>
+<script src="https://embed.runkit.com" data-element-id="promesas794"></script>
+<div id="promesas794">
+
+  function aleatorio2(delta) {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<delta) {
+          resolve('me encanta que los planes salgan bien');
+        }
+        else {
+          reject(Error('peor imposible'));
+        }
+      }, 1000);
+    });
+  }
+</div><p>En este caso, la segunda promesa establece una clausura con el parámetro de la función que indica el umbral para que la promesa se cumpla. Si encapsulamos todos los bloques en funciones, el código principal queda muy compacto y legible:</p>
+<script src="https://embed.runkit.com" data-element-id="promesas230"></script>
+<div id="promesas230">
+  aleatorio()
+    .then(primerMensaje)
+    .then(segundoMensaje)
+    .catch(mensajeError);
+
+  function primerMensaje (mensaje) {
+    console.log(`Primera promesa cumplida: ${mensaje}`);
+    return aleatorio2(0.8);
+  }
+
+  function segundoMensaje (mensaje) {
+    console.log(`Segunda promesa cumplida: ${mensaje}`);
+  }
+
+  function mensajeError (error) {
+    console.log(`Una de las promesas fue incumplida: ${error.message}`);
+  }
+
+  function aleatorio() {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<0.5) {
+          resolve('la cosa fue bien');
+        }
+        else {
+          reject(Error('algo salió mal'));
+        }
+      }, 1000);
+    });
+  }
+
+  function aleatorio2(delta) {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<delta) {
+          resolve('me encanta que los planes salgan bien');
+        }
+        else {
+          reject(Error('peor imposible'));
+        }
+      }, 1000);
+    });
+  }
+</div><p>Uno de los motivos de la introducción de las promesas en JavaScript fue precisamente el de simplificar la escritura de código en los frecuentes casos que los que un evento asíncrono dispara a su terminación otro evento asíncrono que dispara a su vez un nuevo evento asíncrono, etc. El código sin promesas termina teniendo una cantidad tal de ámbitos que su escritura y su lectura se hacen muy dificultosas:</p>
+<script src="https://embed.runkit.com" data-element-id="promesas551"></script>
+<div id="promesas551">
+  function aleatorio() {
+      setTimeout( () => {
+          const r= Math.random();
+          if (r<0.5) {
+            let mensaje= 'la cosa fue bien';
+            alert(`Primera promesa cumplida: ${mensaje}`);
+            let delta= 0.8;
+            setTimeout( () => {
+              const r= Math.random();
+              if (r<delta) {
+                let mensaje= 'me encanta que los planes salgan bien';
+                alert(`Segunda promesa cumplida: ${mensaje}`);
+              }
+              else {
+                let error= Error('peor imposible');
+                alert(`Una de las promesas fue incumplida: ${error.message}`);
+              }
+            }, 1000);
+          }
+          else {
+            let error= Error('algo salió mal');
+            alert(`Una de las promesas fue incumplida: ${error.message}`);
+          }
+    }, 1000);
+  }
+
+  aleatorio();
+</div><p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.</p>
+</div>
+<div class="section" id="el-objeto-xmlhttprequest">
+<h2>4.4. El objeto XMLHttpRequest<a class="headerlink" href="#el-objeto-xmlhttprequest" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En los primeros años de la web, la mayoría de las aplicaciones web seguían el siguiente patrón de comportamiento al realizar, por ejemplo, una búsqueda de un determinado elemento en una base de datos: el usuario rellenaba los valores correspondientes para buscar el elemento en un formulario y pulsaba el botón de enviar; en ese momento, el navegador realizaba una petición al servidor y borraba la página web actual; el servidor realizaba la búsqueda en la base de datos y devolvía entonces una página web completa que el navegador mostraba en sustitución de la anterior. Además de generar una experiencia incómoda al usuario si se compara con una aplicación tradicional de escritorio (el usuario ha de esperar a que se cargue de nuevo toda la página para seguir interactuando con la aplicación), este procedimiento es muy ineficiente cuando la  la página web tiene mucho contenido que apenas cambia, y que, sin embargo, es enviado continuamente por el servidor.</p>
+<p>Sin embargo, a partir de finales de los noventa y especialmente en los primeros años del siglo XXI, los desarrolladores comienzan a explotar el uso de funcionalidades de los navegadores que permiten realizar peticiones a un servidor sin tener que recargar la página completa. A estas técnicas se les denomina Ajax por razones históricas: el término lo acuñó un desarrollador en 2005 como acrónimo de <em>Asynchronous JavaScript and XML</em>. Con Ajax, los datos devueltos por el servidor se usan para generar dinámicamente HTML que es insertado convenientemente en el árbol DOM. La más usada de las técnicas Ajax se basaba en el objeto <code class="docutils literal notranslate"><span class="pre">XMLHttpRequest</span></code> (para abreviar se suele llamar <em>XHR</em>) que permite, como se ha comentado, solicitar (normalmente de forma asícrona) una serie de datos al servidor desde JavaScript en lugar de una página completa que reemplazará a la actual. Estos datos serán, entonces, procesados por una función definida por el programador.</p>
+<p>El siguiente es un ejemplo típico de uso:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// Los datos del servidor se insertarán en el elemento con id &#39;results&#39;:</span>
+<span class="kd">var</span> <span class="nx">resultado</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#results&quot;</span><span class="p">);</span>
+
+<span class="c1">// Borra el contenido previo del elemento:</span>
+<span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+<span class="c1">// Crea el objeto XHR:</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">url</span><span class="o">=</span> <span class="s2">&quot;https://ghibliapi.herokuapp.com/films/&quot;</span><span class="p">;</span>
+<span class="c1">// Identifica el verbo, la URL y que la petición será asíncrona:</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// La función asignada a onreadystatechange es invocada varias veces por</span>
+<span class="c1">// el navegador durante el transcurso de las diferentes fases de comunicación</span>
+<span class="c1">// con el servidor (conexión establecida, petición recibida, petición en proceso,</span>
+<span class="c1">// petición finalizada); la fase de la llamada actual se almacena en readyState;</span>
+<span class="c1">// normalmente, nos interesa la llamada en la que readyState tiene el valor 4,</span>
+<span class="c1">// que se hace en el momento en el que el servidor ha devuelto todos los</span>
+<span class="c1">// datos:</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">readyState</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Código de estado de HTTP:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">status</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Hubo un error (&quot;</span> <span class="o">+</span> <span class="nx">client</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s2">&quot;)!&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// JSON.parse analiza la cadena pasada como argumento y la convierte</span>
+      <span class="c1">// a un objeto de JavaScript; la respuesta de esta petición es un array</span>
+      <span class="c1">// que se almacena en r:</span>
+      <span class="kd">var</span> <span class="nx">r</span><span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+
+      <span class="c1">// Los datos devueltos son de la forma [ {&quot;id&quot;: &quot;0440483e&quot;, &quot;title&quot;: &quot;Princess</span>
+      <span class="c1">// Mononoke&quot;, &quot;description&quot;: &quot;Ashitaka, a prince of the disappearing Ainu tribe...&quot;,</span>
+      <span class="c1">// &quot;director&quot;: ..., &quot;producer&quot;: ...},   {&quot;id&quot;: dc2e6bd1&quot;, &quot;title&quot;: &quot;Spirited Away&quot;,</span>
+      <span class="c1">// &quot;description&quot;: &quot;Spirited Away is an Oscar winning Japanese animated film about</span>
+      <span class="c1">// a ten year old girl who wanders away from her parents...&quot;, &quot;director&quot;: &quot;Hayao</span>
+      <span class="c1">// Miyazaki&quot;, ...},  {...},  {...} ]</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">+=</span> <span class="nx">r</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="o">+</span><span class="s2">&quot;; &quot;</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">// Realiza la petición:</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Este código accede a modo de ejemplo a una <a class="reference external" href="https://ghibliapi.herokuapp.com/">API web</a> sobre las películas del estudio Ghibli. Los datos devueltos por esta API web (y por muchas otras) están codificados en una notación independiente del lenguaje denominada JSON (por <em>JavaScript Object Notation</em>), que es muy parecida a la que se usa en JavaScript para definir literalmente un objeto, pero con algunas diferencias: principalmente, que los atributos van siempre entrecomillados, que no pueden usarse comillas simples y que no pueden incluirse valores de algunos tipos especiales de JavaScript como, por ejemplo, funciones. Como ves en el código anterior, la función <code class="docutils literal notranslate"><span class="pre">JSON.parse</span></code> permite convertir una cadena en formato a JSON a objeto de JavaScript; para lo opuesto, puede usarse la función <code class="docutils literal notranslate"><span class="pre">JSON.stringify</span></code>. En APIs web más antiguas se usaba el formato XML en lugar de JSON.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Prueba el código del ejemplo anterior (por ejemplo, en una web como JSFiddle) para comprender su funcionamiento y estudia todo el tráfico de red mediante las Chrome DevTools. Asegúrate de crear un elemento con id <code class="docutils literal notranslate"><span class="pre">results</span></code> en el documento HTML. Escribe código para probar también otras APIs públicas, como la de <a class="reference external" href="https://github.com/martincarrera/clash-royale-api">información del juego Clash Royale</a>.</p>
+</div>
+</div>
+<div class="section" id="la-api-fetch">
+<h2>4.5. La API Fetch<a class="headerlink" href="#la-api-fetch" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En los últimos años, sin embargo, los navegadores han comenzado a implementar la API Fetch (desarrollada por el WHATWG, Web Hypertext Application Technology Working Group, que también supervisa la evolución de otros estándares como HTML o la API DOM), que es una forma más potente, extensible y flexible de acceder a recursos externos. Usando esta API en lugar de XHR, el código mostrado anteriormente quedaría como sigue:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">resultado</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#results&quot;</span><span class="p">);</span>
+<span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://ghibliapi.herokuapp.com/films/&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">responseAsJson</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">responseAsJson</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">+=</span> <span class="nx">responseAsJson</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="o">+</span><span class="s2">&quot;; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ha habido un problema: &#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>No te costará entender este código si repasas lo estudiado en una sección anterior sobre las promesas en JavaScript y te decimos que la función <code class="docutils literal notranslate"><span class="pre">fetch</span></code> devuelve una promesa que se cumple cuando el servidor devuelve un resultado (aunque la respuesta incluya un código de error de HTTP) y se incumple cuando por cualquier motivo no es posible establecer la comunicación con el servidor. También debería ser fácil deducir que la función <code class="docutils literal notranslate"><span class="pre">json</span></code> devuelve otra promesa que se cumple si el cuerpo de la respuesta del servidor (que se pasa por <code class="docutils literal notranslate"><span class="pre">fetch</span></code> a la función <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y de ahí a la función del primer método <code class="docutils literal notranslate"><span class="pre">then</span></code>) es una cadena en formato JSON que se puede convertir sin errores (usando <code class="docutils literal notranslate"><span class="pre">JSON.parse()</span></code>) en un objeto de JavaScript.</p>
+<p>También debería ser fácil de entender el siguiente código, que añade un paso intermedio al procesamiento de la respuesta del servidor que convierte los títulos de películas almacenados en el objeto de JavaScript a minúsculas. Para ello, define una función que devuelve una promesa que no se cumple únicamente en el caso de que la cadena del atributo <code class="docutils literal notranslate"><span class="pre">title</span></code> sea vacía.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">minusculas</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">promise</span><span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">r</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">r</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="o">=</span> <span class="nx">r</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="nx">resolve</span><span class="p">(</span><span class="nx">r</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">reject</span><span class="p">(</span><span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;String cannot be empty!&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">resultado</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#results&quot;</span><span class="p">);</span>
+<span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://ghibliapi.herokuapp.com/films/&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>  <span class="c1">// llama a JSON.parse()</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">minusculas</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">responseAsJson</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">responseAsJson</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">+=</span> <span class="nx">responseAsJson</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="o">+</span><span class="s2">&quot;; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ha habido un problema: \n&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Las peticiones realizadas por <code class="docutils literal notranslate"><span class="pre">fetch</span></code> son, por defecto, de tipo GET. Más adelante, veremos como realizar peticiones con otros verbos, añadir información en JSON o dar valor a ciertas cabeceras de HTTP.</p>
+</div>
+<div class="section" id="la-politica-del-mismo-origen">
+<h2>4.6. La política del mismo origen<a class="headerlink" href="#la-politica-del-mismo-origen" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Todos los navegadores implementan una restricción conocida como <em>política del mismo origen</em> (en inglés, <em>same-origin policy</em>), un concepto de seguridad existente desde la época de Netscape 2.0 para peticiones basadas en XHR o en la API Fetch. Esta política impide por defecto que desde un script bajado de un determinado servidor se realicen peticiones a servicios web disponibles en un servidor con un dominio diferente. Permitir este tipo de accesos abre la puerta a toda una serie de potenciales problemas: por ejemplo, <em>MaliciousSite.com</em> usa los servicios web de la web de <em>MyBank.com</em> (en la que el usuario tiene sesión abierta en otra pestaña del navegador) para obtener información confidencial; los servicios web de <em>MyBank.com</em> devuelven la información solicitada porque el usuario está autenticado y la <em>cookie</em> de autenticación es enviada por el navegador junto con la petición; el script con origen <em>MaliciousSite.com</em> puede ahora compartir esta información con otros servidores.</p>
+<p>Si la política del mismo origen no pudiera evitarse, muchas aplicaciones web que usan servicios web <em>de terceros</em> desde el cliente no podrían existir o deberían implementar un proxy a dichos servicios web en su propio servidor. Por ello, los navegadores permiten bajo determinadas condiciones que estos accesos puedan realizarse. En particular, la técnica estándar CORS (<em>cross-origin resource sharing</em>) utiliza la cabecera <em>Origin</em> (que es añadida por el navegador y no puede modificarse desde JavaScript) en la petición para informar al servidor del origen del código que está haciendo la solicitud. El servidor puede autorizar o denegar entonces el acceso añadiendo a la respuesta un valor adecuado en la cabecera <em>Access-Control-Allow-Origin</em>; si el valor de esta última cabecera en la respuesta coincide con el valor de <em>Origin</em> en la petición o si toma un valor como <cite>*</cite>, entonces el navegador autoriza el acceso. En peticiones que pueden modificar datos en el servidor (como las de tipo PUT o DELETE), el navegador realiza una comunicación previa con el servidor (usando el verbo <em>OPTIONS</em>) para realizar algunas comprobaciones <em>pre-vuelo</em> (<em>pre-flight</em>) usando las cabeceras ya mencionadas.</p>
+<p>Aunque no es fácil engañar al servidor modificando el valor enviado por el navegador en la cabecera <em>Origin</em>, debe tenerse en cuenta que el propósito de CORS no es el de hacer un sitio web más seguro; si el servidor devuelve datos privados, es necesario usar <em>cookies</em> o <em>tokens</em>, por ejemplo.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>En una actividad anterior tienes un ejemplo de acceso a un servicio (el de información sobre el estudio Ghibli) que usa CORS. Estúdialo con ayuda de las herramientas para desarrolladores del navegador comprobando las cabeceras. Estudia también una petición vía Fetch a un servidor que no soporte CORS, como el de <a class="reference external" href="https://date.nager.at/Home/Api">esta API</a> de días <a class="reference external" href="http://date.nager.at/api/v1/get/ES/2020">festivos</a>.</p>
+</div>
+<p>Finalmente, es importante resaltar que estas restricciones afectan a los servicios web a los que se intenta acceder desde un navegador. Una aplicación de escritorio o un programa ejecutándose en un servidor no tienen estas restricciones.</p>
+</div>
+<div class="section" id="la-arquitectura-rest">
+<h2>4.7. La arquitectura REST<a class="headerlink" href="#la-arquitectura-rest" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>REST es una arquitectura para implementar servicios web sobre el protocolo HTTP, que es usada actualmente por la gran mayoría de APIs web. Bajo REST los recursos se representan mediante URLs y las acciones a realizar con ellos se indican mediante los correspondientes verbos de HTTP (principalmente, GET, POST, PUT y DELETE).</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Estudia una API REST <em>de juguete</em> para gestionar <a class="reference external" href="https://pacific-retreat-67356.herokuapp.com">carritos de la compra</a>. Realiza las peticiones al servidor desde el programa <a class="reference external" href="https://www.getpostman.com/">Postman</a> cargando una <a class="reference external" href="https://www.getpostman.com/collections/10c494041155cf189a7f">colección ya creada</a> de peticiones pulsando el siguiente botón.</p>
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="10c494041155cf189a7f"
+data-postman-param="env%5BCarrito%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwczovL3BhY2lmaWMtcmV0cmVhdC02NzM1Ni5oZXJva3VhcHAuY29tIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJjYXJyaXRvIiwidmFsdWUiOiJlbzl5eDUiLCJlbmFibGVkIjp0cnVlfV0="></div>
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script><p>Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar hasta un minuto en producirse. Más adelante, veremos una aplicación web que accede mediante la API Fetch a esta API REST. Los accesos también pueden realizarse desde la línea de órdens con programas como <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p>
+</div>
+<p>Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y la librería Express como puedes ver en <a class="reference external" href="_static/data/carrito/server.js">este código</a>.</p>
+<p>Finalmente, aunque no lo estudiaremos en esta asignatura, hay que tener en cuenta que existen en la web multitud de APIs disponibles para su uso desde aplicaciones de terceros, pero estas APIs suelen tener términos de uso (mira las condiciones de la <a class="reference external" href="https://developer.twitter.com/en/developer-terms/agreement-and-policy">API de Twitter</a>, por ejemplo) que es importante leer antes de decidirse a basar una determinada aplicación en ellas.</p>
+</div>
 </div>
 
 
@@ -170,10 +625,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="componentes.html" class="btn btn-neutral float-right" title="6. Componentes web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="componentes.html" class="btn btn-neutral float-right" title="5. Componentes web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="protocolos.html" class="btn btn-neutral float-left" title="4. Protocolos de comunicación" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cliente.html" class="btn btn-neutral float-left" title="3. Programar el lado del cliente" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
