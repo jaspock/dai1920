@@ -200,17 +200,33 @@
 <h2>4.3. Promesas de JavaScript<a class="headerlink" href="#promesas-de-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Los objetos de tipo <code class="docutils literal notranslate"><span class="pre">Promise</span></code> (una clase definida en la API de JavaScript de los navegadores modernos) se usan para representar la finalización con éxito de una tarea (normalmente asíncrona, es decir, que no bloquea el bucle de eventos, sino que define una función de <em>callback</em> que será ejecutada más adelante) o su fracaso. En términos informales, diremos que una promesa se cumple (en caso de éxito), se incumple (en caso de fracaso) o que está pendiente (cuando aún no se ha resuelto); en inglés se usan los términos <em>fullfilled</em>, <em>rejected</em> o <em>pending</em>, respectivamente. Los objetos promesa nos serán muy útiles en tareas como la comunicación con un servidor, que veremos más adelante en este tema.</p>
 <p>Veamos un primer ejemplo. El siguiente código crea un objeto de tipo promesa <code class="docutils literal notranslate"><span class="pre">p</span></code> invocando al constructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code>. Este constuctor recibe dos funciones de <em>callback</em> que son aportadas por el sistema (es decir, no son definidas por el programador); estas dos funciones (<code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> en el código de abajo) serán invocadas en los lugares de nuestro código en los que determinemos que la tarea se ha desarrollado con éxito (en el caso del primer parámetro) o ha fracasado (función pasada como segundo parámetro). En este caso, vamos a suponer que nuestra promesa ejecuta una tarea asíncrona muy sencilla: esperar un segundo y generar un número aleatorio entre 0 y 1; la tarea se considera un éxito si el número es menor de 0,5. En lenguaje de la calle, sería como decir «te prometo que voy a generar (asíncronamente) un número aleatorio y que será menor que 0,5»; como cualquier promesa, en cualquier caso, esta puede cumpirse o no.</p>
-<script src="https://embed.runkit.com" data-element-id="promesas567"></script>
-<div id="promesas567">
-  let p= new Promise(function(resolve,reject) {
-    console.log('Entrando en el constructor de la promesa');
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre>  let p= new Promise(function(resolve,reject) {
+    console.log(&#39;Entrando en el constructor de la promesa&#39;);
     setTimeout( function() {
       const r= Math.random();
-      if (r<0.5) {
-        resolve('la cosa fue bien');
+      if (r&lt;0.5) {
+        resolve(&#39;la cosa fue bien&#39;);
       }
       else {
-        reject('algo salió mal');
+        reject(&#39;algo salió mal&#39;);
       }
     }, 1000);
   });
@@ -221,25 +237,43 @@
       console.log(`Promesa incumplida: ${mensaje}`);
     }
   );
-</div><p>Las funciones <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> reciben un único argumento que usaremos para dar información adicional relacionada con el éxito o fracaso de la tarea asíncrona; en este caso, es una simple cadena con un mensaje, pero puede ser un objeto que incluya un conjunto de atributos. Nada más invocar al contructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code> se establece el estado de la promesa a <em>pendiente</em> y se ejecuta el código de la función pasada como parámetro al constructor. Este código normalmente definirá una operación asíncrona (como realizar una petición a un servidor) y terminará llamando a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> o <code class="docutils literal notranslate"><span class="pre">reject</span></code>; estas funciones (recordemos que son creadas por el sistema y no pertenecen a nuestro código) cambian el estado de la promesa a <em>cumplida</em> o <em>incumplida</em> y llaman a las funciones que el programador haya definido para manejar ambas situaciones.</p>
+</pre></div>
+</td></tr></table></div>
+<p>Las funciones <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> reciben un único argumento que usaremos para dar información adicional relacionada con el éxito o fracaso de la tarea asíncrona; en este caso, es una simple cadena con un mensaje, pero puede ser un objeto que incluya un conjunto de atributos. Nada más invocar al contructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code> se establece el estado de la promesa a <em>pendiente</em> y se ejecuta el código de la función pasada como parámetro al constructor. Este código normalmente definirá una operación asíncrona (como realizar una petición a un servidor) y terminará llamando a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> o <code class="docutils literal notranslate"><span class="pre">reject</span></code>; estas funciones (recordemos que son creadas por el sistema y no pertenecen a nuestro código) cambian el estado de la promesa a <em>cumplida</em> o <em>incumplida</em> y llaman a las funciones que el programador haya definido para manejar ambas situaciones.</p>
 <p>El vínculo entre las funciones del sistema <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> y nuestro código se establece llamando al método <code class="docutils literal notranslate"><span class="pre">then</span></code> sobre el objeto de tipo promesa. Al método <code class="docutils literal notranslate"><span class="pre">then</span></code> se le pasan dos funciones: la primera se vincula a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y la segunda a <code class="docutils literal notranslate"><span class="pre">reject</span></code>. Estas funciones pueden tener un parámetro que será el mismo que el usado como argumento en las llamadas a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> del constructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code>.</p>
-<p>Realmente, las llamadas a <code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> también se realizan de forma asíncrona, de manera que para entonces el intérprete ya habrá ejecutado el método <code class="docutils literal notranslate"><span class="pre">then</span></code> correspondiente.</p>
 <p>Finalmente, observa en el código anterior cómo hemos usado <em>cadenas con plantillas</em> (<em>template strings</em>) para imprimir los mensajes por consola. Las cadenas con plantillas de JavaScript usan comillas invertidas en lugar de rectas, pueden contener variables embebidas como en el ejemplo, y pueden también ocupar más de una línea.</p>
 <div class="figure align-default" id="id1">
 <a class="reference external image-reference" href="https://www.c-sharpcorner.com/blogs/overview-of-promises-in-javascript"><img alt="diagrama de los elementos implicados en una promesa" src="https://csharpcorner-mindcrackerinc.netdna-ssl.com/UploadFile/BlogImages/01262017214716PM/Screen%20Shot%202017-01-26%20at%208.28.19%20pm.png" /></a>
 <p class="caption"><span class="caption-text">Diagrama de los elementos de una promesa por Sumant Mishra</span><a class="headerlink" href="#id1" title="Enlace permanente a esta imagen">¶</a></p>
 </div>
 <p>El código anterior es equivalente al siguiente en el que en lugar de pasar dos funciones a <code class="docutils literal notranslate"><span class="pre">then</span></code> se define la función asociada al incumplimiento de la promesa en un método <code class="docutils literal notranslate"><span class="pre">catch</span></code>:</p>
-<script src="https://embed.runkit.com" data-element-id="promesas830"></script>
-<div id="promesas830">
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre>&lt;div id=&quot;promesas830&quot;&gt;
   let p= new Promise(function(resolve,reject) {
     setTimeout( function() {
       const r= Math.random();
-      if (r<0.5) {
-        resolve('la cosa fue bien');
+      if (r&lt;0.5) {
+        resolve(&#39;la cosa fue bien&#39;);
       }
       else {
-        reject('algo salió mal');
+        reject(&#39;algo salió mal&#39;);
       }
     }, 1000);
   });
@@ -250,45 +284,177 @@
     .catch(function(mensaje) {
       console.log(`Promesa incumplida: ${mensaje}`);
     });
-</div><p>Además, si encapsulamos el código de creación de la promesa en una función, usamos funciones flecha y gestionamos el error mediante una excepción (clase <code class="docutils literal notranslate"><span class="pre">Error</span></code>), el código anterior se convierte en:</p>
-<script src="https://embed.runkit.com" data-element-id="promesas731"></script>
-<div id="promesas731">
+</pre></div>
+</td></tr></table></div>
+<p>Además, si encapsulamos el código de creación de la promesa en una función, usamos funciones flecha y gestionamos el error mediante una excepción (clase <code class="docutils literal notranslate"><span class="pre">Error</span></code>), el código anterior se convierte en:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre>&lt;script src=&quot;https://embed.runkit.com&quot; data-element-id=&quot;promesas731&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;promesas731&quot;&gt;
   function aleatorio() {
-    return new Promise( (resolve,reject) => {
-      setTimeout( () => {
+    return new Promise( (resolve,reject) =&gt; {
+      setTimeout( () =&gt; {
         const r= Math.random();
-        if (r<0.5) {
-          resolve('la cosa fue bien');
+        if (r&lt;0.5) {
+          resolve(&#39;la cosa fue bien&#39;);
         }
         else {
-          reject(Error('algo salió mal'));
+          reject(Error(&#39;algo salió mal&#39;));
         }
       }, 1000);
   });
 
   aleatorio()
-    .then( (mensaje) => {console.log(`Promesa cumplida: ${mensaje}`);})
-    .catch( (mensaje) => {console.log(`Promesa incumplida: ${error.message}`);});
-</div><p>Las promesas pueden concatenarse simplemente haciendo que la función asociada al cumplimiento de la promesa (la indicada en la llamada al método <code class="docutils literal notranslate"><span class="pre">then</span></code>) devuelva a su vez una promesa:</p>
-<script src="https://embed.runkit.com" data-element-id="promesas794"></script>
-<div id="promesas794">
+    .then( (mensaje) =&gt; {console.log(`Promesa cumplida: ${mensaje}`);})
+    .catch( (mensaje) =&gt; {console.log(`Promesa incumplida: ${error.message}`);});
+&lt;/div&gt;
+</pre></div>
+</td></tr></table></div>
+<p>Las promesas pueden concatenarse simplemente haciendo que la función asociada al cumplimiento de la promesa (la indicada en la llamada al método <code class="docutils literal notranslate"><span class="pre">then</span></code>) devuelva a su vez una promesa:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre>  aleatorio().then( (mensaje) =&gt; {
+    console.log(`Primera promesa cumplida: ${mensaje}`);
+    return aleatorio2(0.8);
+  })
+  .then( (mensaje) =&gt; {
+    console.log(`Segunda promesa cumplida: ${mensaje}`);
+  })
+  .catch( (error) =&gt; {
+    console.log(`Una de las promesas fue incumplida: ${error.message}`);
+  }
+  );
 
-  function aleatorio2(delta) {
-    return new Promise( (resolve,reject) => {
-      setTimeout( () => {
+  function aleatorio() {
+    return new Promise( (resolve,reject) =&gt; {
+      setTimeout( () =&gt; {
         const r= Math.random();
-        if (r<delta) {
-          resolve('me encanta que los planes salgan bien');
-        }
+        if (r&lt;0.5) {
+          resolve(&#39;la cosa fue bien&#39;);
+          }
         else {
-          reject(Error('peor imposible'));
+          reject(Error(&#39;algo salió mal&#39;));
         }
       }, 1000);
     });
   }
-</div><p>En este caso, la segunda promesa establece una clausura con el parámetro de la función que indica el umbral para que la promesa se cumpla. Si encapsulamos todos los bloques en funciones, el código principal queda muy compacto y legible:</p>
-<script src="https://embed.runkit.com" data-element-id="promesas230"></script>
-<div id="promesas230">
+
+  function aleatorio2(delta) {
+    return new Promise( (resolve,reject) =&gt; {
+      setTimeout( () =&gt; {
+        const r= Math.random();
+        if (r&lt;delta) {
+          resolve(&#39;me encanta que los planes salgan bien&#39;);
+        }
+        else {
+          reject(Error(&#39;peor imposible&#39;));
+        }
+      }, 1000);
+    });
+  }
+</pre></div>
+</td></tr></table></div>
+<p>En este caso, la segunda promesa establece una clausura con el parámetro de la función que indica el umbral para que la promesa se cumpla. Si encapsulamos todos los bloques en funciones, el código principal queda muy compacto y legible:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="highlight"><pre>&lt;script src=&quot;https://embed.runkit.com&quot; data-element-id=&quot;promesas230&quot;&gt;&lt;/script&gt;
+&lt;div id=&quot;promesas230&quot;&gt;
   aleatorio()
     .then(primerMensaje)
     .then(segundoMensaje)
@@ -308,63 +474,91 @@
   }
 
   function aleatorio() {
-    return new Promise( (resolve,reject) => {
-      setTimeout( () => {
+    return new Promise( (resolve,reject) =&gt; {
+      setTimeout( () =&gt; {
         const r= Math.random();
-        if (r<0.5) {
-          resolve('la cosa fue bien');
+        if (r&lt;0.5) {
+          resolve(&#39;la cosa fue bien&#39;);
         }
         else {
-          reject(Error('algo salió mal'));
+          reject(Error(&#39;algo salió mal&#39;));
         }
       }, 1000);
     });
   }
 
   function aleatorio2(delta) {
-    return new Promise( (resolve,reject) => {
-      setTimeout( () => {
+    return new Promise( (resolve,reject) =&gt; {
+      setTimeout( () =&gt; {
         const r= Math.random();
-        if (r<delta) {
-          resolve('me encanta que los planes salgan bien');
+        if (r&lt;delta) {
+          resolve(&#39;me encanta que los planes salgan bien&#39;);
         }
         else {
-          reject(Error('peor imposible'));
+          reject(Error(&#39;peor imposible&#39;));
         }
       }, 1000);
     });
   }
-</div><p>Uno de los motivos de la introducción de las promesas en JavaScript fue precisamente el de simplificar la escritura de código en los frecuentes casos que los que un evento asíncrono dispara a su terminación otro evento asíncrono que dispara a su vez un nuevo evento asíncrono, etc. El código sin promesas termina teniendo una cantidad tal de ámbitos que su escritura y su lectura se hacen muy dificultosas:</p>
-<script src="https://embed.runkit.com" data-element-id="promesas551"></script>
-<div id="promesas551">
-  function aleatorio() {
-      setTimeout( () => {
+</pre></div>
+</td></tr></table></div>
+<p>Uno de los motivos de la introducción de las promesas en JavaScript fue precisamente el de simplificar la escritura de código en los frecuentes casos que los que un evento asíncrono dispara a su terminación otro evento asíncrono que dispara a su vez un nuevo evento asíncrono, etc. El código sin promesas termina teniendo una cantidad tal de ámbitos que su escritura y su lectura se hacen muy dificultosas:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre>  function aleatorio() {
+      setTimeout( () =&gt; {
           const r= Math.random();
-          if (r<0.5) {
-            let mensaje= 'la cosa fue bien';
+          if (r&lt;0.5) {
+            let mensaje= &#39;la cosa fue bien&#39;;
             alert(`Primera promesa cumplida: ${mensaje}`);
             let delta= 0.8;
-            setTimeout( () => {
+            setTimeout( () =&gt; {
               const r= Math.random();
-              if (r<delta) {
-                let mensaje= 'me encanta que los planes salgan bien';
+              if (r&lt;delta) {
+                let mensaje= &#39;me encanta que los planes salgan bien&#39;;
                 alert(`Segunda promesa cumplida: ${mensaje}`);
               }
               else {
-                let error= Error('peor imposible');
+                let error= Error(&#39;peor imposible&#39;);
                 alert(`Una de las promesas fue incumplida: ${error.message}`);
               }
             }, 1000);
           }
           else {
-            let error= Error('algo salió mal');
+            let error= Error(&#39;algo salió mal&#39;);
             alert(`Una de las promesas fue incumplida: ${error.message}`);
           }
     }, 1000);
   }
 
   aleatorio();
-</div><p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.</p>
+</pre></div>
+</td></tr></table></div>
+<p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.</p>
 </div>
 <div class="section" id="el-objeto-xmlhttprequest">
 <h2>4.4. El objeto XMLHttpRequest<a class="headerlink" href="#el-objeto-xmlhttprequest" title="Enlazar permanentemente con este título">¶</a></h2>

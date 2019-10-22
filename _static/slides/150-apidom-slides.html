@@ -8,8 +8,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reset.css">
   <link rel="stylesheet" href="reveal.js/css/reveal.css">
-  <style type="text/css">code{white-space: pre;}</style>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
   <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
@@ -27,7 +33,7 @@
   <div class="reveal">
     <div class="slides">
 
-<section>
+<section id="title-slide">
   <h1 class="title">La API para JavaScript del navegador</h1>
   <p class="author">Desarrollo de Aplicaciones en Internet</p>
 </section>
@@ -54,7 +60,7 @@
 <li>Interactuar con webcams, geolocalización, micrófono, etc.</li>
 <li>Realizar animaciones (por ejemplo, mediante <em>canvas</em> o <em>SVG</em>).</li>
 <li>Ejecutar algoritmos.</li>
-<li>...</li>
+<li>…</li>
 </ul>
 </section>
 <section id="el-árbol-dom" class="slide level2">
@@ -238,7 +244,7 @@ for (var i = 0; i &lt; bodyElement.children.length; i++) {
 <section id="gestión-de-eventos" class="slide level2">
 <h2>Gestión de eventos</h2>
 <ul>
-<li>Eventos típicos son <em>click</em>, <em>mouseover</em>, <em>DOMContentLoaded</em> (cuando el DOM se ha cargado), <em>load</em> (cuando todo el documento se ha cargado), <em>keydown</em>, <em>keyup</em>...</li>
+<li>Eventos típicos son <em>click</em>, <em>mouseover</em>, <em>DOMContentLoaded</em> (cuando el DOM se ha cargado), <em>load</em> (cuando todo el documento se ha cargado), <em>keydown</em>, <em>keyup</em>…</li>
 </ul>
 <pre><code>&lt;!doctype html&gt;
 &lt;html&gt;
@@ -276,9 +282,7 @@ for(var i = 0; i &lt; ps.length; i++){
 </section>
 <section id="captura-y-burbujeo-de-eventos" class="slide level2">
 <h2>Captura y burbujeo de eventos</h2>
-<figure>
-<img src="https://javascript.info/article/bubbling-and-capturing/eventflow.svg" />
-</figure>
+<p><img data-src="https://javascript.info/article/bubbling-and-capturing/eventflow.svg" /></p>
 <p><a href="https://javascript.info/">Fuente</a></p>
 </section>
 <section id="captura-y-burbujeo-de-eventos-1" class="slide level2">
@@ -420,7 +424,6 @@ function f() {...}</code></pre>
     </div>
   </div>
 
-  <script src="reveal.js/lib/js/head.min.js"></script>
   <script src="reveal.js/js/reveal.js"></script>
 
   <script>
@@ -428,6 +431,8 @@ function f() {...}</code></pre>
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: {37:'prev',38:'prev',39:'next',40:'next'},
         // Transition style
@@ -437,7 +442,7 @@ function f() {...}</code></pre>
         dependencies: [
           { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-              { src: 'reveal.js/plugin/notes/notes.js', async: true }
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
         ]
       });
     </script>

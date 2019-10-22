@@ -57,10 +57,9 @@ Los objetos de tipo ``Promise`` (una clase definida en la API de JavaScript de l
 
 Veamos un primer ejemplo. El siguiente código crea un objeto de tipo promesa ``p`` invocando al constructor de ``Promise``. Este constuctor recibe dos funciones de *callback* que son aportadas por el sistema (es decir, no son definidas por el programador); estas dos funciones (``resolve`` y ``reject`` en el código de abajo) serán invocadas en los lugares de nuestro código en los que determinemos que la tarea se ha desarrollado con éxito (en el caso del primer parámetro) o ha fracasado (función pasada como segundo parámetro). En este caso, vamos a suponer que nuestra promesa ejecuta una tarea asíncrona muy sencilla: esperar un segundo y generar un número aleatorio entre 0 y 1; la tarea se considera un éxito si el número es menor de 0,5. En lenguaje de la calle, sería como decir "te prometo que voy a generar (asíncronamente) un número aleatorio y que será menor que 0,5"; como cualquier promesa, en cualquier caso, esta puede cumpirse o no.
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas567"></script>
-  <div id="promesas567">
     let p= new Promise(function(resolve,reject) {
       console.log('Entrando en el constructor de la promesa');
       setTimeout( function() {
@@ -80,7 +79,7 @@ Veamos un primer ejemplo. El siguiente código crea un objeto de tipo promesa ``
         console.log(`Promesa incumplida: ${mensaje}`);
       }
     );
-  </div>
+
 
 Las funciones ``resolve`` y ``reject`` reciben un único argumento que usaremos para dar información adicional relacionada con el éxito o fracaso de la tarea asíncrona; en este caso, es una simple cadena con un mensaje, pero puede ser un objeto que incluya un conjunto de atributos. Nada más invocar al contructor de ``Promise`` se establece el estado de la promesa a *pendiente* y se ejecuta el código de la función pasada como parámetro al constructor. Este código normalmente definirá una operación asíncrona (como realizar una petición a un servidor) y terminará llamando a ``resolve`` o ``reject``; estas funciones (recordemos que son creadas por el sistema y no pertenecen a nuestro código) cambian el estado de la promesa a *cumplida* o *incumplida* y llaman a las funciones que el programador haya definido para manejar ambas situaciones.
 
@@ -88,7 +87,7 @@ El vínculo entre las funciones del sistema ``resolve`` y ``reject`` y nuestro c
 
 .. Note:
 
-Realmente, las llamadas a ``resolve`` y ``reject`` también se realizan de forma asíncrona, de manera que para entonces el intérprete ya habrá ejecutado el método ``then`` correspondiente.
+  Realmente, las llamadas a ``resolve`` y ``reject`` también se realizan de forma asíncrona, de manera que para entonces el intérprete ya habrá ejecutado el método ``then`` correspondiente.
 
 Finalmente, observa en el código anterior cómo hemos usado *cadenas con plantillas* (*template strings*) para imprimir los mensajes por consola. Las cadenas con plantillas de JavaScript usan comillas invertidas en lugar de rectas, pueden contener variables embebidas como en el ejemplo, y pueden también ocupar más de una línea.
 
@@ -100,9 +99,9 @@ Finalmente, observa en el código anterior cómo hemos usado *cadenas con planti
 
 El código anterior es equivalente al siguiente en el que en lugar de pasar dos funciones a ``then`` se define la función asociada al incumplimiento de la promesa en un método ``catch``:
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas830"></script>
   <div id="promesas830">
     let p= new Promise(function(resolve,reject) {
       setTimeout( function() {
@@ -122,12 +121,12 @@ El código anterior es equivalente al siguiente en el que en lugar de pasar dos 
       .catch(function(mensaje) {
         console.log(`Promesa incumplida: ${mensaje}`);
       });
-  </div>
 
 
 Además, si encapsulamos el código de creación de la promesa en una función, usamos funciones flecha y gestionamos el error mediante una excepción (clase ``Error``), el código anterior se convierte en:
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
   <script src="https://embed.runkit.com" data-element-id="promesas731"></script>
   <div id="promesas731">
@@ -152,11 +151,35 @@ Además, si encapsulamos el código de creación de la promesa en una función, 
 
 Las promesas pueden concatenarse simplemente haciendo que la función asociada al cumplimiento de la promesa (la indicada en la llamada al método ``then``) devuelva a su vez una promesa:
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas794"></script>
-  <div id="promesas794">
-    
+    aleatorio().then( (mensaje) => {
+      console.log(`Primera promesa cumplida: ${mensaje}`);
+      return aleatorio2(0.8);
+    })
+    .then( (mensaje) => {
+      console.log(`Segunda promesa cumplida: ${mensaje}`);
+    })
+    .catch( (error) => {
+      console.log(`Una de las promesas fue incumplida: ${error.message}`);
+    }
+    );
+
+    function aleatorio() {
+      return new Promise( (resolve,reject) => {
+        setTimeout( () => {
+          const r= Math.random();
+          if (r<0.5) {
+            resolve('la cosa fue bien');
+            }
+          else {
+            reject(Error('algo salió mal'));
+          }
+        }, 1000);
+      });
+    }
+
     function aleatorio2(delta) {
       return new Promise( (resolve,reject) => {
         setTimeout( () => {
@@ -170,11 +193,12 @@ Las promesas pueden concatenarse simplemente haciendo que la función asociada a
         }, 1000);
       });
     }
-  </div>
+  
 
 En este caso, la segunda promesa establece una clausura con el parámetro de la función que indica el umbral para que la promesa se cumpla. Si encapsulamos todos los bloques en funciones, el código principal queda muy compacto y legible:
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
   <script src="https://embed.runkit.com" data-element-id="promesas230"></script>
   <div id="promesas230">
@@ -223,14 +247,13 @@ En este caso, la segunda promesa establece una clausura con el parámetro de la 
         }, 1000);
       });
     }
-  </div>
+  
 
 Uno de los motivos de la introducción de las promesas en JavaScript fue precisamente el de simplificar la escritura de código en los frecuentes casos que los que un evento asíncrono dispara a su terminación otro evento asíncrono que dispara a su vez un nuevo evento asíncrono, etc. El código sin promesas termina teniendo una cantidad tal de ámbitos que su escritura y su lectura se hacen muy dificultosas:
 
-.. raw:: html
+.. code-block:: 
+  :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas551"></script>
-  <div id="promesas551">
     function aleatorio() {
         setTimeout( () => {
             const r= Math.random();
@@ -258,7 +281,7 @@ Uno de los motivos de la introducción de las promesas en JavaScript fue precisa
     }
 
     aleatorio();
-  </div>
+  
 
 Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas`_ que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.
 
