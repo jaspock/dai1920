@@ -468,7 +468,7 @@ No olvides añadir la correspondiente llamada a ``addWikipedia`` a la función `
 
 Usa una `expresión regular`_ y el método ``replace`` aplicado a cadenas de JavaScript para eliminar todos los números entre corchetes (incluyendo los corchetes) del resultado devuelto por la Wikipedia.
 
-.. `expresión regular`_: https://www.tutorialrepublic.com/javascript-tutorial/javascript-regular-expressions.php
+.. _`expresión regular`: https://www.tutorialrepublic.com/javascript-tutorial/javascript-regular-expressions.php
 
 Incorporación de la información de Flickr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

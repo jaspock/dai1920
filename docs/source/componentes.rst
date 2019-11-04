@@ -2,7 +2,7 @@
 Componentes web
 ===============
 
-Los componentes web son un nuevo conjunto de estándares que facilitan la reutilización de los elementos que se suelen definir en una aplicación web. La tecnología de los componentes web se basa en dos elementos estandarizados principales: el *DOM ensombrecido* (*shadow DOM*), que permite modificar la presentación de una parte de la página web sin modificar el DOM global (o *DOM iluminado*, *light DOM*, nombre que se ha popularizado para diferenciar el DOM clásico del DOM ensombrecido), y las *plantillas* (*templates*), que permiten encapsular bloques de contenido (HTML), presentación (CSS) y funcionalidad (JavaScript) de forma que no interaccionen con el resto de elementos de la página y solo quede expuesta la parte de ellos que desee el desarrollador. Otras tecnologías estándar implicadas son los *elementos personalizados* (*custom elements*), que permiten al desarrollador crear sus propios elementos de HTML.
+Los componentes web son un nuevo conjunto de estándares que facilitan la reutilización de los elementos que se suelen definir en una aplicación web. La tecnología de los componentes web se basa en dos elementos estandarizados principales: el *DOM ensombrecido* (*shadow DOM*), que permite modificar la presentación de una parte de la página web sin modificar el DOM global (o *DOM iluminado*, *light DOM*, nombre que se ha popularizado para diferenciar el DOM clásico del DOM ensombrecido), y las *plantillas* (*templates*), que permiten encapsular bloques de contenido (HTML), presentación (CSS) y funcionalidad (JavaScript) de forma que no interaccionen con el resto de elementos de la página y solo quede expuesta la parte de ellos que desee el desarrollador. Otra tecnología estándar implicada son los *elementos personalizados* (*custom elements*), que permiten al desarrollador crear sus propios elementos de HTML.
 
 
 .. Important::
@@ -21,13 +21,13 @@ Los componentes web son un nuevo conjunto de estándares que facilitan la reutil
 
   A modo introductorio, lee la breve descripción de las tecnologías de los componentes web que puedes encontrar en `webcomponents.org`_. 
 
-  .. _``webcomponents.org`: https://www.webcomponents.org/introduction
+  .. _`webcomponents.org`: https://www.webcomponents.org/introduction
 
 
 Componentes web
 ---------------
 
-Vamos a ver las tecnologías de *shadow DOM*, elementos personalizados y plantillas juntas en acción. La siguiente página web incluye un elemento ``<template>`` cuyo contenido no es mostrado por el motor del navegador; la idea es que un script de JavaScript se referirá posteriormente a esta plantilla (a través de su id) para instanciar un elemento e insertarlo convenientemente en el árbol DOM, como puedes observar en el constructor de la clase ``Operaciones``. Como esta plantilla será instanciada dentro de un *shadow DOM*, los estilos CSS que incluye no modificarán a elementos de otras partes del árbol DOM. También e incluye código en JavaScript que no será ejecutado hasta que el componente se instancie. Por último, la plantilla contiene código HTML que será el que se inserte en el árbol DOM al instanciar el elemento.
+Vamos a ver las tecnologías de *shadow DOM*, elementos personalizados y plantillas juntas en acción. La página web que aparece más abajo incluye un elemento ``<template>`` cuyo contenido no es mostrado por el motor del navegador; la idea es que un script de JavaScript se referirá posteriormente a esta plantilla (a través de su id) para instanciar un elemento e insertarlo convenientemente en el árbol DOM, como puedes observar en el constructor de la clase ``Operaciones``. Como esta plantilla será instanciada dentro de un *shadow DOM*, los estilos CSS que incluye no modificarán a elementos de otras partes del árbol DOM. También se incluye código en JavaScript que no será ejecutado hasta que el componente se instancie. Por último, la plantilla contiene código HTML que será el que se inserte en el árbol DOM al instanciar el elemento.
 
 Como veremos a continuación, nuestro ejemplo define un elemento personalizado ``<calcula-operaciones>`` que se puede usar (es decir, instanciar) en una o más partes de nuestro documento HTML. 
 
@@ -88,9 +88,9 @@ La definición del elemento personalizado se hace mediante una clase (recuerda q
     </body>
   </html>
 
-El *árbol ensombrecido* se comporta como un árbol DOM normal, salvo que no es visible desde fuera: por ejemplo, el elemento ``<h1>`` del *DOM ensombrecido* no aparecerá nunca si buscamos ``document.querySelectorAll("h1")`` desde un script de fuera del componente web; además, los estilos que definamos para ``<h1>`` dentro del *shadow DOM* no afectarán a los elementos del árbol principal.
+El *árbol ensombrecido* se comporta como un árbol DOM normal, salvo que no es visible desde fuera: por ejemplo, el elemento ``<h1>`` del *DOM ensombrecido* no aparecerá nunca si buscamos con ``document.querySelectorAll("h1")`` desde un script de fuera del componente web; además, los estilos que definamos para ``<h1>`` dentro del *shadow DOM* no afectarán a los elementos del árbol principal.
 
-Permitamos ahora personalizar los mensajes. Para ello, vamos a incluir dentro de cada instancia del elemento ``calcula-operaciones`` dos bloques de código HTML identificados mediante un nombre indicado en el atributo ``slot``. Dentro de la plantilla, podemos insertar el contenido de estos bloques usando el elemento ``slot`` e indicando en su atributo ``name`` el identificvador del bloque a insertar. Además, vamos a mejorar también un poco el estilo del componente web rodeándolo con un borde; como se trata de un estilo asociado al elemento completo (que se conoce como *shadow host*), usamos el selector de CSS ``:host``. Observa en el ejemplo que podemos instanciar un componente web más de una vez en un mismo documento HTML.
+Permitamos ahora personalizar los mensajes. Para ello, vamos a incluir dentro de cada instancia del elemento ``calcula-operaciones`` dos bloques de código HTML identificados mediante un nombre indicado en el atributo ``slot``. Dentro de la plantilla, podemos insertar el contenido de estos bloques usando el elemento ``slot`` e indicando en su atributo ``name`` el identificador del bloque a insertar. Además, vamos a mejorar también un poco el estilo del componente web rodeándolo con un borde; como se trata de un estilo asociado al elemento completo (que se conoce como *shadow host*), usamos el selector de CSS ``:host``. Observa en el ejemplo que podemos instanciar un componente web más de una vez en un mismo documento HTML.
 
 .. code-block:: html
 
@@ -174,9 +174,9 @@ Permitamos ahora personalizar los mensajes. Para ello, vamos a incluir dentro de
   </html>
 
 
-Que el componente web realice siempre la multiplicación de los mismos números no tiene mucha gracia. Vamos a hacer que los valores a multiplicar se definan como atributos del elemento. Como en el constructor todavía no puede accederse a los atributos con el método ``this.getAttribute``, lo dejamos para el método ``connectedCallback``que será invocado por el navegador tras instanciar el componente web.
+Que el componente web realice siempre la multiplicación de los mismos números no tiene mucha gracia. Vamos a hacer que los valores a multiplicar se definan como atributos del elemento. Como en el constructor todavía no puede accederse a los atributos con el método ``this.getAttribute``, lo dejamos para el método ``connectedCallback`` que será invocado por el navegador tras instanciar el componente web.
 
-.. code-block: html
+.. code-block:: html
 
   <!DOCTYPE html>
   <html>
@@ -268,7 +268,7 @@ Que el componente web realice siempre la multiplicación de los mismos números 
 
 Ahora vamos a modularizar y encapsular el diseño anterior para que otros puedan usar nuestro componente web sin tener que incluir todo lo anterior en su documento HTML.
 
-.. code-block: html
+.. code-block:: html
 
   <!DOCTYPE html>
   <html>
@@ -293,7 +293,7 @@ Ahora vamos a modularizar y encapsular el diseño anterior para que otros puedan
 
 El contenido del fichero ``calcula-operaciones.js`` es el siguiente:
 
-.. code-block: JavaScript
+.. code-block::
 
   (function() {
     const template = document.createElement('template');
@@ -359,7 +359,7 @@ El contenido del fichero ``calcula-operaciones.js`` es el siguiente:
 
   })();
 
-El código anterior se ha encapsulado dentro de lo que se conoce como una *función invocada inmediatamente* (*immediately-invoked function expressions*, IIFE), que permite no contaminar el espacio de nombres global con variables que podrían estar siendo también definidas en otroas librerías, evitando así potenciales conflictos.
+El código anterior se ha encapsulado dentro de lo que se conoce como una *función invocada inmediatamente* (*immediately-invoked function expressions*, IIFE), que permite no contaminar el espacio de nombres global con variables que podrían estar siendo también definidas en otras librerías, evitando así potenciales conflictos.
 
 Finalmente, vamos a añadir un par de operaciones más y delegar en un servicio externo su cálculo y usar encodeURI...
 

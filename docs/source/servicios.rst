@@ -463,7 +463,7 @@ Finalmente, es importante resaltar que estas restricciones afectan a los servici
 La arquitectura REST
 --------------------
 
-REST es una arquitectura para implementar servicios web sobre el protocolo HTTP, que es usada actualmente por la gran mayoría de APIs web. Bajo REST los recursos se representan mediante URLs y las acciones a realizar con ellos se indican mediante los correspondientes verbos de HTTP (principalmente, GET, POST, PUT y DELETE). 
+REST es una arquitectura para implementar servicios web sobre el protocolo HTTP que es usada actualmente por la gran mayoría de APIs web. Bajo REST los recursos se representan mediante URLs y las acciones a realizar con ellos se indican mediante los correspondientes verbos de HTTP (principalmente, GET, POST, PUT y DELETE). 
 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
@@ -472,23 +472,21 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP,
 
     endpoint=https://limitless-waters-71428.herokuapp.com/carrito/v1/
 
-  .. Note::
+  *Nota:* la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.
 
-    La sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para tu sistema operativo, la sintaxis podría ser ligeramente diferente.
-
-  El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo GET::
+  El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo POST::
 
     curl --request POST --header 'content-type:application/json' -v $endpoint/carrito
 
-  La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl``muestre información más detallada sobre la petición y la respuesta. La petición anterioir nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
+  La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl`` muestre información más detallada sobre la petición y la respuesta. La petición anterior nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
 
     carrito=fada6
 
-  Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar hasta un minuto en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
+  Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar unos segundos en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
 
     curl --request POST --data '{"item":"queso","cantidad":1}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de hacerlo (el código de estado es 404 en ese caso); si no procede dar valor a ``result``o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
+  El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de haberse producido (el código de estado es 404 en ese caso); si no procede dar valor a ``result`` o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
 
     curl --request POST --data '{"item":"leche","cantidad":4}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
@@ -500,9 +498,9 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP,
 
     {
       "result": {
-        "nombre":"xxxxx",
+        "nombre":"fada6",
         "productos":[{"item":"queso","cantidad":1},
-                    {"item":"leche","cantidad":4}]
+                     {"item":"leche","cantidad":4}]
       },
       "error":null
     }
@@ -513,12 +511,12 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP,
 
   Comprobamos que el carrito ha sido actualizado con la nueva cantidad::
 
-    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
+    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
   Finalmente, podemos borrar un producto con la acción DELETE:: 
 
     curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
-    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queremos
+    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
   Con la segunda petición, el servidor devolverá un error indicando que el producto no existe.
 
@@ -528,14 +526,14 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP,
 
   Pero a la hora de hacer una petición en la que el nombre del item forme parte del URL (y no del bloque de datos), es necesario convertir los caracteres especiales a aquellos que puedan formar parte de un URL a través de lo que se conoce como `codificación por ciento`_ (*percent-encoding*)::
 
-    curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
+    curl --request PUT --data '{"cantidad":5}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
 
-  En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para ``curl`` podemos usar `herramientas en línea`_.
+  En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para el programa ``curl`` que se ejecuta en la línea de órdenes podemos usar `herramientas en línea`_.
 
   .. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
   .. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
 
-  Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
+Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
 
   .. literalinclude:: ../../code/carrito/public/carrito.html
     :language: html
@@ -555,18 +553,18 @@ Peticiones CORS
     python -m SimpleHttpServer
     python2 -m SimpleHttpServer
 
-  Si tienes Python 3 instalado en tu sistema, ejecuta desde el directorio donde está ``carrito.html``una de las dos siguientes órdenes::
+  Si tienes Python 3 instalado en tu sistema, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
 
     python -m http.server
     python3 -m http.server
 
-  El servidor te informará del puerto en ``localhost`` desde el que puedes acceder al contenido del directorio. Realiza peticiones desde la aplicación web del carrito y analiza las cabeceras relacionadas con CORS de la petición y la respuesta. Observa cómo las peticiones de tipo POST, PUT o DELETE realizan una comprobación *pre-vuelo* con el verbo OPTIONS. Modifica el cliente para que envíe una cabecera adicional no convencional y observa cómo la respuesta del servidor hace que la petición falle.
+  El servidor te informará del puerto en ``localhost`` desde el que puedes acceder al contenido del directorio. Realiza peticiones desde la aplicación web del carrito y analiza las cabeceras relacionadas con CORS de la petición y la respuesta. Observa cómo las peticiones de tipo POST, PUT o DELETE realizan una comprobación *pre-vuelo* con el verbo OPTIONS. Modifica el cliente para que envíe una cabecera adicional no convencional y observa cómo la respuesta del servidor hace que la petición falle al no devolver el servidor el nombre de la cabecera en la lista devuelta en ``Access-Control-Allow-Headers``.
 
 
 Programación de servicios web en Node.js
 ----------------------------------------
 
-Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y la librería Express como puedes ver en `este código`_.
+Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y el framework Express. Este es el código de la parte del servidor:
 
 .. literalinclude:: ../../code/carrito/index.js
   :language: javascript
@@ -578,9 +576,6 @@ Edición y publicación de la API REST en la nube
 
 En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás a un servidor de aplicaciones en la nube.
 
-.. admonition:: Hazlo tú ahora
-  :class: hazlotu
-
 .. Hint::
 
   Si vas a desarrollar frecuentemente con Node.js, te vendrá bien utilizar la herramienta `nodemon`_, que evita que tengas que matar y volver a lanzar el servidor local cada vez que hagas un cambio en la aplicación.
@@ -591,23 +586,20 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  Modifica ambas para que junto con la cantidad se pueda añadir el precio unitario de cada item. Sigue para ello los siguientes pasos.
+  Modifica la parte del cliente y del servidor de la aplicación del carrito para que junto con la cantidad se pueda añadir el precio unitario de cada item. Sigue para ello los siguientes pasos.
 
-  Instala Node.js en tu ordenador por medio de `Node Version Manager`_ (``nvm``). Descarga el código de la parte del cliente y la parte del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura `_ haciendo::
+  Instala Node.js en tu ordenador por medio de `Node Version Manager`_ (``nvm``). Descarga el código de la parte del cliente y la parte del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura`_ haciendo::
 
     git clone https://github.com/jaspock/dai1920.git
-
-  .. _`Node Version Manager`:: https://github.com/nvm-sh/nvm
-  .. _`repositorio de la asignatura`: https://github.com/jaspock/dai1920
   
   Copia ahora la carpeta `dai1920/code/carrito` en otra ubicación de tu sistema. Abre un terminal dentro de ella y ejecuta::
 
     npm install
     node index.js
 
-  La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto de ``localhost``, por lo que podremos acceder a ella abriendo en el navegador algo como ``localhost:5000``.
+  La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto local, por lo que podremos acceder a ella abriendo en el navegador algo como ``localhost:5000``.
 
-  Puedes ahora realizar los cambios en la aplicación. Salvo que uses ``nodemon`, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. 
+  Puedes ahora realizar los cambios en la aplicación. Salvo que uses ``nodemon``, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. 
 
   Cuando tengas la aplicación lista en local, puedes desplegarla en `Heroku`_ como sigue. Comienza instalando el cliente de línea de órdenes de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
 
@@ -635,6 +627,8 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
 
     heroku open
 
+  .. _`Node Version Manager`: https://github.com/nvm-sh/nvm
+  .. _`repositorio de la asignatura`: https://github.com/jaspock/dai1920
   .. _`instrucciones de esta página`: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
   .. _`desplegar la aplicación`: https://devcenter.heroku.com/articles/git
   .. _`Heroku`: https://www.heroku.com/
