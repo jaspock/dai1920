@@ -22,7 +22,7 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
       - `Una aplicación web local`_
       - 4 noviembre 2019 (extendido)
     * - Práctica #3
-      - Una aplicación con acceso a servicios web de terceros y con componentes web
+      - `Una aplicación con acceso a servicios web de terceros y con componentes web`_
       - 25 noviembre 2019 aprox.
     * - Práctica #4
       - Una aplicación en la nube
@@ -415,4 +415,142 @@ Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior d
 
 Recuerda mantener tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p2-dai.zip`` a través del servidor web del Departamento. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con el fichero ``normal.css``, una carpeta ``img`` con las imágenes de Londres y París, y una carpeta ``js`` con el código en JavaScript.
 
-Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta prática.
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
+
+
+
+Una aplicación con acceso a servicios web de terceros y con componentes web
+---------------------------------------------------------------------------
+
+En esta práctica ampliarás tu práctica anterior para integrarla con diferentes servicios web proporcionados por terceros a través de APIs; en particular, la imagen a mostrar junto al título de cada cuestionario será tomada de alguna de las imágenes relevantes ofrecidas por `Flickr`_; además, cada cuestionario mostrará un pequeño texto extraido de `Wikipedia en español`_ sobre el tema en cuestión. En la segunda parte, crearás algunos componentes web para encapsular adecuadamente toda esta información.
+
+.. _`Flickr`: https://www.flickr.com/
+.. _`Wikipedia en español`: https://es.wikipedia.org/
+
+No está permitido usar jQuery u otras librerías para interactuar con los distintos servicios web, sino que lo has de hacer con el API Fetch estándar estudiado en clase. Tampoco está permitido usar librerías de alto nivel para los componentes web.
+
+Ejemplo de peticiones GET
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lo siguiente es un ejemplo de la petición que has de realizar para obtener información sobre París:
+
+`<https://es.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=extracts&exintro&explaintext&continue&titles=parís>`_
+
+Consulta en la `documentación del API de Wikipedia`_ el propósito de cada parámetro; la mayor parte de ellos, en cualquier caso, proviene de la `extensión TextExtracts`_. Usa algunos ejemplos para determinar cuál es la propiedad de la cadena en JSON devuelta que contiene la información que te interesa y qué ocurre cuando el término no se encuentra en la Wikipedia.
+
+.. _`documentación del API de Wikipedia`: https://www.mediawiki.org/wiki/API:Main_page/en
+.. _`extensión TextExtracts`: https://www.mediawiki.org/wiki/Extension:TextExtracts
+
+Por otro lado, lo siguiente es un ejemplo de la petición que has de realizar a Flickr para obtener las imágenes más relevantes de París (es necesario indicar un valor correcto de ``api_key`` en lugar de ``xxxxx``, según se indica más adelante):
+
+`<https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=xxxxx&text=par%C3%ADs&format=json&per_page=10&media=photos&sort=relevance&nojsoncallback=1>`_
+
+Consulta la `documentación del API de Flickr`_ para entender el propósito de cada parámetro de la llamada anterior; el resultado es una lista de imágenes de la que nos interesa el *id* de la primera para realizar una segunda llamada que nos permita acceder a la URL de dicha imagen:
+
+.. _`documentación del API de Flickr`: https://www.flickr.com/services/api/
+
+`<https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=xxxxxx&photo_id=13942935893&format=json&nojsoncallback=1>`_
+
+De la lista de imágenes devuelta por la petición anterior, te has de quedar con la primera de ellas, que corresponderá a la versión de menor tamaño; ten en cuenta, en cualquier caso, que tu estilo CSS seguirá ajustando la imagen a un tamaño concreto, como se hizo en prácticas anteriores. Usa siempre en tu práctica las dos peticiones consecutivas a Flickr y no intentes componer automáticamente la URL de la imagen tras la primera petición. Además, utiliza el protocolo *https* en todas las peticiones a Wikipedia y Flickr.
+
+Incorporación de información de la Wikipedia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La petición a Wikipedia se hará de forma asíncrona tras añadir el formulario del cuestionario; el resultado devuelto se añadirá inmediatamente antes del nodo del formulario y después del título del cuestionario en un ``div`` con clase ``wiki``. Si no existe ninguna entrada en Wikipedia para el término correspondiente, este ``div`` ha de incluirse pero sin contenido alguno. El estilo aplicado a los elementos de clase ``wiki`` utiliza un tamaño de tipo de letra del 90%; este es el único cambio en el CSS que has de realizar por ahora.
+
+Ten en cuenta que al borrar un cuestionario también se ha de borrar ahora el texto descriptivo asociado. Muestra el contenido del atributo ``extract``, cuando exista, de todas aquellas claves contenidas en ``query.pages`` (``query.pages.*.extract``); si hay más de uno, cada uno aparecerá a continuación del anterior y en el mismo orden en que aparezcan en la respuesta.
+
+Comienza modificando la función ``addFormPregunta`` para que devuelva el nodo del formulario creado. A continuación, crea una función ``addWikipedia`` que reciba como parámetros la cadena con el término a buscar y el nodo que representa el formulario del cuestionario; esta función utiliza el API de la Wikipedia de forma asíncrona para añadir la descripción devuelta por la Wikipedia para el término indicado; el punto de inserción será antes del formulario cuyo nodo se ha pasado como parámetro.
+
+Asegúrate de que a la vez que añades los formularios a los cuestionarios existentes inicialmente (sobre París y Londres), también llamas a ``addWikipedia`` para incorporar la descripción correspondiente. Usa como término a buscar el ``id`` de cada elemento ``section``; para que esto funcione cambia el ``id`` del primer cuestionario de ``paris`` a ``parís`` en el fichero HTML (HTML5 permite casi cualquier carácter como valor de un atributo *id* por lo que puedes utiliza caracteres acentuados sin problema).
+
+No olvides añadir la correspondiente llamada a ``addWikipedia`` a la función ``addCuestionario``.
+
+Usa una `expresión regular`_ y el método ``replace`` aplicado a cadenas de JavaScript para eliminar todos los números entre corchetes (incluyendo los corchetes) del resultado devuelto por la Wikipedia.
+
+.. _`expresión regular`: https://www.tutorialrepublic.com/javascript-tutorial/javascript-regular-expressions.php
+
+Incorporación de la información de Flickr
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Créate en primer lugar un usuario en `Flickr`_ y accede al `apartado de desarrolladores`_ para obtener una clave (*API key*) que usar en el parámetro ``api_key`` de la petición.
+
+.. _`apartado de desarrolladores`: https://www.flickr.com/services/api/misc.api_keys.html
+
+Sigue unos pasos similares a los del texto de la Wikipedia, pero ahora con la imagen. Crea una función ``addFlickr`` que reciba como parámetros la cadena con el término a buscar y el nodo que representa la imagen del cuestionario; esta función utiliza el API de Flickr de forma asíncrona para colocar (como valor del atributo ``src``) en el nodo recibido como parámetro la primera imagen devuelta por Flickr para el término correspondiente según se ha indicado anteriormente. En caso de que no exista ninguna imagen para dicho término, la imagen a mostrar ha de ser `esta del planeta Tierra`_.
+
+.. _`esta del planeta Tierra`: http://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57723/globe_east_540.jpg
+
+Asegúrate de que a la vez que añades los formularios y la descripción de la Wikipedia a los cuestionarios existentes inicialmente (sobre París y Londres), también llamas a ``addFlickr`` para incorporar la imagen correspondiente, que sustituirá a la mostrada inicialmente. Usa de nuevo como término a buscar el ``id`` de cada elemento ``section``.
+
+Finalmente, añade la correspondiente llamada a ``addFlickr`` a la función ``addCuestionario`` y comprueba que se añade correctamente una nueva imagen con cada nuevo cuestionario. Elimina el campo del formulario de nuevo cuestionario que permitía indicar la URL de la imagen a incluir (borra el elemento ``li`` correspondiente), ya que ya no es necesario; asegúrate también de que no queda rastro de él en el código JavaScript.
+
+Creación de los componentes web
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En esta parte final de la práctica has de crear un componente web que muestre el encabezado de cada cuestionario. Este componente web sustituirá al actual bloque de HTML que contiene el título, la imagen y la descripción de cada cuestionario, de manera que en lugar de introducirlo con un código similar a este (y con el correspondiente código de JavaScript):
+
+.. code-block:: html
+
+  <section id="parís">
+
+  <h2><img src="..." alt="...">Cuestionario sobre París</h2>
+  <div class="wiki">...</div>
+
+bastará con hacer:
+
+.. code-block: html
+
+  <section id="parís">
+
+  <encabezado-cuestionario tema="París"></encabezado-cuestionario>
+
+Si repasas bien los contenidos sobre componentes web estudiados en clase, no te debería costar mucho implementar el componente web en un fichero ``encabezado-cuestionario.js``. Ve definiendo el componente sin eliminar hasta el final el código que ya tenías. Ten en cuenta los siguientes detalles:
+
+- Los estilos de ``h2``, ``img`` y ``wiki`` se han de eliminar del CSS global y añadirlos al estilo del componente ``encabezado-cuestionario``.
+
+- Gran parte del código necesario para interactuar con los servicios web de Flickr y Wikipedia lo puedes tomar de las funciones ``addFlickr`` y ``addWikipedia`` que ya tenías definidas, aunque los elementos que creaban estas funciones se añadían al DOM y ahora se añadirán al *shadow DOM*.
+
+- Intenta, en principio, conseguir que algo como
+
+.. code-block: html
+
+  <encabezado-cuestionario tema="Berlín"></encabezado-cuestionario>
+
+funcione en ``index.html``. Cuando lo consigas, sustituye el encabezado de los cuestionarios iniciales existentes en ``index.html`` por el uso del elemento personalizado ``encabezado-cuestionario``. Ya no es necesario, tampoco, tener que añadir el texto de la Wikipedia o la imagen de Flickr a los cuestionarios preexistentes mediante código explícito en JavaScript, sino que el nuevo elemento se encargará de ello.
+
+- Repasa el tema de componentes web visto en clase antes de comenzar a escribir los componentes web. Pon el código en JavaScript que se encarga de acceder a los servicios de Flickr y Wikipedia en la función ``connectedCallback`` de la clase correspondiente y no en el constructor. Pon también en ``connectedCallback`` el acceso al atributo ``tema``.
+
+- Ten en cuenta a qué apunta ``this`` en cada momento; tu código del interior del método ``then`` asociado a una promesa ``fetch`` se ejecutará (cuando el servidor devuelva su respuesta) de forma asíncrona fuera del contexto del componente web; en ese caso, ``this`` no estará apuntando al componente web, por lo que para acceder a sus propiedades tendrás que utilizar correctamente una clausura:
+
+
+.. code-block: javascript
+
+  connectedCallback() {
+    var componente= this;  // aquí this apunta al componente web
+    fetch(...)
+    .then(...)
+    .then(
+      componente.shadowRoot.querySelector(...).textContent= ...;   
+    )
+    ...
+  }
+
+
+- Para terminar, puedes eliminar también las antiguas ``addFlickr`` y ``addWikipedia`` del código de JavaScript, así como sustituir su uso cuando se crean nuevos cuestionarios por código que se encargue de la inserción oportuna del componente web.
+
+Captura de pantalla
+~~~~~~~~~~~~~~~~~~~
+
+Observa `en esta imagen` cómo quedaría la página web una vez añadidos dos cuestionarios y algunas preguntas. Ten en cuenta que el texto descriptivo o las imágenes podrían no corresponderse exactamente con las que los servicios web de Wikipedia o Flickr ofrezcan en el momento en que pruebes tu práctica; en la imagen, además, no se han eliminado los números entre corchetes.
+
+.. _`en esta imagen`: _static/img/dai-p3-captura.png
+
+Entrega de la práctica
+~~~~~~~~~~~~~~~~~~~~~~
+
+Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior del DOM se validan correctamente con los validadores HTML5 y CSS del W3C con excepción de los elementos personalizados, que posiblemente generen algún tipo de error. Además, usa Chrome Developer Tools o Firebug para comprobar que el estilo aplicado en cada punto del documento es correcto y para depurar tu código en JavaScript.
+
+Nota: recuerda mantener un tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p3-dai.zip`` a través del `servidor web del Departamento`. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con el fichero ``normal.css`` y una carpeta ``js`` con el código en JavaScript.
+
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
