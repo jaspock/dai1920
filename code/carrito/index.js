@@ -7,7 +7,7 @@ const MAX_PRODUCTOS= 20;
 // prefijo común de la URL de cada petición:
 const base = '/carrito/v1'
 
-// base de datos: https://github.com/typicode/lowdb
+// base de datos en fichero: https://github.com/typicode/lowdb
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
@@ -95,7 +95,7 @@ app.delete(base+'/:carrito', (req, res) => {
 });
 
 
-const secret= 'qwerty';
+const secret= '12345';
 
 // borra toda la base de datos:
 app.get(base+'/clear', (req,res) => {
@@ -176,7 +176,7 @@ app.get(base+'/', (req, res) => {
   res.send('API web para gestionar carritos de la compra');
 });
 
-app.get(base+'/ayuda', (req, res) => res.sendFile(path.join(public, 'ayuda.html'))
+app.get(base+'/ayuda', (req, res) => res.sendFile(path.join(public, 'index.html'))
 );
 
 app.use('/', express.static(public));
@@ -185,21 +185,3 @@ app.listen(PORT, function () {
   console.log(`Aplicación lanzada en el puerto ${ PORT }!`);
 });
 
-
-// sudo snap install --classic heroku
-
-// Para ejecutar en local:
-// $ npm install  [si existe package.json]
-// $ npm install express lowdb
-// $ node index.js
-
-// $ heroku local web  [o npm start]
-
-// Para desplegar en Heroku:
-// $ git add .
-// $ git commit -m "Descripción de cambios"
-// $ heroku login
-// $ heroku create
-// $ git push heroku master
-// $ heroku open
-// $ heroku ps

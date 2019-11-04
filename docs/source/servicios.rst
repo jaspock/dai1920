@@ -291,9 +291,17 @@ Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas
 El objeto XMLHttpRequest
 ------------------------
 
-En los primeros años de la web, la mayoría de las aplicaciones web seguían el siguiente patrón de comportamiento al realizar, por ejemplo, una búsqueda de un determinado elemento en una base de datos: el usuario rellenaba los valores correspondientes para buscar el elemento en un formulario y pulsaba el botón de enviar; en ese momento, el navegador realizaba una petición al servidor y borraba la página web actual; el servidor realizaba la búsqueda en la base de datos y devolvía entonces una página web completa que el navegador mostraba en sustitución de la anterior. Además de generar una experiencia incómoda al usuario si se compara con una aplicación tradicional de escritorio (el usuario ha de esperar a que se cargue de nuevo toda la página para seguir interactuando con la aplicación), este procedimiento es muy ineficiente cuando la  la página web tiene mucho contenido que apenas cambia, y que, sin embargo, es enviado continuamente por el servidor. 
+En los primeros años de la web, la mayoría de las aplicaciones web seguían el siguiente patrón de comportamiento al realizar, por ejemplo, una búsqueda de un determinado elemento en una base de datos: el usuario rellenaba los valores correspondientes para buscar el elemento en un formulario y pulsaba el botón de enviar; en ese momento, el navegador realizaba una petición al servidor y borraba la página web actual; el servidor realizaba la búsqueda en la base de datos y devolvía entonces una página web completa que el navegador mostraba en sustitución de la anterior. Además de generar una experiencia incómoda al usuario si se compara con una aplicación tradicional de escritorio (el usuario ha de esperar a que se cargue de nuevo toda la página para seguir interactuando con la aplicación), este procedimiento es muy ineficiente cuando la página web tiene mucho contenido que apenas cambia, y que, sin embargo, es enviado continuamente por el servidor. 
 
-Sin embargo, a partir de finales de los noventa y especialmente en los primeros años del siglo XXI, los desarrolladores comienzan a explotar el uso de funcionalidades de los navegadores que permiten realizar peticiones a un servidor sin tener que recargar la página completa. A estas técnicas se les denomina Ajax por razones históricas: el término lo acuñó un desarrollador en 2005 como acrónimo de *Asynchronous JavaScript and XML*. Con Ajax, los datos devueltos por el servidor se usan para generar dinámicamente HTML que es insertado convenientemente en el árbol DOM. La más usada de las técnicas Ajax se basaba en el objeto ``XMLHttpRequest`` (para abreviar se suele llamar *XHR*) que permite, como se ha comentado, solicitar (normalmente de forma asícrona) una serie de datos al servidor desde JavaScript en lugar de una página completa que reemplazará a la actual. Estos datos serán, entonces, procesados por una función definida por el programador.
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Prepárate para este tema, leyendo en primer lugar los capítulos sobre `desarrollo en el lado del cliente`_ y `peticiones Ajax`_ del libro "Client-Side Web Development".
+
+  .. _`desarrollo en el lado del cliente`: https://info340.github.io/client-side-development.html
+  .. _`peticiones Ajax`: https://info340.github.io/ajax.html
+
+A partir de finales de los noventa y especialmente en los primeros años del siglo XXI, los desarrolladores comienzan a explotar el uso de funcionalidades de los navegadores que permiten realizar peticiones a un servidor sin tener que recargar la página completa. A estas técnicas se les denomina Ajax por razones históricas: el término lo acuñó un desarrollador en 2005 como acrónimo de *Asynchronous JavaScript and XML*. Con Ajax, los datos devueltos por el servidor se usan para generar dinámicamente HTML que es insertado convenientemente en el árbol DOM, conformando lo que se conoce como *aplicaciones de una solo página* (*single-page applications*). La más usada de las técnicas Ajax se basaba en el objeto ``XMLHttpRequest`` (para abreviar se suele llamar *XHR*) que permite, como se ha comentado, solicitar (normalmente de forma asícrona) una serie de datos al servidor desde JavaScript en lugar de una página completa que reemplazará a la actual. Estos datos serán, entonces, procesados por una función definida por el programador.
 
 El siguiente es un ejemplo típico de uso:
 
@@ -532,7 +540,11 @@ En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURICompone
 .. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
 .. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
 
-Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación.
+Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
+
+.. literalinclude:: ../../code/carrito/public/carrito.html
+  :language: html
+  :linenos:
 
 .. _`gestión de carritos de la compra`: https://shrieking-caverns-53704.herokuapp.com/carrito.html
 
@@ -543,7 +555,7 @@ Peticiones CORS
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  La API REST del carrito soporta peticiones Fetch realizadas desde programas en JavaScript descargados de dominios diferentes al dominio en el que está ubicada la API. Para comprobarlo, abre el fichero ``carrito.html`` desde un servidor web local. Si tienes Python 2 instalado, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
+  La API REST del carrito soporta peticiones Fetch realizadas desde programas en JavaScript descargados de dominios diferentes al dominio en el que está ubicada la API. Para comprobarlo, abre el fichero ``carrito.html`` desde un servidor web local; recuerda cambiar antes la variable ``base`` de JavaScript para que apunte al *endpoint* de la API que has usado en la actividad anterior. Si tienes Python 2 instalado, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
 
     python -m SimpleHttpServer
     python2 -m SimpleHttpServer
@@ -561,19 +573,18 @@ Programación de servicios web en Node.js
 
 Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y la librería Express como puedes ver en `este código`_.
 
-.. _`este código`: _static/data/carrito/server.js
+.. literalinclude:: ../../code/carrito/index.js
+  :language: javascript
+  :linenos:
 
 
-Publicación de la API REST en la nube
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Edición y publicación de la API REST en la nube
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás a un servidor.
+En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás a un servidor de aplicaciones en la nube.
 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
-
-  Instala Node.js en tu ordenador por medio de `Node Version Manager`_ (``nvm``). Descarga el código de la parte del cliente y la parte del servidor de la aplicación del carrito. Modifica ambas para que junto con la cantidad se pueda añadir el precio unitario de cada item.
-
 
 .. Hint::
 
@@ -585,22 +596,59 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  Publica la aplicación anterior en la nube de `Heroku`_ usando tu propia cuenta gratuita. Comienza creándote un usuario. Instala después el cliente de línea de órdenes (*Heroku CLI*) siguiendo las `instrucciones de esta página`_.  Identifícate con este cliente ejecutando::
+  Modifica ambas para que junto con la cantidad se pueda añadir el precio unitario de cada item. Sigue para ello los siguientes pasos.
+
+  Instala Node.js en tu ordenador por medio de `Node Version Manager`_ (``nvm``). Descarga el código de la parte del cliente y la parte del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura `_ haciendo::
+
+    git clone https://github.com/jaspock/dai1920.git
+
+  .. _`Node Version Manager`:: https://github.com/nvm-sh/nvm
+  .. _`repositorio de la asignatura`: https://github.com/jaspock/dai1920
+  
+  Copia ahora la carpeta `dai1920/code/carrito` en otra ubicación de tu sistema. Abre un terminal dentro de ella y ejecuta::
+
+    npm install
+    node index.js
+
+  La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto de ``localhost``, por lo que podremos acceder a ella abriendo en el navegador algo como ``localhost:5000``.
+
+  Puedes ahora realizar los cambios en la aplicación. Salvo que uses ``nodemon`, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. 
+
+  Cuando tengas la aplicación lista en local, puedes desplegarla en `Heroku`_ como sigue. Comienza instalando el cliente de línea de órdenes de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
+
+    sudo snap install --classic heroku
+
+  Continúa haciendo::
+  
+    git init
+    git add .
+    git commit -m "cambios"
+
+  Con lo anterior, se crea un repositorio con los ficheros del proyecto, que podrás subir (*push*) a Heroku. Identifícate en el cliente de Heroku ejecutando::
 
     heroku login
 
-  Desde este momento ya podrás `desplegar la aplicación`_ con 
+  Crea un proyecto haciendo::
 
-git init
-Initialized empty Git repository in .git/
-git add .
-git commit -m "My first commit"
-heroku create
-heroku git:remote -a thawing-inlet-61413
+    heroku create
 
-  .. _`Heroku`: https://www.heroku.com/
+  Desde este momento ya podrás `desplegar la aplicación`_ con::
+
+    git push heroku master
+
+  Y abrirla en el navegador con::
+
+    heroku open
+
   .. _`instrucciones de esta página`: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
   .. _`desplegar la aplicación`: https://devcenter.heroku.com/articles/git
+  .. _`Heroku`: https://www.heroku.com/
+
+  Si haces cambios en la aplicación, basta con repetir estos pasos para actualizar la aplicación en Heroku::
+
+    git add .
+    git commit -m "cambios"
+    git push heroku master
 
 
 Términos de uso de las APIs web
