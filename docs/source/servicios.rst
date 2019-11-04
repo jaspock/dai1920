@@ -468,85 +468,80 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP,
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  Estudia una API REST *de juguete* para gestionar `carritos de la compra`_. Realiza las peticiones al servidor desde el programa `Postman`_ cargando una `colección ya creada`_ de peticiones pulsando el siguiente botón.
-      
-  .. _`carritos de la compra`: https://pacific-retreat-67356.herokuapp.com
-  .. _`colección ya creada`: https://www.getpostman.com/collections/10c494041155cf189a7f
+  En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
 
-En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
+    endpoint=https://limitless-waters-71428.herokuapp.com/carrito/v1/
 
-  endpoint=https://shrieking-caverns-53704.herokuapp.com/carrito/v1/
+  .. Note::
 
-.. Note::
+    La sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para tu sistema operativo, la sintaxis podría ser ligeramente diferente.
 
-  La sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para tu sistema operativo, la sintaxis podría ser ligeramente diferente.
+  El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo GET::
 
-El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo GET::
+    curl --request POST --header 'content-type:application/json' -v $endpoint/carrito
 
-  curl --request POST --header 'content-type:application/json' -v $endpoint/carrito
+  La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl``muestre información más detallada sobre la petición y la respuesta. La petición anterioir nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
 
-La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl``muestre información más detallada sobre la petición y la respuesta. La petición anterioir nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
+    carrito=fada6
 
-  carrito=fada6
+  Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar hasta un minuto en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
 
-Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar hasta un minuto en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
+    curl --request POST --data '{"item":"queso","cantidad":1}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  curl --request POST --data '{"item":"queso","cantidad":1}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de hacerlo (el código de estado es 404 en ese caso); si no procede dar valor a ``result``o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
 
-El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de hacerlo (el código de estado es 404 en ese caso); si no procede dar valor a ``result``o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
+    curl --request POST --data '{"item":"leche","cantidad":4}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  curl --request POST --data '{"item":"leche","cantidad":4}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  Para obtener la composición de un carrito, usaremos el verbo GET::
 
-Para obtener la composición de un carrito, usaremos el verbo GET::
+    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
+  Obtendremos una respuesta como la siguiente::
 
-Obtendremos una respuesta como la siguiente::
+    {
+      "result": {
+        "nombre":"xxxxx",
+        "productos":[{"item":"queso","cantidad":1},
+                    {"item":"leche","cantidad":4}]
+      },
+      "error":null
+    }
 
-  {
-    "result": {
-      "nombre":"xxxxx",
-      "productos":[{"item":"queso","cantidad":1},
-                   {"item":"leche","cantidad":4}]
-    },
-    "error":null
-  }
+  Para modificar la cantidad de un item ya existente en el carrito, usaremos la acción PUT e indicaremos la nueva cantidad en JSON en el bloque de datos::
 
-Para modificar la cantidad de un item ya existente en el carrito, usaremos la acción PUT e indicaremos la nueva cantidad en JSON en el bloque de datos::
+    curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
-  curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+  Comprobamos que el carrito ha sido actualizado con la nueva cantidad::
 
-Comprobamos que el carrito ha sido actualizado con la nueva cantidad::
+    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
+  Finalmente, podemos borrar un producto con la acción DELETE:: 
 
-Finalmente, podemos borrar un producto con la acción DELETE:: 
+    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queremos
 
-  curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
-  curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queremos
+  Con la segunda petición, el servidor devolverá un error indicando que el producto no existe.
 
-Con la segunda petición, el servidor devolverá un error indicando que el producto no existe.
+  Si quisiéramos añadir un nuevo item cuyo nombre lleve algún carácter especial (por ejemplo, la vocal con tilde de *jamón*), lo podemos hacer como en los casos anteriores::
 
-Si quisiéramos añadir un nuevo item cuyo nombre lleve algún carácter especial (por ejemplo, la vocal con tilde de *jamón*), lo podemos hacer como en los casos anteriores::
+    curl --request POST --data '{"item":"jamón","cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  curl --request POST --data '{"item":"jamón","cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  Pero a la hora de hacer una petición en la que el nombre del item forme parte del URL (y no del bloque de datos), es necesario convertir los caracteres especiales a aquellos que puedan formar parte de un URL a través de lo que se conoce como `codificación por ciento`_ (*percent-encoding*)::
 
-Pero a la hora de hacer una petición en la que el nombre del item forme parte del URL (y no del bloque de datos), es necesario convertir los caracteres especiales a aquellos que puedan formar parte de un URL a través de lo que se conoce como `codificación por ciento`_ (*percent-encoding*)::
+    curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
 
-  curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
+  En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para ``curl`` podemos usar `herramientas en línea`_.
 
-En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para ``curl`` podemos usar `herramientas en línea`_.
+  .. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
+  .. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
 
-.. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
-.. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
+  Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
 
-Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
+  .. literalinclude:: ../../code/carrito/public/carrito.html
+    :language: html
+    :linenos:
 
-.. literalinclude:: ../../code/carrito/public/carrito.html
-  :language: html
-  :linenos:
-
-.. _`gestión de carritos de la compra`: https://shrieking-caverns-53704.herokuapp.com/carrito.html
+  .. _`gestión de carritos de la compra`: https://limitless-waters-71428.herokuapp.com/carrito.html
 
 
 Peticiones CORS
@@ -630,7 +625,7 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
 
   Crea un proyecto haciendo::
 
-    heroku create
+    heroku create --region eu
 
   Desde este momento ya podrás `desplegar la aplicación`_ con::
 
