@@ -1,0 +1,5 @@
+{
+  "name": "Un carrito de la compra con Node.js",
+  "description": "Un API web sencillo con Express para gestionar carritos de la compra",
+  "keywords": ["node", "express", "compra"]
+}

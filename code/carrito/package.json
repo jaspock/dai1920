@@ -1,0 +1,17 @@
+{
+  "name": "carrito",
+  "version": "0.1.0",
+  "description": "Un API web sencillo con Express para gestionar carritos de la compra",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "~4.17.1",
+    "lowdb": "~1.0.0",
+    "nodemon": "^1.19.4"
+  }
+}
+
