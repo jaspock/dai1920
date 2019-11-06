@@ -20,10 +20,10 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
       - 7 octubre 2019
     * - Práctica #2
       - `Una aplicación web local`_
-      - 4 noviembre 2019 (extendido)
+      - 4 noviembre 2019
     * - Práctica #3
       - `Una aplicación con acceso a servicios web de terceros y con componentes web`_
-      - 25 noviembre 2019 aprox.
+      - 25 noviembre 2019
     * - Práctica #4
       - Una aplicación en la nube
       - 23 diciembre 2019 aprox.
@@ -462,7 +462,7 @@ Ten en cuenta que al borrar un cuestionario también se ha de borrar ahora el te
 
 Comienza modificando la función ``addFormPregunta`` para que devuelva el nodo del formulario creado. A continuación, crea una función ``addWikipedia`` que reciba como parámetros la cadena con el término a buscar y el nodo que representa el formulario del cuestionario; esta función utiliza el API de la Wikipedia de forma asíncrona para añadir la descripción devuelta por la Wikipedia para el término indicado; el punto de inserción será antes del formulario cuyo nodo se ha pasado como parámetro.
 
-Asegúrate de que a la vez que añades los formularios a los cuestionarios existentes inicialmente (sobre París y Londres), también llamas a ``addWikipedia`` para incorporar la descripción correspondiente. Usa como término a buscar el ``id`` de cada elemento ``section``; para que esto funcione cambia el ``id`` del primer cuestionario de ``paris`` a ``parís`` en el fichero HTML (HTML5 permite casi cualquier carácter como valor de un atributo *id* por lo que puedes utiliza caracteres acentuados sin problema).
+Asegúrate de que a la vez que añades los formularios a los cuestionarios existentes inicialmente (sobre París y Londres), también llamas a ``addWikipedia`` para incorporar la descripción correspondiente. Usa como término a buscar el ``id`` de cada elemento ``section``; para que esto funcione cambia el ``id`` del primer cuestionario de ``paris`` a ``parís`` en el fichero HTML (HTML5 permite casi cualquier carácter como valor de un atributo *id* por lo que puedes utiliza caracteres acentuados sin problema). *Nota:* para los cuestionarios añadidos dinámicamente no usarás el *id*, ya que este tendrá la forma *c1*, *c2*, etc., sino que usarás el tema obtenido del formulario de inserción.
 
 No olvides añadir la correspondiente llamada a ``addWikipedia`` a la función ``addCuestionario``.
 
@@ -511,9 +511,9 @@ Si repasas bien los contenidos sobre componentes web estudiados en clase, no te 
 
 - Gran parte del código necesario para interactuar con los servicios web de Flickr y Wikipedia lo puedes tomar de las funciones ``addFlickr`` y ``addWikipedia`` que ya tenías definidas, aunque los elementos que creaban estas funciones se añadían al DOM y ahora se añadirán al *shadow DOM*.
 
-- Intenta, en principio, conseguir que algo como
+- Intenta, en principio, conseguir que algo como:
 
-.. code-block: html
+.. code-block:: html
 
   <encabezado-cuestionario tema="Berlín"></encabezado-cuestionario>
 
@@ -542,9 +542,9 @@ funcione en ``index.html``. Cuando lo consigas, sustituye el encabezado de los c
 Captura de pantalla
 ~~~~~~~~~~~~~~~~~~~
 
-Observa `en esta imagen` cómo quedaría la página web una vez añadidos dos cuestionarios y algunas preguntas. Ten en cuenta que el texto descriptivo o las imágenes podrían no corresponderse exactamente con las que los servicios web de Wikipedia o Flickr ofrezcan en el momento en que pruebes tu práctica; en la imagen, además, no se han eliminado los números entre corchetes.
+Observa `en una imagen`_ cómo quedaría la página web una vez añadidos dos cuestionarios y algunas preguntas. Ten en cuenta que el texto descriptivo o las imágenes podrían no corresponderse exactamente con las que los servicios web de Wikipedia o Flickr ofrezcan en el momento en que pruebes tu práctica; en la imagen, además, no se han eliminado los números entre corchetes.
 
-.. _`en esta imagen`: _static/img/dai-p3-captura.png
+.. _`en una imagen`: _static/img/dai-p3-captura.png
 
 Entrega de la práctica
 ~~~~~~~~~~~~~~~~~~~~~~
