@@ -470,7 +470,7 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP 
 
   En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
 
-    endpoint=https://limitless-waters-71428.herokuapp.com/carrito/v1/
+    endpoint=https://limitless-waters-71428.herokuapp.com/carrito/v1
 
   *Nota:* la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.
 
