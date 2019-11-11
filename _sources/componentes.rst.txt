@@ -20,9 +20,9 @@ Los componentes web son un conjunto de estándares que facilitan la reutilizaci�
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  A modo introductorio, lee la breve descripción de las tecnologías de los componentes web que puedes encontrar en `webcomponents.org`_. 
+  A modo introductorio, lee la parte 1 de la `introducción a los componentes web`_ de Caleb Williams. 
 
-  .. _`webcomponents.org`: https://www.webcomponents.org/introduction
+  .. _`introducción a los componentes web`: https://css-tricks.com/an-introduction-to-web-components/
 
 
 Componentes web
