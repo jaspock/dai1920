@@ -36,7 +36,7 @@ Las herramientas para desarrolladores que incorporan los navegadores permiten es
 
 .. Note:
 
-Las peticiones lanzadas desde la barra de direcciones del navegador son siempre de tipo GET. Para estudiar los otros tipos de peticiones de HTTP, necesitamos crear un formulario para peticiones de tipo POST, o, si queremos poder usar cualquier verbo, escribir código en JavaScript (usando la API Fetch que estudiáremos después) u otro lenguaje de programación. También hay herramientas como `Postman`_, una aplicación que permite crear cómodamente colecciones de peticiones a APIs (*application programming interfaces*).
+Las peticiones lanzadas desde la barra de direcciones del navegador son siempre de tipo GET. Para estudiar los otros tipos de peticiones de HTTP, necesitamos crear un formulario para peticiones de tipo POST, o, si queremos poder usar cualquier verbo, escribir código en JavaScript (usando la API Fetch que estudiáremos después) u otro lenguaje de programación. También hay herramientas como `Postman`_, una aplicación que permite crear cómodamente colecciones de peticiones a APIs (*application programming interfaces*). La herramienta ``curl`` es similar pero funciona desde la línea de órdenes.
 
 .. _`Postman`: https://www.getpostman.com/
 
@@ -128,24 +128,22 @@ Además, si encapsulamos el código de creación de la promesa en una función, 
 .. code-block:: 
   :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas731"></script>
-  <div id="promesas731">
-    function aleatorio() {
-      return new Promise( (resolve,reject) => {
-        setTimeout( () => {
-          const r= Math.random();
-          if (r<0.5) {
-            resolve('la cosa fue bien');
-          }
-          else {
-            reject(Error('algo salió mal'));
-          }
-        }, 1000);
-    });
+  function aleatorio() {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<0.5) {
+          resolve('la cosa fue bien');
+        }
+        else {
+          reject(Error('algo salió mal'));
+        }
+      }, 1000);
+  });
 
-    aleatorio()
-      .then( (mensaje) => {console.log(`Promesa cumplida: ${mensaje}`);})
-      .catch( (mensaje) => {console.log(`Promesa incumplida: ${error.message}`);});
+  aleatorio()
+    .then( (mensaje) => {console.log(`Promesa cumplida: ${mensaje}`);})
+    .catch( (mensaje) => {console.log(`Promesa incumplida: ${error.message}`);});
   </div>
 
 
@@ -200,53 +198,51 @@ En este caso, la segunda promesa establece una clausura con el parámetro de la 
 .. code-block:: 
   :linenos:
 
-  <script src="https://embed.runkit.com" data-element-id="promesas230"></script>
-  <div id="promesas230">
-    aleatorio()
-      .then(primerMensaje)
-      .then(segundoMensaje)
-      .catch(mensajeError);
+  aleatorio()
+    .then(primerMensaje)
+    .then(segundoMensaje)
+    .catch(mensajeError);
 
-    function primerMensaje (mensaje) {
-      console.log(`Primera promesa cumplida: ${mensaje}`);
-      return aleatorio2(0.8);
-    }
+  function primerMensaje (mensaje) {
+    console.log(`Primera promesa cumplida: ${mensaje}`);
+    return aleatorio2(0.8);
+  }
 
-    function segundoMensaje (mensaje) {
-      console.log(`Segunda promesa cumplida: ${mensaje}`);
-    }
+  function segundoMensaje (mensaje) {
+    console.log(`Segunda promesa cumplida: ${mensaje}`);
+  }
 
-    function mensajeError (error) {
-      console.log(`Una de las promesas fue incumplida: ${error.message}`);
-    }
+  function mensajeError (error) {
+    console.log(`Una de las promesas fue incumplida: ${error.message}`);
+  }
 
-    function aleatorio() {
-      return new Promise( (resolve,reject) => {
-        setTimeout( () => {
-          const r= Math.random();
-          if (r<0.5) {
-            resolve('la cosa fue bien');
-          }
-          else {
-            reject(Error('algo salió mal'));
-          }
-        }, 1000);
-      });
-    }
+  function aleatorio() {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<0.5) {
+          resolve('la cosa fue bien');
+        }
+        else {
+          reject(Error('algo salió mal'));
+        }
+      }, 1000);
+    });
+  }
 
-    function aleatorio2(delta) {
-      return new Promise( (resolve,reject) => {
-        setTimeout( () => {
-          const r= Math.random();
-          if (r<delta) {
-            resolve('me encanta que los planes salgan bien');
-          }
-          else {
-            reject(Error('peor imposible'));
-          }
-        }, 1000);
-      });
-    }
+  function aleatorio2(delta) {
+    return new Promise( (resolve,reject) => {
+      setTimeout( () => {
+        const r= Math.random();
+        if (r<delta) {
+          resolve('me encanta que los planes salgan bien');
+        }
+        else {
+          reject(Error('peor imposible'));
+        }
+      }, 1000);
+    });
+  }
   
 
 Uno de los motivos de la introducción de las promesas en JavaScript fue precisamente el de simplificar la escritura de código en los frecuentes casos que los que un evento asíncrono dispara a su terminación otro evento asíncrono que dispara a su vez un nuevo evento asíncrono, etc. El código sin promesas termina teniendo una cantidad tal de ámbitos que su escritura y su lectura se hacen muy dificultosas:
@@ -286,6 +282,55 @@ Uno de los motivos de la introducción de las promesas en JavaScript fue precisa
 Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas`_ que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.
 
 .. _`funciones asíncronas`: https://developers.google.com/web/fundamentals/primers/async-functions
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Sabiendo que no hay ningún error en el siguiente código, indica la salida que emite por consola el siguiente bloque de JavaScript:
+
+  .. code-block:: javascript
+
+    p1()
+    .then( (x) => { console.log(x*x); return p2(x+1,x+2,x+3); } )
+    .then( (x) => { console.log(x.a+x.b); x.a++; return true; } )
+    .catch( (x) => console.log(x.a*x.b) );
+
+    function p1() {
+      return new Promise( (resolve,reject) => resolve(2) );
+    }
+    
+    function p2(a,b) {
+      return new Promise( (resolve,reject) => reject( {a:a,b:a*b} ) );
+    }
+
+  .. solución: 4,36, https://jsfiddle.net/tb5vya3r/
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Sabiendo que no hay ningún error en el siguiente código, indica con qué valor hay que sustituir las expresiones ``@1`` y ``@2`` en el siguiente código para que la salida emitida por consola sea 5:
+
+  .. code-block::
+
+    new Promise( (resolve,reject) => resolve( {a:0,b:2} ) )
+    .then( (x) => { 
+      return new Promise (
+        function (resolve,reject) {
+          if (x.a+5===@1 && x.b*x.b*x.b===@2) {
+            resolve(x.a+5);
+          }
+          else {
+            reject(x.b+2);
+          }
+        }
+      )
+    })
+    .then( (x) => console.log(x) )
+    .catch( (x) => console.log(x) );
+
+.. solución: @1=5,@2=8, https://jsfiddle.net/dLxq5n0k/
+
+
 
 
 El objeto XMLHttpRequest
@@ -388,8 +433,8 @@ En los últimos años, sin embargo, los navegadores han comenzado a implementar 
   })
   .then(function(responseAsJson) {
     for (var i=0; i<responseAsJson.length;i++) {
-          resultado.textContent+= responseAsJson[i].title+"; ";
-  }
+      resultado.textContent+= responseAsJson[i].title+"; ";
+    }
   })
   .catch(function(error) {
     console.log('Ha habido un problema: ', error);
@@ -438,6 +483,54 @@ También debería ser fácil de entender el siguiente código, que añade un pas
 
 
 Las peticiones realizadas por ``fetch`` son, por defecto, de tipo GET. Más adelante, veremos como realizar peticiones con otros verbos, añadir información en JSON o dar valor a ciertas cabeceras de HTTP.
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Teníamos un fragmento correcto de código en JavaScript que realizaba una petición asíncrona a ``http://example.com/movies.json/birdbox`` y mostraba por consola el valor del atributo ``title`` de los datos en JSON devueltos por el servidor. Lamentablemente, las líneas de nuestro programa se han desordenado y, además, mezclado con líneas de otros programas. Indica la secuencia de líneas, de entre las siguientes, que permiten reconstruir el programa original. Una posible respuesta (incorrecta) sería *03,09,04*.
+
+  .. code-block::
+  
+    01    .then(function(r) {
+    02    .then(
+    03    })
+    04    console.log(title);
+    05    .then(title)
+    06    console.log(movie.title);
+    07    .then(function(movie) {
+    08    console.log(r.json().title);
+    09    });
+    10    fetch('http://example.com/movies.json/birdbox')
+    11    return r.json();
+    12    fetch(function('http://example.com/movies.json/birdbox'))
+
+  .. solución: 10,01,11,03,07,06,09
+
+
+.. admonition:: :problema-contador:`Problema`
+
+  Indica los tres errores de formato que hay en la representación en JSON del siguiente dato y cómo los solucionarías con la menor cantidad de modificaciones.
+
+  .. code-block::
+    :linenos:
+
+    {
+      "name": "Duke",
+      age: 18,
+      "streetAddress": "100 Internet Dr",
+      "city":"New York",
+      "married": true
+      "sex": male,
+      "companies": [],
+      "universities": [{}  ],
+      "phoneNumbers": [
+        { "Mobile": "1111111111" },
+        { "Mobile": 2222222222 },
+        33333
+      ]
+    }
+
+.. solución: "age", "true,", "male"
 
 
 La política del mismo origen
@@ -638,6 +731,10 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
     git add .
     git commit -m "cambios"
     git push heroku master
+
+  Puedes ir viendo los *logs* de actividad en tu servidor con::
+
+    heroku logs --tail
 
 
 Términos de uso de las APIs web
