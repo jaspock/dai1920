@@ -162,7 +162,7 @@
             
   <div class="section" id="componentes-web">
 <h1>5. Componentes web<a class="headerlink" href="#componentes-web" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Los componentes web son un nuevo conjunto de estándares que facilitan la reutilización de los elementos que se suelen definir en una aplicación web. La tecnología de los componentes web se basa en dos elementos estandarizados principales: el <em>DOM ensombrecido</em> (<em>shadow DOM</em>), que permite modificar la presentación de una parte de la página web sin modificar el DOM global (o <em>DOM iluminado</em>, <em>light DOM</em>, nombre que se ha popularizado para diferenciar el DOM clásico del DOM ensombrecido), y las <em>plantillas</em> (<em>templates</em>), que permiten encapsular bloques de contenido (HTML), presentación (CSS) y funcionalidad (JavaScript) de forma que no interaccionen con el resto de elementos de la página y solo quede expuesta la parte de ellos que desee el desarrollador. Otra tecnología estándar implicada son los <em>elementos personalizados</em> (<em>custom elements</em>), que permiten al desarrollador crear sus propios elementos de HTML.</p>
+<p>Los componentes web son un conjunto de estándares que facilitan la reutilización de los elementos que se suelen definir en una aplicación web. La tecnología de los componentes web se basa en dos elementos estandarizados principales: el <em>DOM ensombrecido</em> (<em>shadow DOM</em>), que permite modificar la presentación de una parte de la página web sin modificar el DOM global (o <em>DOM iluminado</em>, <em>light DOM</em>, nombre que se ha popularizado para diferenciar el DOM clásico del DOM ensombrecido), y las <em>plantillas</em> (<em>templates</em>), que permiten encapsular bloques de contenido (HTML), presentación (CSS) y funcionalidad (JavaScript) de forma que no interaccionen con el resto de elementos de la página y solo quede expuesta la parte de ellos que desee el desarrollador. Otra tecnología estándar implicada son los <em>elementos personalizados</em> (<em>custom elements</em>), que permiten al desarrollador crear sus propios elementos de HTML.</p>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
 <p>Las habilidades que deberías adquirir con este tema incluyen las siguientes:</p>
@@ -185,7 +185,58 @@
 <p>Vamos a ver las tecnologías de <em>shadow DOM</em>, elementos personalizados y plantillas juntas en acción. La página web que aparece más abajo incluye un elemento <code class="docutils literal notranslate"><span class="pre">&lt;template&gt;</span></code> cuyo contenido no es mostrado por el motor del navegador; la idea es que un script de JavaScript se referirá posteriormente a esta plantilla (a través de su id) para instanciar un elemento e insertarlo convenientemente en el árbol DOM, como puedes observar en el constructor de la clase <code class="docutils literal notranslate"><span class="pre">Operaciones</span></code>. Como esta plantilla será instanciada dentro de un <em>shadow DOM</em>, los estilos CSS que incluye no modificarán a elementos de otras partes del árbol DOM. También se incluye código en JavaScript que no será ejecutado hasta que el componente se instancie. Por último, la plantilla contiene código HTML que será el que se inserte en el árbol DOM al instanciar el elemento.</p>
 <p>Como veremos a continuación, nuestro ejemplo define un elemento personalizado <code class="docutils literal notranslate"><span class="pre">&lt;calcula-operaciones&gt;</span></code> que se puede usar (es decir, instanciar) en una o más partes de nuestro documento HTML.</p>
 <p>La definición del elemento personalizado se hace mediante una clase (recuerda que desde ES6 puede usarse <code class="docutils literal notranslate"><span class="pre">class</span></code>) que deriva de <code class="docutils literal notranslate"><span class="pre">HTMLElement</span></code>. El nombre de la clase (<code class="docutils literal notranslate"><span class="pre">Operaciones</span></code> en este caso) se pasa al método <code class="docutils literal notranslate"><span class="pre">customElements.define</span></code> para definir el elemento HTML personalizado; el nombre del elemento ha de llevar obligatoriamente un guión. La clase <code class="docutils literal notranslate"><span class="pre">Operaciones</span></code> tiene en este ejemplo solo un método constructor que llama al constructor de la clase padre, clona la plantilla mediante el método <code class="docutils literal notranslate"><span class="pre">cloneNode</span></code>, crea un nodo ensombrecido vinculado a la instancia del elemento y, finalmente, añade el nodo clonado al nodo ensombrecido del elemento.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -238,10 +289,87 @@
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>El <em>árbol ensombrecido</em> se comporta como un árbol DOM normal, salvo que no es visible desde fuera: por ejemplo, el elemento <code class="docutils literal notranslate"><span class="pre">&lt;h1&gt;</span></code> del <em>DOM ensombrecido</em> no aparecerá nunca si buscamos con <code class="docutils literal notranslate"><span class="pre">document.querySelectorAll(&quot;h1&quot;)</span></code> desde un script de fuera del componente web; además, los estilos que definamos para <code class="docutils literal notranslate"><span class="pre">&lt;h1&gt;</span></code> dentro del <em>shadow DOM</em> no afectarán a los elementos del árbol principal.</p>
 <p>Permitamos ahora personalizar los mensajes. Para ello, vamos a incluir dentro de cada instancia del elemento <code class="docutils literal notranslate"><span class="pre">calcula-operaciones</span></code> dos bloques de código HTML identificados mediante un nombre indicado en el atributo <code class="docutils literal notranslate"><span class="pre">slot</span></code>. Dentro de la plantilla, podemos insertar el contenido de estos bloques usando el elemento <code class="docutils literal notranslate"><span class="pre">slot</span></code> e indicando en su atributo <code class="docutils literal notranslate"><span class="pre">name</span></code> el identificador del bloque a insertar. Además, vamos a mejorar también un poco el estilo del componente web rodeándolo con un borde; como se trata de un estilo asociado al elemento completo (que se conoce como <em>shadow host</em>), usamos el selector de CSS <code class="docutils literal notranslate"><span class="pre">:host</span></code>. Observa en el ejemplo que podemos instanciar un componente web más de una vez en un mismo documento HTML.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -320,9 +448,95 @@
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
-</div>
-<p>Que el componente web realice siempre la multiplicación de los mismos números no tiene mucha gracia. Vamos a hacer que los valores a multiplicar se definan como atributos del elemento. Como en el constructor todavía no puede accederse a los atributos con el método <code class="docutils literal notranslate"><span class="pre">this.getAttribute</span></code>, lo dejamos para el método <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> que será invocado por el navegador tras instanciar el componente web.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</td></tr></table></div>
+<p>Que el componente web realice siempre la multiplicación de los mismos números no tiene mucha gracia. Vamos a hacer que los valores a multiplicar se definan como atributos del elemento. Según la especificación de los componentes web, en el constructor todavía no se puede acceder a los atributos del elemento; por ello, el acceso con el método <code class="docutils literal notranslate"><span class="pre">this.getAttribute</span></code> lo dejamos para el método estándar <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> que será invocado por el navegador tras instanciar el componente web.</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -410,9 +624,28 @@
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>Ahora vamos a modularizar y encapsular el diseño anterior para que otros puedan usar nuestro componente web sin tener que incluir todo lo anterior en su documento HTML.</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
@@ -433,9 +666,71 @@
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>El contenido del fichero <code class="docutils literal notranslate"><span class="pre">calcula-operaciones.js</span></code> es el siguiente:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(function() {
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span>(function() {
   const template = document.createElement(&#39;template&#39;);
 
   template.innerHTML = `
@@ -499,12 +794,357 @@
 
 })();
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>El código anterior se ha encapsulado dentro de lo que se conoce como una <em>función invocada inmediatamente</em> (<em>immediately-invoked function expressions</em>, IIFE), que permite no contaminar el espacio de nombres global con variables que podrían estar siendo también definidas en otras librerías, evitando así potenciales conflictos.</p>
-<p>Finalmente, vamos a añadir un par de operaciones más y delegar en un servicio externo su cálculo y usar encodeURI…</p>
+<p>Finalmente, vamos a sobrescribir el método estándar <code class="docutils literal notranslate"><span class="pre">attributeChangedCallback</span></code>, que se dispara cuando alguno de los atributos del componente web se inicializa o se cambia. Sin este código, si el valor del atributo <code class="docutils literal notranslate"><span class="pre">a</span></code> o <code class="docutils literal notranslate"><span class="pre">b</span></code> cambiara dinámicamente (mediante JavaScript), el resultado de la multiplicación no se actualizaría; puedes comprobarlo fácilmente cambiando el valor de uno de los atributos desde las Chrome DevTools. Dado que <code class="docutils literal notranslate"><span class="pre">attributeChangedCallback</span></code> se llama también cuando el atributo recibe valor por primera vez y dado que nuestra implementación de <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> no hacía nada más que usar los atributos, podemos eliminar esta última función. El método <code class="docutils literal notranslate"><span class="pre">attributeChangedCallback</span></code> solo se invoca para aquellos atributos incluidos en la lista devuelta por el método <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">get</span> <span class="pre">observedAttributes()</span></code>.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre></div></td><td class="code"><div class="highlight"><pre><span></span>(function() {
+  const template = document.createElement(&#39;template&#39;);
+
+  template.innerHTML = `
+    &lt;style&gt;
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        color: steelblue;
+        font-size: 110%;
+        margin-bottom: 10px;
+        border-bottom: 1px solid lightgray;
+      }
+      .contenido {
+        background-color: gainsboro;
+        color: royalblue;
+      }
+      :host {
+        border: 1px solid lightgray;
+        padding: 5px;
+        display: block;
+        margin: 5px;
+        margin-bottom: 15px;
+      }
+    &lt;/style&gt;
+
+    &lt;script&gt;
+      console.log(&quot;Template instanciado&quot;);
+    &lt;/script&gt;
+
+    &lt;h1&gt;&lt;slot name=&quot;title&quot;&gt;Sin título&lt;/slot&gt;&lt;/h1&gt;
+    &lt;div class=&quot;contenido&quot;&gt;
+      &lt;slot name=&quot;mult&quot;&gt;Sin nombre&lt;/slot&gt;:
+      &lt;span id=&quot;a&quot;&gt;&lt;/span&gt; x &lt;span id=&quot;b&quot;&gt;&lt;/span&gt; =
+      &lt;span id=&quot;resultado&quot;&gt;&lt;/span&gt;.
+    &lt;/div&gt;`;
+
+  class Operaciones extends HTMLElement {
+
+    static get observedAttributes() { return [&#39;a&#39;, &#39;b&#39;]; }
+
+    constructor() {
+      super();
+      let clone = template.content.cloneNode(true);
+      let shadowRoot = this.attachShadow({
+        mode: &#39;open&#39;
+      });
+      shadowRoot.appendChild(clone);
+    }
+
+    actualizaPrimerOperando() {
+      this.shadowRoot.querySelector(&#39;#a&#39;).textContent= this.a;
+    }
+
+    actualizaSegundoOperando() {
+      this.shadowRoot.querySelector(&#39;#b&#39;).textContent= this.b;
+    }
+
+    actualizaResultado() {
+      let resultado= this.shadowRoot.querySelector(&#39;#resultado&#39;);
+      fetch(encodeURI(`https://api.mathjs.org/v4/?expr=${this.a}*${this.b}`))
+      .then( r =&gt; r.text() )
+      .then( t =&gt; resultado.textContent= t )
+      .catch( () =&gt; resultado.textContent= &#39;error&#39; );
+    }
+
+    attributeChangedCallback(name,oldValue,newValue) {
+      // ningún uso de this es opcional en esta función
+      if (name===&#39;a&#39;) {
+        this.a= newValue;
+        this.actualizaPrimerOperando();
+        if (this.b) {
+          this.actualizaResultado();
+        }
+      } else if (name===&#39;b&#39;) {
+        this.b= newValue;
+        this.actualizaSegundoOperando();
+        if (this.a) {
+          this.actualizaResultado();
+        }
+      }
+    }
+  }
+
+  customElements.define(&quot;calcula-operaciones&quot;, Operaciones);
+
+})();
+</pre></div>
+</td></tr></table></div>
+<p>La palabra reservada <code class="docutils literal notranslate"><span class="pre">get</span></code> liga un atributo a un método (diremos que la función es un <em>getter</em> para la propiedad) de forma que aunque en el código cliente estemos accediendo a una propiedad en realidad estamos llamando a una función:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Polygon</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">get</span> <span class="nx">area</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">calcArea</span><span class="p">()</span>
+  <span class="p">}</span>
+
+  <span class="nx">calcArea</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Polygon</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">area</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Como el método de nuestro componente anterior es estático, nos podríamos referir a él como <code class="docutils literal notranslate"><span class="pre">Operaciones.observedAttributes</span></code>. Observa que, en cualquier caso, el código que accede a <code class="docutils literal notranslate"><span class="pre">Operaciones.observedAttributes</span></code> en el ejemplo anterior no es nuestro sino que forma parte de la API del navegador.</p>
+<p>Hemos cambiado también el cálculo de la multiplicación para que se realice en un servidor web externo; observa cómo, aunque en este caso no es necesario ya que los atributos deberían ser números (opcionalmente con un punto o un signo más o menos, que también son un caracteres válidos en URLs), hemos seguido la buena práctica de utilizar <code class="docutils literal notranslate"><span class="pre">encodeURI</span></code> para obtener un URL sin caracteres no aceptados. Los caracteres válidos en un URL son:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&amp;&#39;()*+,;=
+</pre></div>
+</div>
+<p>Cualquier otro carácter necesita ser convertido a la <em>codificación por ciento</em>, como ya hemos comentado otras veces.</p>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Considera el siguiente fichero <code class="docutils literal notranslate"><span class="pre">index.html</span></code>:</p>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Mi componente<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;micomp.js&quot;</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">:</span><span class="nd">host</span> <span class="p">{</span>
+      <span class="k">color</span><span class="p">:</span> <span class="kc">mintcream</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">p</span><span class="p">.</span><span class="nc">m</span> <span class="p">{</span>
+      <span class="k">color</span><span class="p">:</span> <span class="kc">papayawhip</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Mi componente<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;mi-componente&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="nt">p</span> <span class="p">{</span>
+        <span class="k">color</span><span class="p">:</span> <span class="kc">navajowhite</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;m&quot;</span><span class="p">&gt;&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>Texto por defecto<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>En un agujero en el suelo, vivía un hobbit.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
+    No un agujero
+      <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>húmedo, sucio, repugnante, con restos de gusanos
+            y olor a fango,<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>ni tampoco un agujero seco, desnudo y arenoso,
+            sin nada en que sentarse o que comer:<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    era un agujero-hobbit, y eso significa comodidad.
+  <span class="p">&lt;/</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Considera también el contenido del fichero <code class="docutils literal notranslate"><span class="pre">micomp.js</span></code>:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;mi-componente&#39;</span><span class="p">,</span>
+  <span class="kr">class</span> <span class="kr">extends</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kr">super</span><span class="p">();</span>
+
+      <span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;mi-componente&#39;</span><span class="p">);</span>
+      <span class="kr">const</span> <span class="nx">templateContent</span> <span class="o">=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">content</span><span class="p">;</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">attachShadow</span><span class="p">({</span><span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;open&#39;</span><span class="p">}).</span><span class="nx">appendChild</span><span class="p">(</span>
+        <span class="nx">templateContent</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Enumera en qué colores se muestran las palabras <em>suelo</em>, <em>fango</em> y <em>comodidad</em>. Si la palabra no se muestra en el documento web, o no puedes saber su color, indica <em>ninguno</em>. Una posible respuesta (incorrecta) sería: red, ninguno, blue.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Si tu aplicación web tiene que funcionar en versiones de los navegadores de hace unos años, es posible que estos no tuvieran implementados todavía los estándares relacionados con los componentes web. Para que los componentes web funcionen en navegadores antiguos es necesario cargar el <a class="reference external" href="https://cdnjs.com/libraries/webcomponentsjs">polyfill</a> correspondiente. El nombre de <em>polyfill</em> se utiliza para referirse a una librería que añade a un navegador una funcionalidad que no tiene implementada.</p>
+<p>Si tu aplicación web tiene que funcionar en versiones de los navegadores de hace unos años, es posible que estos no tuvieran implementados todavía los estándares relacionados con los componentes web. Para que los componentes web funcionen en navegadores antiguos es necesario cargar el <a class="reference external" href="https://cdnjs.com/libraries/webcomponentsjs">polyfill</a> correspondiente. El nombre de <em>polyfill</em> se utiliza para referirse a una librería que añade a un navegador una funcionalidad que no tiene implementada. Otra forma de asegurar el funcionamiento en navegadores antiguos de programas que usan características recientes de JavaScript es mediante compiladores como <a class="reference external" href="https://github.com/babel/babel">Babel</a>.</p>
 </div>
 </div>
 </div>

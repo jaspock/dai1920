@@ -499,7 +499,7 @@ En esta parte final de la práctica has de crear un componente web que muestre e
 
 bastará con hacer:
 
-.. code-block: html
+.. code-block:: html
 
   <section id="parís">
 
@@ -524,7 +524,7 @@ funcione en ``index.html``. Cuando lo consigas, sustituye el encabezado de los c
 - Ten en cuenta a qué apunta ``this`` en cada momento; tu código del interior del método ``then`` asociado a una promesa ``fetch`` se ejecutará (cuando el servidor devuelva su respuesta) de forma asíncrona fuera del contexto del componente web; en ese caso, ``this`` no estará apuntando al componente web, por lo que para acceder a sus propiedades tendrás que utilizar correctamente una clausura:
 
 
-.. code-block: javascript
+.. code-block:: javascript
 
   connectedCallback() {
     var componente= this;  // aquí this apunta al componente web
