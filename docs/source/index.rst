@@ -18,10 +18,18 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 12 Nov
+      - Léete la `definición de computación en la nube`_ del NIST (organización norteamericana de estandarización) antes de la clase del 19 de noviembre.
+    * - 11 Nov
+      - Ya están publicadas las notas de la práctica 2 en la `web del departamento`_.
+    * - 10 Nov
+      - Léete la parte 1 de la `introducción a los componentes web`_ de Caleb Williams antes de la clase del 12 de noviembre.
+    * - 05 Nov
+      - Ya está publicado el enunciado de la práctica 3.
     * - 24 Oct
       - Ya están publicadas las notas de la práctica 1 en la `web del departamento`_.
     * - 15 Oct
-      - El día 29 de octubre no habrá clase de la asignatura por tener que asistir el profesor a una reunión de trabajo. Para que esta interrupción no afecte al normal discurrir de la asignatura se proponen las siguientes medidas: el plazo para la entrega de la práctica 2 se alarga una semana, hasta el 4 de noviembre; el día 22 de octubre no habrá clase de prácticas, pero se impartirá una clase de teoría más larga de lo habitual en el `laboratorio OP-INF1`_ de la planta baja del edificio de Óptica (próximo al edificio Politécnica IV donde se imparten normalmente las clases) en uno de estos dos turnos a elegir libremente por el estudiante: de 9.00 a 12.00 o de 12.00 a 15.00 horas; el día 31 de octubre de 12.00 a 13.00 horas, el profesor de la asignatura atenderá en su despacho a los estudiantes que tengan consultas sobre la práctica 2 (no es necesario pedir cita); en cualquier caso, el sistema de tutoría virtual por UACloud está siempre disponible; como se ha comentado, por tanto, se suspenden las clases (tanto de teoría como de prácticas) del martes 29 de octubre.
+      - El día 29 de octubre no habrá clase de la asignatura por tener que asistir el profesor a una reunión de trabajo. Para que esta interrupción no afecte al normal discurrir de la asignatura se proponen las siguientes medidas: el plazo para la entrega de la práctica 2 se alarga una semana, hasta el 4 de noviembre; el día 22 de octubre no habrá clase de prácticas, pero se impartirá una clase de teoría más larga de lo habitual en el `laboratorio OP-INF1`_ de la planta baja del edificio de Óptica (próximo al edificio Politécnica IV donde se imparten normalmente las clases) en uno de estos dos turnos a elegir libremente por el estudiante: de 9.00 a 12.00 o de 12.00 a 15.00 horas.
     * - 14 Oct 
       - Léete los capítulos sobre `desarrollo en el lado del cliente`_ y `peticiones Ajax`_ del libro "Client-Side Web Development" antes de las clases del 22 de octubre.
     * - 07 Oct
@@ -50,6 +58,8 @@ Novedades
 .. _`peticiones Ajax`: https://info340.github.io/ajax.html
 .. _`laboratorio OP-INF1`: https://cvnet.cpd.ua.es/FichaAula/es/Aula/Ver/0038PB019
 .. _`web del departamento`: https://www.dlsi.ua.es/alumnes/index.cgi?id=val
+.. _`definición de computación en la nube`: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
+.. _`introducción a los componentes web`: https://css-tricks.com/an-introduction-to-web-components/
 
 Guía docente
 ------------
