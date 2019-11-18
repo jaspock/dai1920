@@ -18,6 +18,8 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 18 Nov 
+      - De cara a las próximas clases y a la práctica 4, asegúrate de que tienes habilitada la cuenta de correo electrónico que la universidad te asigna con `dominio gcloud.ua.es`_.
     * - 12 Nov
       - Léete la `definición de computación en la nube`_ del NIST (organización norteamericana de estandarización) antes de la clase del 19 de noviembre.
     * - 11 Nov
@@ -60,6 +62,7 @@ Novedades
 .. _`web del departamento`: https://www.dlsi.ua.es/alumnes/index.cgi?id=val
 .. _`definición de computación en la nube`: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
 .. _`introducción a los componentes web`: https://css-tricks.com/an-introduction-to-web-components/
+.. _`dominio gcloud.ua.es`: https://si.ua.es/es/manuales/uacloud/uacloudse/servicios-externos.html
 
 Guía docente
 ------------
@@ -111,7 +114,6 @@ Este es el momento también en el que enfatizar la importancia de tomar apuntes 
     cliente
     servicios
     componentes
-    servidor
     nube
     otros
     practicas

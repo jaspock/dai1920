@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. Computación en la nube &mdash; documentación de Desarrollo de Aplicaciones en Internet - </title>
+  <title>6. Computación en la nube &mdash; documentación de Desarrollo de Aplicaciones en Internet - </title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="_static/css/estilos.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="8. Otros elementos del desarrollo web" href="otros.html" />
-    <link rel="prev" title="6. Programar el lado del servidor" href="servidor.html" /> 
+    <link rel="next" title="7. Otros elementos del desarrollo web" href="otros.html" />
+    <link rel="prev" title="5. Componentes web" href="componentes.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,10 +89,14 @@
 <li class="toctree-l1"><a class="reference internal" href="cliente.html">3. Programar el lado del cliente</a></li>
 <li class="toctree-l1"><a class="reference internal" href="servicios.html">4. Servicios web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="componentes.html">5. Componentes web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="servidor.html">6. Programar el lado del servidor</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Computación en la nube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="otros.html">8. Otros elementos del desarrollo web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practicas.html">9. Enunciados de las prácticas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Computación en la  nube</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion-del-entorno-de-trabajo">6.1. Configuración del entorno de trabajo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#caso-de-uso-integracion-de-servicios-de-google-cloud-platform">6.2. Caso de uso: integración de servicios de Google Cloud Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#una-definicion-de-computacion-en-la-nube">6.3. Una definición de computación en la nube</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="otros.html">7. Otros elementos del desarrollo web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practicas.html">8. Enunciados de las prácticas</a></li>
 </ul>
 
             
@@ -138,7 +142,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>7. Computación en la nube</li>
+      <li>6. Computación en la  nube</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -158,14 +162,95 @@
            <div itemprop="articleBody">
             
   <div class="section" id="computacion-en-la-nube">
-<h1>7. Computación en la nube<a class="headerlink" href="#computacion-en-la-nube" title="Enlazar permanentemente con este título">¶</a></h1>
-<dl class="class">
-<dt id="miclase">
-<em class="property">class </em><code class="sig-name descname">miclase</code><a class="headerlink" href="#miclase" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>La computación en la nube…</p>
-</dd></dl>
-
-<p>Incompleto.</p>
+<h1>6. Computación en la  nube<a class="headerlink" href="#computacion-en-la-nube" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>La computación en la nube se ha convertido en la manera más habitual de gestionar los diferentes recursos necesarios para una aplicación web.</p>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Las habilidades que deberías adquirir con este tema incluyen las siguientes:</p>
+<ul class="simple">
+<li><p>Entender la diferencia entre los distintos niveles de abstracción proporcionados por los diferentes modelos de computación en la nube.</p></li>
+<li><p>Conocer y relacionar entre ellos varios de los servicios de infraestructura y plataforma ofrecidos por proveedores como Google Cloud Platform.</p></li>
+<li><p>Saber implantar aplicaciones web en Google App Engine.</p></li>
+</ul>
+</div>
+<div class="section" id="configuracion-del-entorno-de-trabajo">
+<h2>6.1. Configuración del entorno de trabajo<a class="headerlink" href="#configuracion-del-entorno-de-trabajo" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En las actividades de este tema vamos a usar diversos servicios de Google Cloud Platform. Aunque plataformas como Amazon Web Services, Microsoft Azure o Google Cloud Platform suelen ofrecer de forma gratuita un acceso limitado a algunos de sus servicios, en esta asignatura vas a a usar un proyecto en Google Cloud Platform que el profesor ya ha creado para ti y que está asignado a una cuenta de facturación para centros educativos que Google ofrece a la universidad. Tu proyecto está asociado a la cuenta que la universidad te asigna con <a class="reference external" href="https://si.ua.es/es/manuales/uacloud/uacloudse/servicios-externos.html">dominio gcloud.ua.es</a>. Para no generar gastos innecesarios, recuerda eliminar los recursos que no vayas a seguir utilizando cuando acabes.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Comienza instalando <a class="reference external" href="https://nodejs.org/">Node.js</a>, el entorno que te permitirá ejecutar programas en JavaScript fuera del navegador. Las instrucciones para cada sistema operativo son diferentes. Para el caso de Linux, la instalación se puede realizar fácilmente sin necesidad de tener privilegios de administrador con ayuda de <a class="reference external" href="https://github.com/nvm-sh/nvm">nvm</a>. En este caso, basta con ejecutar desde la línea de órdenes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+exec -l $SHELL
+</pre></div>
+</div>
+<p>Lo anterior instala <code class="docutils literal notranslate"><span class="pre">nvm</span></code>. Para instalar una versión de Node.js concreta, comprueba qué versiones hay disponibles e instala una de ellas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvm</span> <span class="n">ls</span><span class="o">-</span><span class="n">remote</span>
+<span class="n">nvm</span> <span class="n">install</span> <span class="mf">10.10</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>También necesitarás tener instalado <a class="reference external" href="https://cloud.google.com/sdk/gcloud/?hl=EN">gcloud</a>, un cliente que permite interactuar con Google Cloud Platform desde la línea de órdenes y que forma pate del Google Cloud SDK. Las <a class="reference external" href="https://cloud.google.com/sdk/docs/downloads-interactive?hl=EN">instrucciones de instalación del SDK</a> cambian de un sistema operativo a otro; para el caso de Linux, y de nuevo sin necesidad de tener privilegios de administrador, puedes hacer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+</pre></div>
+</div>
+<p>Una vez instalado, has de vincular el SDK con tu cuenta de Google Cloud Platform (en este caso, tu cuenta <code class="docutils literal notranslate"><span class="pre">gcloud.ua.es</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">init</span>
+</pre></div>
+</div>
+<p>Si posteriormente el SDK se desvinculara por algún motivo de tu cuenta, puedes volver a emprajerlo haciendo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">auth</span> <span class="n">login</span>
+</pre></div>
+</div>
+<p>Puedes ver los proyectos que tienes creados en Google Cloud Platform con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>Lo más habitual es que solo tengas el proyecto de la asignatura, que comienza por <em>dai</em>, pero si el proyecto selecionado es uno diferente (quizás un proyecto que hayas creado tú por tu cuenta) puedes cambiarlo haciendo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">project</span> <span class="nb">id</span>
+</pre></div>
+</div>
+<p>donde <code class="docutils literal notranslate"><span class="pre">id</span></code> sería el id del proyecto obtenido de la lista anterior.</p>
+<p>Finalmente, para algunas actividades tendrás que tener instalado el gestor de bases de datos <a class="reference external" href="https://www.sqlite.org/index.html">SQLite3</a>. Comprueba si ya lo tienes instalado ejecutando <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code>. Si no lo tienes, para el caso de Linux puedes descargar este fichero:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">sqlite</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mi">2019</span><span class="o">/</span><span class="n">sqlite</span><span class="o">-</span><span class="n">tools</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">3300100.</span><span class="n">zip</span>
+</pre></div>
+</div>
+<p>Descomprime el fichero anterior en cualquier carpeta de tu espacio de usuario y añade la carpeta al <em>PATH</em> del sistema añadiendo al fichero <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>  o  <code class="docutils literal notranslate"><span class="pre">~/bash_profile</span></code> la línea:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PATH=$PATH:~/carpeta/sqlite
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="caso-de-uso-integracion-de-servicios-de-google-cloud-platform">
+<h2>6.2. Caso de uso: integración de servicios de Google Cloud Platform<a class="headerlink" href="#caso-de-uso-integracion-de-servicios-de-google-cloud-platform" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En esta actividad vas a crear una solución que integre diversos servicios de Google Cloud Platform. Ve unos vídeos, explora los documentos de introducción enlazados y, a continuación realiza el ejercicio propuesto.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Ve los vídeos de la lista de reproducción sobre los <a class="reference external" href="https://www.youtube.com/playlist?list=PLIivdWyY5sqKh1gDR0WpP9iIOY00IE0xL">elementos básicos de Google Cloud Platform</a> y toma nota de las principales ideas allí expuestas. La duración total de todos los vídeos de la lista es ligeramente inferior a una hora.</p>
+</div>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Lanza en una estancia de Google Compute Engine un servidor web escrito en Node.js con Express que sirva una página web sencilla y ofrezca un servicio que realice una tarea simple, como por ejemplo, invertir una cadena de texto. La página web ha de invocar mediante la API Fetch al servicio web y, además, contener una imagen que previamente habrás subido a Google Cloud Storage. Añade a continuación en Google Cloud Functions una función en JavaScript que devuelva la cadena recibida como parámetro con las vocales eliminadas e invoca también este servicio desde la página web. Para simplificar, usa la consola de Google Cloud Platform siempre que te sea posible. ¡Elimina todos los recursos reservados cuando acabes!</p>
+<p>Para conseguir lo anterior, necesitarás leerte las siguientes guías rápidas:</p>
+<ul class="simple">
+<li><p>Creación de una <a class="reference external" href="https://cloud.google.com/compute/docs/quickstart-linux?hl=EN">máquina virtual con Linux</a> en Compute Engine.</p></li>
+<li><p>Ejecutar un <a class="reference external" href="https://cloud.google.com/compute/docs/tutorials/basic-webserver-apache?hl=EN">servidor Apache básico</a> en Compute Engine.</p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/storage/docs/quickstart-console?hl=EN">Subir ficheros</a> a Cloud Storage.</p></li>
+<li><p>Implementar una <a class="reference external" href="https://cloud.google.com/appengine/docs/standard/nodejs/quickstart?hl=EN">aplicación sencilla</a> en Node.js en App Engine.</p></li>
+<li><p>Crear una <a class="reference external" href="https://cloud.google.com/functions/docs/tutorials/http#functions-deploy-command-node8?hl=EN">función HTTP</a> en Cloud Functions (sigue el ejemplo con Node.js).</p></li>
+<li><p>Crear <a class="reference external" href="https://cloud.google.com/functions/docs/quickstart-console?hl=EN">una función</a> en Cloud Functions.</p></li>
+<li><p>Crear <a class="reference external" href="https://cloud.google.com/functions/docs/quickstart?hl=EN">una función desde la línea de órdenes</a> en Cloud Functions.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="una-definicion-de-computacion-en-la-nube">
+<h2>6.3. Una definición de computación en la nube<a class="headerlink" href="#una-definicion-de-computacion-en-la-nube" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Después de la toma de contacto de la actividad anterior, estamos en disposición de poder caracterizar de forma más precisa a qué nos referimos con la computación en la nube.</p>
+<div class="hazlotu admonition">
+<p class="admonition-title">Hazlo tú ahora</p>
+<p>Lee detenidamente la definición de computación en la nube dada por el National Institute of Standards and Technology en el documento «<a class="reference external" href="http://dx.doi.org/10.6028/NIST.SP.800-145">The NIST Definition of Cloud Computing</a>» y asegúrate de que entiendes cuáles son las características fundamentales de la computación en la nube, así como los diferentes modelos de servicios e implantación existentes. Lee con calma el documento ya que tiene una gran densidad terminológica y conceptual.</p>
+</div>
+<p>Los conceptos anteriores y algunos adicionales se recogen en <a class="reference external" href="_static/slides/500-cloud-slides.html">estas diapositivas</a>.</p>
+</div>
 </div>
 
 
@@ -176,10 +261,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="otros.html" class="btn btn-neutral float-right" title="8. Otros elementos del desarrollo web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="otros.html" class="btn btn-neutral float-right" title="7. Otros elementos del desarrollo web" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="servidor.html" class="btn btn-neutral float-left" title="6. Programar el lado del servidor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="componentes.html" class="btn btn-neutral float-left" title="5. Componentes web" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
