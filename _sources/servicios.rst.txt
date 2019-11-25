@@ -431,9 +431,9 @@ En los últimos años, sin embargo, los navegadores han comenzado a implementar 
     }
     return response.json();  
   })
-  .then(function(responseAsJson) {
-    for (var i=0; i<responseAsJson.length;i++) {
-      resultado.textContent+= responseAsJson[i].title+"; ";
+  .then(function(responseAsObject) {
+    for (var i=0; i<responseAsObject.length;i++) {
+      resultado.textContent+= responseAsObject[i].title+"; ";
     }
   })
   .catch(function(error) {
@@ -472,9 +472,9 @@ También debería ser fácil de entender el siguiente código, que añade un pas
     return response.json();  // llama a JSON.parse()
   })
   .then(minusculas)
-  .then(function(responseAsJson) {
-    for (var i=0; i<responseAsJson.length;i++) {
-          resultado.textContent+= responseAsJson[i].title+"; ";
+  .then(function(responseAsObject) {
+    for (var i=0; i<responseAsObject.length;i++) {
+          resultado.textContent+= responseAsObject[i].title+"; ";
   }
   })
   .catch(function(error) {
@@ -569,7 +569,7 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP 
 
   El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo POST::
 
-    curl --request POST --header 'content-type:application/json' -v $endpoint/carrito
+    curl --request POST --header 'content-type:application/json' -v $endpoint/creacarrito
 
   La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl`` muestre información más detallada sobre la petición y la respuesta. La petición anterior nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
 
@@ -657,15 +657,80 @@ Peticiones CORS
 Programación de servicios web en Node.js
 ----------------------------------------
 
-Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y el framework Express. Este es el código de la parte del servidor:
+Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y el *framework* para desarrollo de aplicaciones web Express. Este es el código de la parte del servidor:
 
-.. literalinclude:: ../../code/carrito/index.js
+.. literalinclude:: ../../code/carrito/app.js
   :language: javascript
   :linenos:
 
+Express es un *módulo* de Node.js. La función de Node.js ``require`` carga un módulo (de forma similar a los *import* o *include* de otros lenguajes) y devuelve un objeto que representa los elementos que exporte el módulo. En este caso, Express exporta una función de inicialización que permite usar el resto de funciones. El código de Express contendrá unas líneas similares a estas:
+
+.. code-block:: javascript 
+  
+  module.exports = createApplication;
+
+  function createApplication() {
+    ...
+    var app= ...
+    app.init();
+    return app;
+  }
+
+El código registra (llamando a ``app.use``) varias funciones de *middleware*, que son invocadas para todas las peticiones y que se encargan de diversos aspectos: indicar que el bloque de datos de la petición contendrá información en JSON, descodificar los caracteres que usen la notación *por ciento* (véase una actividad anterior en este tema), devolver las cabeceras necesarias para permitir peticiones CORS (como también hemos visto) o establecer la conexión con el gestor de base de datos. Todas estas funciones de *middleware* son llamadas por Express con tres parámetros: un objeto que representa la solicitud (``req`` en el código), un objeto que representa la respuesta que se devolverá al cliente (``res`` en el código) y un objeto que representa la siguiente función de *middleware* (``next`` en el código); cada función de *middleware* ha de llamar a la siguiente función de *middleware*, excepto cuando se detecta algún error y se desea enviar inmediatamente una respuesta al cliente con la función ``res.send`` (como ocurre en la función ``creaEsquema``).
+
+Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, si usamos un objeto de JavaScript como argumento de la llamada a ``send``, los datos se convierten a JSON y la cabecera ``Content-Type`` se establece a ``application/json; charset=utf-8``.
+
+El código principal de la aplicación está formado por una serie de llamadas a funciones ``get``, ``post``, ``put`` y ``delete`` que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, ``:item``) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto ``req.params`` ( en ese caso, ``req.params.item``). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto ``req.body``. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto ``req.query``.
+
+Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos *ligera* con SQLite para hacer pruebas), nos interesara no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como *konnex*) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante *callbacks*. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:
+
+.. code-block::
+
+  let i= await knex('productos').select(['item','cantidad'])
+                                .where('carrito',req.params.carrito)
+                                .andWhere('item',req.params.item);
+
+generan una petición SQL como la siguiente::
+
+  select `item`, `cantidad` from `productos` where `carrito` = ? and `item` = ?
+
+Las promesas de la API Fetch son, como hemos visto, una forma muy conveniente de gestionar peticiones a un servidor, pero cuando la llamada a un servicio web depende del resultado de una llamada anterior a otro servicio web y este anidamiento se va haciendo más y más complejo, la escritura del código puede ser muy dificultosa (especialmente a la hora de sangrarlo o de emparejar las llaves y los paréntesis). Para simplificarlo, se añadieron a JavaScript los modificadores ``async`` y ``await``. 
+
+Cuando se invoca una función anotada con ``async``, la respuesta a la llamada se procesa como si fuera una promesa. Si la función ``async`` devuelve un valor, dicha promesa se resolverá con el valor devuelto: si la función asíncrona generara una excepción, la promesa se rechazaría con el valor devuelto. Dentro de una función asíncrona puede aparecer cualquier número de expresiones ``await`` (estas expresiones, de hecho, solo pueden aparecer dentro de funciones ``async``); una expresión ``await`` pausa la ejecución de la función asíncrona y espera a que la promesa se resuelva para continuar la ejecución de la función asíncrona.
+
+El código de más arriba que accedía con Fetch a la API de películas del Studio Ghibli quedaría de la siguiente manera con  ``async`` y ``await``:
+
+.. code-block::
+  :linenos:
+
+  async function ghibli() {
+    let s= "";
+    try {
+      let response= await fetch('https://ghibliapi.herokuapp.com/films/');
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      let responseAsObject= await response.json();
+      for (var i=0; i<responseAsObject.length;i++) {
+        s+= responseAsObject[i].title+"; ";
+      }
+      return s;
+    } catch(error) {
+      console.log('Ha habido un problema: ', error);
+    }
+    return s;
+  }
+
+  async function print() {
+    var resultado= document.querySelector("#results");
+    resultado.textContent= await ghibli();
+  }
+
+  print();
+
 
 Edición y publicación de la API REST en la nube
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------
 
 En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás a un servidor de aplicaciones en la nube.
 
@@ -679,68 +744,158 @@ En esta actividad, vas a realizar una pequeña modificación a la API del carrit
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  Modifica la parte del cliente y del servidor de la aplicación del carrito para que junto con la cantidad se pueda añadir el precio unitario de cada item. Sigue para ello los siguientes pasos.
+  Modifica la parte del cliente y del servidor de la aplicación del carrito para que junto con la cantidad se pueda añadir el precio unitario de cada item. Necesitarás instalar en tu sistema Node.js y el cliente de línea de órdenes de Heroku; sigue para ello los siguientes pasos.
 
-  Instala Node.js en tu ordenador por medio de `Node Version Manager`_ (``nvm``). Descarga el código de la parte del cliente y la parte del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura`_ haciendo::
+Comienza instalando `Node.js`_, el entorno que te permitirá ejecutar programas en JavaScript fuera del navegador. Las instrucciones para cada sistema operativo son diferentes. Para el caso de Linux, la instalación se puede realizar fácilmente sin necesidad de tener privilegios de administrador con ayuda de `nvm`_. Para instalar *nvm* en Linux basta con ejecutar desde la línea de órdenes::
 
-    git clone https://github.com/jaspock/dai1920.git
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+  exec -l $SHELL
+
+.. _`Node.js`: https://nodejs.org/
+.. _`nvm`: https://github.com/nvm-sh/nvm
+
+Lo anterior solo instala ``nvm``. Para instalar una versión de Node.js concreta, comprueba qué versiones hay disponibles e instala una de ellas::
+
+  nvm ls-remote
+  nvm install 10.10.0
+
+.. Note::
+
+  Si tu distribución de Linux tiene ya instalada una versión muy antigua de Node.js es recomendable que la quites antes de tu sistema con::
+
+    sudo apt-get remove nodejs
+
+La aplicación del carrito usa en modo local el gestor de base de datos *ligero* `SQLite3`_ para no depender de gestores más complejos. Cuando la aplicación se despliegue en la nube (en este caso, lo haremos en Heroku y, posteriormente, en Google Cloud Platform), usará otros gestores de bases de datos, lo que explica las diferentes opciones dentro de la función ``conectaBD``. Comprueba si ya tienes SQLite instalado ejecutando ``sqlite3`` desde la línea de órdenes. Si no lo tienes, para el caso de Linux puedes descargar este fichero::
+
+  curl -O https://www.sqlite.org/2019/sqlite-tools-linux-x86-3300100.zip
+
+.. _`SQLite3`: https://www.sqlite.org/index.html
+
+Descomprime el fichero anterior en cualquier carpeta de tu espacio de usuario y añade la carpeta al *PATH* del sistema añadiendo al fichero ``~/.profile`` o ``~/bash_profile`` la línea::
+
+  PATH=$PATH:~/carpeta/sqlite
+
+A continuación, descarga el código del cliente y del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura`_ haciendo::
+
+  git clone https://github.com/jaspock/dai1920.git
+
+Copia ahora la carpeta `dai1920/code/carrito` en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github. Abre un terminal dentro de la nueva carpeta y ejecuta::
+
+  npm install
+  node app.js
+
+La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto local, por lo que podremos acceder a ella abriendo en el navegador una dirección como ``localhost:5000``. 
+
+.. Note::
+
+  Si quisieras usar un nuevo paquete en tu aplicación (lo que probablemente no ocurrirá en esta asignatura), deberías ejecutar::
+
+    npm install paquete
+
+  donde ``paquete`` es el nombre del nuevo módulo; esta orden instala el nuevo módulo en la carpeta ``node_modules`` y, además, añade la línea adecuada al fichero ``package.json``.
+
+.. Note::
+
+  Observa la sección ``scripts`` del fichero ``package.json``. Allí puedes definir diversas maneras de arrancar tu aplicación con diferentes configuraciones. En este caso, solo hay una entrada ``start`` que te permitiría lanzar también tu aplicación haciendo::
+
+    npm start
+
+Puedes ahora realizar los cambios en la aplicación que se piden al principio de este apartado. Salvo que uses ``nodemon``, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. Si deseas depurar el código del servidor en modo local puedes usar el editor de texto `Visual Studio Code`_. Abre con él el fichero ``app.js`` y selecciona :guilabel:`Debug / Start debugging`. 
+
+  .. _`Visual Studio Code`: https://code.visualstudio.com/
+
+Para depurar la aplicación cuando esta se encuentra desplegada en la nube, se necesitan algunas instrucciones adicionales. En el caso de nuestra aplicación, como el código que se ejecuta en ``localhost`` o en la nube es prácticamente el mismo, si la aplicación funciona en local, apenas deberían aparecer problemas en la nube.
+
+Al probar la aplicación en modo local se usa el gestor de base de datos SQLite, que almacena la base de datos en un fichero indicado como opción de inicialización a Knex.js (en nuestra aplicación el fichero se indica en ``config.js``). Si quieres borrar toda la base de datos para empezar de cero, basta con que borres ese fichero, que será creado de nuevo la siguiente vez que Knex.js quiera acceder a él.
+
+Si quieres, realizar consultas a la base de datos local desde un cliente de SQL puedes hacer desde la línea de órdenes::
+
+  sqlite3 <ficheroBD>
   
-  Copia ahora la carpeta `dai1920/code/carrito` en otra ubicación de tu sistema. Abre un terminal dentro de ella y ejecuta::
+donde has de indicar como argumento el nombre del fichero de la base de datos. Desde dentro del cliente puedes ejecutar instrucciones como::
 
-    npm install
-    node index.js
-
-  La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto local, por lo que podremos acceder a ella abriendo en el navegador algo como ``localhost:5000``.
-
-  Puedes ahora realizar los cambios en la aplicación. Salvo que uses ``nodemon``, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. 
-
-  Cuando tengas la aplicación lista en local, puedes desplegarla en `Heroku`_ como sigue. Comienza instalando el cliente de línea de órdenes de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
-
-    sudo snap install --classic heroku
-
-  Continúa haciendo::
+  .tables
   
-    git init
-    git add .
-    git commit -m "cambios"
+para ver las tablas de la base de datos o::
 
-  Con lo anterior, se crea un repositorio con los ficheros del proyecto, que podrás subir (*push*) a Heroku. Identifícate en el cliente de Heroku ejecutando::
+  select * from productos;
 
-    heroku login
+para consultarlas.
 
-  Crea un proyecto haciendo::
+Despliegue de la aplicación en Heroku
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    heroku create --region eu
+Cuando tengas la aplicación lista en local, puedes desplegarla en la plataforma en la nube de `Heroku`_ como sigue. Comienza instalando el cliente de línea de órdenes (CLI, por *command-line interface*) de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
 
-  Desde este momento ya podrás `desplegar la aplicación`_ con::
+  curl https://cli-assets.heroku.com/install.sh | sh
 
-    git push heroku master
+Si tienes permisos de administrador puedes instalar de forma alternativa el cliente de línea de órdenes de Heroku en Ubuntu con::
 
-  Y abrirla en el navegador con::
+  sudo snap install --classic heroku
 
-    heroku open
+Continúa ahora haciendo::
 
-  .. _`Node Version Manager`: https://github.com/nvm-sh/nvm
-  .. _`repositorio de la asignatura`: https://github.com/jaspock/dai1920
-  .. _`instrucciones de esta página`: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
-  .. _`desplegar la aplicación`: https://devcenter.heroku.com/articles/git
-  .. _`Heroku`: https://www.heroku.com/
+  git init
+  git add .
+  git commit -m "cambios"
 
-  Si haces cambios en la aplicación, basta con repetir estos pasos para actualizar la aplicación en Heroku::
+Con lo anterior, se crea un repositorio con los ficheros del proyecto, que podrás subir (*push*) a Heroku. Identifícate en el cliente de Heroku ejecutando::
 
-    git add .
-    git commit -m "cambios"
-    git push heroku master
+  heroku login
 
-  Puedes ir viendo los *logs* de actividad en tu servidor con::
+Crea un proyecto en la nube haciendo::
 
-    heroku logs --tail
+  heroku create --region eu
+
+Desde este momento ya podrás `desplegar la aplicación`_ con::
+
+  git push heroku master
+
+.. Note::
+
+  Heroku puede, en principio, leer del fichero ``app.json`` datos como el gestor de base de datos a utilizar o el valor de ciertas variables de entorno que estarán definidas en el entorno de producción, pero ahora mismo esto no funciona. Por ello, has de configurar estos aspectos de tu aplicación ejecutando lo siguiente desde la línea de órdenes::
+
+    heroku addons:create heroku-postgresql:hobby-dev
+    heroku config:set CARRITO_ENV=heroku
+
+  Si ejecutas ``heroku config`` podrás ver que ahora hay dos variables de entorno: ``CARRITO_ENV`` y ``DATABASE_URL``.
+
+Finalmente, abre la aplicación en el navegador con::
+
+  heroku open
+
+Puedes estudiar los mensajes de actividad emitidos a la consola por tu aplicación implementada en Heroku con::
+
+  heroku logs
+
+Para verlos conforme se van produciendo::
+
+  heroku logs --tail
+
+.. _`Node Version Manager`: https://github.com/nvm-sh/nvm
+.. _`repositorio de la asignatura`: https://github.com/jaspock/dai1920
+.. _`instrucciones de esta página`: https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+.. _`desplegar la aplicación`: https://devcenter.heroku.com/articles/git
+.. _`Heroku`: https://www.heroku.com/
+
+Si haces cambios en la aplicación, basta con repetir estos pasos para actualizar la aplicación en Heroku::
+
+  git add .
+  git commit -m "cambios"
+  git push heroku master
+
+Finalmente, puedes usar el `panel de control`_ de tu aplicación en Heroku para acceder a ciertas opciones adicionales de configuración. Por otro lado, en el panel de control de la `base de datos`_ PostgreSQL puedes visitar la sección :guilabel:`Dataclips` para poder ver las tablas de tu base de datos y lanzar consultas SQL sobre ellas. 
+
+.. _`panel de control`: https://dashboard.heroku.com/
+.. _`base de datos`: https://data.heroku.com/
+
+.. para ligar un nuevo proyecto a una aplicación ya existente: heroku git:remote -a new-project-23116
 
 
 Términos de uso de las APIs web
 -------------------------------
 
-Finalmente, aunque no lo estudiaremos en esta asignatura, hay que tener en cuenta que existen en la web multitud de APIs disponibles para su uso desde aplicaciones de terceros, pero estas APIs suelen tener términos de uso (mira las condiciones de la `API de Twitter`_, por ejemplo) que es importante leer antes de decidirse a basar una determinada aplicación en ellas. 
+Aunque no lo estudiaremos en esta asignatura, hay que tener en cuenta que existen en la web multitud de APIs disponibles para su uso desde aplicaciones de terceros, pero estas APIs suelen tener términos de uso (mira las condiciones de la `API de Twitter`_, por ejemplo) que es importante leer antes de decidirse a basar una determinada aplicación en ellas. 
 
 .. _`API de Twitter`: https://developer.twitter.com/en/developer-terms/agreement-and-policy
 
