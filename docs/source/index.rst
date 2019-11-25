@@ -19,7 +19,7 @@ Novedades
     :class: tablita
 
     * - 18 Nov 
-      - De cara a las próximas clases y a la práctica 4, asegúrate de que tienes habilitada la cuenta de correo electrónico que la universidad te asigna con `dominio gcloud.ua.es`_.
+      - De cara a las próximas clases y a la práctica 4, asegúrate de que tienes habilitada la cuenta de correo electrónico que la universidad te asigna con `dominio gcloud.ua.es`_; entra para ello en la opción :guilabel:`Servicios externos` de UACloud.
     * - 12 Nov
       - Léete la `definición de computación en la nube`_ del NIST (organización norteamericana de estandarización) antes de la clase del 19 de noviembre.
     * - 11 Nov
@@ -74,12 +74,15 @@ Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en
 .. _`guía docente`: http://cv1.cpd.ua.es/ConsPlanesEstudio/cvFichaAsiEEES.asp?wCodEst=C203&wcodasi=34063&wLengua=C&scaca=2019-20
 
 - La asistencia a prácticas es obligatoria, aunque se puede tener un máximo de 5 faltas no justificadas. Si tienes alguna ocupación que te impide asistir a todas o gran parte de las prácticas, envía un justificante escaneado al profesor a través del sistema de tutoría de UACloud. Para justificar una falta puntual, enseña al profesor el justificante durante la próxima sesión de prácticas a la que acudas.
-- La visita al profesor durante sus horas de tutoría no puede ser obligatoria por cuestiones normativas, pero es muy recomendable, ya que es la oportunidad de recibir supervisión sobre tus conocimientos de la materia o la calidad del código que has desarrollado. Reserva turno a través de UACloud. Si el horario no es compatible con tu agenda, escribe al profesor e intentará encontrar un hueco fuera de dicho horario. Si no resultara posible consensuar una hora de visita, también puedes contactar previa cita por chat, videollamada o teléfono.
+- La visita al profesor durante sus horas de tutoría no puede ser obligatoria por cuestiones normativas, pero es muy recomendable, ya que es la oportunidad de recibir supervisión sobre tus conocimientos de la materia o la calidad del código que has desarrollado. Reserva turno a través de UACloud. Si el horario no es compatible con tu agenda, escribe al profesor e intentará encontrar un hueco fuera de dicho horario. Si no resultara posible consensuar una hora de visita, también puedes contactar previa cita por chat, videollamada o teléfono. El despacho del profesor está en la segunda planta del módulo 2 del Edificio Politécnica 4, justo en este `punto del mapa`_.
+
+.. _`punto del mapa`: https://goo.gl/maps/hU5oJbA7yD82
+
 - Las prácticas se realizan individualmente. Lee lo que se comenta más abajo sobre plagios.
 - Cada una de las cuatro prácticas contribuye un 25% a la nota final de las prácticas.
 - Los exámenes de teoría y prácticas se realizan uno a continuación del otro en la fecha oficial del calendario de exámenes. Salvo excepciones autorizadas expresamente por el profesor, el único material que puedes llevar a cada examen es un documento identificativo, un boligrafo y una hoja de tamaño ISO/DIN A5 (148 x 210 mm) en la que puedes escribir o imprimir toda la información que consideres útil. La hoja se entregará al profesor al acabar el examen y no puede compartirse con otros estudiantes. Puedes llevar una hoja diferente para el examen teórico y para el práctico, pero no puede superar las medidas indicadas.
 - El examen de prácticas se realizará en los ordenadores de los laboratorios de la Escuela Politécnica Superior; durante su realización no habrá acceso a internet.
-- Para acceder a Google Cloud Platform en las últimas semanas del curso necesitarás tu `cuenta de correo electrónico de GCloud`_ con dominio ``@gcloud.ua.es`` de la que dispones como alumno de la Universitat d'Alacant.
+- Para acceder a Google Cloud Platform en las últimas semanas del curso necesitarás tu `cuenta de correo electrónico de GCloud`_ con dominio ``@gcloud.ua.es`` de la que dispones como alumno de la Universitat d'Alacant. Asegúrate antes de la cuarta semana de clase de que la tienes activada entrando en la sección *Servicios externos* de UACloud.
 
 .. _`cuenta de correo electrónico de GCloud`: https://si.ua.es/es/manuales/uacloud/uacloudse/servicios-externos.html
 

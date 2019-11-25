@@ -116,7 +116,7 @@
 
   function creaCarrito(event) {
     event.preventDefault();
-    const url= `${base}/carrito`;
+    const url= `${base}/creacarrito`;
     const payload= {};
     const request = {
       method: 'POST', 
@@ -147,10 +147,10 @@
       const e= document.querySelector('#listado');
       e.innerHTML= '';
       if (r.result) {
-        for(var i=0;i<r.result.productos.length;i++) {
+        for(var i=0;i<r.result.length;i++) {
           e.innerHTML+= `<tr>
-            <td>${r.result.productos[i].item}</td>
-            <td>${r.result.productos[i].cantidad}</td>
+            <td>${r.result[i].item}</td>
+            <td>${r.result[i].cantidad}</td>
             </tr>`;
         }
       }

@@ -25,8 +25,8 @@ Este es el calendario de cada uno de los entregables de la asignatura. No se adm
       - `Una aplicación con acceso a servicios web de terceros y con componentes web`_
       - 25 noviembre 2019
     * - Práctica #4
-      - Una aplicación en la nube
-      - 23 diciembre 2019 aprox.
+      - `Una aplicación en la nube`_
+      - 22 diciembre 2019
 
 
 Instrucciones de entrega de las prácticas
@@ -172,7 +172,7 @@ Asegúrate de que tus ficheros se validan correctamente con los validadores HTML
 
 Recuerda poner tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p1-dai.zip`` a través del `servidor web del Departamento`_. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con los ficheros con las hojas de estilo que hayas usado y una carpeta ``img`` con las imágenes.
 
-Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[5 horas]</span>`` donde has de sustiuir el 5 por el número de horas aproximadas que te haya llevado hacer esta prática.
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[5 horas]</span>`` donde has de sustituir el 5 por el número de horas aproximadas que te haya llevado hacer esta prática.
 
 .. _`servidor web del Departamento`: https://pracdlsi.dlsi.ua.es/index.cgi?id=val
 
@@ -415,7 +415,7 @@ Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior d
 
 Recuerda mantener tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p2-dai.zip`` a través del servidor web del Departamento. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con el fichero ``normal.css``, una carpeta ``img`` con las imágenes de Londres y París, y una carpeta ``js`` con el código en JavaScript.
 
-Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
 
 
 
@@ -553,4 +553,106 @@ Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior d
 
 Nota: recuerda mantener un tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p3-dai.zip`` a través del `servidor web del Departamento`. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``index.html``, una carpeta ``css`` con el fichero ``normal.css`` y una carpeta ``js`` con el código en JavaScript.
 
-Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustiuir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
+
+
+
+Una aplicación en la nube
+-------------------------
+
+Esta práctica tiene dos partes. En la primera parte vas a ampliar la práctica anterior, que solo tenía *front-end*, para añadirle un *back-end* que dé persistencia a la aplicación y permita gestionar una base de datos con la información de los cuestionarios. La aplicación resultante se implantará en la plataforma Google App Engine y los datos se almacenarán en una base de datos MySQL alojada en el servicio Google Cloud SQL, de manera muy similar a la aplicación del carrito que has estudiado en clase. Como en prácticas anteriores, no puedes usar ninguna librería, como jQuery o Angular, en la parte del cliente.
+
+.. Note::
+
+  La segunda parte del enunciado se publicará próximamente. 
+
+Cuando el usuario entre en la aplicación, se le mostrará el formulario para insertar nuevos cuestionarios; inicialmente no habrá ningún cuestionario creado y, por tanto, ya no aparecerán los cuestionarios de París ni Londres. La aplicación funcionará como una *aplicación de una única página* (en inglés, *SPA* por *single-page application*): cada vez que el usuario introduzca o elimine datos, los cuestionarios se actualizarán convenientemente en la página como hasta ahora, pero también lo harán en la base de datos del servidor.
+
+Como en el ejemplo del carrito visto en clase, tu código funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.  
+
+
+Comprobación de la aplicación del carrito
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en ``localhost`` y en la nube de Google App Engine. 
+
+Incorporación e implantación de la aplicación de la práctica anterior
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Añade ahora en la carpeta adecuada de la aplicación del carrito, los ficheros de tu práctica 3 de forma que *index.html* esté alojado donde corresponda y el resto de elementos de tu aplicación mantengan su estructura relativa. Lanza la aplicación en modo local y comprueba que funciona correctamente. A continuación, implanta tu aplicación en la nube de Google App Engine y comprueba que, de nuevo, sigue funcionando correctamente. El único cambio que quizás tengas que hacer para que tu aplicación funcione en la nube de Google vendría dado porque a la hora de indicar los tipos de letra de Google Fonts o las direcciones de acceso a las APIs de Wikipedia o Flickr hubieras usado el protocolo *http* en lugar de *https*; en ese caso, tendrías que cambiarlo ahora ya que a las aplicaciones de Google App Engine se accede mediante *https* y desde una página descargada de forma segura no es posible referenciar recursos con URLs no seguras.
+
+Como la página ya no contiene inicialmente ningún cuestionario, puedes borrar de la función *init* el código que se encargaba de añadir a cada uno de los cuestionarios existentes la cruz de borrado y el formulario de inserción de preguntas.
+
+Características comunes de los servicios web a implementar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Los servicios web a implementar serán de tipo GET, POST o DELETE según su cometido y recibirán la información y la devolverán en formato JSON. La respuesta del servidor siempre seguirá el siguiente formato::
+
+  {"result":...,"error":...}
+
+Cuando la petición se haya podido atender correctamente, el atributo ``result`` contendrá la información relevante que haya que devolver al cliente y el atributo ``error`` valdrá ``null``; el código de estado HTTP devuelto en este caso será 200. Por otro lado, si algún problema impide en tu código atender correctamente la solicitud (por ejemplo, se intenta eliminar un cuestionario inexistente), la respuesta del servidor contendrá la información adecuada en el atributo ``error`` y el atributo ``result`` valdrà ``null``; el código de estado devuelto en este caso será 404. Una situación típica de error que has de controlar es que los parámetros esperados de cada servicio web sean incorrectos o no existan.
+
+Cada vez que en el código de JavaScript realices una petición Fetch a uno de los servicios del *back-end*, tendrás que comprobar si el JSON devuelto contiene un valor distinto de ``null`` en la propiedad ``error``; en ese caso, la aplicación mostrará una ventana de alerta (función ``alert``) con un error informativo seguido del contenido de ``error``; además, todas tus peticiones Fetch definirán una función que muestre una ventana de alerta similar ante el resto de posibles situaciones de error (por ejemplo, no se puede establecer la conexión con el servidor).
+
+Ninguna de las acciones que se tengan que efectuar sobre la página actual del navegador como consecuencia de una acción de inserción o borrado por parte del usuario se llevarán a cabo si el servidor devuelve un error (por ejemplo, no se añadirá un cuestionario a la página actual si el servidor no informa de que lo ha añadido con éxito a la base de datos). Ante estas situaciones de error, como ya se ha comentado, habrá, además, que mostrar una ventana de alerta.
+
+Almacenamiento de los cuestionarios en el Datastore
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+En esta práctica crearás servicios web siguiendo el patrón REST para lo siguiente:
+
+- añadir un tema de cuestionario (POST) y devolver el id asignado en la base de datos;
+- recuperar todos los temas (GET); 
+- borrar un tema a partir de su id y todas sus preguntas (DELETE);
+- añadir una pregunta y su correspondiente respuesta a un cuestionario dado el id del tema (POST) y devolver el id de la pregunta en la base de datos;
+- obtener todas las preguntas y respuestas dado el id del tema (GET);
+- borrar una pregunta dado su id (DELETE).
+
+Usa URLs con patrones similares a los de la aplicación del carrito del tema de servicios web.
+
+Representación de los datos en la base de datos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+La base de datos contendrá una tabla para representar los cuestionarios y otra para representar las preguntas. Cada cuestionario vendrá representado por un identificador único generado automáticamente (clave primaria) y su tema. Cada pregunta vendrá representada por un identificador único (clave primaria), el identificador de su tema (clave ajena), el texto de la pregunta y su respuesta correcta.
+
+Conéctate tanto a la base de datos SQLite (cuando pruebes la aplicación en local) como a MySQL (en Google App Engine) para comprobar que las tablas se están rellenando o actualizando correctamente tras cada llamada a un servicio web.
+
+Gestión de los temas de los cuestionarios
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Comienza creando un servicio web que añada un nuevo tema a la base de datos. Como ya se ha comentado, el cuestionario solo se añade a la página actual si la respuesta del servicio es positiva; en otro caso, la solicitud del usuario de crear un nuevo cuestionario no tiene efecto sobre la página del navegador. Este servicio no permite tener más de un cuestionario con el mismo tema. Si, por ejemplo, ya existiera un cuestionario sobre Lugano en la base de datos, la respuesta sería (tu mensaje de error no ha de coincidir necesariamente)::
+
+  { "result":null,"error":"el tema Lugano ya existe en la base de datos"}
+
+A continuación, crea un servicio web que elimine de la base de datos un tema. Después, modifica el código JavaScript del cliente para que invoque este servicio cuando proceda borrar un cuestionario. El cuestionario solo se elimina de la página actual si la respuesta del servicio es positiva. A diferencia de prácticas anteriores, por tanto, en esta es posible que al borrar la última pregunta de un cuestionario, este no desaparezca; esto puede ocurrir ya que la pregunta se borra en primer lugar y, una vez borrada, se ha de proceder a intentar borrar el cuestionario que la incluía; si este último borrado falla, la pregunta eliminada no se recupera. El servicio devolverá en la respuesta en JSON un error si el identificador del tema indicado en los datos de la petición no existe en la base de datos.
+
+Ahora crea un servicio que liste los temas disponibles en la base de datos. Añade el código necesario para invocar el nuevo servicio desde la función *init* de forma que se muestren los encabezados (y los formularios de inserción de preguntas) de los cuestionarios almacenados en la base de datos al cargar la aplicación. Observa que gran parte del código para lo anterior ya existe en la función *addCuestionario*, por lo que te puede interesar refactorizar y crear una nueva función con el código común. Asimismo, observa, que el identificador (*c1*, *c2*, etc.) asignado inicialmente a un cuestionario no tiene por qué mantenerse cuando se recarga la aplicación; eso sí, igual que se ha venido haciendo hasta ahora, el primer cuestionario que se añada a la página será *c1*, el segundo *c2*, etc., independientemente de si se ha creado en ese momento por el usuario o se ha recuperado de la base de datos. 
+
+En estos momentos, tu aplicación ha de permitir crear nuevos formularios y añadirles preguntas. Los temas de los formularios se almacenan ya correctamente en la base de datos, por lo que, aunque se cierre la ventana de la aplicación, esta información se vuelve a mostrar al abrirla de nuevo. Las preguntas, sin embargo, se pierden si se recarga la aplicación; en el apartado siguiente vas a solucionarlo.
+
+Gestión de las preguntas de los cuestionarios
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+De forma análoga a como has hecho con los cuestionarios, vas a crear tres servicios web que permitan añadir, borrar y listar las preguntas asociadas a un cuestionario. Al igual que con los cuestionarios, no será posible añadir a la base de datos dos preguntas con el mismo enunciado para un tema concreto. Los posibles errores a detectar y las respuestas de los servicios son análogas a las del caso de los cuestionarios
+
+Comprueba que tu aplicación permite crear y eliminar tanto cuestionarios como preguntas y que los datos persisten correctamente aun cuando se recarga la aplicación.
+
+Segunda parte
+~~~~~~~~~~~~~
+
+La segunda parte del enunciado se publicará próximamente.
+
+Entrega de la práctica
+~~~~~~~~~~~~~~~~~~~~~~
+
+Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior del DOM se validan correctamente con los validadores HTML5 y CSS del W3C con excepción de los elementos personalizados, que posiblemente generen algún tipo de error. Además, usa Chrome Developer Tools o Firebug para comprobar que el estilo aplicado en cada punto del documento es correcto y para depurar tu código en JavaScript del lado del cliente; usa Visual Studio Code para depurar el código de Node.js de la parte del servidor.
+
+*Nota:* recuerda mantener un tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado ``p4-dai.zip`` a través del `servidor web del Departamento`_. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero ``app.js`` y las carpetas que sean necesarias. Asegúrate de borrar la carpeta ``node_modules`` antes de crear el *zip* para que su contenido no se incluya en el fichero generado y evitar así que la práctica que entregues tenga más tamaño del necesario.
+
+Sube tu aplicación a Google App Engine e incluye en el pie de página de tu aplicación un enlace al URL correspondiente en ``appspot.com``. Tu práctica será corregida descomprimiendo el fichero *zip*, haciendo::
+
+  npm start
+
+y accediendo al URL correspondiente en ``localhost``. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página.
+
+Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
