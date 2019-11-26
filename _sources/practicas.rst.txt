@@ -568,7 +568,7 @@ Esta práctica tiene dos partes. En la primera parte vas a ampliar la práctica 
 
 Cuando el usuario entre en la aplicación, se le mostrará el formulario para insertar nuevos cuestionarios; inicialmente no habrá ningún cuestionario creado y, por tanto, ya no aparecerán los cuestionarios de París ni Londres. La aplicación funcionará como una *aplicación de una única página* (en inglés, *SPA* por *single-page application*): cada vez que el usuario introduzca o elimine datos, los cuestionarios se actualizarán convenientemente en la página como hasta ahora, pero también lo harán en la base de datos del servidor.
 
-Como en el ejemplo del carrito visto en clase, tu código funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.  
+Como en el ejemplo del carrito visto en clase, el código del servidor estará escrito con Node.js y Express, y funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo, como vimos en la plaicación del carrito. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.
 
 
 Comprobación de la aplicación del carrito

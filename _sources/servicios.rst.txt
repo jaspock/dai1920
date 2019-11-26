@@ -563,7 +563,7 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP 
 
   En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
 
-    endpoint=https://limitless-waters-71428.herokuapp.com/carrito/v1
+    endpoint=https://whispering-plains-89598.herokuapp.com/carrito/v1
 
   *Nota:* la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.
 
@@ -684,7 +684,7 @@ El código principal de la aplicación está formado por una serie de llamadas a
 
 Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos *ligera* con SQLite para hacer pruebas), nos interesara no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como *konnex*) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante *callbacks*. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:
 
-.. code-block::
+.. code-block:: javascript
 
   let i= await knex('productos').select(['item','cantidad'])
                                 .where('carrito',req.params.carrito)
@@ -700,7 +700,7 @@ Cuando se invoca una función anotada con ``async``, la respuesta a la llamada s
 
 El código de más arriba que accedía con Fetch a la API de películas del Studio Ghibli quedaría de la siguiente manera con  ``async`` y ``await``:
 
-.. code-block::
+.. code-block:: javascript
   :linenos:
 
   async function ghibli() {

@@ -18,6 +18,8 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 25 Nov
+      - Ya está publicado el enunciado de la primera parte de la práctica 4. Antes de ponerte a programar, asegúrate de que entiendes bien el contenido de los temas de servicios web y de la computación en la nube.
     * - 18 Nov 
       - De cara a las próximas clases y a la práctica 4, asegúrate de que tienes habilitada la cuenta de correo electrónico que la universidad te asigna con `dominio gcloud.ua.es`_; entra para ello en la opción :guilabel:`Servicios externos` de UACloud.
     * - 12 Nov
@@ -73,11 +75,8 @@ Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en
 .. _`@japer3z`: https://twitter.com/japer3z
 .. _`guía docente`: http://cv1.cpd.ua.es/ConsPlanesEstudio/cvFichaAsiEEES.asp?wCodEst=C203&wcodasi=34063&wLengua=C&scaca=2019-20
 
-- La asistencia a prácticas es obligatoria, aunque se puede tener un máximo de 5 faltas no justificadas. Si tienes alguna ocupación que te impide asistir a todas o gran parte de las prácticas, envía un justificante escaneado al profesor a través del sistema de tutoría de UACloud. Para justificar una falta puntual, enseña al profesor el justificante durante la próxima sesión de prácticas a la que acudas.
+- La asistencia a prácticas es obligatoria, aunque se puede tener un máximo de 5 faltas no justificadas. Si tienes alguna ocupación que te impide asistir a todas o gran parte de las prácticas, envía un justificante escaneado al profesor a través del sistema de tutoría de UACloud. Para justificar una falta puntual, enseña al profesor el justificante durante la próxima sesión de prácticas a la que acudas. Cada falta no justificada por encima de las permitidas, restará una parte de la nota final de prácticas.
 - La visita al profesor durante sus horas de tutoría no puede ser obligatoria por cuestiones normativas, pero es muy recomendable, ya que es la oportunidad de recibir supervisión sobre tus conocimientos de la materia o la calidad del código que has desarrollado. Reserva turno a través de UACloud. Si el horario no es compatible con tu agenda, escribe al profesor e intentará encontrar un hueco fuera de dicho horario. Si no resultara posible consensuar una hora de visita, también puedes contactar previa cita por chat, videollamada o teléfono. El despacho del profesor está en la segunda planta del módulo 2 del Edificio Politécnica 4, justo en este `punto del mapa`_.
-
-.. _`punto del mapa`: https://goo.gl/maps/hU5oJbA7yD82
-
 - Las prácticas se realizan individualmente. Lee lo que se comenta más abajo sobre plagios.
 - Cada una de las cuatro prácticas contribuye un 25% a la nota final de las prácticas.
 - Los exámenes de teoría y prácticas se realizan uno a continuación del otro en la fecha oficial del calendario de exámenes. Salvo excepciones autorizadas expresamente por el profesor, el único material que puedes llevar a cada examen es un documento identificativo, un boligrafo y una hoja de tamaño ISO/DIN A5 (148 x 210 mm) en la que puedes escribir o imprimir toda la información que consideres útil. La hoja se entregará al profesor al acabar el examen y no puede compartirse con otros estudiantes. Puedes llevar una hoja diferente para el examen teórico y para el práctico, pero no puede superar las medidas indicadas.
@@ -85,6 +84,7 @@ Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en
 - Para acceder a Google Cloud Platform en las últimas semanas del curso necesitarás tu `cuenta de correo electrónico de GCloud`_ con dominio ``@gcloud.ua.es`` de la que dispones como alumno de la Universitat d'Alacant. Asegúrate antes de la cuarta semana de clase de que la tienes activada entrando en la sección *Servicios externos* de UACloud.
 
 .. _`cuenta de correo electrónico de GCloud`: https://si.ua.es/es/manuales/uacloud/uacloudse/servicios-externos.html
+.. _`punto del mapa`: https://goo.gl/maps/hU5oJbA7yD82
 
 Puedes encontrar algo de información adicional en las diapositivas usadas en la `presentación del curso`_.
 

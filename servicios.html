@@ -888,7 +888,7 @@ function aleatorio2(delta) {
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>En esta actividad vamos a explorar una API REST <em>de jueguete</em> para gestionar carritos de la compra. Para acceder a la API vamos a usar <code class="docutils literal notranslate"><span class="pre">curl</span></code>, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">endpoint</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">limitless</span><span class="o">-</span><span class="n">waters</span><span class="o">-</span><span class="mf">71428.</span><span class="n">herokuapp</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">carrito</span><span class="o">/</span><span class="n">v1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">endpoint</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">whispering</span><span class="o">-</span><span class="n">plains</span><span class="o">-</span><span class="mf">89598.</span><span class="n">herokuapp</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">carrito</span><span class="o">/</span><span class="n">v1</span>
 </pre></div>
 </div>
 <p><em>Nota:</em> la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.</p>
@@ -2148,9 +2148,9 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <p>Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, si usamos un objeto de JavaScript como argumento de la llamada a <code class="docutils literal notranslate"><span class="pre">send</span></code>, los datos se convierten a JSON y la cabecera <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> se establece a <code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">charset=utf-8</span></code>.</p>
 <p>El código principal de la aplicación está formado por una serie de llamadas a funciones <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, <code class="docutils literal notranslate"><span class="pre">put</span></code> y <code class="docutils literal notranslate"><span class="pre">delete</span></code> que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, <code class="docutils literal notranslate"><span class="pre">:item</span></code>) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto <code class="docutils literal notranslate"><span class="pre">req.params</span></code> ( en ese caso, <code class="docutils literal notranslate"><span class="pre">req.params.item</span></code>). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.body</span></code>. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.query</span></code>.</p>
 <p>Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos <em>ligera</em> con SQLite para hacer pruebas), nos interesara no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como <em>konnex</em>) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante <em>callbacks</em>. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">let</span> <span class="n">i</span><span class="o">=</span> <span class="k">await</span> <span class="n">knex</span><span class="p">(</span><span class="s1">&#39;productos&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="s1">&#39;cantidad&#39;</span><span class="p">])</span>
-                              <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s1">&#39;carrito&#39;</span><span class="p">,</span><span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">carrito</span><span class="p">)</span>
-                              <span class="o">.</span><span class="n">andWhere</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="n">req</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">item</span><span class="p">);</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span> <span class="nx">await</span> <span class="nx">knex</span><span class="p">(</span><span class="s1">&#39;productos&#39;</span><span class="p">).</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="s1">&#39;cantidad&#39;</span><span class="p">])</span>
+                              <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;carrito&#39;</span><span class="p">,</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">carrito</span><span class="p">)</span>
+                              <span class="p">.</span><span class="nx">andWhere</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">item</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>generan una petición SQL como la siguiente:</p>
@@ -2160,7 +2160,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <p>Las promesas de la API Fetch son, como hemos visto, una forma muy conveniente de gestionar peticiones a un servidor, pero cuando la llamada a un servicio web depende del resultado de una llamada anterior a otro servicio web y este anidamiento se va haciendo más y más complejo, la escritura del código puede ser muy dificultosa (especialmente a la hora de sangrarlo o de emparejar las llaves y los paréntesis). Para simplificarlo, se añadieron a JavaScript los modificadores <code class="docutils literal notranslate"><span class="pre">async</span></code> y <code class="docutils literal notranslate"><span class="pre">await</span></code>.</p>
 <p>Cuando se invoca una función anotada con <code class="docutils literal notranslate"><span class="pre">async</span></code>, la respuesta a la llamada se procesa como si fuera una promesa. Si la función <code class="docutils literal notranslate"><span class="pre">async</span></code> devuelve un valor, dicha promesa se resolverá con el valor devuelto: si la función asíncrona generara una excepción, la promesa se rechazaría con el valor devuelto. Dentro de una función asíncrona puede aparecer cualquier número de expresiones <code class="docutils literal notranslate"><span class="pre">await</span></code> (estas expresiones, de hecho, solo pueden aparecer dentro de funciones <code class="docutils literal notranslate"><span class="pre">async</span></code>); una expresión <code class="docutils literal notranslate"><span class="pre">await</span></code> pausa la ejecución de la función asíncrona y espera a que la promesa se resuelva para continuar la ejecución de la función asíncrona.</p>
 <p>El código de más arriba que accedía con Fetch a la API de películas del Studio Ghibli quedaría de la siguiente manera con  <code class="docutils literal notranslate"><span class="pre">async</span></code> y <code class="docutils literal notranslate"><span class="pre">await</span></code>:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -2183,30 +2183,30 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 21
 22
 23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span>async function ghibli() {
-  let s= &quot;&quot;;
-  try {
-    let response= await fetch(&#39;https://ghibliapi.herokuapp.com/films/&#39;);
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    let responseAsObject= await response.json();
-    for (var i=0; i&lt;responseAsObject.length;i++) {
-      s+= responseAsObject[i].title+&quot;; &quot;;
-    }
-    return s;
-  } catch(error) {
-    console.log(&#39;Ha habido un problema: &#39;, error);
-  }
-  return s;
-}
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">ghibli</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">s</span><span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">response</span><span class="o">=</span> <span class="nx">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://ghibliapi.herokuapp.com/films/&#39;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusText</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="nx">responseAsObject</span><span class="o">=</span> <span class="nx">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">responseAsObject</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">s</span><span class="o">+=</span> <span class="nx">responseAsObject</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="o">+</span><span class="s2">&quot;; &quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ha habido un problema: &#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
+<span class="p">}</span>
 
-async function print() {
-  var resultado= document.querySelector(&quot;#results&quot;);
-  resultado.textContent= await ghibli();
-}
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">resultado</span><span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#results&quot;</span><span class="p">);</span>
+  <span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="o">=</span> <span class="nx">await</span> <span class="nx">ghibli</span><span class="p">();</span>
+<span class="p">}</span>
 
-print();
+<span class="nx">print</span><span class="p">();</span>
 </pre></div>
 </td></tr></table></div>
 </div>

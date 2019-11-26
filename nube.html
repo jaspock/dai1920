@@ -182,28 +182,28 @@
 <p>Sigue las instrucciones que vienen a continuación para configurar tu entorno de trabajo para las actividades de este tema.</p>
 </div>
 <p>Comienza instalando Node.js y SQLite como se estudió en el tema anterior. También necesitarás tener instalado <a class="reference external" href="https://cloud.google.com/sdk/gcloud/?hl=EN">gcloud</a>, un cliente de línea de órdenes (CLI) que permite interactuar con Google Cloud Platform desde la línea de órdenes y que forma pate del Google Cloud SDK (por el inglés <em>software development kit</em>). Las <a class="reference external" href="https://cloud.google.com/sdk/docs/downloads-interactive?hl=EN">instrucciones de instalación del SDK</a> cambian de un sistema operativo a otro; para el caso de Linux, y sin necesidad de tener privilegios de administrador, puedes hacer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre>curl https://sdk.cloud.google.com | bash
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>curl https://sdk.cloud.google.com | bash
 exec -l $SHELL
 </pre></div>
 </div>
 <p>Una vez instalado, has de vincular el SDK con tu cuenta de Google Cloud Platform (en este caso, tu cuenta <code class="docutils literal notranslate"><span class="pre">gcloud.ua.es</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">init</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">init</span>
 </pre></div>
 </div>
 <p>Si posteriormente el SDK se desvinculara por algún motivo de tu cuenta, puedes volver a emparejarlo haciendo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">auth</span> <span class="n">login</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">auth</span> <span class="n">login</span>
 </pre></div>
 </div>
 <p>Puedes ver los proyectos que tienes creados en Google Cloud Platform con:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">projects</span> <span class="nb">list</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">projects</span> <span class="nb">list</span>
 </pre></div>
 </div>
 <p>Y para ver cuál es el proyecto por defecto:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">config</span> <span class="n">get</span><span class="o">-</span><span class="n">value</span> <span class="n">project</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="n">get</span><span class="o">-</span><span class="n">value</span> <span class="n">project</span>
 </pre></div>
 </div>
 <p>Lo más habitual es que solo tengas el proyecto de la asignatura, cuyo nombre comienza por <em>dai</em>, pero si el proyecto seleccionado por defecto es uno diferente (quizás un proyecto que hayas creado tú por tu cuenta) puedes cambiarlo haciendo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">project</span> <span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">project</span> <span class="o">&lt;</span><span class="nb">id</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>donde <code class="docutils literal notranslate"><span class="pre">&lt;id&gt;</span></code> sería el id del proyecto obtenido de la lista porporcionada por <code class="docutils literal notranslate"><span class="pre">gcloud</span> <span class="pre">projects</span> <span class="pre">list</span></code>.</p>
@@ -247,7 +247,7 @@ exec -l $SHELL
 <p>Sigue las instrucciones que vienen a continuación para aprender cómo desplegar una aplicación como la del carrito en Google App Engine.</p>
 </div>
 <p>Para crear la instancia de Cloud SQL desde el terminal es necesario ejecutar desde la línea de órdenes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">create</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tier</span><span class="o">=</span><span class="n">db</span><span class="o">-</span><span class="n">n1</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="mi">1</span> <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">europe</span><span class="o">-</span><span class="n">west3</span> <span class="o">--</span><span class="n">root</span><span class="o">-</span><span class="n">password</span><span class="o">=&lt;</span><span class="n">contraseñaAdmin</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">create</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tier</span><span class="o">=</span><span class="n">db</span><span class="o">-</span><span class="n">n1</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="mi">1</span> <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">europe</span><span class="o">-</span><span class="n">west3</span> <span class="o">--</span><span class="n">root</span><span class="o">-</span><span class="n">password</span><span class="o">=&lt;</span><span class="n">contraseñaAdmin</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>donde <code class="docutils literal notranslate"><span class="pre">&lt;instancia&gt;</span></code> es el nombre la instancia de base de datos y <code class="docutils literal notranslate"><span class="pre">&lt;contraseñaAdmin&gt;</span></code> la contraseña que queremos para el administrador de la instancia.</p>
@@ -258,27 +258,27 @@ exec -l $SHELL
 </div>
 <p>Ahora vamos a crear un nuevo usuario alternativo al administrador para acceder a la base de datos. Para ello, vamos a la <a class="reference external" href="https://console.cloud.google.com/sql/instances/">consola web de administración de instancias de bases de datos</a>, seleccionamos la instancia creada anteriormente, y desde la pestaña <span class="guilabel">Usuarios</span> creamos una cuenta de usuario que pueda conectarse desde cualquier <em>host</em>.</p>
 <p>A continuación, creemos una base de datos en la instancia de Cloud SQL para nuestra aplicación:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">databases</span> <span class="n">create</span> <span class="o">&lt;</span><span class="n">bd</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">instance</span><span class="o">=&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">databases</span> <span class="n">create</span> <span class="o">&lt;</span><span class="n">bd</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">instance</span><span class="o">=&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>donde <code class="docutils literal notranslate"><span class="pre">&lt;usuario&gt;</span></code> es el nombre del nuevo usuario que hemos creado antes, <code class="docutils literal notranslate"><span class="pre">&lt;bd&gt;</span></code> es el nombre de la base de datos e <code class="docutils literal notranslate"><span class="pre">&lt;instancia&gt;</span></code> es el nombre de la instancia de Cloud SQL que creamos anteriormente. Para comprobar que usuario y base de datos han sido creados correctamente, podemos consultar los usuarios y las bases de datos existentes haciendo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">users</span> <span class="nb">list</span> <span class="o">--</span><span class="n">instance</span><span class="o">=&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">users</span> <span class="nb">list</span> <span class="o">--</span><span class="n">instance</span><span class="o">=&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
 <span class="n">gcloud</span> <span class="n">sql</span> <span class="n">databases</span> <span class="nb">list</span> <span class="o">--</span><span class="n">instance</span><span class="o">=&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Ahora necesitamos conocer el nombre de conexión de la instancia que aparece en el campo <code class="docutils literal notranslate"><span class="pre">connectionName</span></code> al ejecutar:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">describe</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">describe</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>En Linux puedes mostrar solo la línea que contiene el nombre de conexión con:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">describe</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">connectionName</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">describe</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">connectionName</span>
 </pre></div>
 </div>
 <p>Ahora, añade los datos anteriores a un fichero llamado <code class="docutils literal notranslate"><span class="pre">.env</span></code> que estará en la misma carpeta que <code class="docutils literal notranslate"><span class="pre">config.js</span></code> y <code class="docutils literal notranslate"><span class="pre">app.js</span></code> de la aplicación del carrito:</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">GCP_SQL_USER</span><span class="o">=&lt;</span><span class="n">usuario</span><span class="o">&gt;</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">GCP_SQL_USER</span><span class="o">=&lt;</span><span class="n">usuario</span><span class="o">&gt;</span>
 <span class="n">GCP_SQL_PASSWORD</span><span class="o">=&lt;</span><span class="n">contraseña</span><span class="o">&gt;</span>
 <span class="n">GCP_SQL_DATABASE</span><span class="o">=&lt;</span><span class="n">bd</span><span class="o">&gt;</span>
 <span class="n">GCP_SQL_INSTANCE_CONNECTION_NAME</span><span class="o">=/</span><span class="n">cloudsql</span><span class="o">/&lt;</span><span class="n">connectionName</span><span class="o">&gt;</span>
@@ -287,7 +287,7 @@ exec -l $SHELL
 <p>Observa que el nombre de la conexión va precedido de <code class="docutils literal notranslate"><span class="pre">/cloudsql</span></code> en la última variable de entorno.</p>
 <p>El fichero <code class="docutils literal notranslate"><span class="pre">app.yaml</span></code> contiene información para Google App Engine como, entre otras cosas, las variables de entorno que se inicializarán antes de arrancar la aplicación. A diferencia de Heroku, estas variables de entorno no pueden definirse por medio del cliente de línea de órdenes (<code class="docutils literal notranslate"><span class="pre">gcloud</span></code>) sino únicamente a través de este fichero.</p>
 <p>Para subir el código de la aplicación a Google App Engine y abrirla en el navegador basta con hacer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">app</span> <span class="n">deploy</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">app</span> <span class="n">deploy</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -295,19 +295,19 @@ exec -l $SHELL
 <p>Un proyecto de Google Cloud Platform solo puede tener una aplicación de App Engine asociada como máximo. El proyecto que el profesor ha creado para ti ya tiene una aplicación de App Engine asociada; para otros proyectos sin aplicación vinculada, la línea anterior podría mostrar un mensaje ofreciendo crearla en ese momento.</p>
 </div>
 <p>La aplicación ya está desplegada en la nube. Podemos ahora abrirla directamente en el navegador sin necesidad de consultar su URL haciendo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">app</span> <span class="n">browse</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">app</span> <span class="n">browse</span>
 </pre></div>
 </div>
 <p>Para ver todos los mensajes de <em>log</em> emitidos por la aplicación:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">app</span> <span class="n">logs</span> <span class="n">read</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">app</span> <span class="n">logs</span> <span class="n">read</span>
 </pre></div>
 </div>
 <p>Y para ir viéndolos en un terminal mientras se van generando:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">app</span> <span class="n">logs</span> <span class="n">tail</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">app</span> <span class="n">logs</span> <span class="n">tail</span>
 </pre></div>
 </div>
 <p>Para poder ejecutar instrucciones de SQL sobre la base de datos y asegurarnos de que nuestro programa está rellenándola correctamente, es necesario ir a la consola web de Google Cloud Platform, abrir Cloud Shell y hacer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">connect</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">user</span><span class="o">=&lt;</span><span class="n">usuario</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">connect</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">user</span><span class="o">=&lt;</span><span class="n">usuario</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Desde el terminal web podemos seleccionar nuestra base de datos con <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">&lt;bd&gt;;</span></code>, donde <code class="docutils literal notranslate"><span class="pre">&lt;bd&gt;</span></code> es el nombre correspondiente, y ejecutar instrucciones SQL como <code class="docutils literal notranslate"><span class="pre">select</span> <span class="pre">*</span> <span class="pre">from</span> <span class="pre">productos;</span></code>.</p>
