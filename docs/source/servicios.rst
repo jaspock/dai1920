@@ -561,78 +561,84 @@ REST es una arquitectura para implementar servicios web sobre el protocolo HTTP 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
+  En esta actividad vamos a explorar una API REST *de jueguete* para gestionar carritos de la compra. Para acceder a la API vamos a usar ``curl``, un programa que permite realizar peticiones HTTP desde la línea de órdenes y observar la respuesta devuelta por el servidor. Ve probando en tu ordenador todos los pasos siguientes.
+  
+En primer lugar, vamos a asignar a una variable de entorno el URL base de la API::
 
-    endpoint=https://whispering-plains-89598.herokuapp.com/carrito/v1
+  endpoint=https://whispering-plains-89598.herokuapp.com/carrito/v1
 
-  *Nota:* la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.
+*Nota:* la sintaxis que seguiremos aquí para manejar variables de entorno es la usada en sistemas basados en Unix. Para otros sistemas operativos, la sintaxis podría ser ligeramente diferente.
 
-  El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo POST::
+El primer paso con la API del carrito suele ser obtener un identificador de carrito válido, lo que haremos con el verbo POST::
 
-    curl --request POST --header 'content-type:application/json' -v $endpoint/creacarrito
+  curl --request POST --header 'content-type:application/json' -v $endpoint/creacarrito
 
-  La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl`` muestre información más detallada sobre la petición y la respuesta. La petición anterior nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
+La opción ``--request`` indica el verbo a usar y la opción ``--header`` sirve para identificar las cabeceras de la petición; en este caso, usamos la cabecera ``content-type`` que se usa para indicar al servidor en qué formato (JSON, en este caso) queremos recibir los datos de la respuesta; el servidor podría ignorar nuestra solicitud si no soportara dicho formato, lo que no es el caso. Finalmente, la opción ``--v`` hace que ``curl`` muestre información más detallada sobre la petición y la respuesta. La petición anterior nos devolverá en formato JSON el nombre del carrito recién creado en el atributo ``result.nombre``. Asigna dicho valor (por ejemplo, ``fada6``) a la variable de entorno ``carrito``::
 
-    carrito=fada6
+  carrito=fada6
 
-  Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar unos segundos en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
+Ten en cuenta que si ningún cliente ha realizado una petición a la API en los últimos minutos, la primera respuesta puede tardar unos segundos en producirse. Vamos a añadir ahora un item al carrito. Para ello usamos el verbo POST sobre la ruta ``$endpoint/$carrito/productos``; los datos del nuevo item los pasaremos en JSON dentro del cuerpo (*payload*) del mensaje, al que damos valor con la opción ``--data`` de ``curl``::
 
-    curl --request POST --data '{"item":"queso","cantidad":1}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  curl --request POST --data '{"item":"queso","cantidad":1}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de haberse producido (el código de estado es 404 en ese caso); si no procede dar valor a ``result`` o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
+El servidor nos devuelve un resultado en JSON con dos atributos, ``result`` y ``error``; el primero contiene información adicional si la petición pudo satisfacerse (el código de estado es 200 en ese caso); el atributo ``error`` contiene mas información sobre el error en caso de haberse producido (el código de estado es 404 en ese caso); si no procede dar valor a ``result`` o ``error``, estos atributos tomarán el valor ``null``. Vamos a añadir otro item al carrito::
 
-    curl --request POST --data '{"item":"leche","cantidad":4}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  curl --request POST --data '{"item":"leche","cantidad":4}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  Para obtener la composición de un carrito, usaremos el verbo GET::
+Para obtener la composición de un carrito, usaremos el verbo GET::
 
-    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
+  curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  Obtendremos una respuesta como la siguiente::
+Obtendremos una respuesta como la siguiente::
 
-    {
-      "result": {
-        "nombre":"fada6",
-        "productos":[{"item":"queso","cantidad":1},
-                     {"item":"leche","cantidad":4}]
-      },
-      "error":null
-    }
+  {
+    "result": {
+      "nombre":"fada6",
+      "productos":[{"item":"queso","cantidad":1},
+                    {"item":"leche","cantidad":4}]
+    },
+    "error":null
+  }
 
-  Para modificar la cantidad de un item ya existente en el carrito, usaremos la acción PUT e indicaremos la nueva cantidad en JSON en el bloque de datos::
+Para modificar la cantidad de un item ya existente en el carrito, usaremos la acción PUT e indicaremos la nueva cantidad en JSON en el bloque de datos::
 
-    curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+  curl --request PUT --data '{"cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
-  Comprobamos que el carrito ha sido actualizado con la nueva cantidad::
+Comprobamos que el carrito ha sido actualizado con la nueva cantidad::
 
-    curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+  curl --request GET --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
-  Finalmente, podemos borrar un producto con la acción DELETE:: 
+Finalmente, podemos borrar un producto con la acción DELETE:: 
 
-    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
-    curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+  curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
+  curl --request DELETE --header 'content-type:application/json' $endpoint/$carrito/productos/queso
 
-  Con la segunda petición, el servidor devolverá un error indicando que el producto no existe.
+Con la segunda petición, el servidor devolverá un error indicando que el producto no existe.
 
-  Si quisiéramos añadir un nuevo item cuyo nombre lleve algún carácter especial (por ejemplo, la vocal con tilde de *jamón*), lo podemos hacer como en los casos anteriores::
+Si quisiéramos añadir un nuevo item cuyo nombre lleve algún carácter especial (por ejemplo, la vocal con tilde de *jamón*), lo podemos hacer como en los casos anteriores::
 
-    curl --request POST --data '{"item":"jamón","cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos
+  curl --request POST --data '{"item":"jamón","cantidad":2}' --header 'content-type:application/json' $endpoint/$carrito/productos
 
-  Pero a la hora de hacer una petición en la que el nombre del item forme parte del URL (y no del bloque de datos), es necesario convertir los caracteres especiales a aquellos que puedan formar parte de un URL a través de lo que se conoce como `codificación por ciento`_ (*percent-encoding*)::
+Pero a la hora de hacer una petición en la que el nombre del item forme parte del URL (y no del bloque de datos), es necesario convertir los caracteres especiales a aquellos que puedan formar parte de un URL a través de lo que se conoce como `codificación por ciento`_ (*percent-encoding*)::
 
-    curl --request PUT --data '{"cantidad":5}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
+  curl --request PUT --data '{"cantidad":5}' --header 'content-type:application/json' $endpoint/$carrito/productos/jam%C3%B3n
 
-  En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para el programa ``curl`` que se ejecuta en la línea de órdenes podemos usar `herramientas en línea`_.
+En JavaScript tenemos funciones como ``decodeURIComponent`` y ``encodeURIComponent`` que se encargan del trabajo de conversión. Para codificar un símbolo para el programa ``curl`` que se ejecuta en la línea de órdenes podemos usar `herramientas en línea`_.
 
-  .. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
-  .. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
+.. _`codificación por ciento`: https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding
+.. _`herramientas en línea`: https://meyerweb.com/eric/tools/dencoder/
+
+
+Envío de peticiones desde JavaScript
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de `gestión de carritos de la compra`_. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:
 
-  .. literalinclude:: ../../code/carrito/public/carrito.html
-    :language: html
-    :linenos:
+.. literalinclude:: ../../code/carrito/public/carrito.html
+  :language: html
+  :linenos:
 
-  .. _`gestión de carritos de la compra`: https://limitless-waters-71428.herokuapp.com/carrito.html
+.. _`gestión de carritos de la compra`: https://whispering-plains-89598.herokuapp.com/carrito.html
 
 
 Peticiones CORS
@@ -641,17 +647,19 @@ Peticiones CORS
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
 
-  La API REST del carrito soporta peticiones Fetch realizadas desde programas en JavaScript descargados de dominios diferentes al dominio en el que está ubicada la API. Para comprobarlo, abre el fichero ``carrito.html`` desde un servidor web local; recuerda cambiar antes la variable ``base`` de JavaScript para que apunte al *endpoint* de la API que has usado en la actividad anterior. Si tienes Python 2 instalado, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
+  La API REST del carrito soporta peticiones Fetch realizadas desde programas en JavaScript descargados de dominios diferentes al dominio en el que está ubicada la API. Para comprobarlo, abre el fichero ``carrito.html`` desde un servidor web local; recuerda cambiar antes la variable ``base`` de JavaScript para que apunte al *endpoint* de la API que has usado en la actividad anterior. 
+  
+Si tienes Python 2 instalado, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
 
-    python -m SimpleHttpServer
-    python2 -m SimpleHttpServer
+  python -m SimpleHttpServer
+  python2 -m SimpleHttpServer
 
-  Si tienes Python 3 instalado en tu sistema, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
+Si tienes Python 3 instalado en tu sistema, ejecuta desde el directorio donde está ``carrito.html`` una de las dos siguientes órdenes::
 
-    python -m http.server
-    python3 -m http.server
+  python -m http.server
+  python3 -m http.server
 
-  El servidor te informará del puerto en ``localhost`` desde el que puedes acceder al contenido del directorio. Realiza peticiones desde la aplicación web del carrito y analiza las cabeceras relacionadas con CORS de la petición y la respuesta. Observa cómo las peticiones de tipo POST, PUT o DELETE realizan una comprobación *pre-vuelo* con el verbo OPTIONS. Modifica el cliente para que envíe una cabecera adicional no convencional y observa cómo la respuesta del servidor hace que la petición falle al no devolver el servidor el nombre de la cabecera en la lista devuelta en ``Access-Control-Allow-Headers``.
+El servidor te informará del puerto en ``localhost`` desde el que puedes acceder al contenido del directorio. Realiza peticiones desde la aplicación web del carrito y analiza las cabeceras relacionadas con CORS de la petición y la respuesta. Observa cómo las peticiones de tipo POST, PUT o DELETE realizan una comprobación *pre-vuelo* con el verbo OPTIONS. Modifica el cliente para que envíe una cabecera adicional no convencional y observa cómo la respuesta del servidor hace que la petición falle al no devolver el servidor el nombre de la cabecera en la lista devuelta en ``Access-Control-Allow-Headers``.
 
 
 Programación de servicios web en Node.js
@@ -682,7 +690,10 @@ Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, s
 
 El código principal de la aplicación está formado por una serie de llamadas a funciones ``get``, ``post``, ``put`` y ``delete`` que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, ``:item``) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto ``req.params`` ( en ese caso, ``req.params.item``). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto ``req.body``. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto ``req.query``.
 
-Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos *ligera* con SQLite para hacer pruebas), nos interesara no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como *konnex*) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante *callbacks*. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:
+Interfaz común de acceso a bases de datos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos *ligera* con SQLite para hacer pruebas), nos interesa no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como *konnex*) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante *callbacks*. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:
 
 .. code-block:: javascript
 
@@ -693,6 +704,10 @@ Como queremos que nuestra aplicación web pueda funcionar con distintos gestores
 generan una petición SQL como la siguiente::
 
   select `item`, `cantidad` from `productos` where `carrito` = ? and `item` = ?
+
+
+Async/await
+~~~~~~~~~~~
 
 Las promesas de la API Fetch son, como hemos visto, una forma muy conveniente de gestionar peticiones a un servidor, pero cuando la llamada a un servicio web depende del resultado de una llamada anterior a otro servicio web y este anidamiento se va haciendo más y más complejo, la escritura del código puede ser muy dificultosa (especialmente a la hora de sangrarlo o de emparejar las llaves y los paréntesis). Para simplificarlo, se añadieron a JavaScript los modificadores ``async`` y ``await``. 
 
@@ -729,35 +744,27 @@ El código de más arriba que accedía con Fetch a la API de películas del Stud
   print();
 
 
-Edición y publicación de la API REST en la nube
------------------------------------------------
+.. _label-local:
 
-En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás a un servidor de aplicaciones en la nube.
+Configuración del entorno de trabajo para ejecutar localmente una aplicación web
+--------------------------------------------------------------------------------
 
-.. Hint::
+En esta actividad se explica cómo configurar el entorno de trabajo para poder lanzar aplicaciones web escritas en Node.js que usan una base de datos SQLite3.
 
-  Si vas a desarrollar frecuentemente con Node.js, te vendrá bien utilizar la herramienta `nodemon`_, que evita que tengas que matar y volver a lanzar el servidor local cada vez que hagas un cambio en la aplicación.
+.. Important::
 
-  .. _`nodemon`: https://www.npmjs.com/package/nodemon
+  El sistema operativo *oficial* en esta asignatura es Linux. Puedes utilizar otros sistemas operativos para desarrollar, pero tendrás que solucionar tú mismo los problemas relacionados con la configuración del entorno de trabajo que te encuentres. Las instrucciones que siguen son para el sistema operativo Linux, pero es muy probable que las puedas ignorar si usas el fichero `dai-bundle-dev`_ para instalar los programas necesarios. Para ello, descarga el fichero, descomprímelo y ejecuta el script ``install.sh``. 
+  
+  Puedes editar el fichero para indicar qué programas quieres instalar. El script solo instala Node.js por defecto. Comprueba si tienes instalado ``sqlite3`` en tu ordenador para saber si lo necesitas y pon a ``true`` la variable correspondiente en caso negativo. El script también permite instalar el SDK de Google Cloud Platform, que usaremos más adelante.
 
+  El script funciona sin problemas en el sistema Linux instalado en los ordenadores de los laboratorios, donde SQLite3 ya está instalado.
+  
+  .. _`dai-bundle-dev`: _static/data/dai-bundle-dev-20191128.tar.gz
 
-.. admonition:: Hazlo tú ahora
-  :class: hazlotu
-
-  Modifica la parte del cliente y del servidor de la aplicación del carrito para que junto con la cantidad se pueda añadir el precio unitario de cada item. Necesitarás instalar en tu sistema Node.js y el cliente de línea de órdenes de Heroku; sigue para ello los siguientes pasos.
-
-Comienza instalando `Node.js`_, el entorno que te permitirá ejecutar programas en JavaScript fuera del navegador. Las instrucciones para cada sistema operativo son diferentes. Para el caso de Linux, la instalación se puede realizar fácilmente sin necesidad de tener privilegios de administrador con ayuda de `nvm`_. Para instalar *nvm* en Linux basta con ejecutar desde la línea de órdenes::
-
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
-  exec -l $SHELL
+Comienza instalando `Node.js`_, el entorno que te permitirá ejecutar programas en JavaScript fuera del navegador. Las instrucciones para cada sistema operativo son diferentes. Para el caso de Linux, la instalación se puede realizar fácilmente sin necesidad de tener privilegios de administrador descargando uno de los `paquetes disponibles`_ en la web de Node.js.
 
 .. _`Node.js`: https://nodejs.org/
-.. _`nvm`: https://github.com/nvm-sh/nvm
-
-Lo anterior solo instala ``nvm``. Para instalar una versión de Node.js concreta, comprueba qué versiones hay disponibles e instala una de ellas::
-
-  nvm ls-remote
-  nvm install 10.10.0
+.. _`paquetes disponibles`: https://nodejs.org/en/download/releases/
 
 .. Note::
 
@@ -765,26 +772,53 @@ Lo anterior solo instala ``nvm``. Para instalar una versión de Node.js concreta
 
     sudo apt-get remove nodejs
 
-La aplicación del carrito usa en modo local el gestor de base de datos *ligero* `SQLite3`_ para no depender de gestores más complejos. Cuando la aplicación se despliegue en la nube (en este caso, lo haremos en Heroku y, posteriormente, en Google Cloud Platform), usará otros gestores de bases de datos, lo que explica las diferentes opciones dentro de la función ``conectaBD``. Comprueba si ya tienes SQLite instalado ejecutando ``sqlite3`` desde la línea de órdenes. Si no lo tienes, para el caso de Linux puedes descargar este fichero::
+Este curso vamos a usar la versión 12 de Node.js. Descárgala con::
+
+  curl -O https://nodejs.org/download/release/v12.13.1/node-v12.13.1-linux-x64.tar.gz
+
+Descomprime el fichero anterior en tu directorio raíz::
+
+  tar xzf node-v12.13.1-linux-x64.tar.gz -C $HOME
+
+Añade el directorio ``bin`` a la variable ``PATH`` del sistema::
+
+  echo 'export PATH=$HOME/node-v12.13.1-linux-x64/bin:$PATH' >> $HOME/.bashrc
+
+Abre un nuevo terminal para que el nuevo valor de la variable de entorno ``PATH`` se aplique. Ahora deberías poder ver la versión de Node.js instalada con::
+
+  node -v
+
+La aplicación del carrito usa en modo local el gestor de base de datos *ligero* `SQLite3`_ para no depender de gestores más complejos. Cuando la aplicación se despliegue en la nube (un poco más adelante lo haremos en Heroku y, posteriormente, en Google Cloud Platform), usará otros gestores de bases de datos, lo que explica las diferentes opciones dentro de la función ``conectaBD``. Comprueba si ya tienes SQLite instalado ejecutando ``sqlite3`` desde la línea de órdenes. Si no lo tienes, para el caso de Linux puedes descargar este fichero::
 
   curl -O https://www.sqlite.org/2019/sqlite-tools-linux-x86-3300100.zip
 
 .. _`SQLite3`: https://www.sqlite.org/index.html
 
-Descomprime el fichero anterior en cualquier carpeta de tu espacio de usuario y añade la carpeta al *PATH* del sistema añadiendo al fichero ``~/.profile`` o ``~/bash_profile`` la línea::
+Descomprime el fichero anterior en tu directorio raíz y añade el nuevo directorio a la variable ``PATH`` del sistema::
 
-  PATH=$PATH:~/carpeta/sqlite
+  unzip -q sqlite-tools-linux-x86-3300100.zip -d $HOME
+  echo 'export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH' >> $HOME/.bashrc
+
+Abre un nuevo terminal para que el nuevo valor de la variable de entorno ``PATH`` se aplique. 
+
+Los binarios de SQLite están compilados para 32 bits, por lo que es posible que necesites instalar algunas librerías adicionales de 32 bits, ya que tu sistema es proablemente de 64 bits; la siguiente orden es para Ubuntu::
+
+  sudo apt-get install libc6-i386 lib32z1
+
+Ahora deberías poder ver la versión de SQLite3 instalada con::
+
+  sqlite3 -version
 
 A continuación, descarga el código del cliente y del servidor de la aplicación del carrito; clona para ello el `repositorio de la asignatura`_ haciendo::
 
   git clone https://github.com/jaspock/dai1920.git
 
-Copia ahora la carpeta `dai1920/code/carrito` en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github. Abre un terminal dentro de la nueva carpeta y ejecuta::
+Entra en el directorio ``code/carrito`` y ejecuta::
 
   npm install
   node app.js
 
-La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto local, por lo que podremos acceder a ella abriendo en el navegador una dirección como ``localhost:5000``. 
+La primera línea instala en la carpeta ``node_modules`` todas las dependencias indicadas en el fichero ``package.json``. La segunda línea lanza el motor de JavaScript sobre el fichero indicado. Como este fichero contiene una aplicación web escrita con el framework Express, este la ejecuta sobre un puerto local, por lo que podremos acceder a ella abriendo en el navegador una dirección como ``localhost:5000`` o similar. 
 
 .. Note::
 
@@ -800,19 +834,26 @@ La primera línea instala en la carpeta ``node_modules`` todas las dependencias 
 
     npm start
 
-Puedes ahora realizar los cambios en la aplicación que se piden al principio de este apartado. Salvo que uses ``nodemon``, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. Si deseas depurar el código del servidor en modo local puedes usar el editor de texto `Visual Studio Code`_. Abre con él el fichero ``app.js`` y selecciona :guilabel:`Debug / Start debugging`. 
+Depuración y prueba de la aplicación
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Si deseas depurar el código del servidor en modo local puedes usar el editor de texto `Visual Studio Code`_. Abre con él el fichero ``app.js`` y selecciona :guilabel:`Debug / Start debugging`. Puedes definir puntos de ruptura haciendo click en el borde de la línea de código oportuna.
 
   .. _`Visual Studio Code`: https://code.visualstudio.com/
 
 Para depurar la aplicación cuando esta se encuentra desplegada en la nube, se necesitan algunas instrucciones adicionales. En el caso de nuestra aplicación, como el código que se ejecuta en ``localhost`` o en la nube es prácticamente el mismo, si la aplicación funciona en local, apenas deberían aparecer problemas en la nube.
 
-Al probar la aplicación en modo local se usa el gestor de base de datos SQLite, que almacena la base de datos en un fichero indicado como opción de inicialización a Knex.js (en nuestra aplicación el fichero se indica en ``config.js``). Si quieres borrar toda la base de datos para empezar de cero, basta con que borres ese fichero, que será creado de nuevo la siguiente vez que Knex.js quiera acceder a él.
+.. Note::
+
+  Ten en cuenta que el código de JavaScript que se ejecuta en el navegador se seguirá depurando desde las Chrome DevTools. Durante la depuración de la aplicación irás alternando entre el navegador y Visual Studio Code según se esté ejecutando el código del lado del cliente o del servidor, respectivamente.
+
+Al ejecutar la aplicación en modo local se usa el gestor de base de datos SQLite, que almacena la base de datos en un fichero indicado como opción de inicialización a Knex.js (en nuestra aplicación el fichero se indica en ``config.js``). Si quieres borrar toda la base de datos para empezar de cero, basta con que borres ese fichero, que será creado de nuevo la siguiente vez que Knex.js quiera acceder a él.
 
 Si quieres, realizar consultas a la base de datos local desde un cliente de SQL puedes hacer desde la línea de órdenes::
 
   sqlite3 <ficheroBD>
   
-donde has de indicar como argumento el nombre del fichero de la base de datos. Desde dentro del cliente puedes ejecutar instrucciones como::
+donde has de indicar como argumento el nombre del fichero de la base de datos (si no has editado los ficheros de configuración del carrito se llamará ``midb.sqlite``). Desde dentro del cliente puedes ejecutar instrucciones como::
 
   .tables
   
@@ -822,10 +863,34 @@ para ver las tablas de la base de datos o::
 
 para consultarlas.
 
-Despliegue de la aplicación en Heroku
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cuando tengas la aplicación lista en local, puedes desplegarla en la plataforma en la nube de `Heroku`_ como sigue. Comienza instalando el cliente de línea de órdenes (CLI, por *command-line interface*) de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
+Modificación de la API REST
+---------------------------
+
+En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás en la siguiente actividad a un servidor de aplicaciones en la nube.
+
+.. Hint::
+
+  Si vas a desarrollar frecuentemente con Node.js, te vendrá bien utilizar la herramienta `nodemon`_, que evita que tengas que matar y volver a lanzar el servidor local cada vez que hagas un cambio en la aplicación.
+
+  .. _`nodemon`: https://www.npmjs.com/package/nodemon
+
+
+.. admonition:: Hazlo tú ahora
+  :class: hazlotu
+
+  Modifica la parte del cliente y del servidor de la aplicación del carrito para que junto con la cantidad se pueda añadir el precio unitario de cada item. Necesitarás instalar en tu sistema Node.js y el gestor de base de datos SQLite3; sigue para ello los pasos detallados en la actividad ":ref:`label-local`". Salvo que uses ``nodemon``, como se ha comentado antes, tendrás que matar y relanzar el servidor para que se apliquen los cambios. Como siempre, tendrás que recargar la página en el navegador siempre que realices algún cambio en el código del cliente.
+
+
+.. _label-heroku:
+
+Despliegue de la aplicación web en Heroku
+------------------------------------------
+
+Cuando tengas la aplicación lista en modo local, puedes desplegarla en la plataforma en la nube de `Heroku`_ como sigue. 
+Copia para empezar la carpeta ``dai1920/code/carrito`` en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github, ya que para desplegar la aplicación en Heroku necesitas vincularla a otro repositorio.
+
+Instala el cliente de línea de órdenes (CLI, por *command-line interface*) de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
 
   curl https://cli-assets.heroku.com/install.sh | sh
 
@@ -833,13 +898,13 @@ Si tienes permisos de administrador puedes instalar de forma alternativa el clie
 
   sudo snap install --classic heroku
 
-Continúa ahora haciendo::
+Continúa ahora configurando tu proyecto haciendo::
 
   git init
   git add .
   git commit -m "cambios"
 
-Con lo anterior, se crea un repositorio con los ficheros del proyecto, que podrás subir (*push*) a Heroku. Identifícate en el cliente de Heroku ejecutando::
+Con lo anterior, se crea un repositorio con los ficheros del proyecto, que podrás subir (*push*) a Heroku. Crea una cuenta en la web de Heroku e identifícate en el cliente de línea de órdenes ejecutando::
 
   heroku login
 
@@ -853,7 +918,7 @@ Desde este momento ya podrás `desplegar la aplicación`_ con::
 
 .. Note::
 
-  Heroku puede, en principio, leer del fichero ``app.json`` datos como el gestor de base de datos a utilizar o el valor de ciertas variables de entorno que estarán definidas en el entorno de producción, pero ahora mismo esto no funciona. Por ello, has de configurar estos aspectos de tu aplicación ejecutando lo siguiente desde la línea de órdenes::
+  Heroku puede, en principio, leer del fichero ``app.json`` datos como el gestor de base de datos a utilizar o el valor de ciertas variables de entorno que estarán definidas en el entorno de producción, pero en el momento de escribir esto no funciona. Por ello, has de configurar estos aspectos de tu aplicación ejecutando lo siguiente desde la línea de órdenes::
 
     heroku addons:create heroku-postgresql:hobby-dev
     heroku config:set CARRITO_ENV=heroku
