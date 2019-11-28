@@ -13,8 +13,10 @@ La computación en la nube se ha convertido en la manera más habitual de gestio
   - Conocer, saber usar y relacionar entre ellos varios de los servicios de infraestructura y plataforma disponibles en la nube.
   - Saber implantar en Google App Engine aplicaciones web escritas en Node.js que usen las bases de datos relacionales de Google Cloud SQL.
 
-Configuración del entorno de trabajo
-------------------------------------
+.. _label-gcloud:
+
+Configuración del entorno de trabajo para Google Cloud Platform
+---------------------------------------------------------------
 
 En las actividades de este tema vamos a usar diversos servicios de Google Cloud Platform. Aunque plataformas como Amazon Web Services, Microsoft Azure o Google Cloud Platform suelen ofrecer de forma gratuita un acceso limitado a algunos de sus servicios, en esta asignatura vas a a usar un proyecto en Google Cloud Platform que el profesor ya ha creado para ti y que está asignado a una cuenta de facturación para centros educativos que Google ofrece a la universidad. Tu proyecto está asociado a la cuenta que la universidad te asigna con `dominio gcloud.ua.es`_; asegúrate de que la tienes activada antes de seguir leyendo. Para no generar gastos innecesarios, recuerda eliminar los recursos que no vayas a seguir utilizando cuando acabes.
 
@@ -26,15 +28,20 @@ En las actividades de este tema vamos a usar diversos servicios de Google Cloud 
 
   Sigue las instrucciones que vienen a continuación para configurar tu entorno de trabajo para las actividades de este tema.
 
-Comienza instalando Node.js y SQLite como se estudió en el tema anterior. También necesitarás tener instalado `gcloud`_, un cliente de línea de órdenes (CLI) que permite interactuar con Google Cloud Platform desde la línea de órdenes y que forma pate del Google Cloud SDK (por el inglés *software development kit*). Las `instrucciones de instalación del SDK`_ cambian de un sistema operativo a otro; para el caso de Linux, y sin necesidad de tener privilegios de administrador, puedes hacer::
+Comienza instalando Node.js y SQLite como se estudió en el tema anterior en la sección ":ref:`label-local`". También necesitarás tener instalado `gcloud`_, un cliente de línea de órdenes (CLI) que permite interactuar con Google Cloud Platform desde la línea de órdenes y que forma pate del Google Cloud SDK (por el inglés *software development kit*). 
+
+.. Important::
+
+  El fichero ``dai-bundle-dev`` que se menciona al comienzo del apartado ":ref:`label-local`" del capítulo anterior también te permite instalar el SDK de Google Cloud Platform. Edita el script ``install.sh`` y cambia, si procede, el valor de las variables de entorno del comienzo para que instale el SDK.
+
+Las `instrucciones de instalación del SDK`_ cambian de un sistema operativo a otro; para el caso de Linux, y sin necesidad de tener privilegios de administrador, puedes ejecutar lo que sigue; sáltate este paso si has instalado el SDK con el script mencionado antes::
 
   curl https://sdk.cloud.google.com | bash
-  exec -l $SHELL
 
 .. _`gcloud`: https://cloud.google.com/sdk/gcloud/?hl=EN
 .. _`instrucciones de instalación del SDK`: https://cloud.google.com/sdk/docs/downloads-interactive?hl=EN
 
-Una vez instalado, has de vincular el SDK con tu cuenta de Google Cloud Platform (en este caso, tu cuenta ``gcloud.ua.es``)::
+Ahora cierra el terminal actual y abre uno nuevo para que se actualicen los valores de las variables de entorno. Una vez instalado, has de vincular el SDK con tu cuenta de Google Cloud Platform (en este caso, tu cuenta ``gcloud.ua.es``)::
 
   gcloud init
 
@@ -57,6 +64,7 @@ Lo más habitual es que solo tengas el proyecto de la asignatura, cuyo nombre co
 donde ``<id>`` sería el id del proyecto obtenido de la lista porporcionada por ``gcloud projects list``.
 
 .. Para desinstalar gcloud borrar su directorio princial y ~/.config/gcloud en Linux.
+
 
 Caso de uso: integración de servicios de Google Cloud Platform
 --------------------------------------------------------------
@@ -112,10 +120,12 @@ Los conceptos anteriores y algunos adicionales se recogen en `estas diapositivas
 .. _`estas diapositivas`: _static/slides/500-cloud-slides.html
 
 
-Publicación de la API REST del carrito en Google App Engine
------------------------------------------------------------
+.. _label-appengine:
 
-Vamos a ver cómo desplegar la aplicación del carrito del tema anterior en Google App Engine, el servicio de plataforma de aplicaciones de Google Cloud Platform. Dado que las máquinas virtuales que se asignen a nuestra aplicación de Google App Engine pueden ser eliminadas o creadas en cualquier momento en base a la demanda, necesitamos almacenar los datos que maneje la aplicación en una base de datos alojada en otro lugar: Google Cloud Platform cuenta con Google Cloud SQL, un servicio de bases de datos relacionales en la nube que incluye el gestor MySQL. En el tema anterior vimos que la aplicación del carrito ya estaba configurada para trabajar con MySQL a través de Knex.js, por lo que no es necesario modificar el código. Al comienzo de este tema también se explica cómo configurar el cliente de línea de órdenes ``gcloud``. Para que la aplicación pueda usar MySQL debemos crear y configurar una instancia de base de datos en Google Cloud SQL.
+Publicación de la aplicación del carrito en Google App Engine
+-------------------------------------------------------------
+
+Vamos a ver cómo desplegar la aplicación del carrito del tema anterior en Google App Engine, el servicio de plataforma de aplicaciones de Google Cloud Platform. Dado que las máquinas virtuales que se asignen a nuestra aplicación de Google App Engine pueden ser eliminadas o creadas en cualquier momento en base a la demanda, necesitamos almacenar los datos que maneje la aplicación en una base de datos alojada en otro lugar: Google Cloud Platform cuenta con Google Cloud SQL, un servicio de bases de datos relacionales en la nube que incluye el gestor MySQL. En el tema anterior vimos que la aplicación del carrito ya estaba configurada para trabajar con MySQL a través de Knex.js, por lo que no es necesario modificar el código. Al comienzo de este tema, en el apartado ":ref:`label-gcloud`", también se explica cómo configurar el cliente de línea de órdenes ``gcloud``. Para que la aplicación pueda usar MySQL debemos crear y configurar una instancia de base de datos en Google Cloud SQL.
 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
@@ -129,7 +139,9 @@ Para crear la instancia de Cloud SQL desde el terminal es necesario ejecutar des
 
 donde ``<instancia>`` es el nombre la instancia de base de datos y ``<contraseñaAdmin>`` la contraseña que queremos para el administrador de la instancia. 
 
-La primera vez que ejecutes la línea anterior, obtendrás un mensaje informando de que la API de SQL no está activada y ofreciéndote la opción de activarla; pídele que la active. Muchos servicios de Google Cloud Platform están desactivados inicialmente para evitar que las aplicaciones utilicen servicios de pago que no han sido autorizados explícitamente.
+La primera vez que ejecutes la línea anterior, obtendrás un mensaje informando de que la API de SQL no está activada y ofreciéndote la opción de activarla; pídele que la active. Es posible que también se te solicite aceptar las `condiciones del servicio`_. Muchos servicios de Google Cloud Platform están desactivados inicialmente para evitar que las aplicaciones utilicen servicios de pago que no han sido autorizados explícitamente.
+
+.. _`condiciones del servicio`: https://console.developers.google.com/terms/cloud
 
 .. Note::
 
@@ -139,13 +151,19 @@ Ahora vamos a crear un nuevo usuario alternativo al administrador para acceder a
 
 .. _`consola web de administración de instancias de bases de datos`: https://console.cloud.google.com/sql/instances/
 
-.. Desde la línea de órdenes se haría gcloud sql users create <usuario> --host=% --instance=<instancia> --password=<contraseña>, pero esto no da los mismos permisos al usuario; mejorar la creación de usuarios para usar uno que solo pueda crear tablas y rellenarlas. Los usuarios creados desde la consola web tienen los mismos privilegios que root
+.. Note::
+
+  Desde la línea de órdenes se debería también poder conseguir crear un usuario haciendo::
+  
+    gcloud sql users create <usuario> --host=% --instance=<instancia> --password=<contraseña>
+    
+  En el momento de escribir esto, sin embargo, la orden anterior no parece dar los privilegios adecuados al usuario (similares a los de administrador), lo que explica por qué para la creación de usuarios recurrimos a la consola web. 
 
 A continuación, creemos una base de datos en la instancia de Cloud SQL para nuestra aplicación::
 
   gcloud sql databases create <bd> --instance=<instancia>
 
-donde ``<usuario>`` es el nombre del nuevo usuario que hemos creado antes, ``<bd>`` es el nombre de la base de datos e ``<instancia>`` es el nombre de la instancia de Cloud SQL que creamos anteriormente. Para comprobar que usuario y base de datos han sido creados correctamente, podemos consultar los usuarios y las bases de datos existentes haciendo::
+donde ``<bd>`` es el nombre de la base de datos e ``<instancia>`` es el nombre de la instancia de Cloud SQL que creamos anteriormente. Para comprobar que usuario y base de datos han sido creados correctamente, podemos consultar los usuarios y las bases de datos existentes haciendo::
 
   gcloud sql users list --instance=<instancia>
   gcloud sql databases list --instance=<instancia>
@@ -192,7 +210,7 @@ Y para ir viéndolos en un terminal mientras se van generando::
 
   gcloud app logs tail 
 
-Para poder ejecutar instrucciones de SQL sobre la base de datos y asegurarnos de que nuestro programa está rellenándola correctamente, es necesario ir a la consola web de Google Cloud Platform, abrir Cloud Shell y hacer::
+Para poder ejecutar instrucciones de SQL sobre la base de datos y asegurarnos de que nuestro programa está rellenándola correctamente, es necesario ir a la consola web de Google Cloud Platform, abrir el terminal web Cloud Shell y hacer::
 
   gcloud sql connect <instancia> --user=<usuario> 
   

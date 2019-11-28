@@ -247,7 +247,7 @@
 <div class="section" id="una-pagina-web-con-html5">
 <h2>8.3. Una página web con HTML5<a class="headerlink" href="#una-pagina-web-con-html5" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En esta práctica vas a crear un documento HTML5 en el que <em>todo</em> el formato recaiga en hojas de estilo CSS (por tanto, no es posible usar atributos como <code class="docutils literal notranslate"><span class="pre">style</span></code> para el formato). Tu documento se llamará <code class="docutils literal notranslate"><span class="pre">index.html</span></code> y tendrá dos vistas diferentes, <em>normal</em> (la vista por defecto) y <em>compacta</em>; el usuario podrá cambiar de vista en cualquier momento usando los enlaces a pie de página. El objetivo es que consigas un documento que se muestre exactamente como puedes ver en estas imágenes de la <a class="reference external" href="_static/img/p1-vista-normal.png">vista normal</a> y de la <a class="reference external" href="_static/img/p1-vista-compacta.png">vista compacta</a>. Tu documento usará tres hojas de estilo: una con todo el contenido común a ambas vistas y dos más correspondientes a cada una de las vistas. Para poder alternar entre ambas hojas de estilo, añade este código a la cabecera (<code class="docutils literal notranslate"><span class="pre">head</span></code>) de tu página:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
   <span class="kd">function</span> <span class="nx">changeCSS</span><span class="p">(</span><span class="nx">cssFile</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">oldlink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;estilo&quot;</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">newlink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
@@ -257,16 +257,16 @@
     <span class="nx">newlink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">cssFile</span><span class="p">);</span>
     <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">newlink</span><span class="p">,</span> <span class="nx">oldlink</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
 </pre></div>
 </div>
 <p>Recuerda también añadir posteriormente este código en el pie de la página cuando lo crees:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;changeCSS(&#39;./css/normal.css&#39;);&quot;</span><span class="p">&gt;</span>Vista normal<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> |
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;changeCSS(&#39;./css/compact.css&#39;);&quot;</span><span class="p">&gt;</span>Vista compacta<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">onclick=</span><span class="s">&quot;changeCSS(&#39;./css/normal.css&#39;);&quot;</span><span class="nt">&gt;</span>Vista normal<span class="nt">&lt;/a&gt;</span> |
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="na">onclick=</span><span class="s">&quot;changeCSS(&#39;./css/compact.css&#39;);&quot;</span><span class="nt">&gt;</span>Vista compacta<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 <p>Añade, finalmente, un elemento como este a la cabecera de tu documento para que la vista normal sea la que se muestre por defecto:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;estilo&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;./css/normal.css&quot;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">id=</span><span class="s">&quot;estilo&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;./css/normal.css&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 <p>Es muy importante que cuando implementes tu solución te asegures de que respetas <strong>estrictamente</strong> estas instrucciones, incluidos los nombres de identificadores, nombres de fichero, etc.; respeta las mayúsculas y minúsculas, las tildes, la posición de cada elemento en el documento, etc.</p>
@@ -279,7 +279,7 @@
 <li><p>la página acabará con un pie de página (elemento <code class="docutils literal notranslate"><span class="pre">footer</span></code>) con tus datos y los enlaces para cambiar la vista; encierra tu nombre completo (nombre y apellidos, en este orden) en un <code class="docutils literal notranslate"><span class="pre">span</span></code> (hijo de <code class="docutils literal notranslate"><span class="pre">footer</span></code>) con identificador <code class="docutils literal notranslate"><span class="pre">nombre</span></code> y el DNI en otro elemento <code class="docutils literal notranslate"><span class="pre">span</span></code> (también hijo de <code class="docutils literal notranslate"><span class="pre">footer</span></code>) con identificador <code class="docutils literal notranslate"><span class="pre">dni</span></code>; utiliza el carácter <code class="docutils literal notranslate"><span class="pre">'|'</span></code> en el documento HTML para separar los diferentes contenidos del pie de página.</p></li>
 </ul>
 <p>Cada cuestionario estará incluido en su propia sección (mediante sendos elementos <code class="docutils literal notranslate"><span class="pre">section</span></code>, que han de incluir atributos <code class="docutils literal notranslate"><span class="pre">id</span></code>, con valores <code class="docutils literal notranslate"><span class="pre">paris</span></code>, sin tilde y todo en minúsculas, y <code class="docutils literal notranslate"><span class="pre">londres</span></code>, todo en minúsculas, que serán referenciados desde el índice) y tendrá un título de segundo nivel (un elemento <code class="docutils literal notranslate"><span class="pre">h2</span></code>, que será hijo de <code class="docutils literal notranslate"><span class="pre">section</span></code>) que incluirá una imagen (que no ha de coincidir necesariamente en tu solución con la de este enunciado, pero no ha de tener tamaño superior a 512x512 píxeles) seguida del texto del título tal como sigue:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">section</span> <span class="o">...&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="o">&lt;</span><span class="n">section</span> <span class="o">...&gt;</span>
   <span class="o">&lt;</span><span class="n">h2</span> <span class="o">...&gt;</span>
     <span class="o">&lt;</span><span class="n">img</span> <span class="o">...&gt;</span>
     <span class="n">Cuestionario</span> <span class="n">sobre</span><span class="o">...</span>
@@ -287,13 +287,13 @@
 </pre></div>
 </div>
 <p>La forma de codificar cada pregunta será la siguiente:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;bloque&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pregunta&quot;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;bloque&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pregunta&quot;</span><span class="nt">&gt;</span>
   La ciudad de París se sitúa a ambos lados del río Sena.
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;respuesta&quot;</span> <span class="na">data-valor</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;respuesta&quot;</span> <span class="na">data-valor=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>El contador de pregunta se ha de inicializar para cada nuevo cuestionario. El atributo <code class="docutils literal notranslate"><span class="pre">data-valor</span></code> es un atributo personalizado de HTML que usaremos para almacenar la respuesta (true/false) a la pregunta. En general, no es posible añadir a un elemento atributos que no estén especificados en el estándar excepto si estos comienzan por el prefijo <code class="docutils literal notranslate"><span class="pre">data-</span></code>.</p>
@@ -325,17 +325,17 @@
 <ul class="simple">
 <li><p>usa el tipo de letra Droid Serif  para todo el documento; la web que <a class="reference external" href="https://fonts.google.com/specimen/Droid+Serif">describía</a> este tipo de letra ya no está en Google Fonts, pero puedes seguir usándola añadiendo lo siguiente a tu página:</p></li>
 </ul>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;https://fonts.googleapis.com/css?family=Droid+Serif&#39;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#39;text/css&#39;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&#39;https://fonts.googleapis.com/css?family=Droid+Serif&#39;</span> <span class="na">rel=</span><span class="s">&#39;stylesheet&#39;</span> <span class="na">type=</span><span class="s">&#39;text/css&#39;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 <p>y lo siguiente a tu hoja de estilo:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;Droid Serif&#39;</span><span class="o">,</span> <span class="nt">serif</span><span class="o">;</span>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;Droid Serif&#39;</span><span class="o">,</span> <span class="nt">serif</span><span class="o">;</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>cada pregunta/respuesta (selector <code class="docutils literal notranslate"><span class="pre">.bloque</span></code>) tiene un fondo de color <code class="docutils literal notranslate"><span class="pre">whitesmoke</span></code>; su borde es sólido de 1px de ancho y color <code class="docutils literal notranslate"><span class="pre">lightgray</span></code>; el margen superior es de 10px y el inferior de 20px; el relleno (<em>padding</em>) es de 10px; la sombra de la caja se obtiene dando el siguiente valor a la propiedad CSS <code class="docutils literal notranslate"><span class="pre">box-shadow</span></code> (averigua para qué sirve cada parámetro):</p></li>
 </ul>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">box-shadow</span><span class="o">:</span> <span class="nt">6px</span> <span class="nt">6px</span> <span class="nt">3px</span> <span class="nt">slategray</span><span class="o">;</span>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span class="nt">box-shadow</span><span class="o">:</span> <span class="nt">6px</span> <span class="nt">6px</span> <span class="nt">3px</span> <span class="nt">slategray</span><span class="o">;</span>
 </pre></div>
 </div>
 </div>
@@ -357,21 +357,21 @@
 <div class="section" id="adicion-del-formulario-para-insertar-un-nuevo-cuestionario">
 <h3>8.4.2. Adición del formulario para insertar un nuevo cuestionario<a class="headerlink" href="#adicion-del-formulario-para-insertar-un-nuevo-cuestionario" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Añade el siguiente código al principio del bloque <code class="docutils literal notranslate"><span class="pre">main</span></code> de tu documento:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;formulario&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;nuevoCuestionario&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Tema del cuestionario:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;tema&quot;</span> <span class="na">autofocus</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>URL de la imagen:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;url&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;imagen&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;crea&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Crear nuevo cuestionario&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;formulario&quot;</span> <span class="na">id=</span><span class="s">&quot;nuevoCuestionario&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Tema del cuestionario:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;tema&quot;</span> <span class="na">autofocus</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;label&gt;</span>URL de la imagen:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;url&quot;</span> <span class="na">name=</span><span class="s">&quot;imagen&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">name=</span><span class="s">&quot;crea&quot;</span> <span class="na">value=</span><span class="s">&quot;Crear nuevo cuestionario&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>Este código define los elementos necesarios para el formulario de creación de un nuevo cuestionario. Cada campo a insertar se representa en el formulario con una etiqueta (elemento <code class="docutils literal notranslate"><span class="pre">&lt;label&gt;</span></code>) y una entrada (elemento <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code>); ambos se incluyen como elementos dentro de una lista. El botón que se añade como último elemento de la lista ejecutará al ser pulsado el código JavaScript de creación del cuestionario. Es importante que respetes escrupulosamente el fragmento de código anterior, incluyendo los nombres de las clases e identificadores.</p>
@@ -387,8 +387,8 @@
 <li><p>el contenido de los elementos <code class="docutils literal notranslate"><span class="pre">&lt;label&gt;</span></code> se ha de mostrar con el valor <code class="docutils literal notranslate"><span class="pre">inline-block</span></code> para la propiedad <code class="docutils literal notranslate"><span class="pre">display</span></code> (que trata el contenido del elemento como una combinación de <code class="docutils literal notranslate"><span class="pre">inline</span></code> y <code class="docutils literal notranslate"><span class="pre">block</span></code>) lo que nos permitirá darle un ancho fijo de 15em y conseguir que las cajas de introducción de texto queden bien alineadas unas respecto a otras;</p></li>
 <li><p>aquellos elementos de tipo <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> del formulario que tengan su atributo <code class="docutils literal notranslate"><span class="pre">type</span></code> con valor <code class="docutils literal notranslate"><span class="pre">text</span></code> o <code class="docutils literal notranslate"><span class="pre">url</span></code> (el botón, por tanto, queda excluido) tendrá un borde sólido de 1px de grosor y color <code class="docutils literal notranslate"><span class="pre">#aaa</span></code>; añádeles, además, estos atributos para conseguir una mayor definición de la caja:</p></li>
 </ul>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">box-shadow</span><span class="o">:</span> <span class="nt">0px</span> <span class="nt">0px</span> <span class="nt">3px</span> <span class="p">#</span><span class="nn">ccc</span><span class="o">,</span> <span class="nt">0</span> <span class="nt">5px</span> <span class="nt">8px</span> <span class="p">#</span><span class="nn">eee</span> <span class="nt">inset</span><span class="o">;</span>
-<span class="nt">border-radius</span><span class="p">:</span><span class="nd">2px</span><span class="o">;</span>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span class="nt">box-shadow</span><span class="o">:</span> <span class="nt">0px</span> <span class="nt">0px</span> <span class="nt">3px</span> <span class="nf">#ccc</span><span class="o">,</span> <span class="nt">0</span> <span class="nt">5px</span> <span class="nt">8px</span> <span class="nf">#eee</span> <span class="nt">inset</span><span class="o">;</span>
+<span class="nt">border-radius</span><span class="nd">:2px</span><span class="o">;</span>
 </pre></div>
 </div>
 </div>
@@ -399,7 +399,7 @@
 <div class="section" id="adicion-de-iconos-para-borrar-cada-pregunta">
 <h3>8.4.5. Adición de iconos para borrar cada pregunta<a class="headerlink" href="#adicion-de-iconos-para-borrar-cada-pregunta" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En primer lugar, vamos a añadir a las (cinco) cajas existentes para bloques de pregunta un icono que permita eliminar el bloque completo (número, enunciado y respuesta) de la página. Crea para ello una función <code class="docutils literal notranslate"><span class="pre">addCruz</span></code> que reciba como parámetro un objeto de tipo nodo que apunte a un elemento de clase <code class="docutils literal notranslate"><span class="pre">.bloque</span></code>. La función creará un nodo que contega un elemento como el siguiente</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;borra&quot;</span><span class="p">&gt;</span>☒<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;borra&quot;</span><span class="nt">&gt;</span>☒<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>y lo insertará como primer hijo del nodo <code class="docutils literal notranslate"><span class="pre">.bloque</span></code> pasado como parámetro. El contenido corresponde al carácter Unicode <a class="reference external" href="http://unicode-table.com/en/2612/">2612</a>.</p>
@@ -421,7 +421,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">queryAncestorSelector(node,selector)</span></code>: devuelve el ancestro más cercano a <code class="docutils literal notranslate"><span class="pre">node</span></code> que case con el selector indicado como segundo parámetro o <code class="docutils literal notranslate"><span class="pre">null</span></code> si no existe ninguno; <code class="docutils literal notranslate"><span class="pre">node</span></code> ha de ser un nodo inferior en el árbol a <code class="docutils literal notranslate"><span class="pre">document.body</span></code>.</p></li>
 </ul>
 <p>La siguiente es una posible implementación de la función que puedes copiar en tu práctica después de asegurarte de que la entiendes perfectamente:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">queryAncestorSelector</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">queryAncestorSelector</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">parent</span><span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">all</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">found</span><span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
@@ -440,33 +440,33 @@
 <p>Versiones recientes de los navegadores permiten usar la función <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest">closest</a> que tiene un comportamiento similar a <code class="docutils literal notranslate"><span class="pre">queryAncestorSelector</span></code>, pero no es necesario que la uses en tu práctica.</p>
 </div>
 <p>Esta función la usaras cuando desde un nodo determinado del DOM quieras acceder a un ancestro para el que conoces un selector, pero no conoces la <em>distancia</em> exacta a la que se encuentra o no te interesa hacer que tu código dependa en exceso de dicha distancia porque en el futuro podría haber más nodos intermedios en el árbol y no quieres tener que modificar el código de JavaScript si esto ocurre. Por ejemplo, considera este fragmento de HTML:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">a</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;a&gt;</span>
+  <span class="nt">&lt;b&gt;</span>
     ...
-    <span class="p">&lt;</span><span class="nt">c</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">d</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">d</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">c</span><span class="p">&gt;</span>
+    <span class="nt">&lt;c&gt;</span>
+      <span class="nt">&lt;d&gt;</span>
+      <span class="nt">&lt;/d&gt;</span>
+    <span class="nt">&lt;/c&gt;</span>
     ...
-    <span class="p">&lt;</span><span class="nt">e</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">e</span><span class="p">&gt;</span>
+    <span class="nt">&lt;e&gt;</span>
+    <span class="nt">&lt;/e&gt;</span>
     ...
-    <span class="p">&lt;</span><span class="nt">f</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">f</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="nt">&lt;f&gt;</span>
+    <span class="nt">&lt;/f&gt;</span>
+  <span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 <p>Si <code class="docutils literal notranslate"><span class="pre">x</span></code> representa el nodo correspondiente al elemento <code class="docutils literal notranslate"><span class="pre">d</span></code> y quieres acceder a información del nodo <code class="docutils literal notranslate"><span class="pre">a</span></code>, podría hacerse algo como:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">x</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">parentNode</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span class="nx">x</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">parentNode</span>
 </pre></div>
 </div>
 <p>o, con ayuda de la nueva funcion, simplemente</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">queryAncestorSelector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span class="nx">queryAncestorSelector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Otro ejemplo: para acceder al elemento <code class="docutils literal notranslate"><span class="pre">f</span></code> desde <code class="docutils literal notranslate"><span class="pre">x</span></code>, se puede hacer:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">queryAncestorSelector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">).</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">);</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span class="nx">queryAncestorSelector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">).</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -481,22 +481,22 @@
 <div class="section" id="adicion-de-formularios-de-insercion-de-preguntas">
 <h3>8.4.9. Adición de formularios de inserción de preguntas<a class="headerlink" href="#adicion-de-formularios-de-insercion-de-preguntas" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>A diferencia del formulario de creación de cuestionarios, el formulario de adición de una nueva pregunta se crea dinámicamente para cada cuestionario. Crea ahora una función <code class="docutils literal notranslate"><span class="pre">addFormPregunta</span></code> que se encargue de ello. Esta función recibe como parámetro el nodo correspondiente al elemento <code class="docutils literal notranslate"><span class="pre">section</span></code> de un determinado cuestionario, crea dinámicamente un formulario como el siguiente y lo inserta a continuación del título del cuestionario (antes de la primera pregunta, si la hubiera):</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;formulario&quot;</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Enunciado de la pregunta:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;paris_pregunta&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">label</span><span class="p">&gt;</span>Respuesta:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;paris_respuesta&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;verdadero&quot;</span> <span class="na">checked</span><span class="p">&gt;</span>Verdadero
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;paris_respuesta&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;falso&quot;</span><span class="p">&gt;</span>Falso
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Añadir nueva pregunta&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;formulario&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Enunciado de la pregunta:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;paris_pregunta&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;label&gt;</span>Respuesta:<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">name=</span><span class="s">&quot;paris_respuesta&quot;</span> <span class="na">value=</span><span class="s">&quot;verdadero&quot;</span> <span class="na">checked</span><span class="nt">&gt;</span>Verdadero
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;radio&quot;</span> <span class="na">name=</span><span class="s">&quot;paris_respuesta&quot;</span> <span class="na">value=</span><span class="s">&quot;falso&quot;</span><span class="nt">&gt;</span>Falso
+    <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">value=</span><span class="s">&quot;Añadir nueva pregunta&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>Un comentario sobre los atributos <code class="docutils literal notranslate"><span class="pre">name</span></code> del formulario: dado que estos no pueden tener los mismos valores para los distintos formularios del documento (de otro modo, todos los botones de radio serían considerados como un único conjunto por el navegador y activar uno de ellos en un cuestionario desactivaría el resto de botones en los otros cuestionarios), en esta práctica has de añadir como prefijo el nombre del atributo <code class="docutils literal notranslate"><span class="pre">id</span></code> del elemento <code class="docutils literal notranslate"><span class="pre">section</span></code> correspondiente seguido de un carácter subrayado.</p>
@@ -565,16 +565,16 @@
 <div class="section" id="creacion-de-los-componentes-web">
 <h3>8.5.4. Creación de los componentes web<a class="headerlink" href="#creacion-de-los-componentes-web" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>En esta parte final de la práctica has de crear un componente web que muestre el encabezado de cada cuestionario. Este componente web sustituirá al actual bloque de HTML que contiene el título, la imagen y la descripción de cada cuestionario, de manera que en lugar de introducirlo con un código similar a este (y con el correspondiente código de JavaScript):</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;parís&quot;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;parís&quot;</span><span class="nt">&gt;</span>
 
-<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;...&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;...&quot;</span><span class="p">&gt;</span>Cuestionario sobre París<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;wiki&quot;</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="nt">&lt;h2&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;...&quot;</span> <span class="na">alt=</span><span class="s">&quot;...&quot;</span><span class="nt">&gt;</span>Cuestionario sobre París<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wiki&quot;</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div>
 <p>bastará con hacer:</p>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;parís&quot;</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;parís&quot;</span><span class="nt">&gt;</span>
 
-<span class="p">&lt;</span><span class="nt">encabezado-cuestionario</span> <span class="na">tema</span><span class="o">=</span><span class="s">&quot;París&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">encabezado-cuestionario</span><span class="p">&gt;</span>
+<span class="nt">&lt;encabezado-cuestionario</span> <span class="na">tema=</span><span class="s">&quot;París&quot;</span><span class="nt">&gt;&lt;/encabezado-cuestionario&gt;</span>
 </pre></div>
 </div>
 <p>Si repasas bien los contenidos sobre componentes web estudiados en clase, no te debería costar mucho implementar el componente web en un fichero <code class="docutils literal notranslate"><span class="pre">encabezado-cuestionario.js</span></code>. Ve definiendo el componente sin eliminar hasta el final el código que ya tenías. Ten en cuenta los siguientes detalles:</p>
@@ -583,7 +583,7 @@
 <li><p>Gran parte del código necesario para interactuar con los servicios web de Flickr y Wikipedia lo puedes tomar de las funciones <code class="docutils literal notranslate"><span class="pre">addFlickr</span></code> y <code class="docutils literal notranslate"><span class="pre">addWikipedia</span></code> que ya tenías definidas, aunque los elementos que creaban estas funciones se añadían al DOM y ahora se añadirán al <em>shadow DOM</em>.</p></li>
 <li><p>Intenta, en principio, conseguir que algo como:</p></li>
 </ul>
-<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">encabezado-cuestionario</span> <span class="na">tema</span><span class="o">=</span><span class="s">&quot;Berlín&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">encabezado-cuestionario</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span class="nt">&lt;encabezado-cuestionario</span> <span class="na">tema=</span><span class="s">&quot;Berlín&quot;</span><span class="nt">&gt;&lt;/encabezado-cuestionario&gt;</span>
 </pre></div>
 </div>
 <p>funcione en <code class="docutils literal notranslate"><span class="pre">index.html</span></code>. Cuando lo consigas, sustituye el encabezado de los cuestionarios iniciales existentes en <code class="docutils literal notranslate"><span class="pre">index.html</span></code> por el uso del elemento personalizado <code class="docutils literal notranslate"><span class="pre">encabezado-cuestionario</span></code>. Ya no es necesario, tampoco, tener que añadir el texto de la Wikipedia o la imagen de Flickr a los cuestionarios preexistentes mediante código explícito en JavaScript, sino que el nuevo elemento se encargará de ello.</p>
@@ -591,7 +591,7 @@
 <li><p>Repasa el tema de componentes web visto en clase antes de comenzar a escribir los componentes web. Pon el código en JavaScript que se encarga de acceder a los servicios de Flickr y Wikipedia en la función <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> de la clase correspondiente y no en el constructor. Pon también en <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> el acceso al atributo <code class="docutils literal notranslate"><span class="pre">tema</span></code>.</p></li>
 <li><p>Ten en cuenta a qué apunta <code class="docutils literal notranslate"><span class="pre">this</span></code> en cada momento; tu código del interior del método <code class="docutils literal notranslate"><span class="pre">then</span></code> asociado a una promesa <code class="docutils literal notranslate"><span class="pre">fetch</span></code> se ejecutará (cuando el servidor devuelva su respuesta) de forma asíncrona fuera del contexto del componente web; en ese caso, <code class="docutils literal notranslate"><span class="pre">this</span></code> no estará apuntando al componente web, por lo que para acceder a sus propiedades tendrás que utilizar correctamente una clausura:</p></li>
 </ul>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">connectedCallback</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span class="nx">connectedCallback</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">componente</span><span class="o">=</span> <span class="k">this</span><span class="p">;</span>  <span class="c1">// aquí this apunta al componente web</span>
   <span class="nx">fetch</span><span class="p">(...)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(...)</span>
@@ -625,20 +625,28 @@
 <p>La segunda parte del enunciado se publicará próximamente.</p>
 </div>
 <p>Cuando el usuario entre en la aplicación, se le mostrará el formulario para insertar nuevos cuestionarios; inicialmente no habrá ningún cuestionario creado y, por tanto, ya no aparecerán los cuestionarios de París ni Londres. La aplicación funcionará como una <em>aplicación de una única página</em> (en inglés, <em>SPA</em> por <em>single-page application</em>): cada vez que el usuario introduzca o elimine datos, los cuestionarios se actualizarán convenientemente en la página como hasta ahora, pero también lo harán en la base de datos del servidor.</p>
-<p>Como en el ejemplo del carrito visto en clase, el código del servidor estará escrito con Node.js y Express, y funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo, como vimos en la plaicación del carrito. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.</p>
+<p>Como en el ejemplo del carrito visto en clase, el código del servidor estará escrito con Node.js y Express, y funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo, como vimos en la aplicación del carrito. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.</p>
 <div class="section" id="comprobacion-de-la-aplicacion-del-carrito">
 <h3>8.6.1. Comprobación de la aplicación del carrito<a class="headerlink" href="#comprobacion-de-la-aplicacion-del-carrito" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en <code class="docutils literal notranslate"><span class="pre">localhost</span></code> y en la nube de Google App Engine.</p>
+<p>Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en <code class="docutils literal notranslate"><span class="pre">localhost</span></code> y en la nube de Google App Engine. Recuerda que las instrucciones sobre cómo configurar el entorno de trabajo y lanzar la aplicación tanto en modo local como en la nube se dieron en las secciones «<a class="reference internal" href="servicios.html#label-local"><span class="std std-ref">Configuración del entorno de trabajo para ejecutar localmente una aplicación web</span></a>», «<a class="reference internal" href="nube.html#label-gcloud"><span class="std std-ref">Configuración del entorno de trabajo para Google Cloud Platform</span></a>» y «<a class="reference internal" href="nube.html#label-appengine"><span class="std std-ref">Publicación de la aplicación del carrito en Google App Engine</span></a>».</p>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Recuerda lo que se comenta al principio del apartado «<a class="reference internal" href="servicios.html#label-local"><span class="std std-ref">Configuración del entorno de trabajo para ejecutar localmente una aplicación web</span></a>» sobre el hecho de que el sistema operativo <em>oficial</em> de la asignatura es Linux. El examen de prácticas se realizará sobre la versión de Linux instalada en los ordenadores de los laboratorios, por lo que es muy importante que aprendas a trabajar sobre ellos. Recuerda que puedes instalar todo el software necesario rápidamente con ayuda del fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191128.tar.gz">dai-bundle-dev</a>: descárgalo, descomprímelo, edita y luego ejecuta el script <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>. Mientras trabajas en la práctica, en los ordenadores de los laboratorios solo necesitas instalar Node.js y el SDK de Google Cloud Platform (SQLite3 ya está instalado). El día del examen solo necesitas instalar Node.js, ya que no se pedirá en el examen que implantes nada en la nube.</p>
+</div>
 </div>
 <div class="section" id="incorporacion-e-implantacion-de-la-aplicacion-de-la-practica-anterior">
 <h3>8.6.2. Incorporación e implantación de la aplicación de la práctica anterior<a class="headerlink" href="#incorporacion-e-implantacion-de-la-aplicacion-de-la-practica-anterior" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Añade ahora en la carpeta adecuada de la aplicación del carrito, los ficheros de tu práctica 3 de forma que <em>index.html</em> esté alojado donde corresponda y el resto de elementos de tu aplicación mantengan su estructura relativa. Lanza la aplicación en modo local y comprueba que funciona correctamente. A continuación, implanta tu aplicación en la nube de Google App Engine y comprueba que, de nuevo, sigue funcionando correctamente. El único cambio que quizás tengas que hacer para que tu aplicación funcione en la nube de Google vendría dado porque a la hora de indicar los tipos de letra de Google Fonts o las direcciones de acceso a las APIs de Wikipedia o Flickr hubieras usado el protocolo <em>http</em> en lugar de <em>https</em>; en ese caso, tendrías que cambiarlo ahora ya que a las aplicaciones de Google App Engine se accede mediante <em>https</em> y desde una página descargada de forma segura no es posible referenciar recursos con URLs no seguras.</p>
+<p>Añade ahora en la carpeta adecuada de la aplicación del carrito, los ficheros de tu práctica 3 de forma que <em>index.html</em> esté alojado donde corresponda y el resto de elementos de tu aplicación mantengan su estructura relativa. Lanza la aplicación en modo local y comprueba que funciona correctamente. A continuación, implanta tu aplicación en la nube de Google App Engine y comprueba que, de nuevo, sigue funcionando correctamente.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>El único cambio que quizás tengas que hacer para que tu aplicación funcione en la nube de Google vendría dado porque a la hora de indicar los tipos de letra de Google Fonts o las direcciones de acceso a las APIs de Wikipedia o Flickr hubieras usado el protocolo <em>http</em> en lugar de <em>https</em>; en ese caso, tendrías que cambiarlo ahora ya que a las aplicaciones de Google App Engine se accede mediante <em>https</em> y desde una página descargada de forma segura no es posible referenciar recursos con URLs no seguras.</p>
+</div>
 <p>Como la página ya no contiene inicialmente ningún cuestionario, puedes borrar de la función <em>init</em> el código que se encargaba de añadir a cada uno de los cuestionarios existentes la cruz de borrado y el formulario de inserción de preguntas.</p>
 </div>
 <div class="section" id="caracteristicas-comunes-de-los-servicios-web-a-implementar">
 <h3>8.6.3. Características comunes de los servicios web a implementar<a class="headerlink" href="#caracteristicas-comunes-de-los-servicios-web-a-implementar" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Los servicios web a implementar serán de tipo GET, POST o DELETE según su cometido y recibirán la información y la devolverán en formato JSON. La respuesta del servidor siempre seguirá el siguiente formato:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span><span class="o">...</span><span class="p">,</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="o">...</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span><span class="o">...</span><span class="p">,</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="o">...</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Cuando la petición se haya podido atender correctamente, el atributo <code class="docutils literal notranslate"><span class="pre">result</span></code> contendrá la información relevante que haya que devolver al cliente y el atributo <code class="docutils literal notranslate"><span class="pre">error</span></code> valdrá <code class="docutils literal notranslate"><span class="pre">null</span></code>; el código de estado HTTP devuelto en este caso será 200. Por otro lado, si algún problema impide en tu código atender correctamente la solicitud (por ejemplo, se intenta eliminar un cuestionario inexistente), la respuesta del servidor contendrá la información adecuada en el atributo <code class="docutils literal notranslate"><span class="pre">error</span></code> y el atributo <code class="docutils literal notranslate"><span class="pre">result</span></code> valdrà <code class="docutils literal notranslate"><span class="pre">null</span></code>; el código de estado devuelto en este caso será 404. Una situación típica de error que has de controlar es que los parámetros esperados de cada servicio web sean incorrectos o no existan.</p>
@@ -666,7 +674,7 @@
 <div class="section" id="gestion-de-los-temas-de-los-cuestionarios">
 <h3>8.6.6. Gestión de los temas de los cuestionarios<a class="headerlink" href="#gestion-de-los-temas-de-los-cuestionarios" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Comienza creando un servicio web que añada un nuevo tema a la base de datos. Como ya se ha comentado, el cuestionario solo se añade a la página actual si la respuesta del servicio es positiva; en otro caso, la solicitud del usuario de crear un nuevo cuestionario no tiene efecto sobre la página del navegador. Este servicio no permite tener más de un cuestionario con el mismo tema. Si, por ejemplo, ya existiera un cuestionario sobre Lugano en la base de datos, la respuesta sería (tu mensaje de error no ha de coincidir necesariamente):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span><span class="s2">&quot;error&quot;</span><span class="p">:</span><span class="s2">&quot;el tema Lugano ya existe en la base de datos&quot;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="p">{</span> <span class="s">&quot;result&quot;</span><span class="p">:</span><span class="n">null</span><span class="p">,</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="s">&quot;el tema Lugano ya existe en la base de datos&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>A continuación, crea un servicio web que elimine de la base de datos un tema. Después, modifica el código JavaScript del cliente para que invoque este servicio cuando proceda borrar un cuestionario. El cuestionario solo se elimina de la página actual si la respuesta del servicio es positiva. A diferencia de prácticas anteriores, por tanto, en esta es posible que al borrar la última pregunta de un cuestionario, este no desaparezca; esto puede ocurrir ya que la pregunta se borra en primer lugar y, una vez borrada, se ha de proceder a intentar borrar el cuestionario que la incluía; si este último borrado falla, la pregunta eliminada no se recupera. El servicio devolverá en la respuesta en JSON un error si el identificador del tema indicado en los datos de la petición no existe en la base de datos.</p>
@@ -687,7 +695,8 @@
 <p>Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior del DOM se validan correctamente con los validadores HTML5 y CSS del W3C con excepción de los elementos personalizados, que posiblemente generen algún tipo de error. Además, usa Chrome Developer Tools o Firebug para comprobar que el estilo aplicado en cada punto del documento es correcto y para depurar tu código en JavaScript del lado del cliente; usa Visual Studio Code para depurar el código de Node.js de la parte del servidor.</p>
 <p><em>Nota:</em> recuerda mantener un tu nombre completo y DNI en el pie del documento. Realiza tu entrega en un único fichero comprimido llamado <code class="docutils literal notranslate"><span class="pre">p4-dai.zip</span></code> a través del <a class="reference external" href="https://pracdlsi.dlsi.ua.es/index.cgi?id=val">servidor web del Departamento</a>. El archivo comprimido contendrá directamente (sin ninguna carpeta contenedora) el fichero <code class="docutils literal notranslate"><span class="pre">app.js</span></code> y las carpetas que sean necesarias. Asegúrate de borrar la carpeta <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> antes de crear el <em>zip</em> para que su contenido no se incluya en el fichero generado y evitar así que la práctica que entregues tenga más tamaño del necesario.</p>
 <p>Sube tu aplicación a Google App Engine e incluye en el pie de página de tu aplicación un enlace al URL correspondiente en <code class="docutils literal notranslate"><span class="pre">appspot.com</span></code>. Tu práctica será corregida descomprimiendo el fichero <em>zip</em>, haciendo:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">start</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="n">npm</span> <span class="n">install</span>
+<span class="n">npm</span> <span class="n">start</span>
 </pre></div>
 </div>
 <p>y accediendo al URL correspondiente en <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página.</p>

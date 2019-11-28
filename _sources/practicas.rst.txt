@@ -568,18 +568,29 @@ Esta práctica tiene dos partes. En la primera parte vas a ampliar la práctica 
 
 Cuando el usuario entre en la aplicación, se le mostrará el formulario para insertar nuevos cuestionarios; inicialmente no habrá ningún cuestionario creado y, por tanto, ya no aparecerán los cuestionarios de París ni Londres. La aplicación funcionará como una *aplicación de una única página* (en inglés, *SPA* por *single-page application*): cada vez que el usuario introduzca o elimine datos, los cuestionarios se actualizarán convenientemente en la página como hasta ahora, pero también lo harán en la base de datos del servidor.
 
-Como en el ejemplo del carrito visto en clase, el código del servidor estará escrito con Node.js y Express, y funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo, como vimos en la plaicación del carrito. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.
+Como en el ejemplo del carrito visto en clase, el código del servidor estará escrito con Node.js y Express, y funcionará con una base de datos SQLite mientras se ejecute localmente y con MySQL cuando se ejecute desde Google App Engine. Al usar Knex.js, la mayor parte del código para ambas opciones será el mismo, como vimos en la aplicación del carrito. Asimismo, la aplicación será la encargada de crear el esquema de la base de datos si las tablas no existen.
 
 
 Comprobación de la aplicación del carrito
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en ``localhost`` y en la nube de Google App Engine. 
+Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en ``localhost`` y en la nube de Google App Engine. Recuerda que las instrucciones sobre cómo configurar el entorno de trabajo y lanzar la aplicación tanto en modo local como en la nube se dieron en las secciones ":ref:`label-local`", ":ref:`label-gcloud`" y ":ref:`label-appengine`".
+
+.. Important::
+
+  Recuerda lo que se comenta al principio del apartado ":ref:`label-local`" sobre el hecho de que el sistema operativo *oficial* de la asignatura es Linux. El examen de prácticas se realizará sobre la versión de Linux instalada en los ordenadores de los laboratorios, por lo que es muy importante que aprendas a trabajar sobre ellos. Recuerda que puedes instalar todo el software necesario rápidamente con ayuda del fichero `dai-bundle-dev`_: descárgalo, descomprímelo, edita y luego ejecuta el script ``install.sh``. Mientras trabajas en la práctica, en los ordenadores de los laboratorios solo necesitas instalar Node.js y el SDK de Google Cloud Platform (SQLite3 ya está instalado). El día del examen solo necesitas instalar Node.js, ya que no se pedirá en el examen que implantes nada en la nube.
+  
+  .. _`dai-bundle-dev`: _static/data/dai-bundle-dev-20191128.tar.gz
+
 
 Incorporación e implantación de la aplicación de la práctica anterior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Añade ahora en la carpeta adecuada de la aplicación del carrito, los ficheros de tu práctica 3 de forma que *index.html* esté alojado donde corresponda y el resto de elementos de tu aplicación mantengan su estructura relativa. Lanza la aplicación en modo local y comprueba que funciona correctamente. A continuación, implanta tu aplicación en la nube de Google App Engine y comprueba que, de nuevo, sigue funcionando correctamente. El único cambio que quizás tengas que hacer para que tu aplicación funcione en la nube de Google vendría dado porque a la hora de indicar los tipos de letra de Google Fonts o las direcciones de acceso a las APIs de Wikipedia o Flickr hubieras usado el protocolo *http* en lugar de *https*; en ese caso, tendrías que cambiarlo ahora ya que a las aplicaciones de Google App Engine se accede mediante *https* y desde una página descargada de forma segura no es posible referenciar recursos con URLs no seguras.
+Añade ahora en la carpeta adecuada de la aplicación del carrito, los ficheros de tu práctica 3 de forma que *index.html* esté alojado donde corresponda y el resto de elementos de tu aplicación mantengan su estructura relativa. Lanza la aplicación en modo local y comprueba que funciona correctamente. A continuación, implanta tu aplicación en la nube de Google App Engine y comprueba que, de nuevo, sigue funcionando correctamente. 
+
+.. Note::
+
+  El único cambio que quizás tengas que hacer para que tu aplicación funcione en la nube de Google vendría dado porque a la hora de indicar los tipos de letra de Google Fonts o las direcciones de acceso a las APIs de Wikipedia o Flickr hubieras usado el protocolo *http* en lugar de *https*; en ese caso, tendrías que cambiarlo ahora ya que a las aplicaciones de Google App Engine se accede mediante *https* y desde una página descargada de forma segura no es posible referenciar recursos con URLs no seguras.
 
 Como la página ya no contiene inicialmente ningún cuestionario, puedes borrar de la función *init* el código que se encargaba de añadir a cada uno de los cuestionarios existentes la cruz de borrado y el formulario de inserción de preguntas.
 
@@ -651,6 +662,7 @@ Asegúrate de que tanto tus ficheros iniciales como cualquier estado posterior d
 
 Sube tu aplicación a Google App Engine e incluye en el pie de página de tu aplicación un enlace al URL correspondiente en ``appspot.com``. Tu práctica será corregida descomprimiendo el fichero *zip*, haciendo::
 
+  npm install
   npm start
 
 y accediendo al URL correspondiente en ``localhost``. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página.
