@@ -957,6 +957,48 @@ Finalmente, puedes usar el `panel de control`_ de tu aplicación en Heroku para 
 .. para ligar un nuevo proyecto a una aplicación ya existente: heroku git:remote -a new-project-23116
 
 
+.. _label-signin:
+
+Autenticación de usuarios
+-------------------------
+
+Una componente importante de la mayoría de aplicaciones web es la que permite que los usuarios se identifiquen o autentiquen en la aplicación y puedan gestionar así sus propios datos. La gestión de cuentas de usuario requiere un esfuerzo adicional (validación de cuentas de correo electrónico, almacenamiento seguro de las contraseñas, gestión de ataques cibernéticos, olvidos de contraseña, etc.) que podemos delegar en servicios de terceros como Facebook Login o Google Sign-in; este último será el que usaremos en esta actividad. De esta forma, el usuario se identifica en una ventana del navegador vinculada a un URL de Google y autoriza a nuestra aplicación a acceder a cierta información de su perfil (nombre y correo electrónico, por ejemplo) sin compartir el resto de sus datos (o permitiendo el acceso a un subconjunto de ellos, como, por ejemplo, los ficheros almacenados en una carpeta de Google Drive).
+
+.. Note::
+
+  Esta actividad solo es necesaria este curso si vas a implementar la parte de la práctica 4 relacionada con la identificación de usuarios. Si no es así, puedes ignorar el resto, salvo que tengas curiosidad en aprender cómo se hace.
+
+El primer paso para que una aplicación pueda acceder al servicio de identificación de Google Sign-in es obtener las credenciales adecuadas que nos permitan obtener el *id del cliente*, una secuencia de caracteres que necesitamos para poder usar el servicio desde el código JavaScript del navegador y desde el código en Node.js del servidor. Para ello accede en la consola web de Google Cloud Platform a la opción :guilabel:`Credenciales` dentro del menú :guilabel:`APIs y servicios`. Elije crear una credencial de tipo :guilabel:`ID de cliente de OAuth`. En la nueva pantalla, escoge *web* como tipo de aplicación, introduce un nombre para la aplicación, y en :guilabel:`Orígenes de JavaScript autorizados` indica los URLs desde los que harás peticiones: normalmente, indicarás un URL del tipo ``http://localhost:5000`` para cuando la aplicación se lance en local y uno del tipo ``https://proyecto-10002.appspot.com/`` para cuando se despliegue en un servidor en la nube. No has de indicar nada en la sección :guilabel:`URIs de redirección autorizados`. Con esta información, ya podrás obtener el *id del cliente*.
+
+A continuación se describe una aplicación sencilla que permite que el usuario se identifique en el navegador con su cuenta de Google. La aplicación completa está en la carpeta ``code/gsignin`` del `repositorio de la asignatura`_ . Tras la autenticación, el código puede obtener una serie de datos del usuario entre los que es especialmente relevante el *token id*, que será el dato que se enviará al servidor y del que este extraerá un *id* del usuario que será el que se almacenará en las bases de datos para indicar el usuario asociado a un registro dado. Observa que no se envía al servidor un dato como la dirección de correo electrónico para usarlo como identificador del usuario porque podría cambiar en algún momento del futuro. Tampoco se le envía el *id* del usuario, sino un *token* más largo que codifica diferentes datos, incluyendo el *id* del usuario. Este token deberá ser validado por el servidor antes de dar por bueno el *id* que incluye.
+
+Este es el código de la parte del cliente:
+
+.. literalinclude:: ../../code/gsignin/public/index.html
+  :language: html
+  :linenos:
+
+El código del lado del navegador es el que lleva el mayor peso de la tarea. Como puedes ver, la librería de Google ``apis.google.com/js/platform.js`` simplifica gran parte del proceso. La función ``initGoogleAPI`` inicializa el objeto ``auth2`` y registra diferentes funciones de *callback* que serán invocadas cuando el usuario se logre autenticar pulsando el botón (``onSuccessSignIn``), cuando el paso anterior falle (``onFailureSignIn``) o cuando el usuario se identifique por cualquier medio (``signinChanged``). Observa que es posible que se invoque ``signinChanged`` sin invocar ``onSuccessSignIn``; por ejemplo, si un usuario se ha identificado previamente, no ha salido de la aplicación, pero cierra la página y vuelve a abrirla, entonces la librería autentica automáticamente al usuario y llama a ``signinChanged`` pero no a ``onSuccessSignIn``. Se incluye también una función (``signOut``) para salir de la aplicación cuando se pulsa el botón correspondiente; en este caso, también se llamará a ``signinChanged`` con el valor ``false`` como parámetro.
+
+El *token id* se obtiene con ``auth2.currentUser.get().getAuthResponse().id_token`` y se envía al servidor en la cabecera de HTTP ``Authorization`` con el prefijo estándar ``Bearer`` que identifica el tipo de autenticación.
+
+En el lado del servidor, hay pocas novedades reseñables:
+
+.. literalinclude:: ../../code/gsignin/app.js
+  :language: javascript
+  :linenos:
+
+Se ha añadido un *middleware* que obtiene el valor de la cabecera ``Authorization`` y lo verifica usando la función ``verifyIdToken`` del módulo de Node.js ``google-auth-library``. Del objeto devuelto se puede extraer el *id* del usuario con ``getPayload()['sub']`` y usar este valor como identificador del usuario en la base de datos (esta parte se ha omitido en el código, ya que ya se estudió en un apartado anterior).
+
+.. Note::
+
+  Si necesitas aclarar algún aspecto del código anterior, puedes consultar la referencia del `cliente de JavaScript de Google Sign-in`_, la guía `Integrating Google Sign-in into your web app`_, la `documentación de la librería de Google`_ o la descripción del `acceso con OAuth 2.0 a la API de Google`_. 
+
+    .. _`Integrating Google Sign-in into your web app`: https://developers.google.com/identity/sign-in/web/sign-in
+    .. _`documentación de la librería de Google`: https://github.com/google/google-api-javascript-client
+    .. _`acceso con OAuth 2.0 a la API de Google`: https://developers.google.com/identity/protocols/OAuth2
+    .. _`cliente de JavaScript de Google Sign-in`: https://developers.google.com/identity/sign-in/web/reference
+
 Términos de uso de las APIs web
 -------------------------------
 

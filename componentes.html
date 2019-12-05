@@ -93,8 +93,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="nube.html">6. Computación en la  nube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="otros.html">7. Otros elementos del desarrollo web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practicas.html">8. Enunciados de las prácticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practicas.html">7. Enunciados de las prácticas</a></li>
 </ul>
 
             
@@ -235,40 +234,40 @@
 49
 50
 51
-52</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Definición de componentes web<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
+52</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;template</span> <span class="na">id=</span><span class="s">&quot;operaciones&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;style&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;operaciones&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
         <span class="nt">h1</span> <span class="p">{</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">steelblue</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">steelblue</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="nc">.contenido</span> <span class="p">{</span>
-          <span class="k">background-color</span><span class="o">:</span> <span class="nb">gainsboro</span><span class="p">;</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">royalblue</span><span class="p">;</span>
+        <span class="p">.</span><span class="nc">contenido</span> <span class="p">{</span>
+          <span class="k">background-color</span><span class="p">:</span> <span class="kc">gainsboro</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">royalblue</span><span class="p">;</span>
         <span class="p">}</span>
-      <span class="nt">&lt;/style&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;script&gt;</span>
+      <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Template instanciado&quot;</span><span class="p">);</span>
-      <span class="nt">&lt;/script&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;h1&gt;</span>Operaciones binarias<span class="nt">&lt;/h1&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contenido&quot;</span><span class="nt">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Operaciones binarias<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;contenido&quot;</span><span class="p">&gt;</span>
         Multiplicación: 3 x 2 = 6.
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/template&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;h1&gt;</span>Definición de componentes web<span class="nt">&lt;/h1&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones&gt;&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span><span class="p">&gt;&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
       <span class="kr">class</span> <span class="nx">Operaciones</span> <span class="kr">extends</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
           <span class="kr">super</span><span class="p">();</span>
@@ -281,12 +280,12 @@
         <span class="p">}</span>
       <span class="p">}</span>
       <span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&quot;calcula-operaciones&quot;</span><span class="p">,</span> <span class="nx">Operaciones</span><span class="p">);</span>
-    <span class="nt">&lt;/script&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;p&gt;</span>Fin de la pagina.<span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Fin de la pagina.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 <p>El <em>árbol ensombrecido</em> se comporta como un árbol DOM normal, salvo que no es visible desde fuera: por ejemplo, el elemento <code class="docutils literal notranslate"><span class="pre">&lt;h1&gt;</span></code> del <em>DOM ensombrecido</em> no aparecerá nunca si buscamos con <code class="docutils literal notranslate"><span class="pre">document.querySelectorAll(&quot;h1&quot;)</span></code> desde un script de fuera del componente web; además, los estilos que definamos para <code class="docutils literal notranslate"><span class="pre">&lt;h1&gt;</span></code> dentro del <em>shadow DOM</em> no afectarán a los elementos del árbol principal.</p>
@@ -368,66 +367,66 @@
 75
 76
 77
-78</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Definición de componentes web<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
+78</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;template</span> <span class="na">id=</span><span class="s">&quot;operaciones&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;style&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;operaciones&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
         <span class="o">*</span> <span class="p">{</span>
-          <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-          <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+          <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="nt">h1</span> <span class="p">{</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">steelblue</span><span class="p">;</span>
-          <span class="k">font-size</span><span class="o">:</span> <span class="m">110%</span><span class="p">;</span>
-          <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-          <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">steelblue</span><span class="p">;</span>
+          <span class="k">font-size</span><span class="p">:</span> <span class="mi">110</span><span class="kt">%</span><span class="p">;</span>
+          <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">border-bottom</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="nc">.contenido</span> <span class="p">{</span>
-          <span class="k">background-color</span><span class="o">:</span> <span class="nb">gainsboro</span><span class="p">;</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">royalblue</span><span class="p">;</span>
+        <span class="p">.</span><span class="nc">contenido</span> <span class="p">{</span>
+          <span class="k">background-color</span><span class="p">:</span> <span class="kc">gainsboro</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">royalblue</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="nd">:host</span> <span class="p">{</span>
-          <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="n">lightgray</span><span class="p">;</span>
-          <span class="k">padding</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
-          <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
-          <span class="k">margin</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
-          <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">15px</span><span class="p">;</span>
+        <span class="p">:</span><span class="nd">host</span> <span class="p">{</span>
+          <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
+          <span class="k">padding</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+          <span class="k">margin</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
         <span class="p">}</span>
-      <span class="nt">&lt;/style&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;script&gt;</span>
+      <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Template instanciado&quot;</span><span class="p">);</span>
-      <span class="nt">&lt;/script&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;h1&gt;&lt;slot</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Sin título<span class="nt">&lt;/slot&gt;&lt;/h1&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contenido&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Sin nombre<span class="nt">&lt;/slot&gt;</span>: 3 x 2 = 6.
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/template&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Sin título<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;contenido&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Sin nombre<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;</span>: 3 x 2 = 6.
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;h1&gt;</span>Definición de componentes web<span class="nt">&lt;/h1&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Operaciones binarias<span class="nt">&lt;/span&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplicación<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Operaciones binarias<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplicación<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Binary <span class="nt">&lt;strong&gt;</span>operations<span class="nt">&lt;/strong&gt;&lt;/span&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplication<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Binary <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>operations<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplication<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplicación<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplicación<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
       <span class="kr">class</span> <span class="nx">Operaciones</span> <span class="kr">extends</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
           <span class="kr">super</span><span class="p">();</span>
@@ -440,12 +439,12 @@
         <span class="p">}</span>
       <span class="p">}</span>
       <span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&quot;calcula-operaciones&quot;</span><span class="p">,</span> <span class="nx">Operaciones</span><span class="p">);</span>
-    <span class="nt">&lt;/script&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;p&gt;</span>Fin de la pagina.<span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Fin de la pagina.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 <p>Que el componente web realice siempre la multiplicación de los mismos números no tiene mucha gracia. Vamos a hacer que los valores a multiplicar se definan como atributos del elemento. Según la especificación de los componentes web, en el constructor todavía no se puede acceder a los atributos del elemento; por ello, el acceso con el método <code class="docutils literal notranslate"><span class="pre">this.getAttribute</span></code> lo dejamos para el método estándar <code class="docutils literal notranslate"><span class="pre">connectedCallback</span></code> que será invocado por el navegador tras instanciar el componente web.</p>
@@ -535,64 +534,64 @@
 84
 85
 86
-87</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Definición de componentes web<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
+87</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;template</span> <span class="na">id=</span><span class="s">&quot;operaciones&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;style&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;operaciones&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
         <span class="o">*</span> <span class="p">{</span>
-          <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
-          <span class="k">padding</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+          <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="nt">h1</span> <span class="p">{</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">steelblue</span><span class="p">;</span>
-          <span class="k">font-size</span><span class="o">:</span> <span class="m">110%</span><span class="p">;</span>
-          <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
-          <span class="k">border-bottom</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">steelblue</span><span class="p">;</span>
+          <span class="k">font-size</span><span class="p">:</span> <span class="mi">110</span><span class="kt">%</span><span class="p">;</span>
+          <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">border-bottom</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="nc">.contenido</span> <span class="p">{</span>
-          <span class="k">background-color</span><span class="o">:</span> <span class="nb">gainsboro</span><span class="p">;</span>
-          <span class="k">color</span><span class="o">:</span> <span class="nb">royalblue</span><span class="p">;</span>
+        <span class="p">.</span><span class="nc">contenido</span> <span class="p">{</span>
+          <span class="k">background-color</span><span class="p">:</span> <span class="kc">gainsboro</span><span class="p">;</span>
+          <span class="k">color</span><span class="p">:</span> <span class="kc">royalblue</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="nd">:host</span> <span class="p">{</span>
-          <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="n">lightgray</span><span class="p">;</span>
-          <span class="k">padding</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
-          <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span>
-          <span class="k">margin</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
-          <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">15px</span><span class="p">;</span>
+        <span class="p">:</span><span class="nd">host</span> <span class="p">{</span>
+          <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">lightgray</span><span class="p">;</span>
+          <span class="k">padding</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+          <span class="k">margin</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+          <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
         <span class="p">}</span>
-      <span class="nt">&lt;/style&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;script&gt;</span>
+      <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Template instanciado&quot;</span><span class="p">);</span>
-      <span class="nt">&lt;/script&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-      <span class="nt">&lt;h1&gt;&lt;slot</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Sin título<span class="nt">&lt;/slot&gt;&lt;/h1&gt;</span>
-      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;contenido&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Sin nombre<span class="nt">&lt;/slot&gt;</span>:
-        <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;a&quot;</span><span class="nt">&gt;&lt;/span&gt;</span> x <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;b&quot;</span><span class="nt">&gt;&lt;/span&gt;</span> =
-        <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;resultado&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>.
-      <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/template&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Sin título<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;contenido&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Sin nombre<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;</span>:
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;a&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> x <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> =
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;resultado&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>.
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;h1&gt;</span>Definición de componentes web<span class="nt">&lt;/h1&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones</span> <span class="na">a=</span><span class="s">&quot;4&quot;</span> <span class="na">b=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Operaciones binarias<span class="nt">&lt;/span&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplicación<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span> <span class="na">a</span><span class="o">=</span><span class="s">&quot;4&quot;</span> <span class="na">b</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Operaciones binarias<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplicación<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones</span> <span class="na">a=</span><span class="s">&quot;8&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Binary operations<span class="nt">&lt;/span&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplication<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span> <span class="na">a</span><span class="o">=</span><span class="s">&quot;8&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Binary operations<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplication<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;script&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
       <span class="kr">class</span> <span class="nx">Operaciones</span> <span class="kr">extends</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
         <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
           <span class="kr">super</span><span class="p">();</span>
@@ -616,12 +615,12 @@
 
       <span class="p">}</span>
       <span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s2">&quot;calcula-operaciones&quot;</span><span class="p">,</span> <span class="nx">Operaciones</span><span class="p">);</span>
-    <span class="nt">&lt;/script&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;p&gt;</span>Fin de la pagina.<span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Fin de la pagina.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 <p>Ahora vamos a modularizar y encapsular el diseño anterior para que otros puedan usar nuestro componente web sin tener que incluir todo lo anterior en su documento HTML.</p>
@@ -644,26 +643,26 @@
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Definición de componentes web<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">defer</span> <span class="na">src=</span><span class="s">&quot;calcula-operaciones.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;calcula-operaciones.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;h1&gt;</span>Definición de componentes web<span class="nt">&lt;/h1&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Definición de componentes web<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;calcula-operaciones</span> <span class="na">a=</span><span class="s">&quot;4&quot;</span> <span class="na">b=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Operaciones binarias<span class="nt">&lt;/span&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mult&quot;</span><span class="nt">&gt;</span>Multiplicación<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/calcula-operaciones&gt;</span>
+    <span class="p">&lt;</span><span class="nt">calcula-operaciones</span> <span class="na">a</span><span class="o">=</span><span class="s">&quot;4&quot;</span> <span class="na">b</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>Operaciones binarias<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mult&quot;</span><span class="p">&gt;</span>Multiplicación<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">calcula-operaciones</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;p&gt;</span>Fin de la pagina.<span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Fin de la pagina.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 <p>El contenido del fichero <code class="docutils literal notranslate"><span class="pre">calcula-operaciones.js</span></code> es el siguiente:</p>
@@ -729,7 +728,7 @@
 60
 61
 62
-63</pre></div></td><td class="code"><div class="highlight"><pre>(function() {
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span>(function() {
   const template = document.createElement(&#39;template&#39;);
 
   template.innerHTML = `
@@ -884,7 +883,7 @@
 86
 87
 88
-89</pre></div></td><td class="code"><div class="highlight"><pre>(function() {
+89</pre></div></td><td class="code"><div class="highlight"><pre><span></span>(function() {
   const template = document.createElement(&#39;template&#39;);
 
   template.innerHTML = `
@@ -992,7 +991,7 @@
 14
 15
 16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span class="kr">class</span> <span class="nx">Polygon</span> <span class="p">{</span>
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Polygon</span> <span class="p">{</span>
   <span class="nx">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
@@ -1013,7 +1012,7 @@
 </td></tr></table></div>
 <p>Como el método de nuestro componente anterior es estático, nos podríamos referir a él como <code class="docutils literal notranslate"><span class="pre">Operaciones.observedAttributes</span></code>. Observa que, en cualquier caso, el código que accede a <code class="docutils literal notranslate"><span class="pre">Operaciones.observedAttributes</span></code> en el ejemplo anterior no es nuestro sino que forma parte de la API del navegador.</p>
 <p>Hemos cambiado también el cálculo de la multiplicación para que se realice en un servidor web externo; observa cómo, aunque en este caso no es necesario ya que los atributos deberían ser números (opcionalmente con un punto o un signo más o menos, que también son un caracteres válidos en URLs), hemos seguido la buena práctica de utilizar <code class="docutils literal notranslate"><span class="pre">encodeURI</span></code> para obtener un URL sin caracteres no aceptados. Los caracteres válidos en un URL son:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&amp;&#39;()*+,;=
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&amp;&#39;()*+,;=
 </pre></div>
 </div>
 <p>Cualquier otro carácter necesita ser convertido a la <em>codificación por ciento</em>, como ya hemos comentado otras veces.</p>
@@ -1063,50 +1062,50 @@
 41
 42
 43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;title&gt;</span>Mi componente<span class="nt">&lt;/title&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;micomp.js&quot;</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;style&gt;</span>
-    <span class="nd">:host</span> <span class="p">{</span>
-      <span class="k">color</span><span class="o">:</span> <span class="nb">mintcream</span><span class="p">;</span>
+44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Mi componente<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;micomp.js&quot;</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">:</span><span class="nd">host</span> <span class="p">{</span>
+      <span class="k">color</span><span class="p">:</span> <span class="kc">mintcream</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="nt">p</span><span class="nc">.m</span> <span class="p">{</span>
-      <span class="k">color</span><span class="o">:</span> <span class="nb">papayawhip</span><span class="p">;</span>
+    <span class="nt">p</span><span class="p">.</span><span class="nc">m</span> <span class="p">{</span>
+      <span class="k">color</span><span class="p">:</span> <span class="kc">papayawhip</span><span class="p">;</span>
     <span class="p">}</span>
-  <span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;h1&gt;</span>Mi componente<span class="nt">&lt;/h1&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Mi componente<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;template</span> <span class="na">id=</span><span class="s">&quot;mi-componente&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;style&gt;</span>
+  <span class="p">&lt;</span><span class="nt">template</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;mi-componente&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
       <span class="nt">p</span> <span class="p">{</span>
-        <span class="k">color</span><span class="o">:</span> <span class="nb">navajowhite</span><span class="p">;</span>
+        <span class="k">color</span><span class="p">:</span> <span class="kc">navajowhite</span><span class="p">;</span>
       <span class="p">}</span>
-    <span class="nt">&lt;/style&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;m&quot;</span><span class="nt">&gt;&lt;slot</span> <span class="na">name=</span><span class="s">&quot;mi-texto&quot;</span><span class="nt">&gt;</span>Texto por defecto<span class="nt">&lt;/slot&gt;&lt;/p&gt;</span>
-  <span class="nt">&lt;/template&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;m&quot;</span><span class="p">&gt;&lt;</span><span class="nt">slot</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>Texto por defecto<span class="p">&lt;/</span><span class="nt">slot</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;mi-componente&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">slot=</span><span class="s">&quot;mi-texto&quot;</span><span class="nt">&gt;</span>En un agujero en el suelo, vivía un hobbit.<span class="nt">&lt;/span&gt;</span>
-  <span class="nt">&lt;/mi-componente&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>En un agujero en el suelo, vivía un hobbit.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
 
-  <span class="nt">&lt;mi-componente&gt;</span>
+  <span class="p">&lt;</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
     No un agujero
-      <span class="nt">&lt;ul</span> <span class="na">slot=</span><span class="s">&quot;mi-texto&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;li&gt;</span>húmedo, sucio, repugnante, con restos de gusanos
-            y olor a fango,<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span>ni tampoco un agujero seco, desnudo y arenoso,
-            sin nada en que sentarse o que comer:<span class="nt">&lt;/li&gt;</span>
-      <span class="nt">&lt;/ul&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">slot</span><span class="o">=</span><span class="s">&quot;mi-texto&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>húmedo, sucio, repugnante, con restos de gusanos
+            y olor a fango,<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>ni tampoco un agujero seco, desnudo y arenoso,
+            sin nada en que sentarse o que comer:<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
     era un agujero-hobbit, y eso significa comodidad.
-  <span class="nt">&lt;/mi-componente&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">mi-componente</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
 <p>Considera también el contenido del fichero <code class="docutils literal notranslate"><span class="pre">micomp.js</span></code>:</p>
@@ -1123,7 +1122,7 @@
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;mi-componente&#39;</span><span class="p">,</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">customElements</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;mi-componente&#39;</span><span class="p">,</span>
   <span class="kr">class</span> <span class="kr">extends</span> <span class="nx">HTMLElement</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
       <span class="kr">super</span><span class="p">();</span>

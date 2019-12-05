@@ -18,6 +18,8 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 05 Dic
+      - Ya está publicada en el enunciado la segunda parte (opcional) de la práctica 4. La primera parte permitirá obtener un 8 como nota máxima de la práctica. Los dos puntos restantes corresponden a la segunda parte, que no es obligatorio que implementes ni para la entrega de esta práctica ni para el examen de prácticas, ya que el enunciado del examen supondrá que no ha sido implementada.
     * - 25 Nov
       - Ya está publicado el enunciado de la primera parte de la práctica 4. Antes de ponerte a programar, asegúrate de que entiendes bien el contenido de los temas de servicios web y de la computación en la nube.
     * - 18 Nov 
@@ -118,7 +120,6 @@ Este es el momento también en el que enfatizar la importancia de tomar apuntes 
     servicios
     componentes
     nube
-    otros
     practicas
 
 .. >>> add new documents here

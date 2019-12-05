@@ -560,11 +560,9 @@ Por último, coloca en algún punto del pie de la página un fragmento de HTML c
 Una aplicación en la nube
 -------------------------
 
-Esta práctica tiene dos partes. En la primera parte vas a ampliar la práctica anterior, que solo tenía *front-end*, para añadirle un *back-end* que dé persistencia a la aplicación y permita gestionar una base de datos con la información de los cuestionarios. La aplicación resultante se implantará en la plataforma Google App Engine y los datos se almacenarán en una base de datos MySQL alojada en el servicio Google Cloud SQL, de manera muy similar a la aplicación del carrito que has estudiado en clase. Como en prácticas anteriores, no puedes usar ninguna librería, como jQuery o Angular, en la parte del cliente.
+Esta práctica tiene dos partes. En la primera parte vas a ampliar la práctica anterior, que solo tenía *front-end*, para añadirle un *back-end* que dé persistencia a la aplicación y permita gestionar una base de datos con la información de los cuestionarios. La aplicación resultante se implantará en la plataforma Google App Engine y los datos se almacenarán en una base de datos MySQL alojada en el servicio Google Cloud SQL, de manera muy similar a la aplicación del carrito que has estudiado en clase. Como en prácticas anteriores, no puedes usar ninguna librería, como jQuery o Angular, en la parte del cliente, con excepción de la librería para integrar Google Sign-in que se usará en la segunda parte de la práctica.
 
-.. Note::
-
-  La segunda parte del enunciado se publicará próximamente. 
+La primera parte permitirá obtener un 8 como nota máxima de la práctica. Los dos puntos restantes corresponden a la segunda parte, que no es obligatorio que implementes ni para la entrega de esta práctica ni para el examen de prácticas, ya que el enunciado del examen supondrá que no ha sido implementada. En la segunda parte de la práctica vas a permitir que el usuario se identifique mediante su cuenta de Google de forma que los cuestionarios tendrán un usuario asociado en la base de datos; los cuestionarios y preguntas de un usuario no podrán ser vistos por el resto de usuarios.
 
 Cuando el usuario entre en la aplicación, se le mostrará el formulario para insertar nuevos cuestionarios; inicialmente no habrá ningún cuestionario creado y, por tanto, ya no aparecerán los cuestionarios de París ni Londres. La aplicación funcionará como una *aplicación de una única página* (en inglés, *SPA* por *single-page application*): cada vez que el usuario introduzca o elimine datos, los cuestionarios se actualizarán convenientemente en la página como hasta ahora, pero también lo harán en la base de datos del servidor.
 
@@ -648,10 +646,12 @@ De forma análoga a como has hecho con los cuestionarios, vas a crear tres servi
 
 Comprueba que tu aplicación permite crear y eliminar tanto cuestionarios como preguntas y que los datos persisten correctamente aun cuando se recarga la aplicación.
 
-Segunda parte
-~~~~~~~~~~~~~
+Autenticación de usuarios
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La segunda parte del enunciado se publicará próximamente.
+En la segunda parte de la práctica (opcional, como se ha comentado más arriba), vas a permitir que los usuarios se identifiquen en la aplicación con su cuenta de Google usando la API de Google Sign-in como en el ejemplo de código explorado en la actividad :ref:`label-signin`. Añade los botones para identificarse y para salir de la aplicación como en dicho código. Mientras no haya un usuario logueado, la aplicación funcionará como hasta ahora; de esta forma seguirá funcionando en modo local incluso si no hay conexión a internet (por ejemplo, durante el examen). Cuando un usuario se identifique, los cuestionarios y preguntas que no le pertenecen se borrarán de la página web (pero no de la base de datos) y se cargarán los cuestionarios y preguntas que el usuario pudiera haber creado en una sesión anterior. Igualmente, cuando el usuario abandone la aplicación, sus cuestionarios y preguntas se borrarán de la página web (pero no de la base de datos) y se cargarán los cuestionarios y preguntas no vinculados a un usuario concreto. 
+
+Asegúrate de que el sistema de autenticación de usuarios también funciona cuando la aplicación se despliega en Google App Engine.
 
 Entrega de la práctica
 ~~~~~~~~~~~~~~~~~~~~~~
