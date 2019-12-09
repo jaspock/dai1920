@@ -120,6 +120,13 @@ Los conceptos anteriores y algunos adicionales se recogen en `estas diapositivas
 .. _`estas diapositivas`: _static/slides/500-cloud-slides.html
 
 
+.. admonition:: :problema-contador:`Problema`
+
+  Indica con qué sustituir ``@1`` en la siguiente frase para que sea correcta: "Los servicios de computación en la nube se pueden dividir en tres categorías en base al nivel de abstracción que ofrecen sobre los recursos utilizados: software como servicio, @1, e infraestructura como servicio"
+
+  .. solución: @1=plataforma como servicio
+
+
 .. _label-appengine:
 
 Publicación de la aplicación del carrito en Google App Engine

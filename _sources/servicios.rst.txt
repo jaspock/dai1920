@@ -279,7 +279,7 @@ Uno de los motivos de la introducción de las promesas en JavaScript fue precisa
     aleatorio();
   
 
-Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas`_ que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.
+Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas`_ que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. Lo veremos más adelante.
 
 .. _`funciones asíncronas`: https://developers.google.com/web/fundamentals/primers/async-functions
 
@@ -533,6 +533,32 @@ Las peticiones realizadas por ``fetch`` son, por defecto, de tipo GET. Más adel
 .. solución: "age", "true,", "male"
 
 
+.. admonition:: :problema-contador:`Problema`
+
+  Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en ``fetch`` devuelve en el cuerpo de la respuesta el dato válido en JSON ``{"title":"天気の子","director":"新海誠","year":2019}``, indica la salida que emite por consola el siguiente bloque de JavaScript:
+
+  .. code-block:: javascript
+
+    function movie() {
+      var g= 1;  
+      fetch('http://example.com/movies.json/3400231').
+      .then( r => {
+        g++;
+        return r.json();
+      })
+      .then( x => {
+        g++;
+        console.log(x.year+g);
+      })
+      .catch( e => console.log(e) );
+      g++;
+      console.log(g);
+    }
+
+    movie();
+
+  .. solución: 2,2023, https://codesandbox.io/s/dazzling-paper-kpkyq
+
 La política del mismo origen
 ----------------------------
 
@@ -690,6 +716,22 @@ Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, s
 
 El código principal de la aplicación está formado por una serie de llamadas a funciones ``get``, ``post``, ``put`` y ``delete`` que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, ``:item``) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto ``req.params`` ( en ese caso, ``req.params.item``). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto ``req.body``. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto ``req.query``.
 
+
+.. admonition:: :problema-contador:`Problema`
+
+  El siguiente código define una función de *middleware* de Express que añade la cabecera ``Content-type`` con valor ``text/html`` a la respuesta del servidor. Indica con qué hay que sustituir ``@1`` y ``@2`` para que el código sea correcto.
+
+  .. code-block:: javascript
+    :linenos:
+
+    app.use( (request,response,foo) => {
+      res.set('Content-Type', '@1')
+      @2;
+    });
+
+  .. solución: @1=text/html,@2=foo()
+
+
 Interfaz común de acceso a bases de datos
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -744,6 +786,30 @@ El código de más arriba que accedía con Fetch a la API de películas del Stud
   print();
 
 
+.. admonition:: :problema-contador:`Problema`
+
+  Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en ``fetch`` devuelve en el cuerpo de la respuesta el dato válido en JSON ``{"title":"天気の子","director":"新海誠","year":2019}``, indica el código con el que hay que sustituir ``@1`` y ``@2`` en el siguiente bloque de JavaScript para que se imprima por consola el valor ``2021``:
+
+  .. code-block:: javascript
+    :linenos:
+
+    async function movie() {
+      var g= 1;
+      g+= @1;
+      try {
+        let r= await fetch('http://example.com/movies.json/3400231');
+        let x= @2 r.json();
+        console.log(x.year + g);
+      } catch(e) {
+        console.log(e)
+      };
+    }
+
+    movie();
+
+  .. solución: @1=1,@2=await, https://codesandbox.io/s/objective-leaf-9wx6z
+
+
 .. _label-local:
 
 Configuración del entorno de trabajo para ejecutar localmente una aplicación web
@@ -759,7 +825,7 @@ En esta actividad se explica cómo configurar el entorno de trabajo para poder l
 
   El script funciona sin problemas en el sistema Linux instalado en los ordenadores de los laboratorios, donde SQLite3 ya está instalado.
   
-  .. _`dai-bundle-dev`: _static/data/dai-bundle-dev-20191128.tar.gz
+  .. _`dai-bundle-dev`: _static/data/dai-bundle-dev-20191206.tar.gz
 
 Comienza instalando `Node.js`_, el entorno que te permitirá ejecutar programas en JavaScript fuera del navegador. Las instrucciones para cada sistema operativo son diferentes. Para el caso de Linux, la instalación se puede realizar fácilmente sin necesidad de tener privilegios de administrador descargando uno de los `paquetes disponibles`_ en la web de Node.js.
 
@@ -890,11 +956,17 @@ Despliegue de la aplicación web en Heroku
 Cuando tengas la aplicación lista en modo local, puedes desplegarla en la plataforma en la nube de `Heroku`_ como sigue. 
 Copia para empezar la carpeta ``dai1920/code/carrito`` en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github, ya que para desplegar la aplicación en Heroku necesitas vincularla a otro repositorio.
 
-Instala el cliente de línea de órdenes (CLI, por *command-line interface*) de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con hacer::
+Instala el cliente de línea de órdenes (CLI, por *command-line interface*) de Heroku con las `instrucciones de esta página`_. En el caso de Linux basta con descargar el fichero con los binarios, descomprimirlo y añadir la carpeta ``bin`` a la variable ``PATH`` del sistema::
 
-  curl https://cli-assets.heroku.com/install.sh | sh
+  curl -O https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
+  tar xzf heroku-linux-x64.tar.gz -C $HOME
+  echo 'export PATH=$HOME/heroku/bin:$PATH' >> $HOME/.bashrc
 
 Si tienes permisos de administrador puedes instalar de forma alternativa el cliente de línea de órdenes de Heroku en Ubuntu con::
+
+  sudo curl https://cli-assets.heroku.com/install.sh | sh
+
+o alternativamente::
 
   sudo snap install --classic heroku
 
@@ -998,6 +1070,12 @@ Se ha añadido un *middleware* que obtiene el valor de la cabecera ``Authorizati
     .. _`documentación de la librería de Google`: https://github.com/google/google-api-javascript-client
     .. _`acceso con OAuth 2.0 a la API de Google`: https://developers.google.com/identity/protocols/OAuth2
     .. _`cliente de JavaScript de Google Sign-in`: https://developers.google.com/identity/sign-in/web/reference
+
+
+Con lo anterior, la autenticación se realiza almacenando los datos del usuario en un *token* que genera una vez el servidor y que el cliente envía como cabecera en cada petición posterior, lo que constituye un ejemplo de `autenticación sin sesión`_ (*session-less*). El *token* suele codificar la información siguiendo el estándar JWT (por *JSON web token*) y es validado por el servidor para cada petición. La comunicación entre el cliente y el servidor se ha de realizar encriptada mediante protocolos seguros como SSL/HTTPS para que terceros no puedan obtener el *token* y suplantar la identidad del usuario. Los enfoques de autenticación basados en sesión, por otro lado, almacenarían los datos del usuario en la memoria del servidor (lo que pude plantear problemas si la cantidad de usuarios es muy grande) y enviarían una *cookie* con el identificador de sesión al cliente, que a su vez la adjuntaría a cada petición. 
+
+  .. _`autenticación sin sesión`: https://dev.to/thecodearcher/what-really-is-the-difference-between-session-and-token-based-authentication-2o39
+
 
 Términos de uso de las APIs web
 -------------------------------

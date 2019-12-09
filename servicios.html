@@ -565,7 +565,7 @@ function aleatorio2(delta) {
   aleatorio();
 </pre></div>
 </td></tr></table></div>
-<p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. No los veremos, sin embargo, este curso.</p>
+<p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. Lo veremos más adelante.</p>
 <div class="admonition-problema-contador-problema admonition">
 <p class="admonition-title"><span class="problema-contador">Problema</span></p>
 <p>Sabiendo que no hay ningún error en el siguiente código, indica la salida que emite por consola el siguiente bloque de JavaScript:</p>
@@ -876,6 +876,29 @@ function aleatorio2(delta) {
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en <code class="docutils literal notranslate"><span class="pre">fetch</span></code> devuelve en el cuerpo de la respuesta el dato válido en JSON <code class="docutils literal notranslate"><span class="pre">{&quot;title&quot;:&quot;天気の子&quot;,&quot;director&quot;:&quot;新海誠&quot;,&quot;year&quot;:2019}</span></code>, indica la salida que emite por consola el siguiente bloque de JavaScript:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">movie</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">g</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://example.com/movies.json/3400231&#39;</span><span class="p">).</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">r</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">x</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">year</span><span class="o">+</span><span class="nx">g</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">);</span>
+  <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">g</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">movie</span><span class="p">();</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="la-politica-del-mismo-origen">
@@ -2157,6 +2180,19 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <p>El código registra (llamando a <code class="docutils literal notranslate"><span class="pre">app.use</span></code>) varias funciones de <em>middleware</em>, que son invocadas para todas las peticiones y que se encargan de diversos aspectos: indicar que el bloque de datos de la petición contendrá información en JSON, descodificar los caracteres que usen la notación <em>por ciento</em> (véase una actividad anterior en este tema), devolver las cabeceras necesarias para permitir peticiones CORS (como también hemos visto) o establecer la conexión con el gestor de base de datos. Todas estas funciones de <em>middleware</em> son llamadas por Express con tres parámetros: un objeto que representa la solicitud (<code class="docutils literal notranslate"><span class="pre">req</span></code> en el código), un objeto que representa la respuesta que se devolverá al cliente (<code class="docutils literal notranslate"><span class="pre">res</span></code> en el código) y un objeto que representa la siguiente función de <em>middleware</em> (<code class="docutils literal notranslate"><span class="pre">next</span></code> en el código); cada función de <em>middleware</em> ha de llamar a la siguiente función de <em>middleware</em>, excepto cuando se detecta algún error y se desea enviar inmediatamente una respuesta al cliente con la función <code class="docutils literal notranslate"><span class="pre">res.send</span></code> (como ocurre en la función <code class="docutils literal notranslate"><span class="pre">creaEsquema</span></code>).</p>
 <p>Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, si usamos un objeto de JavaScript como argumento de la llamada a <code class="docutils literal notranslate"><span class="pre">send</span></code>, los datos se convierten a JSON y la cabecera <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> se establece a <code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">charset=utf-8</span></code>.</p>
 <p>El código principal de la aplicación está formado por una serie de llamadas a funciones <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, <code class="docutils literal notranslate"><span class="pre">put</span></code> y <code class="docutils literal notranslate"><span class="pre">delete</span></code> que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, <code class="docutils literal notranslate"><span class="pre">:item</span></code>) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto <code class="docutils literal notranslate"><span class="pre">req.params</span></code> ( en ese caso, <code class="docutils literal notranslate"><span class="pre">req.params.item</span></code>). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.body</span></code>. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.query</span></code>.</p>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>El siguiente código define una función de <em>middleware</em> de Express que añade la cabecera <code class="docutils literal notranslate"><span class="pre">Content-type</span></code> con valor <code class="docutils literal notranslate"><span class="pre">text/html</span></code> a la respuesta del servidor. Indica con qué hay que sustituir <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> y <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code> para que el código sea correcto.</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>app.use( (request,response,foo) =&gt; {
+  res.set(&#39;Content-Type&#39;, &#39;@1&#39;)
+  @2;
+});
+</pre></div>
+</td></tr></table></div>
+</div>
 <div class="section" id="interfaz-comun-de-acceso-a-bases-de-datos">
 <h3>4.8.1. Interfaz común de acceso a bases de datos<a class="headerlink" href="#interfaz-comun-de-acceso-a-bases-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos <em>ligera</em> con SQLite para hacer pruebas), nos interesa no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como <em>konnex</em>) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante <em>callbacks</em>. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:</p>
@@ -2224,6 +2260,37 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <span class="nx">print</span><span class="p">();</span>
 </pre></div>
 </td></tr></table></div>
+<div class="admonition-problema-contador-problema admonition">
+<p class="admonition-title"><span class="problema-contador">Problema</span></p>
+<p>Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en <code class="docutils literal notranslate"><span class="pre">fetch</span></code> devuelve en el cuerpo de la respuesta el dato válido en JSON <code class="docutils literal notranslate"><span class="pre">{&quot;title&quot;:&quot;天気の子&quot;,&quot;director&quot;:&quot;新海誠&quot;,&quot;year&quot;:2019}</span></code>, indica el código con el que hay que sustituir <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> y <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code> en el siguiente bloque de JavaScript para que se imprima por consola el valor <code class="docutils literal notranslate"><span class="pre">2021</span></code>:</p>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>async function movie() {
+  var g= 1;
+  g+= @1;
+  try {
+    let r= await fetch(&#39;http://example.com/movies.json/3400231&#39;);
+    let x= @2 r.json();
+    console.log(x.year + g);
+  } catch(e) {
+    console.log(e)
+  };
+}
+
+movie();
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 </div>
 <div class="section" id="configuracion-del-entorno-de-trabajo-para-ejecutar-localmente-una-aplicacion-web">
@@ -2231,7 +2298,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <p>En esta actividad se explica cómo configurar el entorno de trabajo para poder lanzar aplicaciones web escritas en Node.js que usan una base de datos SQLite3.</p>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
-<p>El sistema operativo <em>oficial</em> en esta asignatura es Linux. Puedes utilizar otros sistemas operativos para desarrollar, pero tendrás que solucionar tú mismo los problemas relacionados con la configuración del entorno de trabajo que te encuentres. Las instrucciones que siguen son para el sistema operativo Linux, pero es muy probable que las puedas ignorar si usas el fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191128.tar.gz">dai-bundle-dev</a> para instalar los programas necesarios. Para ello, descarga el fichero, descomprímelo y ejecuta el script <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>.</p>
+<p>El sistema operativo <em>oficial</em> en esta asignatura es Linux. Puedes utilizar otros sistemas operativos para desarrollar, pero tendrás que solucionar tú mismo los problemas relacionados con la configuración del entorno de trabajo que te encuentres. Las instrucciones que siguen son para el sistema operativo Linux, pero es muy probable que las puedas ignorar si usas el fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191206.tar.gz">dai-bundle-dev</a> para instalar los programas necesarios. Para ello, descarga el fichero, descomprímelo y ejecuta el script <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>.</p>
 <p>Puedes editar el fichero para indicar qué programas quieres instalar. El script solo instala Node.js por defecto. Comprueba si tienes instalado <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> en tu ordenador para saber si lo necesitas y pon a <code class="docutils literal notranslate"><span class="pre">true</span></code> la variable correspondiente en caso negativo. El script también permite instalar el SDK de Google Cloud Platform, que usaremos más adelante.</p>
 <p>El script funciona sin problemas en el sistema Linux instalado en los ordenadores de los laboratorios, donde SQLite3 ya está instalado.</p>
 </div>
@@ -2344,11 +2411,17 @@ echo &#39;export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH&#39; &gt;&gt; $
 <span id="label-heroku"></span><h2>4.11. Despliegue de la aplicación web en Heroku<a class="headerlink" href="#despliegue-de-la-aplicacion-web-en-heroku" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Cuando tengas la aplicación lista en modo local, puedes desplegarla en la plataforma en la nube de <a class="reference external" href="https://www.heroku.com/">Heroku</a> como sigue.
 Copia para empezar la carpeta <code class="docutils literal notranslate"><span class="pre">dai1920/code/carrito</span></code> en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github, ya que para desplegar la aplicación en Heroku necesitas vincularla a otro repositorio.</p>
-<p>Instala el cliente de línea de órdenes (CLI, por <em>command-line interface</em>) de Heroku con las <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install">instrucciones de esta página</a>. En el caso de Linux basta con hacer:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cli</span><span class="o">-</span><span class="n">assets</span><span class="o">.</span><span class="n">heroku</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">install</span><span class="o">.</span><span class="n">sh</span> <span class="o">|</span> <span class="n">sh</span>
+<p>Instala el cliente de línea de órdenes (CLI, por <em>command-line interface</em>) de Heroku con las <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install">instrucciones de esta página</a>. En el caso de Linux basta con descargar el fichero con los binarios, descomprimirlo y añadir la carpeta <code class="docutils literal notranslate"><span class="pre">bin</span></code> a la variable <code class="docutils literal notranslate"><span class="pre">PATH</span></code> del sistema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>curl -O https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
+tar xzf heroku-linux-x64.tar.gz -C $HOME
+echo &#39;export PATH=$HOME/heroku/bin:$PATH&#39; &gt;&gt; $HOME/.bashrc
 </pre></div>
 </div>
 <p>Si tienes permisos de administrador puedes instalar de forma alternativa el cliente de línea de órdenes de Heroku en Ubuntu con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">curl</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cli</span><span class="o">-</span><span class="n">assets</span><span class="o">.</span><span class="n">heroku</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">install</span><span class="o">.</span><span class="n">sh</span> <span class="o">|</span> <span class="n">sh</span>
+</pre></div>
+</div>
+<p>o alternativamente:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">snap</span> <span class="n">install</span> <span class="o">--</span><span class="n">classic</span> <span class="n">heroku</span>
 </pre></div>
 </div>
@@ -3037,6 +3110,9 @@ Copia para empezar la carpeta <code class="docutils literal notranslate"><span c
 <blockquote>
 <div></div></blockquote>
 </div>
+<p>Con lo anterior, la autenticación se realiza almacenando los datos del usuario en un <em>token</em> que genera una vez el servidor y que el cliente envía como cabecera en cada petición posterior, lo que constituye un ejemplo de <a class="reference external" href="https://dev.to/thecodearcher/what-really-is-the-difference-between-session-and-token-based-authentication-2o39">autenticación sin sesión</a> (<em>session-less</em>). El <em>token</em> suele codificar la información siguiendo el estándar JWT (por <em>JSON web token</em>) y es validado por el servidor para cada petición. La comunicación entre el cliente y el servidor se ha de realizar encriptada mediante protocolos seguros como SSL/HTTPS para que terceros no puedan obtener el <em>token</em> y suplantar la identidad del usuario. Los enfoques de autenticación basados en sesión, por otro lado, almacenarían los datos del usuario en la memoria del servidor (lo que pude plantear problemas si la cantidad de usuarios es muy grande) y enviarían una <em>cookie</em> con el identificador de sesión al cliente, que a su vez la adjuntaría a cada petición.</p>
+<blockquote>
+<div></div></blockquote>
 </div>
 <div class="section" id="terminos-de-uso-de-las-apis-web">
 <h2>4.13. Términos de uso de las APIs web<a class="headerlink" href="#terminos-de-uso-de-las-apis-web" title="Enlazar permanentemente con este título">¶</a></h2>

@@ -136,6 +136,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">7.6.9. Entrega de la práctica</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#ejemplos-de-posibles-ejercicios-para-el-examen-practico">7.7. Ejemplos de posibles ejercicios para el examen práctico</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#colapsar-los-enunciados-de-las-preguntas">7.7.1. Colapsar los enunciados de las preguntas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#destacar-algunas-preguntas-de-un-cuestionario">7.7.2. Destacar algunas preguntas de un cuestionario</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -627,7 +632,7 @@
 <p>Comienza asegurándote de que entiendes cómo funciona la apicación del carrito vista en clase y que eres capaz de ejecutarla localmente en <code class="docutils literal notranslate"><span class="pre">localhost</span></code> y en la nube de Google App Engine. Recuerda que las instrucciones sobre cómo configurar el entorno de trabajo y lanzar la aplicación tanto en modo local como en la nube se dieron en las secciones «<a class="reference internal" href="servicios.html#label-local"><span class="std std-ref">Configuración del entorno de trabajo para ejecutar localmente una aplicación web</span></a>», «<a class="reference internal" href="nube.html#label-gcloud"><span class="std std-ref">Configuración del entorno de trabajo para Google Cloud Platform</span></a>» y «<a class="reference internal" href="nube.html#label-appengine"><span class="std std-ref">Publicación de la aplicación del carrito en Google App Engine</span></a>».</p>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
-<p>Recuerda lo que se comenta al principio del apartado «<a class="reference internal" href="servicios.html#label-local"><span class="std std-ref">Configuración del entorno de trabajo para ejecutar localmente una aplicación web</span></a>» sobre el hecho de que el sistema operativo <em>oficial</em> de la asignatura es Linux. El examen de prácticas se realizará sobre la versión de Linux instalada en los ordenadores de los laboratorios, por lo que es muy importante que aprendas a trabajar sobre ellos. Recuerda que puedes instalar todo el software necesario rápidamente con ayuda del fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191128.tar.gz">dai-bundle-dev</a>: descárgalo, descomprímelo, edita y luego ejecuta el script <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>. Mientras trabajas en la práctica, en los ordenadores de los laboratorios solo necesitas instalar Node.js y el SDK de Google Cloud Platform (SQLite3 ya está instalado). El día del examen solo necesitas instalar Node.js, ya que no se pedirá en el examen que implantes nada en la nube.</p>
+<p>Recuerda lo que se comenta al principio del apartado «<a class="reference internal" href="servicios.html#label-local"><span class="std std-ref">Configuración del entorno de trabajo para ejecutar localmente una aplicación web</span></a>» sobre el hecho de que el sistema operativo <em>oficial</em> de la asignatura es Linux. El examen de prácticas se realizará sobre la versión de Linux instalada en los ordenadores de los laboratorios, por lo que es muy importante que aprendas a trabajar sobre ellos. Recuerda que puedes instalar todo el software necesario rápidamente con ayuda del fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191206.tar.gz">dai-bundle-dev</a>: descárgalo, descomprímelo, edita y luego ejecuta el script <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>. Mientras trabajas en la práctica, en los ordenadores de los laboratorios solo necesitas instalar Node.js y el SDK de Google Cloud Platform (SQLite3 ya está instalado). El día del examen solo necesitas instalar Node.js, ya que no se pedirá en el examen que implantes nada en la nube.</p>
 </div>
 </div>
 <div class="section" id="incorporacion-e-implantacion-de-la-aplicacion-de-la-practica-anterior">
@@ -666,6 +671,7 @@
 <h3>7.6.5. Representación de los datos en la base de datos<a class="headerlink" href="#representacion-de-los-datos-en-la-base-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>La base de datos contendrá una tabla para representar los cuestionarios y otra para representar las preguntas. Cada cuestionario vendrá representado por un identificador único generado automáticamente (clave primaria) y su tema. Cada pregunta vendrá representada por un identificador único (clave primaria), el identificador de su tema (clave ajena), el texto de la pregunta y su respuesta correcta.</p>
 <p>Conéctate tanto a la base de datos SQLite (cuando pruebes la aplicación en local) como a MySQL (en Google App Engine) para comprobar que las tablas se están rellenando o actualizando correctamente tras cada llamada a un servicio web.</p>
+<p>Crea atributos nuevos en el código HTML generado (recuerda que han de comenzar por el prefijo <code class="docutils literal notranslate"><span class="pre">data-</span></code>) para guardar para cada cuestionario y pregunta su id en la base de datos; de esta manera, resultará sencillo poder indicarle al servidor que, por ejemplo, borre un determinado cuestionario o una determinada pregunta.</p>
 </div>
 <div class="section" id="gestion-de-los-temas-de-los-cuestionarios">
 <h3>7.6.6. Gestión de los temas de los cuestionarios<a class="headerlink" href="#gestion-de-los-temas-de-los-cuestionarios" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -674,7 +680,7 @@
 </pre></div>
 </div>
 <p>A continuación, crea un servicio web que elimine de la base de datos un tema. Después, modifica el código JavaScript del cliente para que invoque este servicio cuando proceda borrar un cuestionario. El cuestionario solo se elimina de la página actual si la respuesta del servicio es positiva. A diferencia de prácticas anteriores, por tanto, en esta es posible que al borrar la última pregunta de un cuestionario, este no desaparezca; esto puede ocurrir ya que la pregunta se borra en primer lugar y, una vez borrada, se ha de proceder a intentar borrar el cuestionario que la incluía; si este último borrado falla, la pregunta eliminada no se recupera. El servicio devolverá en la respuesta en JSON un error si el identificador del tema indicado en los datos de la petición no existe en la base de datos.</p>
-<p>Ahora crea un servicio que liste los temas disponibles en la base de datos. Añade el código necesario para invocar el nuevo servicio desde la función <em>init</em> de forma que se muestren los encabezados (y los formularios de inserción de preguntas) de los cuestionarios almacenados en la base de datos al cargar la aplicación. Observa que gran parte del código para lo anterior ya existe en la función <em>addCuestionario</em>, por lo que te puede interesar refactorizar y crear una nueva función con el código común. Asimismo, observa, que el identificador (<em>c1</em>, <em>c2</em>, etc.) asignado inicialmente a un cuestionario no tiene por qué mantenerse cuando se recarga la aplicación; eso sí, igual que se ha venido haciendo hasta ahora, el primer cuestionario que se añada a la página será <em>c1</em>, el segundo <em>c2</em>, etc., independientemente de si se ha creado en ese momento por el usuario o se ha recuperado de la base de datos.</p>
+<p>Ahora crea un servicio que liste los temas disponibles en la base de datos. Añade el código necesario para invocar el nuevo servicio desde la función <em>init</em> de forma que se muestren los encabezados (y los formularios de inserción de preguntas) de los cuestionarios almacenados en la base de datos al cargar la aplicación. Observa que gran parte del código para lo anterior ya existe en la función <em>addCuestionario</em>, por lo que te puede interesar refactorizar y crear una nueva función con el código común. Asimismo, observa, que el identificador (<em>c1</em>, <em>c2</em>, etc.) asignado inicialmente a un cuestionario no tiene por qué mantenerse en la nueva aplicación.</p>
 <p>En estos momentos, tu aplicación ha de permitir crear nuevos formularios y añadirles preguntas. Los temas de los formularios se almacenan ya correctamente en la base de datos, por lo que, aunque se cierre la ventana de la aplicación, esta información se vuelve a mostrar al abrirla de nuevo. Las preguntas, sin embargo, se pierden si se recarga la aplicación; en el apartado siguiente vas a solucionarlo.</p>
 </div>
 <div class="section" id="gestion-de-las-preguntas-de-los-cuestionarios">
@@ -698,6 +704,125 @@
 </div>
 <p>y accediendo al URL correspondiente en <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página.</p>
 <p>Por último, coloca en algún punto del pie de la página un fragmento de HTML como <code class="docutils literal notranslate"><span class="pre">&lt;span</span> <span class="pre">id=&quot;tiempo&quot;&gt;[10</span> <span class="pre">horas]&lt;/span&gt;</span></code> donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.</p>
+</div>
+</div>
+<div class="section" id="ejemplos-de-posibles-ejercicios-para-el-examen-practico">
+<h2>7.7. Ejemplos de posibles ejercicios para el examen práctico<a class="headerlink" href="#ejemplos-de-posibles-ejercicios-para-el-examen-practico" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Este apartado muestra algunos ejemplos de posibles ejercicios para el examen práctico. Un examen típico incluiría solo uno de ellos, pero sería posible también que hubiera dos o más ejercicios de menor complejidad. El tiempo de realización del examen suele estar en torno a los 110 minutos. Ejercicios adicionales con los que podrías practicar son:</p>
+<ul class="simple">
+<li><p>permitir hacer un cuestionario <em>público</em> de forma que pueda consultarse a través de una URL propia;</p></li>
+<li><p>permitir que un cuestionario pueda borrarse sin necesidad de borrar anteriormente todas sus preguntas;</p></li>
+<li><p>permitir que los cuestionarios o las preguntas puedan moverse <em>arriba o abajo</em> en la ventana de la aplicación para ponerlos en un orden concreto;</p></li>
+<li><p>permitir que las preguntas puedan editarse;</p></li>
+<li><p>permitir que la aplicación use otros servicios web de terceros; posiblemente se te ocurran ideas cuando repases esta <a class="reference external" href="https://github.com/toddmotto/public-apis">lista de APIs públicas</a>;</p></li>
+<li><p>cualquier otra modificación de complejidad similar que se te pueda ocurrir; inspírate para ello en las aplicaciones web que usas, especialmente en aquellas que se basan en gestionar <em>listas de listas</em>.</p></li>
+</ul>
+<div class="section" id="colapsar-los-enunciados-de-las-preguntas">
+<h3>7.7.1. Colapsar los enunciados de las preguntas<a class="headerlink" href="#colapsar-los-enunciados-de-las-preguntas" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Modifica tu práctica 4 para que junto al título de cada cuestionario aparezca un elemento (un botón, por ejemplo) que permita colapsar o expandir la lista de preguntas asociadas a dicho cuestionario. Mientras la lista de preguntas esté colapsada, las preguntas no se mostrarán en pantalla, ni siquiera cuando se añada una nueva pregunta al cuestionario correspondiente. Cuando la lista de preguntas esté expandida, el comportamiento de la aplicación será similar al actual.</p>
+<p>El estado colapsado/expandido de un cuestionario se almacenará en la base de datos y se mantendrá aunque la aplicación se recargue. Al crear un nuevo cuestionario, este estará por defecto expandido.</p>
+<p>Para obtener la máxima nota será necesario, además, que cuando el cuestionario esté colapsado se indique el número de preguntas ocultas existentes.</p>
+<p>Lo siguiente son algunos consejos relativos a la implementación que no es obligatorio que sigas. Únicamente se dan a modo de recomendación y pueden estar más o menos incompletos según como sea tu implementación.</p>
+<ul class="simple">
+<li><p>Cada entrada de la tabla de cuestionarios de la base de datos tendrá un nuevo atributo (llamado, por ejemplo,  <code class="docutils literal notranslate"><span class="pre">colapsado</span></code>) que almacenará su estado de colapso.</p></li>
+<li><p>Comienza implementando dos servicios web: uno que devuelva en formato JSON el estado de colapso de un determinado cuestionario (referenciado mediante su id) y otro para cambiarlo.</p></li>
+<li><p>Para crear los servicios web anteriores, te puedes inspirar en los servicios que ya has implementado para listar cuestionarios o preguntas.</p></li>
+<li><p>Para modificar una entrada de la base de datos con Knex.js puedes usar un código como el siguiente que equivale a la instrucción SQL indicada en el comentario:</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">knex</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;published_date&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">update</span><span class="p">({</span>
+  <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;archived&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// SQL: update `books` set `status` = &#39;archived&#39; where `published_date` &lt; 2000</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Una posible manera de gestionar fácilmente el estado de expandido/colapsado de las preguntas de un cuestionario en el navegador es añadiendo un atributo <code class="docutils literal notranslate"><span class="pre">data-colapsado</span></code> (con valores <code class="docutils literal notranslate"><span class="pre">true</span></code> o <code class="docutils literal notranslate"><span class="pre">false</span></code>) al elemento <code class="docutils literal notranslate"><span class="pre">section</span></code> que rodea el cuestionario. Con algunas reglas de estilo sencillas basadas en la propiedad <code class="docutils literal notranslate"><span class="pre">display</span></code> de CSS podrás hacer que las preguntas de cada cuestionario se muestren o no en la aplicación según el valor de <code class="docutils literal notranslate"><span class="pre">data-colapsado</span></code>.</p></li>
+<li><p>Modifica tu código en JavaScript para que el atributo <code class="docutils literal notranslate"><span class="pre">data-colapsado</span></code> se añada con el valor adecuado tanto al crear un nuevo cuestionario como al recuperar la lista de cuestionarios del servidor. Para este segundo caso, tendrás que llamar al servicio que devuelve la información de colapso con cada tema de cuestionario. Recuerda cómo funcionan las clausuras en JavaScript si para lo anterior usaras un bucle que iterara sobre todos los temas y llamara con <em>fetch</em> al servicio web con cada uno de ellos; es posible en ese caso que te interese definir una variable con <code class="docutils literal notranslate"><span class="pre">let</span></code> (y no con <code class="docutils literal notranslate"><span class="pre">var</span></code>) para obtener el nodo <code class="docutils literal notranslate"><span class="pre">section</span></code> al que añadir el atributo:</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(...)</span> <span class="p">{</span>  <span class="cm">/* itera sobre los temas */</span>
+  <span class="p">...</span>
+  <span class="kd">let</span> <span class="nx">node</span> <span class="o">=</span> <span class="cm">/* nodo section del cuestionario correspondiente */</span>
+  <span class="p">...</span>
+  <span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;...info-colapsado...&quot;</span><span class="p">)</span>
+  <span class="p">...</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span>
+  <span class="p">...</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;data-colapsado&quot;</span><span class="p">,...);</span> <span class="cm">/* clausura */</span>
+  <span class="p">...</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Añade un botón o simplemente texto al inicio de cada cuestionario que permita cambiar el estado de colapsado/expandido. Asóciale un nuevo manejador de evento y escribe su código inspirándote, por ejemplo, en el de la función ya existente que borra un cuestionario. Llama adecuadamente con <em>fetch</em> al servicio de cambio de estado de colapso desde la función del nuevo manejador de evento.</p></li>
+</ul>
+</div>
+<div class="section" id="destacar-algunas-preguntas-de-un-cuestionario">
+<h3>7.7.2. Destacar algunas preguntas de un cuestionario<a class="headerlink" href="#destacar-algunas-preguntas-de-un-cuestionario" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Modifica tu práctica 4 para que cada pregunta incluya un nuevo icono (por ejemplo, la estrella ★ con código Unicode U+2605 o un simple asterisco) junto al icono de borrado que permita <em>destacar</em> dicha pregunta. Una pregunta destacada se muestra la primera en la lista de preguntas de un cuestionario dado. Solo se puede destacar una pregunta como máximo en cada cuestionario. Cada clic sobre el icono de destacar activa o desactiva el estado de la pregunta. El color del icono ha de cambiar cuando la pregunta esté destacada. El estado de destacada de una pregunta se almacenará en la base de datos y se mantendrá aunque la aplicación se recargue. Al crear un nueva pregunta, esta estará por defecto no destacada.</p>
+<p>Cuando se cambia el estado de una pregunta destacada, esta no tiene que volver a su posición original en la lista de preguntas salvo, quizás, si se recarga la página. Además, no tienes que cambiar el siguiente comportamiento, que probablemente será el que tenga tu aplicación: al subir una pregunta al principio de la lista, esta pasará a ser la pregunta 1 y las siguientes se renumerarán en consonancia.</p>
+<p>Lo siguiente son algunos consejos relativos a la implementación que no es obligatorio que sigas. Únicamente se dan a modo de recomendación y pueden estar más o menos incompletos según como sea tu implementación.</p>
+<ul class="simple">
+<li><p>Cada entrada de tipo pregunta de la base de datos tendrá una nueva propiedad (llamada, por ejemplo, <code class="docutils literal notranslate"><span class="pre">destacada</span></code>) que almacenará su estado de destacada.</p></li>
+<li><p>Comienza añadiendo el nuevo icono al bloque en la misma función de tu código en Javascript en la que añades la cruz de borrado.</p></li>
+<li><p>En el DOM del documento representa el estado de una pregunta mediante un atributo <code class="docutils literal notranslate"><span class="pre">data-destacada</span></code> en el elemento del bloque correspondiente:</p></li>
+</ul>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;bloque&quot;</span> <span class="na">data-destacada</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Asegúrate de que en la parte de tu código JavaScript encargada de crear una nueva pregunta se inicializa a falso el atributo <code class="docutils literal notranslate"><span class="pre">data-destacada</span></code>.</p></li>
+<li><p>Añade un manejador de evento para cuando se haga clic sobre el nuevo icono. Este manejador cambia el valor del atributo <code class="docutils literal notranslate"><span class="pre">data-destacada</span></code>.</p></li>
+<li><p>Para ahorrarte algunas conversiones, haz que cualquier nueva variable en tu código JavaScript que represente el estado de una pregunta sea de tipo cadena y no booleana.</p></li>
+<li><p>Modifica la hoja de estilo para que el nuevo icono se muestre junto a la cruz de borrado. Añade los estilos necesarios para que se muestre en rojo si la pregunta está destacada y en negro en otro caso.</p></li>
+<li><p>Modifica el manejador del evento del nuevo icono para que solo cambie el valor de <code class="docutils literal notranslate"><span class="pre">data-destacada</span></code> si no hay otra pregunta destacada en el cuestionario; si la hay, ha de mostrar una ventana de <em>alerta</em> y no hacer nada más.</p></li>
+<li><p>Crea un nuevo servicio web para cambiar el valor de la propiedad <code class="docutils literal notranslate"><span class="pre">destacada</span></code> de una pregunta en la base de datos. Es posible que te interese basarte en el codigo ya existente de algún otro servicio web.</p></li>
+<li><p>Para modificar una entrada de la base de datos con Knex.js puedes usar un código como el siguiente que equivale a la instrucción SQL indicada en el comentario:</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nx">knex</span><span class="p">(</span><span class="s1">&#39;books&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;published_date&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">update</span><span class="p">({</span>
+  <span class="nx">status</span><span class="o">:</span> <span class="s1">&#39;archived&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// SQL: update `books` set `status` = &#39;archived&#39; where `published_date` &lt; 2000</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Cambia también el servicio web que se invoca al crear una nueva pregunta para que la propiedad <code class="docutils literal notranslate"><span class="pre">destacada</span></code> se inicialice adecuadamente.</p></li>
+<li><p>En el código del cliente, cuando el servidor no dé error al cambiar el estado de una pregunta, mueve la pregunta al inicio de la lista de preguntas del cuestionario; es posible que te venga bien usar la función <code class="docutils literal notranslate"><span class="pre">insertBeforeChild</span></code> para ello.</p></li>
+<li><p>Haz que al recargar la página y leer todas las preguntas de un cuestionario, la pregunta destacada se coloque al principio. Modifica los servicios web oportunos para que devuelvan en los datos en JSON la nueva propiedad. Modifica el código de la función <code class="docutils literal notranslate"><span class="pre">init</span></code> de JavaScript para que al leer las preguntas de cada cuestionario coloque al comienzo la pregunta destacada, si la hay.</p></li>
+</ul>
 </div>
 </div>
 </div>

@@ -18,6 +18,10 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 09 Dic
+      - Se ha añadido al final de la página web que contiene los enunciados de las prácticas algunos ejemplos de posibles ampliaciones de la práctica que te permitan preparar el examen práctico.
+    * - 08 Dic
+      - Las dos últimas sesiones de teoría del curso las dedicaremos principalmente a resolver algunos de los problemas que aparecen en los materiales de la asignatura, por lo que es recomendable haber trabajado con ellos antes de la clase. Recuerda que las preguntas del examen teórico serán similares a estas.
     * - 05 Dic
       - Ya está publicada en el enunciado la segunda parte (opcional) de la práctica 4. La primera parte permitirá obtener un 8 como nota máxima de la práctica. Los dos puntos restantes corresponden a la segunda parte, que no es obligatorio que implementes ni para la entrega de esta práctica ni para el examen de prácticas, ya que el enunciado del examen supondrá que no ha sido implementada.
     * - 25 Nov
