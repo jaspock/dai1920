@@ -506,7 +506,7 @@ De paso, hemos hecho que las medidas de todas las cajas se determinen usando el 
       <li>más.</li>
     </ul>
 
-  ..solución: https://jsbin.com/howativusi
+  .. solución: https://jsbin.com/howativusi
 
 
 .. Note::

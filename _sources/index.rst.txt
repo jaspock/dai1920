@@ -18,6 +18,10 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 07 Ene
+      - Ya están publicadas las notas de la práctica 4 en la `web del departamento`_.
+    * - 30 Dic
+      - Las medianas del tiempo dedicado por los estudiantes a realizar cada una de las cuatro prácticas, según los datos indicados por los estudiantes al pie de la página web de la aplicación entregada, han sido 6, 12, 10 y 19 horas respectivamente. La suma de estas medianas supone 47 horas de trabajo, de las que en principio unas 26 serían horas de trabajo en las sesiones de prácticas y el resto, 21 horas, trabajo personal fuera del aula. Recordad que dado que la asignatura tiene 6 créditos ECTS, el tiempo medio dedicado a ella fuera del aula (incluyendo el repaso de la teoría, la realización de las prácticas, la preparación del examen, etc.) debería de ser de 90 horas en total.
     * - 09 Dic
       - Se ha añadido al final de la página web que contiene los enunciados de las prácticas algunos ejemplos de posibles ampliaciones de la práctica que te permitan preparar el examen práctico.
     * - 08 Dic

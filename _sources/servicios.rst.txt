@@ -907,6 +907,10 @@ Si deseas depurar el código del servidor en modo local puedes usar el editor de
 
   .. _`Visual Studio Code`: https://code.visualstudio.com/
 
+Suele ser útil también poder ver un informe detallado de qué rutas puede procesar Express y qué hace con cada petición que llega; para ello puedes lanzar el servidor en modo depuración en Linux con::
+
+  DEBUG=express:* node app.js
+
 Para depurar la aplicación cuando esta se encuentra desplegada en la nube, se necesitan algunas instrucciones adicionales. En el caso de nuestra aplicación, como el código que se ejecuta en ``localhost`` o en la nube es prácticamente el mismo, si la aplicación funciona en local, apenas deberían aparecer problemas en la nube.
 
 .. Note::

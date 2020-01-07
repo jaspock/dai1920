@@ -2374,6 +2374,10 @@ echo &#39;export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH&#39; &gt;&gt; $
 <p>Si deseas depurar el código del servidor en modo local puedes usar el editor de texto <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a>. Abre con él el fichero <code class="docutils literal notranslate"><span class="pre">app.js</span></code> y selecciona <span class="guilabel">Debug / Start debugging</span>. Puedes definir puntos de ruptura haciendo click en el borde de la línea de código oportuna.</p>
 <blockquote>
 <div></div></blockquote>
+<p>Suele ser útil también poder ver un informe detallado de qué rutas puede procesar Express y qué hace con cada petición que llega; para ello puedes lanzar el servidor en modo depuración en Linux con:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEBUG</span><span class="o">=</span><span class="n">express</span><span class="p">:</span><span class="o">*</span> <span class="n">node</span> <span class="n">app</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
 <p>Para depurar la aplicación cuando esta se encuentra desplegada en la nube, se necesitan algunas instrucciones adicionales. En el caso de nuestra aplicación, como el código que se ejecuta en <code class="docutils literal notranslate"><span class="pre">localhost</span></code> o en la nube es prácticamente el mismo, si la aplicación funciona en local, apenas deberían aparecer problemas en la nube.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
