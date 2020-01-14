@@ -254,7 +254,7 @@
 <p>Sigue las instrucciones que vienen a continuación para aprender cómo desplegar una aplicación como la del carrito en Google App Engine.</p>
 </div>
 <p>Para crear la instancia de Cloud SQL desde el terminal es necesario ejecutar desde la línea de órdenes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">create</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">tier</span><span class="o">=</span><span class="n">db</span><span class="o">-</span><span class="n">n1</span><span class="o">-</span><span class="n">standard</span><span class="o">-</span><span class="mi">1</span> <span class="o">--</span><span class="n">region</span><span class="o">=</span><span class="n">europe</span><span class="o">-</span><span class="n">west3</span> <span class="o">--</span><span class="n">root</span><span class="o">-</span><span class="n">password</span><span class="o">=&lt;</span><span class="n">contraseñaAdmin</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gcloud sql instances create &lt;instancia&gt; --tier=db‑f1‑micro --region=europe-west3 --root-password=&lt;contraseñaAdmin&gt;
 </pre></div>
 </div>
 <p>donde <code class="docutils literal notranslate"><span class="pre">&lt;instancia&gt;</span></code> es el nombre la instancia de base de datos y <code class="docutils literal notranslate"><span class="pre">&lt;contraseñaAdmin&gt;</span></code> la contraseña que queremos para el administrador de la instancia.</p>
@@ -320,6 +320,18 @@
 <p>Y para ir viéndolos en un terminal mientras se van generando:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">app</span> <span class="n">logs</span> <span class="n">tail</span>
 </pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Importante</p>
+<p>Las instancias de Cloud SQL tienen un coste relativamente alto, por lo que tenemos que hacer un uso moderado de ellas para no agotar los créditos disponibles. En primer lugar, asegúrate de que, como se dice más arriba, indicas el tipo de instancia de base de datos <code class="docutils literal notranslate"><span class="pre">db‑f1‑micro</span></code> (el más <a class="reference external" href="https://cloud.google.com/sql/pricing#2nd-gen-instance-pricing">barato</a>) y ningún otro al crear la instancia. Además, acostúmbrate a <em>dormir</em> tu instancia de base de datos cuando no vayas a trabajar en las siguientes horas con ella (no es necesario que lo hagas constantemente mientras estás desarrollando, pero sí cuando vayas a dejar de hacerlo) ejecutando:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">patch</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">activation</span><span class="o">-</span><span class="n">policy</span> <span class="n">never</span>
+</pre></div>
+</div>
+<p>Para <em>despertar</em> posteriormente la instancia puedes ejecutar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">instances</span> <span class="n">patch</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">activation</span><span class="o">-</span><span class="n">policy</span> <span class="n">always</span>
+</pre></div>
+</div>
+<p>Es posible que de vez en cuando el profesor ejecute un script que intente mandar a dormir todas las instancias de base de datos por si hay estudiantes que han olvidado hacerlo. Despierta tu instancia si inesperadamente comienzas a recibir errores al acceder a la base de datos, porque lamentablemente con la segunda generación de instancias de MySQL de Google Cloud SQL esto no ocurre automáticamente. Evidentemente, en una aplicación real la base de datos ha de estar siempre disponible o establecerse un procedimiento automático que la despierte, pero para los propósitos de la asignatura y de cara a ahorrar costes, dormir y despertar la instancia de base de datos es razonablemente admisible.</p>
 </div>
 <p>Para poder ejecutar instrucciones de SQL sobre la base de datos y asegurarnos de que nuestro programa está rellenándola correctamente, es necesario ir a la consola web de Google Cloud Platform, abrir el terminal web Cloud Shell y hacer:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcloud</span> <span class="n">sql</span> <span class="n">connect</span> <span class="o">&lt;</span><span class="n">instancia</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">user</span><span class="o">=&lt;</span><span class="n">usuario</span><span class="o">&gt;</span>

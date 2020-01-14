@@ -667,7 +667,7 @@ Sube tu aplicación a Google App Engine e incluye en el pie de página de tu apl
   npm install
   npm start
 
-y accediendo al URL correspondiente en ``localhost``. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página.
+y accediendo al URL correspondiente en ``localhost``. También se evaluará usando el enlace a la aplicación en Google App Engine suministrado a pie de página, despertando previamente si procede la instancia de la base de datos de Google Cloud SQL. 
 
 Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
 

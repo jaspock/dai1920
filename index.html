@@ -168,6 +168,35 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p>13 Ene</p></td>
+<td><p>Lo siguiente son algunas <strong>normas y recomendaciones para los exámenes</strong> de la asignatura del 24 de enero de 2020.</p>
+<ul class="simple">
+<li><p>Léete bien las normas de la asignatura que se encuentran en la <a class="reference external" href="http://cv1.cpd.ua.es/ConsPlanesEstudio/cvFichaAsiEEES.asp?wCodEst=C203&amp;wcodasi=34063&amp;wLengua=C&amp;scaca=2019-20">guía docente</a> en UACloud y más abajo en esta página.</p></li>
+<li><p>Recuerda que puedes traer al examen teórico una chuleta de tamaño máximo A5. Al examen práctico puedes traer otra chuleta del mismo tamaño, pero dado que también traerás tu propio código de la práctica 4 en una memoria USB, puedes añadir allí cualquier información suplementaria en un fichero de texto.</p></li>
+<li><p>Inmediatamente antes del inicio examen práctico tendrás 5 minutos para copiar desde tu memoria USB al ordenador del laboratorio el código de tu práctica 4 (que no tiene por qué coincidir al cien por cien con el que entregaste en diciembre, ya que probablemente le hayas hecho alguna mejora o corregido algunos errores) y preparar el entorno de trabajo; después de ese momento, no será posible tener conectado ningún dispositivo externo al ordenador durante la realización del examen.</p></li>
+<li><p>Es recomendable llevar una par de memorias USB para evitar <em>disgustos</em> por fallos inesperados en el dispositivo.</p></li>
+<li><p>El examen se realizará en el sistema operativo Linux de los ordenadores del laboratorio; asegúrate de que el sistema de ficheros de tu memoria USB es compatible con el Linux de los laboratorios para no tener problemas al copiar tu código.</p></li>
+<li><p>Durante la realización del examen no habrá acceso a internet, excepto a esta <a class="reference external" href="https://www.dlsi.ua.es/%7ejaperez/dai-examen2020">página con una copia de los materiales</a> de la asignatura y al servidor de <a class="reference external" href="https://pracdlsi.dlsi.ua.es/index.cgi?id=val">entrega de prácticas</a> del departamento (para entregar tu solución al examen cuando acabes).</p></li>
+<li><p>Desde la página con la copia de los materiales puedes descargar el fichero <a class="reference external" href="_static/data/dai-bundle-dev-20191206.tar.gz">dai-bundle-dev</a> (que ya hemos usado en clase) para instalar Node.js, así como el fichero <a class="reference external" href="_static/data/dai-node_modules-20200114.tar.gz">dai-node_modules</a>, que contiene los módulos de Node.js necesarios para ejecutar tu práctica (gracias a ello, ya no necesitarás hacer <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> antes de lanzar tu práctica, ya que esta orden necesita acceso a internet); este último fichero lo has de descomprimir en tu carpeta de código para que se cree allí el directorio <code class="docutils literal notranslate"><span class="pre">node_modules</span></code>.</p></li>
+<li><p>El día del examen práctico realiza antes de empezar el examen estos pasos por este orden:</p>
+<ol class="arabic simple">
+<li><p>Entra en Linux con tu usuario y contraseña.</p></li>
+<li><p>Accede a la <a class="reference external" href="https://www.dlsi.ua.es/%7ejaperez/dai-examen2020">página con una copia de los materiales</a>  y descarga de ella los ficheros <a class="reference external" href="_static/data/dai-bundle-dev-20191206.tar.gz">dai-bundle-dev</a> y <a class="reference external" href="_static/data/dai-node_modules-20200114.tar.gz">dai-node_modules</a> o llévalos ya copiados en tu memoria USB.</p></li>
+<li><p>Descomprime el fichero cuyo nombre comienza por <code class="docutils literal notranslate"><span class="pre">dai-bundle-dev</span></code> en cualquier directorio.</p></li>
+<li><p>Entra en el directorio creado y ejecuta desde un terminal <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>.</p></li>
+<li><p>Cierra el terminal y abre uno nuevo.</p></li>
+<li><p>Crea una carpeta <code class="docutils literal notranslate"><span class="pre">dai-enero2020</span></code> y copia dentro de ella los ficheros de tu práctica.</p></li>
+<li><p>Descomprime dentro de <code class="docutils literal notranslate"><span class="pre">dai-enero2020</span></code> el fichero cuyo nombre comienza por <code class="docutils literal notranslate"><span class="pre">dai-node_modules</span></code>.</p></li>
+<li><p>Desde el terminal ejecuta <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">start</span></code> dentro del directorio <code class="docutils literal notranslate"><span class="pre">dai-enero2020</span></code> y comprueba que tu práctica funciona en <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code>.</p></li>
+</ol>
+</li>
+<li><p>Asegúrate de que te familiarizas con toda la información anterior antes del examen.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>13 Ene</p></td>
+<td><p>Por un error en el texto de los materiales de la asignatura, las instancias de bases de datos que estábamos creando en Google Cloud SQL eran de un tipo excesivamente potente (y costoso) para el uso que les damos en la asignatura (unas pocas tablas con unos pocos registros cada una). El apartado «<a class="reference internal" href="nube.html#label-appengine"><span class="std std-ref">Publicación de la aplicación del carrito en Google App Engine</span></a>» ya se ha corregido para indicar que la instancia que aloja la base de datos MySQL ha de ser de tipo <code class="docutils literal notranslate"><span class="pre">db‑f1‑micro</span></code>. También se indica al final de dicho apartado cómo dormir la instancia cuando vayamos a dejar de usar la aplicación y cómo despertarla posteriormente. Para evitar un gasto innecesario, el profesor ha destruido todas las instancias de bases de datos anteriores, por lo que tendrás que volver a crearla (esta vez indicando el tipo <code class="docutils literal notranslate"><span class="pre">db‑f1‑micro</span></code> al hacer <code class="docutils literal notranslate"><span class="pre">gcloud</span> <span class="pre">sql</span> <span class="pre">instances</span> <span class="pre">create</span> <span class="pre">...</span></code>) si quieres usar tus aplicaciones en Google App Engine. Dado que la práctica 4 ya ha sido corregida y que en el examen práctico no se pedirá nada relacionado con la nube de Google, en realidad solo te podría interesar crear una nueva instancia de cara a recordar algunos conceptos cuando prepares el examen teórico.</p></td>
+</tr>
 <tr class="row-odd"><td><p>07 Ene</p></td>
 <td><p>Ya están publicadas las notas de la práctica 4 en la <a class="reference external" href="https://www.dlsi.ua.es/alumnes/index.cgi?id=val">web del departamento</a>.</p></td>
 </tr>
@@ -237,8 +266,8 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="guia-docente">
-<h2>Guía docente<a class="headerlink" href="#guia-docente" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="guia-docente-y-normas-del-curso">
+<h2>Guía docente y normas del curso<a class="headerlink" href="#guia-docente-y-normas-del-curso" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en Internet, coordinada por el profesor <a class="reference external" href="https://www.dlsi.ua.es/~japerez/">Juan Antonio Pérez Ortiz</a> (cuenta de Twitter: <a class="reference external" href="https://twitter.com/japer3z">&#64;japer3z</a>) de la Universitat d’Alacant. Para obtener información sobre la evaluación de la asignatura puedes consultar la <a class="reference external" href="http://cv1.cpd.ua.es/ConsPlanesEstudio/cvFichaAsiEEES.asp?wCodEst=C203&amp;wcodasi=34063&amp;wLengua=C&amp;scaca=2019-20">guía docente</a>. Algunos aspectos adicionales que no están recogidos en la guía son los siguientes:</p>
 <ul class="simple">
 <li><p>La asistencia a prácticas es obligatoria, aunque se puede tener un máximo de 5 faltas no justificadas. Si tienes alguna ocupación que te impide asistir a todas o gran parte de las prácticas, envía un justificante escaneado al profesor a través del sistema de tutoría de UACloud. Para justificar una falta puntual, enseña al profesor el justificante durante la próxima sesión de prácticas a la que acudas. Cada falta no justificada por encima de las permitidas, restará una parte de la nota final de prácticas.</p></li>
@@ -251,6 +280,10 @@
 </ul>
 <p>Puedes encontrar algo de información adicional en las diapositivas usadas en la <a class="reference external" href="_static/slides/000-presentacion-curso.html">presentación del curso</a>.</p>
 <p>El <a class="reference external" href="https://github.com/jaspock/dai1920">código fuente</a> de estas páginas, escrito en reStructuredText, está disponible en Github.</p>
+<p>Puedes obtener una copia local de estas páginas (por ejemplo, para poder consultarlas sin conexión) ejecutando:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">--</span><span class="n">mirror</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">parent</span> <span class="o">--</span><span class="n">convert</span><span class="o">-</span><span class="n">links</span> <span class="o">--</span><span class="n">page</span><span class="o">-</span><span class="n">requisites</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">jaspock</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dai1920</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="recomendaciones">
 <h2>Recomendaciones<a class="headerlink" href="#recomendaciones" title="Enlazar permanentemente con este título">¶</a></h2>
