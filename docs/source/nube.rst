@@ -142,7 +142,7 @@ Vamos a ver cómo desplegar la aplicación del carrito del tema anterior en Goog
 
 Para crear la instancia de Cloud SQL desde el terminal es necesario ejecutar desde la línea de órdenes::
 
-  gcloud sql instances create <instancia> --tier=db-n1-standard-1 --region=europe-west3 --root-password=<contraseñaAdmin>
+  gcloud sql instances create <instancia> --tier=db‑f1‑micro --region=europe-west3 --root-password=<contraseñaAdmin>
 
 donde ``<instancia>`` es el nombre la instancia de base de datos y ``<contraseñaAdmin>`` la contraseña que queremos para el administrador de la instancia. 
 
@@ -216,6 +216,20 @@ Para ver todos los mensajes de *log* emitidos por la aplicación::
 Y para ir viéndolos en un terminal mientras se van generando::
 
   gcloud app logs tail 
+
+.. Important::
+
+  Las instancias de Cloud SQL tienen un coste relativamente alto, por lo que tenemos que hacer un uso moderado de ellas para no agotar los créditos disponibles. En primer lugar, asegúrate de que, como se dice más arriba, indicas el tipo de instancia de base de datos ``db‑f1‑micro`` (el más `barato`_) y ningún otro al crear la instancia. Además, acostúmbrate a *dormir* tu instancia de base de datos cuando no vayas a trabajar en las siguientes horas con ella (no es necesario que lo hagas constantemente mientras estás desarrollando, pero sí cuando vayas a dejar de hacerlo) ejecutando::
+
+    gcloud sql instances patch <instancia> --activation-policy never
+
+  Para *despertar* posteriormente la instancia puedes ejecutar::
+
+      gcloud sql instances patch <instancia> --activation-policy always
+
+  Es posible que de vez en cuando el profesor ejecute un script que intente mandar a dormir todas las instancias de base de datos por si hay estudiantes que han olvidado hacerlo. Despierta tu instancia si inesperadamente comienzas a recibir errores al acceder a la base de datos, porque lamentablemente con la segunda generación de instancias de MySQL de Google Cloud SQL esto no ocurre automáticamente. Evidentemente, en una aplicación real la base de datos ha de estar siempre disponible o establecerse un procedimiento automático que la despierte, pero para los propósitos de la asignatura y de cara a ahorrar costes, dormir y despertar la instancia de base de datos es razonablemente admisible.
+
+  .. _`barato`: https://cloud.google.com/sql/pricing#2nd-gen-instance-pricing
 
 Para poder ejecutar instrucciones de SQL sobre la base de datos y asegurarnos de que nuestro programa está rellenándola correctamente, es necesario ir a la consola web de Google Cloud Platform, abrir el terminal web Cloud Shell y hacer::
 

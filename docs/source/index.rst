@@ -18,6 +18,31 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 13 Ene
+      - Lo siguiente son algunas **normas y recomendaciones para los exámenes** de la asignatura del 24 de enero de 2020. 
+      
+        - Léete bien las normas de la asignatura que se encuentran en la `guía docente`_ en UACloud y más abajo en esta página. 
+        - Recuerda que puedes traer al examen teórico una chuleta de tamaño máximo A5. Al examen práctico puedes traer otra chuleta del mismo tamaño, pero dado que también traerás tu propio código de la práctica 4 en una memoria USB, puedes añadir allí cualquier información suplementaria en un fichero de texto.
+        - Inmediatamente antes del inicio examen práctico tendrás 5 minutos para copiar desde tu memoria USB al ordenador del laboratorio el código de tu práctica 4 (que no tiene por qué coincidir al cien por cien con el que entregaste en diciembre, ya que probablemente le hayas hecho alguna mejora o corregido algunos errores) y preparar el entorno de trabajo; después de ese momento, no será posible tener conectado ningún dispositivo externo al ordenador durante la realización del examen.
+        - Es recomendable llevar una par de memorias USB para evitar *disgustos* por fallos inesperados en el dispositivo.
+        - El examen se realizará en el sistema operativo Linux de los ordenadores del laboratorio; asegúrate de que el sistema de ficheros de tu memoria USB es compatible con el Linux de los laboratorios para no tener problemas al copiar tu código.
+        - Durante la realización del examen no habrá acceso a internet, excepto a esta `página con una copia de los materiales`_ de la asignatura y al servidor de `entrega de prácticas`_ del departamento (para entregar tu solución al examen cuando acabes).
+        - Desde la página con la copia de los materiales puedes descargar el fichero `dai-bundle-dev`_ (que ya hemos usado en clase) para instalar Node.js, así como el fichero `dai-node_modules`_, que contiene los módulos de Node.js necesarios para ejecutar tu práctica (gracias a ello, ya no necesitarás hacer ``npm install`` antes de lanzar tu práctica, ya que esta orden necesita acceso a internet); este último fichero lo has de descomprimir en tu carpeta de código para que se cree allí el directorio ``node_modules``.
+
+        - El día del examen práctico realiza antes de empezar el examen estos pasos por este orden:
+
+          1. Entra en Linux con tu usuario y contraseña.
+          2. Accede a la `página con una copia de los materiales`_  y descarga de ella los ficheros `dai-bundle-dev`_ y `dai-node_modules`_ o llévalos ya copiados en tu memoria USB.
+          3. Descomprime el fichero cuyo nombre comienza por ``dai-bundle-dev`` en cualquier directorio.
+          4. Entra en el directorio creado y ejecuta desde un terminal ``install.sh``.
+          5. Cierra el terminal y abre uno nuevo.
+          6. Crea una carpeta ``dai-enero2020`` y copia dentro de ella los ficheros de tu práctica.
+          7. Descomprime dentro de ``dai-enero2020`` el fichero cuyo nombre comienza por ``dai-node_modules``.
+          8. Desde el terminal ejecuta ``npm start`` dentro del directorio ``dai-enero2020`` y comprueba que tu práctica funciona en ``localhost:5000``.
+
+        - Asegúrate de que te familiarizas con toda la información anterior antes del examen.
+    * - 13 Ene
+      - Por un error en el texto de los materiales de la asignatura, las instancias de bases de datos que estábamos creando en Google Cloud SQL eran de un tipo excesivamente potente (y costoso) para el uso que les damos en la asignatura (unas pocas tablas con unos pocos registros cada una). El apartado ":ref:`label-appengine`" ya se ha corregido para indicar que la instancia que aloja la base de datos MySQL ha de ser de tipo ``db‑f1‑micro``. También se indica al final de dicho apartado cómo dormir la instancia cuando vayamos a dejar de usar la aplicación y cómo despertarla posteriormente. Para evitar un gasto innecesario, el profesor ha destruido todas las instancias de bases de datos anteriores, por lo que tendrás que volver a crearla (esta vez indicando el tipo ``db‑f1‑micro`` al hacer ``gcloud sql instances create ...``) si quieres usar tus aplicaciones en Google App Engine. Dado que la práctica 4 ya ha sido corregida y que en el examen práctico no se pedirá nada relacionado con la nube de Google, en realidad solo te podría interesar crear una nueva instancia de cara a recordar algunos conceptos cuando prepares el examen teórico; lamentablemente, en estos momentos no podrías hacerlo por problemas técnicos; espera unos días, por favor, hasta que se solucionen.
     * - 07 Ene
       - Ya están publicadas las notas de la práctica 4 en la `web del departamento`_.
     * - 30 Dic
@@ -75,9 +100,13 @@ Novedades
 .. _`definición de computación en la nube`: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
 .. _`introducción a los componentes web`: https://css-tricks.com/an-introduction-to-web-components/
 .. _`dominio gcloud.ua.es`: https://si.ua.es/es/manuales/uacloud/uacloudse/servicios-externos.html
+.. _`dai-bundle-dev`: _static/data/dai-bundle-dev-20191206.tar.gz
+.. _`dai-node_modules`: _static/data/dai-node_modules-20200114.tar.gz
+.. _`página con una copia de los materiales`: https://www.dlsi.ua.es/%7ejaperez/dai-examen2020
+.. _`entrega de prácticas`: https://pracdlsi.dlsi.ua.es/index.cgi?id=val
 
-Guía docente
-------------
+Guía docente y normas del curso
+-------------------------------
 
 Estos son los materiales de clase de la asignatura Desarrollo de Aplicaciones en Internet, coordinada por el profesor `Juan Antonio Pérez Ortiz`_ (cuenta de Twitter: `@japer3z`_) de la Universitat d'Alacant. Para obtener información sobre la evaluación de la asignatura puedes consultar la `guía docente`_. Algunos aspectos adicionales que no están recogidos en la guía son los siguientes:
 
@@ -103,6 +132,11 @@ Puedes encontrar algo de información adicional en las diapositivas usadas en la
 El `código fuente`_ de estas páginas, escrito en reStructuredText, está disponible en Github.
 
 .. _`código fuente`: https://github.com/jaspock/dai1920
+
+Puedes obtener una copia local de estas páginas (por ejemplo, para poder consultarlas sin conexión) ejecutando::
+
+  wget --mirror --no-parent --convert-links --page-requisites https://jaspock.github.io/dai1920/index.html
+
 
 Recomendaciones
 ---------------
