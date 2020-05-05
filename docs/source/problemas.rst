@@ -32,7 +32,7 @@ Lenguajes de marcado
 .. admonition:: :problema-contador-marcado:`Problema`
   :class: problema
 
-  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente como sigue sin usar ninguna hoja de estilo adicional:
+  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente como sigue, sin usar ninguna hoja de estilo adicional:
 
   .. raw:: html
 
