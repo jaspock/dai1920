@@ -21,11 +21,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/translations.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -116,7 +116,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="componentes.html">5. Componentes web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nube.html">6. Computación en la  nube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practicas.html">7. Enunciados de las prácticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problemas.html">7. Problemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practicas.html">8. Enunciados de las prácticas</a></li>
 </ul>
 
             
@@ -162,7 +163,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>4. Servicios web</li>
+      <li><span class="section-number">4. </span>Servicios web</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,7 +183,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="servicios-web">
-<h1>4. Servicios web<a class="headerlink" href="#servicios-web" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1><span class="section-number">4. </span>Servicios web<a class="headerlink" href="#servicios-web" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>Los <em>servicios web</em> proporcionan una forma estándar de interoperabilidad entre diferentes aplicaciones, posiblemente heterogéneas. En este tema, veremos cómo crear y cómo acceder a estos servicios, así como su relación con el estándar HTTP. Además, abordaremos el estudio de la arquitectura de servicios conocida como REST (por el inglés, <em>representation state transfer</em>), en la que los agentes proporcionan una interfaz con una semántica uniforme (que, básicamente, se corresponde con las operaciones para crear, recuperar, actualizar y borrar recursos), en lugar de interfaces arbitrarias o específicas de una aplicación concreta. En un primer momento, nos centraremos en el acceso a servicios web ofrecidos por terceros; posteriormente, veremos cómo definir nuestros propios servicios web.</p>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
@@ -198,12 +199,12 @@
 </ul>
 </div>
 <div class="section" id="el-protocolo-http">
-<h2>4.1. El protocolo HTTP<a class="headerlink" href="#el-protocolo-http" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.1. </span>El protocolo HTTP<a class="headerlink" href="#el-protocolo-http" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>HTTP (por <em>hypertext transfer protocol</em>) es el protocolo de comunicación (a nivel de capa de aplicación) diseñado para permitir el envío de información en la <em>world wide web</em> entre distintos ordenadores. Sus primeras versiones fueron desarrolladas en la década de los noventa a partir de los trabajos de Tim Berners Lee y su equipo (los creadores de la web). Las diferentes versiones del estándar son coordinadas por el <a class="reference external" href="https://httpwg.org/">HTTP Working Group</a> de la Internet Engineering Task Force. HTTP/1.1 se publicó en 1997, HTTP/2 en 2015 y HTTP/3 en 2018, aunque tanto navegadores como servidores siguen soportando las versiones antiguas y son capaces de adaptarse para usar el mismo protocolo: por ejemplo, un navegador reciente que soporte HTTP/3 usará HTTP/2 o incluso HTTP/1.1 al comunicarse con un servidor que no haya sido actualizado en mucho tiempo. HTTP/3, a diferencia de anteriores versiones, ya no se apoya en el protocolo de transporte TCP (<em>transmission control protocol</em>), sino que usa QUIC (que no son siglas, sino un término que pretende evocar a la palabra inglesa <em>quick</em>). QUIC mejora la capacidad de multiplexación de TCP y suele mejorar la latencia y velocidad de las conexiones.</p>
 <p>Los conceptos que tienes que comprender del protocolo HTTP se encuentran recogidos en <a class="reference external" href="_static/slides/050-http-slides.html">estas diapositivas</a>.</p>
 </div>
 <div class="section" id="herramientas-para-desarrolladores">
-<h2>4.2. Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Las herramientas para desarrolladores que incorporan los navegadores permiten estudiar los detalles de todas las conexiones establecidas por el navegador al ejecutar una aplicación web.</p>
 <p>Las peticiones lanzadas desde la barra de direcciones del navegador son siempre de tipo GET. Para estudiar los otros tipos de peticiones de HTTP, necesitamos crear un formulario para peticiones de tipo POST, o, si queremos poder usar cualquier verbo, escribir código en JavaScript (usando la API Fetch que estudiáremos después) u otro lenguaje de programación. También hay herramientas como <a class="reference external" href="https://www.getpostman.com/">Postman</a>, una aplicación que permite crear cómodamente colecciones de peticiones a APIs (<em>application programming interfaces</em>). La herramienta <code class="docutils literal notranslate"><span class="pre">curl</span></code> es similar pero funciona desde la línea de órdenes.</p>
 <div class="hazlotu admonition">
@@ -212,7 +213,7 @@
 </div>
 </div>
 <div class="section" id="promesas-de-javascript">
-<h2>4.3. Promesas de JavaScript<a class="headerlink" href="#promesas-de-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.3. </span>Promesas de JavaScript<a class="headerlink" href="#promesas-de-javascript" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Los objetos de tipo <code class="docutils literal notranslate"><span class="pre">Promise</span></code> (una clase definida en la API de JavaScript de los navegadores modernos) se usan para representar la finalización con éxito de una tarea (normalmente asíncrona, es decir, que no bloquea el bucle de eventos, sino que define una función de <em>callback</em> que será ejecutada más adelante) o su fracaso. En términos informales, diremos que una promesa se cumple (en caso de éxito), se incumple (en caso de fracaso) o que está pendiente (cuando aún no se ha resuelto); en inglés se usan los términos <em>fullfilled</em>, <em>rejected</em> o <em>pending</em>, respectivamente. Los objetos promesa nos serán muy útiles en tareas como la comunicación con un servidor, que veremos más adelante en este tema.</p>
 <p>Veamos un primer ejemplo. El siguiente código crea un objeto de tipo promesa <code class="docutils literal notranslate"><span class="pre">p</span></code> invocando al constructor de <code class="docutils literal notranslate"><span class="pre">Promise</span></code>. Este constuctor recibe dos funciones de <em>callback</em> que son aportadas por el sistema (es decir, no son definidas por el programador); estas dos funciones (<code class="docutils literal notranslate"><span class="pre">resolve</span></code> y <code class="docutils literal notranslate"><span class="pre">reject</span></code> en el código de abajo) serán invocadas en los lugares de nuestro código en los que determinemos que la tarea se ha desarrollado con éxito (en el caso del primer parámetro) o ha fracasado (función pasada como segundo parámetro). En este caso, vamos a suponer que nuestra promesa ejecuta una tarea asíncrona muy sencilla: esperar un segundo y generar un número aleatorio entre 0 y 1; la tarea se considera un éxito si el número es menor de 0,5. En lenguaje de la calle, sería como decir «te prometo que voy a generar (asíncronamente) un número aleatorio y que será menor que 0,5»; como cualquier promesa, en cualquier caso, esta puede cumpirse o no.</p>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -566,48 +567,9 @@ function aleatorio2(delta) {
 </pre></div>
 </td></tr></table></div>
 <p>Finalmente, JavaScript ha incluido más recientemente las <a class="reference external" href="https://developers.google.com/web/fundamentals/primers/async-functions">funciones asíncronas</a> que permiten simplificar aún más las cadenas de promesas al utilizar la misma notación secuencial empleada en segmentos síncronos de código con los bloques de código que contienen llamadas asíncronas. Lo veremos más adelante.</p>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Sabiendo que no hay ningún error en el siguiente código, indica la salida que emite por consola el siguiente bloque de JavaScript:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">p1</span><span class="p">()</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="o">*</span><span class="nx">x</span><span class="p">);</span> <span class="k">return</span> <span class="nx">p2</span><span class="p">(</span><span class="nx">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nx">x</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="nx">x</span><span class="o">+</span><span class="mi">3</span><span class="p">);</span> <span class="p">}</span> <span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">a</span><span class="o">+</span><span class="nx">x</span><span class="p">.</span><span class="nx">b</span><span class="p">);</span> <span class="nx">x</span><span class="p">.</span><span class="nx">a</span><span class="o">++</span><span class="p">;</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span> <span class="p">)</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">a</span><span class="o">*</span><span class="nx">x</span><span class="p">.</span><span class="nx">b</span><span class="p">)</span> <span class="p">);</span>
-
-<span class="kd">function</span> <span class="nx">p1</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">p2</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">reject</span><span class="p">(</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="nx">a</span><span class="o">*</span><span class="nx">b</span><span class="p">}</span> <span class="p">)</span> <span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Sabiendo que no hay ningún error en el siguiente código, indica con qué valor hay que sustituir las expresiones <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> y <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code> en el siguiente código para que la salida emitida por consola sea 5:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new</span> <span class="n">Promise</span><span class="p">(</span> <span class="p">(</span><span class="n">resolve</span><span class="p">,</span><span class="n">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">resolve</span><span class="p">(</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="n">b</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span> <span class="p">)</span> <span class="p">)</span>
-<span class="o">.</span><span class="n">then</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">new</span> <span class="n">Promise</span> <span class="p">(</span>
-    <span class="n">function</span> <span class="p">(</span><span class="n">resolve</span><span class="p">,</span><span class="n">reject</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">a</span><span class="o">+</span><span class="mi">5</span><span class="o">===</span><span class="nd">@1</span> <span class="o">&amp;&amp;</span> <span class="n">x</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">b</span><span class="o">===</span><span class="nd">@2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">resolve</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">a</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
-      <span class="p">}</span>
-      <span class="k">else</span> <span class="p">{</span>
-        <span class="n">reject</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">)</span>
-<span class="p">})</span>
-<span class="o">.</span><span class="n">then</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
-<span class="o">.</span><span class="n">catch</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">);</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="el-objeto-xmlhttprequest">
-<h2>4.4. El objeto XMLHttpRequest<a class="headerlink" href="#el-objeto-xmlhttprequest" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.4. </span>El objeto XMLHttpRequest<a class="headerlink" href="#el-objeto-xmlhttprequest" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En los primeros años de la web, la mayoría de las aplicaciones web seguían el siguiente patrón de comportamiento al realizar, por ejemplo, una búsqueda de un determinado elemento en una base de datos: el usuario rellenaba los valores correspondientes para buscar el elemento en un formulario y pulsaba el botón de enviar; en ese momento, el navegador realizaba una petición al servidor y borraba la página web actual; el servidor realizaba la búsqueda en la base de datos y devolvía entonces una página web completa que el navegador mostraba en sustitución de la anterior. Además de generar una experiencia incómoda al usuario si se compara con una aplicación tradicional de escritorio (el usuario ha de esperar a que se cargue de nuevo toda la página para seguir interactuando con la aplicación), este procedimiento es muy ineficiente cuando la página web tiene mucho contenido que apenas cambia, y que, sin embargo, es enviado continuamente por el servidor.</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
@@ -717,7 +679,7 @@ function aleatorio2(delta) {
 </div>
 </div>
 <div class="section" id="la-api-fetch">
-<h2>4.5. La API Fetch<a class="headerlink" href="#la-api-fetch" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.5. </span>La API Fetch<a class="headerlink" href="#la-api-fetch" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En los últimos años, sin embargo, los navegadores han comenzado a implementar la API Fetch (desarrollada por el WHATWG, Web Hypertext Application Technology Working Group, que también supervisa la evolución de otros estándares como HTML o la API DOM), que es una forma más potente, extensible y flexible de acceder a recursos externos. Usando esta API en lugar de XHR, el código mostrado anteriormente quedaría como sigue:</p>
 <div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -824,85 +786,9 @@ function aleatorio2(delta) {
 </pre></div>
 </td></tr></table></div>
 <p>Las peticiones realizadas por <code class="docutils literal notranslate"><span class="pre">fetch</span></code> son, por defecto, de tipo GET. Más adelante, veremos como realizar peticiones con otros verbos, añadir información en JSON o dar valor a ciertas cabeceras de HTTP.</p>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Teníamos un fragmento correcto de código en JavaScript que realizaba una petición asíncrona a <code class="docutils literal notranslate"><span class="pre">http://example.com/movies.json/birdbox</span></code> y mostraba por consola el valor del atributo <code class="docutils literal notranslate"><span class="pre">title</span></code> de los datos en JSON devueltos por el servidor. Lamentablemente, las líneas de nuestro programa se han desordenado y, además, mezclado con líneas de otros programas. Indica la secuencia de líneas, de entre las siguientes, que permiten reconstruir el programa original. Una posible respuesta (incorrecta) sería <em>03,09,04</em>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">01</span>    <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">02</span>    <span class="o">.</span><span class="n">then</span><span class="p">(</span>
-<span class="mi">03</span>    <span class="p">})</span>
-<span class="mi">04</span>    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
-<span class="mi">05</span>    <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-<span class="mi">06</span>    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">movie</span><span class="o">.</span><span class="n">title</span><span class="p">);</span>
-<span class="mi">07</span>    <span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">movie</span><span class="p">)</span> <span class="p">{</span>
-<span class="mi">08</span>    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">title</span><span class="p">);</span>
-<span class="mi">09</span>    <span class="p">});</span>
-<span class="mi">10</span>    <span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;http://example.com/movies.json/birdbox&#39;</span><span class="p">)</span>
-<span class="mi">11</span>    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
-<span class="mi">12</span>    <span class="n">fetch</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="s1">&#39;http://example.com/movies.json/birdbox&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Indica los tres errores de formato que hay en la representación en JSON del siguiente dato y cómo los solucionarías con la menor cantidad de modificaciones.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Duke&quot;</span><span class="p">,</span>
-  <span class="n">age</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-  <span class="s2">&quot;streetAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;100 Internet Dr&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;New York&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;married&quot;</span><span class="p">:</span> <span class="n">true</span>
-  <span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="n">male</span><span class="p">,</span>
-  <span class="s2">&quot;companies&quot;</span><span class="p">:</span> <span class="p">[],</span>
-  <span class="s2">&quot;universities&quot;</span><span class="p">:</span> <span class="p">[{}</span>  <span class="p">],</span>
-  <span class="s2">&quot;phoneNumbers&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="s2">&quot;Mobile&quot;</span><span class="p">:</span> <span class="s2">&quot;1111111111&quot;</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="s2">&quot;Mobile&quot;</span><span class="p">:</span> <span class="mi">2222222222</span> <span class="p">},</span>
-    <span class="mi">33333</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table></div>
-</div>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en <code class="docutils literal notranslate"><span class="pre">fetch</span></code> devuelve en el cuerpo de la respuesta el dato válido en JSON <code class="docutils literal notranslate"><span class="pre">{&quot;title&quot;:&quot;天気の子&quot;,&quot;director&quot;:&quot;新海誠&quot;,&quot;year&quot;:2019}</span></code>, indica la salida que emite por consola el siguiente bloque de JavaScript:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">movie</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">g</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://example.com/movies.json/3400231&#39;</span><span class="p">).</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">r</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">r</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span> <span class="nx">x</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">year</span><span class="o">+</span><span class="nx">g</span><span class="p">);</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">(</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">);</span>
-  <span class="nx">g</span><span class="o">++</span><span class="p">;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">g</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">movie</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="la-politica-del-mismo-origen">
-<h2>4.6. La política del mismo origen<a class="headerlink" href="#la-politica-del-mismo-origen" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.6. </span>La política del mismo origen<a class="headerlink" href="#la-politica-del-mismo-origen" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Todos los navegadores implementan una restricción conocida como <em>política del mismo origen</em> (en inglés, <em>same-origin policy</em>), un concepto de seguridad existente desde la época de Netscape 2.0 para peticiones basadas en XHR o en la API Fetch. Esta política impide por defecto que desde un script bajado de un determinado servidor se realicen peticiones a servicios web disponibles en un servidor con un dominio diferente. Permitir este tipo de accesos abre la puerta a toda una serie de potenciales problemas: por ejemplo, <em>MaliciousSite.com</em> usa los servicios web de la web de <em>MyBank.com</em> (en la que el usuario tiene sesión abierta en otra pestaña del navegador) para obtener información confidencial; los servicios web de <em>MyBank.com</em> devuelven la información solicitada porque el usuario está autenticado y la <em>cookie</em> de autenticación es enviada por el navegador junto con la petición; el script con origen <em>MaliciousSite.com</em> puede ahora compartir esta información con otros servidores.</p>
 <p>Si la política del mismo origen no pudiera evitarse, muchas aplicaciones web que usan servicios web <em>de terceros</em> desde el cliente no podrían existir o deberían implementar un proxy a dichos servicios web en su propio servidor. Por ello, los navegadores permiten bajo determinadas condiciones que estos accesos puedan realizarse. En particular, la técnica estándar CORS (<em>cross-origin resource sharing</em>) utiliza la cabecera <em>Origin</em> (que es añadida por el navegador y no puede modificarse desde JavaScript) en la petición para informar al servidor del origen del código que está haciendo la solicitud. El servidor puede autorizar o denegar entonces el acceso añadiendo a la respuesta un valor adecuado en la cabecera <em>Access-Control-Allow-Origin</em>; si el valor de esta última cabecera en la respuesta coincide con el valor de <em>Origin</em> en la petición o si toma un valor como <cite>*</cite>, entonces el navegador autoriza el acceso. En peticiones que pueden modificar datos en el servidor (como las de tipo PUT o DELETE), el navegador realiza una comunicación previa con el servidor (usando el verbo <em>OPTIONS</em>) para realizar algunas comprobaciones <em>pre-vuelo</em> (<em>pre-flight</em>) usando las cabeceras ya mencionadas.</p>
 <p>Aunque no es fácil engañar al servidor modificando el valor enviado por el navegador en la cabecera <em>Origin</em>, debe tenerse en cuenta que el propósito de CORS no es el de hacer un sitio web más seguro; si el servidor devuelve datos privados, es necesario usar <em>cookies</em> o <em>tokens</em>, por ejemplo.</p>
@@ -913,7 +799,7 @@ function aleatorio2(delta) {
 <p>Finalmente, es importante resaltar que estas restricciones afectan a los servicios web a los que se intenta acceder desde un navegador. Una aplicación de escritorio o un programa ejecutándose en un servidor no tienen estas restricciones.</p>
 </div>
 <div class="section" id="la-arquitectura-rest">
-<h2>4.7. La arquitectura REST<a class="headerlink" href="#la-arquitectura-rest" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.7. </span>La arquitectura REST<a class="headerlink" href="#la-arquitectura-rest" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>REST es una arquitectura para implementar servicios web sobre el protocolo HTTP que es usada actualmente por la gran mayoría de APIs web. Bajo REST los recursos se representan mediante URLs y las acciones a realizar con ellos se indican mediante los correspondientes verbos de HTTP (principalmente, GET, POST, PUT y DELETE).</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
@@ -979,7 +865,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 </div>
 <p>En JavaScript tenemos funciones como <code class="docutils literal notranslate"><span class="pre">decodeURIComponent</span></code> y <code class="docutils literal notranslate"><span class="pre">encodeURIComponent</span></code> que se encargan del trabajo de conversión. Para codificar un símbolo para el programa <code class="docutils literal notranslate"><span class="pre">curl</span></code> que se ejecuta en la línea de órdenes podemos usar <a class="reference external" href="https://meyerweb.com/eric/tools/dencoder/">herramientas en línea</a>.</p>
 <div class="section" id="envio-de-peticiones-desde-javascript">
-<h3>4.7.1. Envío de peticiones desde JavaScript<a class="headerlink" href="#envio-de-peticiones-desde-javascript" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3><span class="section-number">4.7.1. </span>Envío de peticiones desde JavaScript<a class="headerlink" href="#envio-de-peticiones-desde-javascript" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Ahora vamos a ver cómo interactuar con la API del carrito desde JavaScript (en concreto, usando la API Fetch que hemos estudiado antes) por medio de una aplicación web de <a class="reference external" href="https://whispering-plains-89598.herokuapp.com/carrito.html">gestión de carritos de la compra</a>. Abre las DevTools de Google Chrome y estudia cada una de las peticiones Fetch realizadas por la aplicación. El código de este cliente de la API es el siguiente:</p>
 <div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
@@ -1526,7 +1412,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 </td></tr></table></div>
 </div>
 <div class="section" id="peticiones-cors">
-<h3>4.7.2. Peticiones CORS<a class="headerlink" href="#peticiones-cors" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3><span class="section-number">4.7.2. </span>Peticiones CORS<a class="headerlink" href="#peticiones-cors" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>La API REST del carrito soporta peticiones Fetch realizadas desde programas en JavaScript descargados de dominios diferentes al dominio en el que está ubicada la API. Para comprobarlo, abre el fichero <code class="docutils literal notranslate"><span class="pre">carrito.html</span></code> desde un servidor web local; recuerda cambiar antes la variable <code class="docutils literal notranslate"><span class="pre">base</span></code> de JavaScript para que apunte al <em>endpoint</em> de la API que has usado en la actividad anterior.</p>
@@ -1545,7 +1431,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 </div>
 </div>
 <div class="section" id="programacion-de-servicios-web-en-node-js">
-<h2>4.8. Programación de servicios web en Node.js<a class="headerlink" href="#programacion-de-servicios-web-en-node-js" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.8. </span>Programación de servicios web en Node.js<a class="headerlink" href="#programacion-de-servicios-web-en-node-js" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Los servicios web se pueden programar en prácticamente cualquier lenguaje de programación existente hoy día. Para el servicio web anterior, hemos usado JavaScript con Node.js y el <em>framework</em> para desarrollo de aplicaciones web Express. Este es el código de la parte del servidor:</p>
 <div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
@@ -2180,21 +2066,8 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <p>El código registra (llamando a <code class="docutils literal notranslate"><span class="pre">app.use</span></code>) varias funciones de <em>middleware</em>, que son invocadas para todas las peticiones y que se encargan de diversos aspectos: indicar que el bloque de datos de la petición contendrá información en JSON, descodificar los caracteres que usen la notación <em>por ciento</em> (véase una actividad anterior en este tema), devolver las cabeceras necesarias para permitir peticiones CORS (como también hemos visto) o establecer la conexión con el gestor de base de datos. Todas estas funciones de <em>middleware</em> son llamadas por Express con tres parámetros: un objeto que representa la solicitud (<code class="docutils literal notranslate"><span class="pre">req</span></code> en el código), un objeto que representa la respuesta que se devolverá al cliente (<code class="docutils literal notranslate"><span class="pre">res</span></code> en el código) y un objeto que representa la siguiente función de <em>middleware</em> (<code class="docutils literal notranslate"><span class="pre">next</span></code> en el código); cada función de <em>middleware</em> ha de llamar a la siguiente función de <em>middleware</em>, excepto cuando se detecta algún error y se desea enviar inmediatamente una respuesta al cliente con la función <code class="docutils literal notranslate"><span class="pre">res.send</span></code> (como ocurre en la función <code class="docutils literal notranslate"><span class="pre">creaEsquema</span></code>).</p>
 <p>Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, si usamos un objeto de JavaScript como argumento de la llamada a <code class="docutils literal notranslate"><span class="pre">send</span></code>, los datos se convierten a JSON y la cabecera <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> se establece a <code class="docutils literal notranslate"><span class="pre">application/json;</span> <span class="pre">charset=utf-8</span></code>.</p>
 <p>El código principal de la aplicación está formado por una serie de llamadas a funciones <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, <code class="docutils literal notranslate"><span class="pre">put</span></code> y <code class="docutils literal notranslate"><span class="pre">delete</span></code> que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, <code class="docutils literal notranslate"><span class="pre">:item</span></code>) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto <code class="docutils literal notranslate"><span class="pre">req.params</span></code> ( en ese caso, <code class="docutils literal notranslate"><span class="pre">req.params.item</span></code>). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.body</span></code>. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto <code class="docutils literal notranslate"><span class="pre">req.query</span></code>.</p>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>El siguiente código define una función de <em>middleware</em> de Express que añade la cabecera <code class="docutils literal notranslate"><span class="pre">Content-type</span></code> con valor <code class="docutils literal notranslate"><span class="pre">text/html</span></code> a la respuesta del servidor. Indica con qué hay que sustituir <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> y <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code> para que el código sea correcto.</p>
-<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>app.use( (request,response,foo) =&gt; {
-  res.set(&#39;Content-Type&#39;, &#39;@1&#39;)
-  @2;
-});
-</pre></div>
-</td></tr></table></div>
-</div>
 <div class="section" id="interfaz-comun-de-acceso-a-bases-de-datos">
-<h3>4.8.1. Interfaz común de acceso a bases de datos<a class="headerlink" href="#interfaz-comun-de-acceso-a-bases-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3><span class="section-number">4.8.1. </span>Interfaz común de acceso a bases de datos<a class="headerlink" href="#interfaz-comun-de-acceso-a-bases-de-datos" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Como queremos que nuestra aplicación web pueda funcionar con distintos gestores de bases de datos (Heroku permite usar PostgreSQL, Google Cloud Platform permite usar MySQL y en modo local vamos a usar una base de datos <em>ligera</em> con SQLite para hacer pruebas), nos interesa no tener que escribir código diferente para cada uno. Node.js no tiene un equivalente exacto a, por ejemplo, la tecnología JDBC de Java, pero el paquete Knex.js (pronunciado como <em>konnex</em>) se acerca bastante al permitirnos interactuar con diferentes gestores de bases de datos con una interfaz única. Con Knex.js usaremos funciones para construir las consultas a la base de datos que serán transformadas internamente en instrucciones SQL; las peticiones a la base de datos son asíncronas y se gestionan mediante promesas o mediante <em>callbacks</em>. Las funciones que a este respecto se usan en el código son bastante autoexplicativas y es muy sencillo deducir cuál es su transformación en SQL. Por ejemplo, las líneas de código:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span> <span class="nx">await</span> <span class="nx">knex</span><span class="p">(</span><span class="s1">&#39;productos&#39;</span><span class="p">).</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="s1">&#39;cantidad&#39;</span><span class="p">])</span>
                               <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;carrito&#39;</span><span class="p">,</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">carrito</span><span class="p">)</span>
@@ -2207,7 +2080,7 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 </div>
 </div>
 <div class="section" id="async-await">
-<h3>4.8.2. Async/await<a class="headerlink" href="#async-await" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3><span class="section-number">4.8.2. </span>Async/await<a class="headerlink" href="#async-await" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Las promesas de la API Fetch son, como hemos visto, una forma muy conveniente de gestionar peticiones a un servidor, pero cuando la llamada a un servicio web depende del resultado de una llamada anterior a otro servicio web y este anidamiento se va haciendo más y más complejo, la escritura del código puede ser muy dificultosa (especialmente a la hora de sangrarlo o de emparejar las llaves y los paréntesis). Para simplificarlo, se añadieron a JavaScript los modificadores <code class="docutils literal notranslate"><span class="pre">async</span></code> y <code class="docutils literal notranslate"><span class="pre">await</span></code>.</p>
 <p>Cuando se invoca una función anotada con <code class="docutils literal notranslate"><span class="pre">async</span></code>, la respuesta a la llamada se procesa como si fuera una promesa. Si la función <code class="docutils literal notranslate"><span class="pre">async</span></code> devuelve un valor, dicha promesa se resolverá con el valor devuelto: si la función asíncrona generara una excepción, la promesa se rechazaría con el valor devuelto. Dentro de una función asíncrona puede aparecer cualquier número de expresiones <code class="docutils literal notranslate"><span class="pre">await</span></code> (estas expresiones, de hecho, solo pueden aparecer dentro de funciones <code class="docutils literal notranslate"><span class="pre">async</span></code>); una expresión <code class="docutils literal notranslate"><span class="pre">await</span></code> pausa la ejecución de la función asíncrona y espera a que la promesa se resuelva para continuar la ejecución de la función asíncrona.</p>
 <p>El código de más arriba que accedía con Fetch a la API de películas del Studio Ghibli quedaría de la siguiente manera con  <code class="docutils literal notranslate"><span class="pre">async</span></code> y <code class="docutils literal notranslate"><span class="pre">await</span></code>:</p>
@@ -2260,41 +2133,10 @@ curl --request DELETE --header &#39;content-type:application/json&#39; $endpoint
 <span class="nx">print</span><span class="p">();</span>
 </pre></div>
 </td></tr></table></div>
-<div class="admonition-problema-contador-problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en <code class="docutils literal notranslate"><span class="pre">fetch</span></code> devuelve en el cuerpo de la respuesta el dato válido en JSON <code class="docutils literal notranslate"><span class="pre">{&quot;title&quot;:&quot;天気の子&quot;,&quot;director&quot;:&quot;新海誠&quot;,&quot;year&quot;:2019}</span></code>, indica el código con el que hay que sustituir <code class="docutils literal notranslate"><span class="pre">&#64;1</span></code> y <code class="docutils literal notranslate"><span class="pre">&#64;2</span></code> en el siguiente bloque de JavaScript para que se imprima por consola el valor <code class="docutils literal notranslate"><span class="pre">2021</span></code>:</p>
-<div class="highlight-javascript notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span>async function movie() {
-  var g= 1;
-  g+= @1;
-  try {
-    let r= await fetch(&#39;http://example.com/movies.json/3400231&#39;);
-    let x= @2 r.json();
-    console.log(x.year + g);
-  } catch(e) {
-    console.log(e)
-  };
-}
-
-movie();
-</pre></div>
-</td></tr></table></div>
-</div>
 </div>
 </div>
 <div class="section" id="configuracion-del-entorno-de-trabajo-para-ejecutar-localmente-una-aplicacion-web">
-<span id="label-local"></span><h2>4.9. Configuración del entorno de trabajo para ejecutar localmente una aplicación web<a class="headerlink" href="#configuracion-del-entorno-de-trabajo-para-ejecutar-localmente-una-aplicacion-web" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="label-local"></span><h2><span class="section-number">4.9. </span>Configuración del entorno de trabajo para ejecutar localmente una aplicación web<a class="headerlink" href="#configuracion-del-entorno-de-trabajo-para-ejecutar-localmente-una-aplicacion-web" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En esta actividad se explica cómo configurar el entorno de trabajo para poder lanzar aplicaciones web escritas en Node.js que usan una base de datos SQLite3.</p>
 <div class="admonition important">
 <p class="admonition-title">Importante</p>
@@ -2370,7 +2212,7 @@ echo &#39;export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH&#39; &gt;&gt; $
 </div>
 </div>
 <div class="section" id="depuracion-y-prueba-de-la-aplicacion">
-<h3>4.9.1. Depuración y prueba de la aplicación<a class="headerlink" href="#depuracion-y-prueba-de-la-aplicacion" title="Enlazar permanentemente con este título">¶</a></h3>
+<h3><span class="section-number">4.9.1. </span>Depuración y prueba de la aplicación<a class="headerlink" href="#depuracion-y-prueba-de-la-aplicacion" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Si deseas depurar el código del servidor en modo local puedes usar el editor de texto <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a>. Abre con él el fichero <code class="docutils literal notranslate"><span class="pre">app.js</span></code> y selecciona <span class="guilabel">Debug / Start debugging</span>. Puedes definir puntos de ruptura haciendo click en el borde de la línea de código oportuna.</p>
 <blockquote>
 <div></div></blockquote>
@@ -2400,7 +2242,7 @@ echo &#39;export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH&#39; &gt;&gt; $
 </div>
 </div>
 <div class="section" id="modificacion-de-la-api-rest">
-<h2>4.10. Modificación de la API REST<a class="headerlink" href="#modificacion-de-la-api-rest" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.10. </span>Modificación de la API REST<a class="headerlink" href="#modificacion-de-la-api-rest" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>En esta actividad, vas a realizar una pequeña modificación a la API del carrito y a la aplicación web que la utiliza. El desarrollo lo realizarás en tu máquina y, cuando hayas comprobado que todo funciona correctamente, lo subirás en la siguiente actividad a un servidor de aplicaciones en la nube.</p>
 <div class="admonition hint">
 <p class="admonition-title">Consejo</p>
@@ -2412,7 +2254,7 @@ echo &#39;export PATH=$HOME/sqlite-tools-linux-x86-3300100:$PATH&#39; &gt;&gt; $
 </div>
 </div>
 <div class="section" id="despliegue-de-la-aplicacion-web-en-heroku">
-<span id="label-heroku"></span><h2>4.11. Despliegue de la aplicación web en Heroku<a class="headerlink" href="#despliegue-de-la-aplicacion-web-en-heroku" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="label-heroku"></span><h2><span class="section-number">4.11. </span>Despliegue de la aplicación web en Heroku<a class="headerlink" href="#despliegue-de-la-aplicacion-web-en-heroku" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Cuando tengas la aplicación lista en modo local, puedes desplegarla en la plataforma en la nube de <a class="reference external" href="https://www.heroku.com/">Heroku</a> como sigue.
 Copia para empezar la carpeta <code class="docutils literal notranslate"><span class="pre">dai1920/code/carrito</span></code> en otra ubicación de tu sistema. Al copiar la carpeta a una ubicación diferente haces que su contenido no esté ligado al repositorio de Github, ya que para desplegar la aplicación en Heroku necesitas vincularla a otro repositorio.</p>
 <p>Instala el cliente de línea de órdenes (CLI, por <em>command-line interface</em>) de Heroku con las <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install">instrucciones de esta página</a>. En el caso de Linux basta con descargar el fichero con los binarios, descomprimirlo y añadir la carpeta <code class="docutils literal notranslate"><span class="pre">bin</span></code> a la variable <code class="docutils literal notranslate"><span class="pre">PATH</span></code> del sistema:</p>
@@ -2477,7 +2319,7 @@ echo &#39;export PATH=$HOME/heroku/bin:$PATH&#39; &gt;&gt; $HOME/.bashrc
 <p>Finalmente, puedes usar el <a class="reference external" href="https://dashboard.heroku.com/">panel de control</a> de tu aplicación en Heroku para acceder a ciertas opciones adicionales de configuración. Por otro lado, en el panel de control de la <a class="reference external" href="https://data.heroku.com/">base de datos</a> PostgreSQL puedes visitar la sección <span class="guilabel">Dataclips</span> para poder ver las tablas de tu base de datos y lanzar consultas SQL sobre ellas.</p>
 </div>
 <div class="section" id="autenticacion-de-usuarios">
-<span id="label-signin"></span><h2>4.12. Autenticación de usuarios<a class="headerlink" href="#autenticacion-de-usuarios" title="Enlazar permanentemente con este título">¶</a></h2>
+<span id="label-signin"></span><h2><span class="section-number">4.12. </span>Autenticación de usuarios<a class="headerlink" href="#autenticacion-de-usuarios" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Una componente importante de la mayoría de aplicaciones web es la que permite que los usuarios se identifiquen o autentiquen en la aplicación y puedan gestionar así sus propios datos. La gestión de cuentas de usuario requiere un esfuerzo adicional (validación de cuentas de correo electrónico, almacenamiento seguro de las contraseñas, gestión de ataques cibernéticos, olvidos de contraseña, etc.) que podemos delegar en servicios de terceros como Facebook Login o Google Sign-in; este último será el que usaremos en esta actividad. De esta forma, el usuario se identifica en una ventana del navegador vinculada a un URL de Google y autoriza a nuestra aplicación a acceder a cierta información de su perfil (nombre y correo electrónico, por ejemplo) sin compartir el resto de sus datos (o permitiendo el acceso a un subconjunto de ellos, como, por ejemplo, los ficheros almacenados en una carpeta de Google Drive).</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -3119,7 +2961,7 @@ echo &#39;export PATH=$HOME/heroku/bin:$PATH&#39; &gt;&gt; $HOME/.bashrc
 <div></div></blockquote>
 </div>
 <div class="section" id="terminos-de-uso-de-las-apis-web">
-<h2>4.13. Términos de uso de las APIs web<a class="headerlink" href="#terminos-de-uso-de-las-apis-web" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">4.13. </span>Términos de uso de las APIs web<a class="headerlink" href="#terminos-de-uso-de-las-apis-web" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Aunque no lo estudiaremos en esta asignatura, hay que tener en cuenta que existen en la web multitud de APIs disponibles para su uso desde aplicaciones de terceros, pero estas APIs suelen tener términos de uso (mira las condiciones de la <a class="reference external" href="https://developer.twitter.com/en/developer-terms/agreement-and-policy">API de Twitter</a>, por ejemplo) que es importante leer antes de decidirse a basar una determinada aplicación en ellas.</p>
 </div>
 </div>
@@ -3144,7 +2986,7 @@ echo &#39;export PATH=$HOME/heroku/bin:$PATH&#39; &gt;&gt; $HOME/.bashrc
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Juan Antonio Pérez
+        &copy; Copyright 2020, Juan Antonio Pérez
 
     </p>
   </div>

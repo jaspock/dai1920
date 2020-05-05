@@ -97,52 +97,6 @@ El código del documento HTML más completo enlazado anteriormente es el siguien
 .. ficheros de código: ../../code/a.java
 
 
-.. admonition:: :problema-contador:`Problema`
-  :class: problema
-
-  Indica con qué código HTML es necesario sustituir la cadena @1 para que el siguiente bloque HTML sea válido y corresponda a una tabla con dos filas (la primera de encabezado) y una columna.
-
-  .. code-block:: html
-    :linenos:
-
-    <table>
-      <thead><tr><td><em>Nombre del río</em>@1<td>Ebro</td></tr>
-    </table>
-
-  .. @1=</td></tr></thead><tr>
-
-
-.. admonition:: :problema-contador:`Problema`
-  :class: problema
-
-  Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente como sigue sin usar ninguna hoja de estilo adicional:
-
-  .. raw:: html
-
-    <section><h4>Colores
-    </h4>
-    <ul>
-    <li>azul
-    </li>
-    </ul>
-    </section>
-    
-  .. code-block:: html
-    :linenos:
-
-    <li>azul
-    <ul>
-    </section>
-    </li>
-    <section><h4>Colores
-    </h4>
-    </ul>
-
-  Una posible respuesta (incorrecta) tendría el formato ``1,2,3,4,5,6,7``.
-
-  .. 5,6,2,1,4,7,3
-
-
 Representación en memoria de un documento HTML
 ----------------------------------------------
 
@@ -170,32 +124,11 @@ La siguiente figura muestra parte de un árbol DOM:
   Podría ser que en alguna ocasión necesites que entre dos elementos (por ejemplo, entre dos palabras) de tu página haya un espacio más grande lo habitual. Podrías en ese caso tener la tentación de usar la entidad ``&nbsp;`` (también ``&NonBreakingSpace;``), repetida varias veces, para obtener aproximadamente este espacio extra. Comprueba una vez cómo funciona (observa la diferencia entre ``a &nbsp;&nbsp; b`` y ``a b``) y luego no vuelvas a usarla nunca más (salvo para su verdadero propósito; sigue leyendo). Posteriormente veremos que, dentro del espíritu de separar presentación y contenido, son las hojas de estilo las que se han de encargar de definir de forma precisa la separación entre los elementos de una página. ¿Para qué existe entonces una entidad como ``&nbsp;``? Su propósito es indicar al navegador que nunca introduzca un salto de línea en el punto en el que aparece la entidad (cosa que el navegador puede decidir hacer con cualquier otro espacio en blanco) y la interprete estrictamente como un espacio en blanco. Escribe una latitud como ``40°&nbsp;41′&nbsp;21.4”&nbsp;N`` en un documento HTML, cambia el ancho de la ventana del navegador e intenta que se separen sus componentes en dos líneas consecutivas.
 
 
-.. admonition:: :problema-contador:`Problema`
-  :class: problema
-
-  Dibuja el árbol DOM correspondiente al siguiente documento HTML. Representa todos los nodos, incluyendo aquellos que representan secuencias de blancos.
-
-  .. code-block:: html
-    :linenos:
-
-    <!doctype html>
-    <html lang="es"><head>
-          <title>La historia interminable</title></head>
-      <body><section><h2>La ciudad de los espectros</h2><p>Fújur se esforzó
-      desesperadamente por encontrar otra vez el lugar en que Atreyu debía de haber
-      caído al agua, pero hasta para un dragón blanco de la suerte es imposible
-      descubrir en la espuma hirviente de un mar revuelto el puntito diminuto de un
-      cuerpo que flota... o el de un ahogado en su fondo.</p><p>Sin embargo, Fújur
-      no quiso renunciar.</p></section>
-    </body>
-    </html>
-
 
 Herramientas para desarrolladores
 ---------------------------------
 
 Los navegadores suelen incorporar de serie un conjunto de herramientas para facilitar el trabajo de los desarrolladores. En particular, a estas alturas del curso ya puedes usar el panel :guilabel:`Elements` de las *Chrome DevTools* para inspeccionar los distintos elementos de tu página; para ello, en el navegador Google Chrome (o Chromium) sitúa el puntero del ratón encima de alguna posición de tu página web y selecciona :guilabel:`Inspeccionar` en el menú contextual; otra opción para acceder a estas herramientas es abrirlas desde el menú :menuselection:`Más herramientas --> Herramientas para desarrolladores` del navegador o mediante el atajo de teclado :kbd:`Ctrl+Shift+I` o :kbd:`F12`. Existen extensiones similares para otros navegadores, como *Firebug* para *Mozilla Firefox*.
-
 
 .. admonition:: Hazlo tú ahora
   :class: hazlotu
@@ -217,19 +150,6 @@ Codificación de caracteres
 Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codificación de caracteres de longitud variable UTF-8, que permite representar todos los caracteres del juego de caracteres Unicode, es importante que seas capaz de saber qué codificación de caracteres se usa en tus documentos web, en los de terceros, o en tu servidor web. No tener esto en cuenta puede hacer que tu web se visualice incorrectamente en algunos navegadores. En esta actividad hablaremos de codificación de caracteres siguiendo `estas diapositivas`_. 
 
 .. _`estas diapositivas`: _static/slides/070-codificacion-slides.html
-
-
-.. admonition:: :problema-contador:`Problema`
-  :class: problema
-
-  Considera los siguientes datos: 
-
-  - El carácter ``a`` (*Latin small letter a*, U+0061) en US-ASCII se repesenta como ``61`` en hexadecimal (``01100001`` en binario), igual que en ISO/IEC 8859 y que en UTF-8; en UTF-16 es ``FEFF0061`` (o en binario ``11111110 11111111 00000000 01100001``).
-  - El carácter ``á`` (*Latin small letter a with acute*, U+00E1) se representa en ISO/IEC 8859-15 como ``E1`` y en UTF-8 como ``C3A1``.
-  - El carácter ``Ã`` se representa en ISO/IEC 8859-15 como ``C3``.
-  - El carácter ``¡`` se representa en ISO/IEC 8859-15 como ``A1``.
-
-  Teniendo en cuenta los datos de las diapositivas anteriores, ¿cómo se ve un fichero de texto escrito en UTF-8 que contiene la cadena ``aáa`` en un editor de texto configurado para ISO/IEC 8859-15? ¿Cómo se ve un fichero de texto escrito en ISO/IEC 8859-15 que contiene la cadena ``aáa`` en un editor de texto configurado para UTF-8?
 
 
 .. admonition:: Hazlo tú ahora

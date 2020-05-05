@@ -21,11 +21,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/translations.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -98,7 +98,8 @@
 <li class="toctree-l1"><a class="reference internal" href="servicios.html">4. Servicios web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="componentes.html">5. Componentes web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nube.html">6. Computación en la  nube</a></li>
-<li class="toctree-l1"><a class="reference internal" href="practicas.html">7. Enunciados de las prácticas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problemas.html">7. Problemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practicas.html">8. Enunciados de las prácticas</a></li>
 </ul>
 
             
@@ -144,7 +145,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>1. Lenguajes de marcado</li>
+      <li><span class="section-number">1. </span>Lenguajes de marcado</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,7 +165,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="lenguajes-de-marcado">
-<h1>1. Lenguajes de marcado<a class="headerlink" href="#lenguajes-de-marcado" title="Enlazar permanentemente con este título">¶</a></h1>
+<h1><span class="section-number">1. </span>Lenguajes de marcado<a class="headerlink" href="#lenguajes-de-marcado" title="Enlazar permanentemente con este título">¶</a></h1>
 <p>HTML (<em>HyperText Markup Language</em>) es el lenguaje <em>declarativo</em> en el que están escritas las páginas web y es la piedra angular de la web. En este tema, aprenderemos sobre HTML centrándonos en las versiones más recientes del lenguaje.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
@@ -187,7 +188,7 @@
 <p>Prepárate para este tema, leyendo en primer lugar el <a class="reference external" href="https://info340.github.io/html-fundamentals.html">capítulo sobre HTML</a> del libro «Client-Side Web Development».</p>
 </div>
 <div class="section" id="sintaxis-y-elementos-del-lenguaje-html">
-<h2>1.1. Sintaxis y elementos del lenguaje HTML<a class="headerlink" href="#sintaxis-y-elementos-del-lenguaje-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Sintaxis y elementos del lenguaje HTML<a class="headerlink" href="#sintaxis-y-elementos-del-lenguaje-html" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>HTML es el lenguaje informático básico que se usa para escribir el contenido de las páginas web (por otro lado, CSS se usa para especificar los aspectos estéticos que afectan a la presentación de las páginas y JavaScript para programar los aspectos dinámicos). En esta actividad vas a conocer los elementos fundamentales de HTML. Te basarás para ello en el código de la página web mínima que aparece a continuación, que iremos ampliando con otros elementos del lenguaje.</p>
 <div class="admonition attention">
 <p class="admonition-title">Atención</p>
@@ -630,46 +631,9 @@
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<div class="problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Indica con qué código HTML es necesario sustituir la cadena &#64;1 para que el siguiente bloque HTML sea válido y corresponda a una tabla con dos filas (la primera de encabezado) y una columna.</p>
-<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">td</span><span class="p">&gt;&lt;</span><span class="nt">em</span><span class="p">&gt;</span>Nombre del río<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span>@1<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>Ebro<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-</pre></div>
-</td></tr></table></div>
-</div>
-<div class="problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Indica en qué orden colocar las líneas de HTML de más abajo para que el fragmento de código HTML resultante sea correcto y se visualice en un navegador aproximadamente como sigue sin usar ninguna hoja de estilo adicional:</p>
-<section><h4>Colores
-</h4>
-<ul>
-<li>azul
-</li>
-</ul>
-</section><div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>azul
-<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Colores
-<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</pre></div>
-</td></tr></table></div>
-<p>Una posible respuesta (incorrecta) tendría el formato <code class="docutils literal notranslate"><span class="pre">1,2,3,4,5,6,7</span></code>.</p>
-</div>
 </div>
 <div class="section" id="representacion-en-memoria-de-un-documento-html">
-<h2>1.2. Representación en memoria de un documento HTML<a class="headerlink" href="#representacion-en-memoria-de-un-documento-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Representación en memoria de un documento HTML<a class="headerlink" href="#representacion-en-memoria-de-un-documento-html" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Imaginemos que tenemos que escribir un programa que cargue en memoria un documento HTML para luego realizar algún procesamiento sobre sus elementos (por ejemplo, mostrarlo en la ventana de un navegador, extraer los datos de una tabla desde un programa en Java u obtener sus palabras para indexarlas en la base de datos de un buscador). La estructura de datos que se utiliza para ello es un árbol en el que cada nodo es un objeto que representa una parte del documento. El DOM (<em>Document Object Model</em>) es un conjunto estándar de métodos (una interfaz) independientes del lenguaje para interactuar con este árbol que suele, por tanto, llamarse <em>árbol DOM</em>. En un tema posterior estudiaremos algunos de los métodos del DOM, pero por ahora centrémonos en la forma del árbol.</p>
 <p>La siguiente figura muestra parte de un árbol DOM:</p>
 <div class="figure align-default" id="id2">
@@ -684,36 +648,9 @@
 <p class="admonition-title">Consejo</p>
 <p>Podría ser que en alguna ocasión necesites que entre dos elementos (por ejemplo, entre dos palabras) de tu página haya un espacio más grande lo habitual. Podrías en ese caso tener la tentación de usar la entidad <code class="docutils literal notranslate"><span class="pre">&amp;nbsp;</span></code> (también <code class="docutils literal notranslate"><span class="pre">&amp;NonBreakingSpace;</span></code>), repetida varias veces, para obtener aproximadamente este espacio extra. Comprueba una vez cómo funciona (observa la diferencia entre <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&amp;nbsp;&amp;nbsp;</span> <span class="pre">b</span></code> y <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">b</span></code>) y luego no vuelvas a usarla nunca más (salvo para su verdadero propósito; sigue leyendo). Posteriormente veremos que, dentro del espíritu de separar presentación y contenido, son las hojas de estilo las que se han de encargar de definir de forma precisa la separación entre los elementos de una página. ¿Para qué existe entonces una entidad como <code class="docutils literal notranslate"><span class="pre">&amp;nbsp;</span></code>? Su propósito es indicar al navegador que nunca introduzca un salto de línea en el punto en el que aparece la entidad (cosa que el navegador puede decidir hacer con cualquier otro espacio en blanco) y la interprete estrictamente como un espacio en blanco. Escribe una latitud como <code class="docutils literal notranslate"><span class="pre">40°&amp;nbsp;41′&amp;nbsp;21.4”&amp;nbsp;N</span></code> en un documento HTML, cambia el ancho de la ventana del navegador e intenta que se separen sus componentes en dos líneas consecutivas.</p>
 </div>
-<div class="problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Dibuja el árbol DOM correspondiente al siguiente documento HTML. Representa todos los nodos, incluyendo aquellos que representan secuencias de blancos.</p>
-<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>La historia interminable<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;</span><span class="nt">section</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>La ciudad de los espectros<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Fújur se esforzó
-  desesperadamente por encontrar otra vez el lugar en que Atreyu debía de haber
-  caído al agua, pero hasta para un dragón blanco de la suerte es imposible
-  descubrir en la espuma hirviente de un mar revuelto el puntito diminuto de un
-  cuerpo que flota... o el de un ahogado en su fondo.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Sin embargo, Fújur
-  no quiso renunciar.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</pre></div>
-</td></tr></table></div>
-</div>
 </div>
 <div class="section" id="herramientas-para-desarrolladores">
-<h2>1.3. Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Herramientas para desarrolladores<a class="headerlink" href="#herramientas-para-desarrolladores" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Los navegadores suelen incorporar de serie un conjunto de herramientas para facilitar el trabajo de los desarrolladores. En particular, a estas alturas del curso ya puedes usar el panel <span class="guilabel">Elements</span> de las <em>Chrome DevTools</em> para inspeccionar los distintos elementos de tu página; para ello, en el navegador Google Chrome (o Chromium) sitúa el puntero del ratón encima de alguna posición de tu página web y selecciona <span class="guilabel">Inspeccionar</span> en el menú contextual; otra opción para acceder a estas herramientas es abrirlas desde el menú <span class="menuselection">Más herramientas ‣ Herramientas para desarrolladores</span> del navegador o mediante el atajo de teclado <kbd class="kbd docutils literal notranslate">Ctrl+Shift+I</kbd> o <kbd class="kbd docutils literal notranslate">F12</kbd>. Existen extensiones similares para otros navegadores, como <em>Firebug</em> para <em>Mozilla Firefox</em>.</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
@@ -725,26 +662,15 @@
 </div>
 </div>
 <div class="section" id="codificacion-de-caracteres">
-<h2>1.4. Codificación de caracteres<a class="headerlink" href="#codificacion-de-caracteres" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Codificación de caracteres<a class="headerlink" href="#codificacion-de-caracteres" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Aunque hoy día la mayor parte de los sistemas operativos trabajan con la codificación de caracteres de longitud variable UTF-8, que permite representar todos los caracteres del juego de caracteres Unicode, es importante que seas capaz de saber qué codificación de caracteres se usa en tus documentos web, en los de terceros, o en tu servidor web. No tener esto en cuenta puede hacer que tu web se visualice incorrectamente en algunos navegadores. En esta actividad hablaremos de codificación de caracteres siguiendo <a class="reference external" href="_static/slides/070-codificacion-slides.html">estas diapositivas</a>.</p>
-<div class="problema admonition">
-<p class="admonition-title"><span class="problema-contador">Problema</span></p>
-<p>Considera los siguientes datos:</p>
-<ul class="simple">
-<li><p>El carácter <code class="docutils literal notranslate"><span class="pre">a</span></code> (<em>Latin small letter a</em>, U+0061) en US-ASCII se repesenta como <code class="docutils literal notranslate"><span class="pre">61</span></code> en hexadecimal (<code class="docutils literal notranslate"><span class="pre">01100001</span></code> en binario), igual que en ISO/IEC 8859 y que en UTF-8; en UTF-16 es <code class="docutils literal notranslate"><span class="pre">FEFF0061</span></code> (o en binario <code class="docutils literal notranslate"><span class="pre">11111110</span> <span class="pre">11111111</span> <span class="pre">00000000</span> <span class="pre">01100001</span></code>).</p></li>
-<li><p>El carácter <code class="docutils literal notranslate"><span class="pre">á</span></code> (<em>Latin small letter a with acute</em>, U+00E1) se representa en ISO/IEC 8859-15 como <code class="docutils literal notranslate"><span class="pre">E1</span></code> y en UTF-8 como <code class="docutils literal notranslate"><span class="pre">C3A1</span></code>.</p></li>
-<li><p>El carácter <code class="docutils literal notranslate"><span class="pre">Ã</span></code> se representa en ISO/IEC 8859-15 como <code class="docutils literal notranslate"><span class="pre">C3</span></code>.</p></li>
-<li><p>El carácter <code class="docutils literal notranslate"><span class="pre">¡</span></code> se representa en ISO/IEC 8859-15 como <code class="docutils literal notranslate"><span class="pre">A1</span></code>.</p></li>
-</ul>
-<p>Teniendo en cuenta los datos de las diapositivas anteriores, ¿cómo se ve un fichero de texto escrito en UTF-8 que contiene la cadena <code class="docutils literal notranslate"><span class="pre">aáa</span></code> en un editor de texto configurado para ISO/IEC 8859-15? ¿Cómo se ve un fichero de texto escrito en ISO/IEC 8859-15 que contiene la cadena <code class="docutils literal notranslate"><span class="pre">aáa</span></code> en un editor de texto configurado para UTF-8?</p>
-</div>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
 <p>Observa que indicar una determinada codificación en el atributo <code class="docutils literal notranslate"><span class="pre">charset</span></code> del elemento <code class="docutils literal notranslate"><span class="pre">meta</span></code> no garantiza que los caracteres del documento usen realmente dicha codificación. Usa un editor de textos que permita redactar documentos bajo diferentes codificaciones y graba tu documento HTML usando las codificaciones <em>UTF-8</em> e <em>ISO-8859-15</em> (Latin-1); prueba a poner el valor correcto y el incorrecto en la directiva <code class="docutils literal notranslate"><span class="pre">meta</span></code> y observa el resultado con los caracteres especiales al abrir el documento en el navegador. Estudia cómo se representan a nivel de bytes los caracteres en las distintas codificaciones con editores hexadecimales como <a class="reference external" href="https://hexed.it/">HexEd.it</a>.</p>
 </div>
 </div>
 <div class="section" id="alojamiento-en-un-servidor">
-<h2>1.5. Alojamiento en un servidor<a class="headerlink" href="#alojamiento-en-un-servidor" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.5. </span>Alojamiento en un servidor<a class="headerlink" href="#alojamiento-en-un-servidor" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Una página web normalmente se aloja en un servidor web. Si la máquina en la que lo hacemos fuera pública (nuestro ordenador personal normalmente no lo será), se podría acceder entonces al documento desde cualquier máquina conectada a internet usando convenientemente la URL del servidor. Existen muchos servidores web diferentes; algunos de los más conocidos son Apache HTTP Server (HTTPD), Internet Information Services, Apache Tomcat o Jetty. Mientras un programador desarrolla una aplicación web es habitual que lance un servidor en su máquina para ir probando sus cambios; en ese caso, el URL de acceso al servidor suele tener la forma <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code> donde <code class="docutils literal notranslate"><span class="pre">localhost</span></code> es el nombre de la propia máquina como <em>host</em> (IP 127.0.0.1) y <code class="docutils literal notranslate"><span class="pre">8080</span></code> es un puerto libre que es necesario indicar en el URL, ya que de no hacerlo el protocolo HTTP usa por defecto el puerto 80 (y HTTPS el 443), que estará normalmente reservado para comunicarse mediante HTTP con otros ordenadores.</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
@@ -755,7 +681,7 @@
 </div>
 </div>
 <div class="section" id="validacion-de-documentos-html">
-<h2>1.6. Validación de documentos HTML<a class="headerlink" href="#validacion-de-documentos-html" title="Enlazar permanentemente con este título">¶</a></h2>
+<h2><span class="section-number">1.6. </span>Validación de documentos HTML<a class="headerlink" href="#validacion-de-documentos-html" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Un aspecto básico de los documentos HTML es que estos cumplan estrictamente con las directrices de HTML, tanto a nivel sintáctico (por ejemplo, las marcas de apertura y clausura respetan el anidamiento entre elementos) como semántico (no hay dos atributos <em>id</em> con el mismo valor o no se usan en un elemento atributos que correspondan a otros elementos). De esta manera, se allana el camino hacia la compatibilidad entre navegadores y la usabilidad de la página web; la validación, sin embargo, no asegura que el documento se vaya a ver como el desarrollador tiene en la cabeza ni que se muestre de igual manera en todos los navegadores.</p>
 <div class="hazlotu admonition">
 <p class="admonition-title">Hazlo tú ahora</p>
@@ -804,7 +730,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Juan Antonio Pérez
+        &copy; Copyright 2020, Juan Antonio Pérez
 
     </p>
   </div>
