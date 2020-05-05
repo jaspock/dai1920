@@ -1,7 +1,7 @@
 
 SRC_DIR=source
 DEST_DIR=build
-REVEAL=reveal.js-3.8.0
+REVEAL=reveal.js-3.9.2
 
 SRC_FILES1 = $(wildcard $(SRC_DIR)/*.mds)
 DEST_FILES1 = $(patsubst $(SRC_DIR)/%.mds,$(DEST_DIR)/%.html,$(SRC_FILES1))
@@ -17,9 +17,9 @@ $(DEST_DIR)/%.html : $(SRC_DIR)/%.mds
 		rm -rf $(REVEAL); \
 		echo "reveal.js copied to $(DEST_DIR) directory"; \
 	fi;
-	pandoc --standalone --section-divs --variable theme="simple" --variable \
-		transition="linear" --variable keyboard="{37:'prev',38:'prev',39:'next',40:'next'}" \
-		-t revealjs -s -o $@ $< 
+	pandoc --standalone --section-divs --variable theme="simple" --from=markdown --variable \
+transition="linear" --variable keyboard="{37:'prev',38:'prev',39:'next',40:'next'}" \
+-t revealjs -s -o $@ $< 
 
 clean:
 	rm -rf build

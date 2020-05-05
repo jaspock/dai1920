@@ -284,54 +284,6 @@ Finalmente, JavaScript ha incluido más recientemente las `funciones asíncronas
 .. _`funciones asíncronas`: https://developers.google.com/web/fundamentals/primers/async-functions
 
 
-.. admonition:: :problema-contador:`Problema`
-
-  Sabiendo que no hay ningún error en el siguiente código, indica la salida que emite por consola el siguiente bloque de JavaScript:
-
-  .. code-block:: javascript
-
-    p1()
-    .then( (x) => { console.log(x*x); return p2(x+1,x+2,x+3); } )
-    .then( (x) => { console.log(x.a+x.b); x.a++; return true; } )
-    .catch( (x) => console.log(x.a*x.b) );
-
-    function p1() {
-      return new Promise( (resolve,reject) => resolve(2) );
-    }
-    
-    function p2(a,b) {
-      return new Promise( (resolve,reject) => reject( {a:a,b:a*b} ) );
-    }
-
-  .. solución: 4,36, https://jsfiddle.net/tb5vya3r/
-
-
-.. admonition:: :problema-contador:`Problema`
-
-  Sabiendo que no hay ningún error en el siguiente código, indica con qué valor hay que sustituir las expresiones ``@1`` y ``@2`` en el siguiente código para que la salida emitida por consola sea 5:
-
-  .. code-block::
-
-    new Promise( (resolve,reject) => resolve( {a:0,b:2} ) )
-    .then( (x) => { 
-      return new Promise (
-        function (resolve,reject) {
-          if (x.a+5===@1 && x.b*x.b*x.b===@2) {
-            resolve(x.a+5);
-          }
-          else {
-            reject(x.b+2);
-          }
-        }
-      )
-    })
-    .then( (x) => console.log(x) )
-    .catch( (x) => console.log(x) );
-
-.. solución: @1=5,@2=8, https://jsfiddle.net/dLxq5n0k/
-
-
-
 
 El objeto XMLHttpRequest
 ------------------------
@@ -484,80 +436,6 @@ También debería ser fácil de entender el siguiente código, que añade un pas
 
 Las peticiones realizadas por ``fetch`` son, por defecto, de tipo GET. Más adelante, veremos como realizar peticiones con otros verbos, añadir información en JSON o dar valor a ciertas cabeceras de HTTP.
 
-
-.. admonition:: :problema-contador:`Problema`
-
-  Teníamos un fragmento correcto de código en JavaScript que realizaba una petición asíncrona a ``http://example.com/movies.json/birdbox`` y mostraba por consola el valor del atributo ``title`` de los datos en JSON devueltos por el servidor. Lamentablemente, las líneas de nuestro programa se han desordenado y, además, mezclado con líneas de otros programas. Indica la secuencia de líneas, de entre las siguientes, que permiten reconstruir el programa original. Una posible respuesta (incorrecta) sería *03,09,04*.
-
-  .. code-block::
-  
-    01    .then(function(r) {
-    02    .then(
-    03    })
-    04    console.log(title);
-    05    .then(title)
-    06    console.log(movie.title);
-    07    .then(function(movie) {
-    08    console.log(r.json().title);
-    09    });
-    10    fetch('http://example.com/movies.json/birdbox')
-    11    return r.json();
-    12    fetch(function('http://example.com/movies.json/birdbox'))
-
-  .. solución: 10,01,11,03,07,06,09
-
-
-.. admonition:: :problema-contador:`Problema`
-
-  Indica los tres errores de formato que hay en la representación en JSON del siguiente dato y cómo los solucionarías con la menor cantidad de modificaciones.
-
-  .. code-block::
-    :linenos:
-
-    {
-      "name": "Duke",
-      age: 18,
-      "streetAddress": "100 Internet Dr",
-      "city":"New York",
-      "married": true
-      "sex": male,
-      "companies": [],
-      "universities": [{}  ],
-      "phoneNumbers": [
-        { "Mobile": "1111111111" },
-        { "Mobile": 2222222222 },
-        33333
-      ]
-    }
-
-.. solución: "age", "true,", "male"
-
-
-.. admonition:: :problema-contador:`Problema`
-
-  Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en ``fetch`` devuelve en el cuerpo de la respuesta el dato válido en JSON ``{"title":"天気の子","director":"新海誠","year":2019}``, indica la salida que emite por consola el siguiente bloque de JavaScript:
-
-  .. code-block:: javascript
-
-    function movie() {
-      var g= 1;  
-      fetch('http://example.com/movies.json/3400231').
-      .then( r => {
-        g++;
-        return r.json();
-      })
-      .then( x => {
-        g++;
-        console.log(x.year+g);
-      })
-      .catch( e => console.log(e) );
-      g++;
-      console.log(g);
-    }
-
-    movie();
-
-  .. solución: 2,2023, https://codesandbox.io/s/dazzling-paper-kpkyq
 
 La política del mismo origen
 ----------------------------
@@ -717,21 +595,6 @@ Express añade automáticamente algunas cabeceras a la respuesta. Por ejemplo, s
 El código principal de la aplicación está formado por una serie de llamadas a funciones ``get``, ``post``, ``put`` y ``delete`` que registran las funciones de callback asociadas a las peticiones realizadas con los verbos y los URLs correspondientes. Observa cómo una subcadena del URL que comienza por el carácter de dos puntos (por ejemplo, ``:item``) no se interpreta literalmente, sino que la subcadena real puesta en el URL de la llamada se usa para dar valor al atributo del objeto ``req.params`` ( en ese caso, ``req.params.item``). A los atributos de los datos en JSON del bloque de datos de la petición nos podemos referir mediante el objeto ``req.body``. A los atributos pasados en el propio URL tras el carácter de interrogación se puede acceder mediante el objeto ``req.query``.
 
 
-.. admonition:: :problema-contador:`Problema`
-
-  El siguiente código define una función de *middleware* de Express que añade la cabecera ``Content-type`` con valor ``text/html`` a la respuesta del servidor. Indica con qué hay que sustituir ``@1`` y ``@2`` para que el código sea correcto.
-
-  .. code-block:: javascript
-    :linenos:
-
-    app.use( (request,response,foo) => {
-      res.set('Content-Type', '@1')
-      @2;
-    });
-
-  .. solución: @1=text/html,@2=foo()
-
-
 Interfaz común de acceso a bases de datos
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -784,30 +647,6 @@ El código de más arriba que accedía con Fetch a la API de películas del Stud
   }
 
   print();
-
-
-.. admonition:: :problema-contador:`Problema`
-
-  Sabiendo que no hay ningún error en el siguiente código y que la llamada al URL indicado en ``fetch`` devuelve en el cuerpo de la respuesta el dato válido en JSON ``{"title":"天気の子","director":"新海誠","year":2019}``, indica el código con el que hay que sustituir ``@1`` y ``@2`` en el siguiente bloque de JavaScript para que se imprima por consola el valor ``2021``:
-
-  .. code-block:: javascript
-    :linenos:
-
-    async function movie() {
-      var g= 1;
-      g+= @1;
-      try {
-        let r= await fetch('http://example.com/movies.json/3400231');
-        let x= @2 r.json();
-        console.log(x.year + g);
-      } catch(e) {
-        console.log(e)
-      };
-    }
-
-    movie();
-
-  .. solución: @1=1,@2=await, https://codesandbox.io/s/objective-leaf-9wx6z
 
 
 .. _label-local:

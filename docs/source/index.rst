@@ -18,6 +18,10 @@ Novedades
     :header-rows: 0
     :class: tablita
 
+    * - 05 May
+      - Por `resolución rectoral`_, el examen del 1 de julio de 2020 (correspondiente a la convocatoria C4) se llevará a cabo a través de mecanismos de evaluación no presencial. Recuerda que según la `guía docente`_ "la calificación final será la media del examen teórico final y la prueba práctica con ordenador" y que "las notas de la convocatoria C2 mayores de 4 se guardan para la convocatoria C4". Estos criterios de evaluación no se modificarán ante la nueva situación. El examen teórico y la prueba de ampliación de la última práctica serán similares a los de la convocatoria de enero, pero previsiblemente introducirán algunos cambios que se anunciarán más adelante (junto con otros aspectos como las horas asignadas para el examen). Por ejemplo, es de esperar que el examen teórico no incluya preguntas del tipo "di cuál es la salida por consola al ejecutar este programa en JavaScript", ya que como vas a realizar el examen en tu ordenador bastaría con copiar el código y ejecutarlo. Recuerda también que el profesor sigue estando a tu disposición para tutoría por Google Meet (con cámara o sin ella, como quieras), previa reserva por UACloud. En otro orden de cosas, mira la otra noticia que se ha publicado hoy sobre la nueva página de problemas que se ha creado.
+    * - 05 May
+      - Se han movido todos los problemas que estaban diseminados por las distintas páginas de cada tema a un nueva página titulada ":ref:`label-problemas`". A esta página se le han incorporado también los enunciados de los problemas del examen de enero de 2020.
     * - 13 Ene
       - Lo siguiente son algunas **normas y recomendaciones para los exámenes** de la asignatura del 24 de enero de 2020. 
       
@@ -88,6 +92,7 @@ Novedades
     * - 08 sep
       - Ya está publicado el enunciado de la práctica 1. Las clases de prácticas comienzan el 17 de septiembre.
 
+.. _`resolución rectoral`: https://pdc.ua.es/es/resolucion-evaluacion-online-c4.html
 .. _`capítulo sobre HTML`: https://info340.github.io/html-fundamentals.html
 .. _`capítulo de introducción a CSS`: https://info340.github.io/css.html
 .. _`capítulo de introducción a JavaScript`: https://info340.github.io/javascript.html
@@ -141,9 +146,9 @@ Puedes obtener una copia local de estas páginas (por ejemplo, para poder consul
 Recomendaciones
 ---------------
 
-Este prefacio es un buen lugar para decir unas palabras sobre integridad profesional y ética académica. Durante este cuatrimestre, la carga de trabajo producida por esta y otras asignaturas puede hacer que en ocasiones te sientas desbordado por la faena pendiente. Esta situación también se producirá frecuentemente en el ámbito profesional para el que te estás formando. Es muy importante que afrontes esos momentos de presión con integridad. El Massachusettts Institute of Technology (MIT) da una serie de recomendaciones_ a sus estudiantes al respecto que es importante que leas. Este tipo de universidades suelen tener bien especificado los `procedimientos y sanciones`_ posibles en caso de fraude académico; también la Universitat d'Alacant tiene un reglamento_ al respecto, que probablemente ya conoces. Todos estos aspectos también has de tenerlos en cuenta en esta asignatura: se pueden discutir soluciones en equipo pero nunca compartir código.
+Este prefacio es un buen lugar para decir unas palabras sobre integridad profesional y ética académica. Durante este cuatrimestre, la carga de trabajo producida por esta y otras asignaturas puede hacer que en ocasiones te sientas desbordado por la faena pendiente. Esta situación también se producirá frecuentemente en el ámbito profesional para el que te estás formando. Es muy importante que afrontes esos momentos de presión con integridad. El Massachusettts Institute of Technology (MIT) da una `serie de recomendaciones`_ a sus estudiantes al respecto que es importante que leas. Este tipo de universidades suelen tener bien especificado los `procedimientos y sanciones`_ posibles en caso de fraude académico; también la Universitat d'Alacant tiene un reglamento_ al respecto, que probablemente ya conoces. Todos estos aspectos también has de tenerlos en cuenta en esta asignatura: se pueden discutir soluciones en equipo pero nunca compartir código.
 
-.. _recomendaciones: http://integrity.mit.edu/
+.. _`serie de recomendaciones`: http://integrity.mit.edu/
 .. _`procedimientos y sanciones`: http://web.mit.edu/policies/10/10.2.html
 .. _reglamento: https://dma.ua.es/es/documentos/pdf/actuacion-ante-copia-en-pruebas-de-evaluacion-de-la-eps.pdf
 
@@ -162,6 +167,7 @@ Este es el momento también en el que enfatizar la importancia de tomar apuntes 
     servicios
     componentes
     nube
+    problemas
     practicas
 
 .. >>> add new documents here
