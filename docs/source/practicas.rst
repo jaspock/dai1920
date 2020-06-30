@@ -672,6 +672,7 @@ y accediendo al URL correspondiente en ``localhost``. También se evaluará usan
 Por último, coloca en algún punto del pie de la página un fragmento de HTML como ``<span id="tiempo">[10 horas]</span>`` donde has de sustituir el 10 por el número de horas aproximadas que te haya llevado hacer esta práctica.
 
 
+.. _label-ampliaciones:
 
 Ejemplos de posibles ejercicios para el examen práctico
 -------------------------------------------------------
